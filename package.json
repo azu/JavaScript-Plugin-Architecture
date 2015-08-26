@@ -1,0 +1,27 @@
+{
+  "name": "plugin-design-patterns",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/plugin-design-patterns.git"
+  },
+  "author": "azu",
+  "email": "azuciao@gmail.com",
+  "homepage": "https://github.com/azu/plugin-design-patterns",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azu/plugin-design-patterns/issues"
+  },
+  "version": "1.0.0",
+  "description": "JavaScript plugin design pattens book.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "plugin",
+    "extension"
+  ]
+}
