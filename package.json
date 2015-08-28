@@ -23,5 +23,11 @@
   "keywords": [
     "plugin",
     "extension"
-  ]
+  ],
+  "devDependencies": {
+    "gitbook-parsers": "^0.7.7",
+    "spellcheck-tech-word-textlint-rule": "^3.0.0",
+    "textlint": "^3.2.0",
+    "textlint-rule-spellcheck-tech-word": "^4.0.1"
+  }
 }
