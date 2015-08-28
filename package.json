@@ -18,6 +18,8 @@
     "test": "test"
   },
   "scripts": {
+    "prestart": "gitbook install",
+    "start": "gitbook serve",
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
     "test": "npm run textlint"
   },
@@ -26,7 +28,7 @@
     "extension"
   ],
   "devDependencies": {
-    "gitbook-parsers": "^0.7.7",
+    "gitbook-cli": "^0.3.4",
     "gitbook-summary-to-path": "^1.0.1",
     "textlint": "^3.2.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
