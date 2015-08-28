@@ -39,6 +39,8 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 
 ### Proposalの具体例
 
+現在ある[Proposal一覧](https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal)を参考にしてみると良いかもしれません。Proposal
+
 - [jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture/issues/8 "jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture")
 
 ## テスト
