@@ -18,6 +18,7 @@
     "test": "test"
   },
   "scripts": {
+    "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -26,6 +27,7 @@
   ],
   "devDependencies": {
     "gitbook-parsers": "^0.7.7",
+    "gitbook-summary-to-path": "^1.0.1",
     "textlint": "^3.2.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
   }
