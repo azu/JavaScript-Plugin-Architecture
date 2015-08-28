@@ -94,7 +94,8 @@ Closes #8454
 chore: コミットメッセージ
 ```
 
-このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog "conventional-changelog")による自動生成のためでもありますが、無視してもらっても問題はありません。
+このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog "conventional-changelog")による自動生成のためでもありますが、
+無視してもらっても問題はありません。
 
 以下を見てみると良いかもしれません。
 
