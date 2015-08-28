@@ -1,6 +1,6 @@
 # JavaScript-Plugin-Architecture [![Build Status](https://travis-ci.org/azu/JavaScript-Plugin-Architecture.svg?branch=master)](https://travis-ci.org/azu/JavaScript-Plugin-Architecture)
 
-この書籍はJavaScriptのライブラリやツールにおけるプラグインのパターンについて見ていく事を目的としたものです。
+この書籍はJavaScriptのライブラリやツールにおけるプラグインのアーキテクチャを見ていく事を目的としたものです。
 
 ## Introduction
 
