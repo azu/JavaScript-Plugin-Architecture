@@ -37,9 +37,13 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 - XXX以外にも同様の仕組みを使ってるものがあるなら
 ```
 
+以下からこのテンプレートを使ったIssueを立てることが出来ます。
+
+- [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?title=XXX&body=%23+XXX%E3%81%AE%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%0D%0AURL%3A+%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E6%9B%B8%E3%81%91%E3%82%8B%3F%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BB%95%E7%B5%84%E3%81%BF%3F%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BA%8B%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%82%8B%3F%0D%0A%0D%0A%23%23+%E3%81%93%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%8B%E3%82%82%E3%81%AE%0D%0A)
+
 ### Proposalの具体例
 
-現在ある[Proposal一覧](https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal)を参考にしてみると良いかもしれません。Proposal
+現在ある[Proposal一覧](https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal)を参考にしてみると良いかもしれません。
 
 - [jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture/issues/8 "jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture")
 
