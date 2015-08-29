@@ -13,4 +13,4 @@ jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブ
 <script src="greenify.js"></script>
 ```
 
-## どういう仕組み?fea
+## どういう仕組み?
