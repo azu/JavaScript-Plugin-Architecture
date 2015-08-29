@@ -4,7 +4,7 @@ jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブ
 
 次の`greenify`プラグインでは、`$(document.body).greenify();`というメソッド呼び出しが可能になります。
 
-!CODEFILE "../../src/jQuery/greenify.js"
+[import, greenify.js](../../src/jQuery/greenify.js)
 
 実際に利用するためには、`jquery.js`を読み込んだ後に`greenify.js`を読み込ませる必要があります。
 
