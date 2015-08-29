@@ -1,3 +1,3 @@
 # jQueryのPlugin Pattern
 
-!CODEFILE "./src/jquery.js"
+!CODEFILE "/src/jquery.js"
