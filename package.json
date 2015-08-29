@@ -21,6 +21,7 @@
     "prestart": "gitbook install",
     "start": "gitbook serve",
     "eslint": "eslint src/**/*.js",
+    "eslint:md": "eslint --ext .md ja/**/*.md",
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
     "test": "npm run textlint && npm run eslint"
   },
@@ -30,6 +31,7 @@
   ],
   "devDependencies": {
     "eslint": "^1.3.0",
+    "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
     "gitbook-cli": "^0.3.4",
     "gitbook-summary-to-path": "^1.0.1",
     "textlint": "^3.2.0",
