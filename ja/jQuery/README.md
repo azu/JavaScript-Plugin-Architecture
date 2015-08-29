@@ -1,8 +1,16 @@
-# jQueryのPlugin Pattern
+# jQueryのPlugin
 
-!CODEFILE "../../src/jQuery/jquery.js"
+jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブジェクトにメソッドを追加することが出来ます。
 
-```js
-var jQuery = require("jquery");
-jQuery(document.body);
+次の`greenify`プラグインでは、`$(document.body).greenify();`というメソッド呼び出しが可能になります。
+
+!CODEFILE "../../src/jQuery/greenify.js"
+
+実際に利用するためには、`jquery.js`を読み込んだ後に`greenify.js`を読み込ませる必要があります。
+
+```html
+<script src="jquery.js"></script>
+<script src="greenify.js"></script>
 ```
+
+## どういう仕組み?
