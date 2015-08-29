@@ -23,7 +23,7 @@
     "eslint": "eslint src/**/*.js",
     "eslint:md": "eslint --ext .md ja/**/*.md",
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
-    "test": "npm run textlint && npm run eslint"
+    "test": "npm run textlint && npm run eslint:md && npm run eslint"
   },
   "keywords": [
     "plugin",
