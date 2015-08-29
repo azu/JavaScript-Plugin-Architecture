@@ -1,7 +1,7 @@
 // LICENSE : MIT
 "use strict";
 import jsdom from "jsdom";
-import assert from "power-assert"
+import assert from "power-assert";
 import fs from "fs";
 const testbed = fs.readFileSync(__dirname + "/fixtures/testbed.html", "utf-8");
 const jquery = fs.readFileSync(__dirname + "/../../node_modules/jquery/dist/jquery.js", "utf-8");
