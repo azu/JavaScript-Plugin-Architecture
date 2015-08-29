@@ -76,10 +76,10 @@ Closes #8453
 Closes #8454
 ```
 
-1行の`feat`や`fix`といったcommit typeは、迷ったらとりあえず`chore`と書けば問題ありません。
 
 ```
                          scope        commit title
+                         
         commit type       /                /      
                 \        |                |
                  feat(ngInclude): add template url parameter to events
@@ -92,14 +92,14 @@ Closes #8454
  issues          Closes #8454
 ```
 
-`scope`も省略して問題ないので、最低限では以下のような形でも問題ありません。
+1行の`feat`や`fix`といったcommit typeは、迷ったらとりあえず`chore`と書いて、`scope`も省略して問題ないので以下のような形でも問題ありません。
 
 ```
 chore: コミットメッセージ
 ```
 
 このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog "conventional-changelog")による自動生成のためでもありますが、
-無視してもらっても問題はありません。
+取り込むときに調整できるので無視してもらっても問題はありません。
 
 以下を見てみると良いかもしれません。
 
