@@ -18,12 +18,13 @@
     "test": "test"
   },
   "scripts": {
-    "prestart": "gitbook install",
+    "prepublish": "gitbook install",
     "start": "gitbook serve",
+    "build": "gitbook build",
     "eslint": "eslint src/**/*.js",
     "eslint:md": "eslint --ext .md ja/**/*.md",
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
-    "test": "npm run textlint && npm run eslint:md && npm run eslint"
+    "test": "npm run textlint && npm run eslint:md && npm run eslint && npm run build"
   },
   "keywords": [
     "plugin",
