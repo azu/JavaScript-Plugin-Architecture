@@ -1,6 +1,6 @@
 # jQueryのPlugin Pattern
 
-!CODEFILE "/src/jquery.js"
+!CODEFILE "../../src/jQuery/jquery.js"
 
 ```js
 var jQuery = require("jquery");
