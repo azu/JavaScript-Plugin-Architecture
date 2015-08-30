@@ -48,3 +48,5 @@ calculator.fn = calculator.prototype;
 
 [import, calculator-example.js](../../src/jQuery/calculator-example.js)
 
+実装をみてもらうと分かりますが、JavaScriptの`prototype`の仕組みをそのまま利用しています。
+そのため、特別な実装は必要なく「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」というルールがあるだけとも言えます。
