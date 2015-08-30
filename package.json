@@ -35,6 +35,7 @@
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
     "espower-babel": "^3.3.0",
     "gitbook-cli": "^0.3.4",
+    "gitbook-plugin-richquotes": "0.0.5",
     "gitbook-summary-to-path": "^1.0.1",
     "jsdom": "^3.0.0",
     "mocha": "^2.2.5",
