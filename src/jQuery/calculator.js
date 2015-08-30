@@ -1,0 +1,10 @@
+"use strict";
+function calculator(value) {
+    if (!(this instanceof calculator)) {
+        return new calculator(value);
+    }
+    this.value = value;
+}
+// alias
+calculator.fn = calculator.prototype;
+export default calculator;
