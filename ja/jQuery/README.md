@@ -92,3 +92,8 @@ calculator.fn = calculator.prototype;
 そのため、特別な実装は必要なく
 「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」
 というルールがあるだけとも言えます。
+
+## 参考資料
+
+[Plugins | jQuery Learning Center](https://learn.jquery.com/plugins/ "Plugins | jQuery Learning Center")
+- [jQuery拡張の仕組み 〜 JSおくのほそ道 #013 - Qiita](http://qiita.com/hosomichi/items/29b19ed3ebd0df9361ae)
