@@ -25,7 +25,7 @@ jQueryプラグインはprototype拡張のように `$.fn.greenify = function ()
 // https://github.com/jquery/jquery/blob/2.1.4/src/core.js#L39
 jQuery.fn = jQuery.prototype = {
     // prototypeの実装
-}
+};
 ```
 
 
