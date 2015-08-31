@@ -93,6 +93,15 @@ calculator.fn = calculator.prototype;
 「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」
 というルールがあるだけとも言えます。
 
+## まとめ
+
+ここではjQueryプラグインの仕組みや実装について学びました。
+
+- jQueryプラグインは `jQuery.fn` を拡張する
+- `jQuery.fn = jQuery.prototype` である
+- jQueryプラグインとは`jQuery.prototype`を拡張したものといえる
+- 柔軟であるが、プラグインが行うことを制御することが難しい
+
 ## 参考資料
 
 [Plugins | jQuery Learning Center](https://learn.jquery.com/plugins/ "Plugins | jQuery Learning Center")
