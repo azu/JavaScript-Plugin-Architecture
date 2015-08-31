@@ -21,7 +21,7 @@ jQueryプラグインはprototype拡張のように `$.fn.greenify = function ()
 
 `jQuery.fn`の実装を見てみると、実態は`jQuery.prototype`であるため実際にprototype拡張していることがわかります。
 
-```
+```js
 // https://github.com/jquery/jquery/blob/2.1.4/src/core.js#L39
 jQuery.fn = jQuery.prototype = {
     // prototypeの実装
@@ -31,7 +31,7 @@ jQuery.fn = jQuery.prototype = {
 
 `$()`は内部的に`new`をしてjQueryオブジェクトを返すので、このjQueryオブジェクトではprototypeに拡張したメソッドが利用できます。
 
-```
+```js
 $(document.body); // 返り値はjQueryのインスタンス
 ```
 
@@ -65,7 +65,7 @@ jQueryではそこをどうやってカバーしているかというと、
 
 `$.fn`と同様に`prototype`へのaliasを貼っているだけのただのコンストラクタ関数です。
 
-```
+```js
 calculator.fn = calculator.prototype;
 ```
 
