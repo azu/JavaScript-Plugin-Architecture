@@ -27,8 +27,5 @@
   "ecmaFeatures": {
     "modules": true
   },
-  "plugins": [
-    "markdown"
-  ],
   "extends": "eslint:recommended"
 }

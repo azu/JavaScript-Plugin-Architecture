@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "no-undef": 0
+  },
+  "plugins": [
+    "markdown"
+  ],
+  "extends": ".eslintrc"
+}
