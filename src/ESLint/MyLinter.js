@@ -1,4 +1,3 @@
-// LICENSE : MIT
 "use strict";
 import {parse} from "esprima";
 import {traverse} from "estraverse";
@@ -8,14 +7,10 @@ class RuleContext extends EventEmitter {
         this.emit("report", message);
     }
 }
-export default class MyLint extends EventEmitter {
+export default class MyLint {
     constructor() {
-        super();
         this._emitter = new EventEmitter();
         this._ruleContext = new RuleContext();
-        this._ruleContext.on("report", (message) => {
-            this.emit("report", message);
-        });
     }
 
     loadPlugin(plugin) {
@@ -28,6 +23,11 @@ export default class MyLint extends EventEmitter {
 
 
     lint(code) {
+        var messages = [];
+        var addMessage = (message)=> {
+            messages.push(message);
+        };
+        this._ruleContext.on("report", addMessage);
         var ast = parse(code);
         traverse(ast, {
             enter: (node) => {
@@ -37,5 +37,7 @@ export default class MyLint extends EventEmitter {
                 this._emitter.emit(`${node.type}:exit`, node);
             }
         });
+        this._ruleContext.removeListener("report", addMessage);
+        return messages;
     }
 }
