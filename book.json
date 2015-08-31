@@ -1,4 +1,6 @@
 {
+  "title": "JavaScript Plugin Architecture",
+  "description": "JavaScriptライブラリやツールのプラグインの仕組み",
   "plugins": [
     "include-codeblock",
     "richquotes"
