@@ -24,7 +24,8 @@
     "eslint": "eslint src/**/*.js",
     "eslint:md": "eslint -c .md.eslintrc --ext .md ja/**/*.md",
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
-    "test": "mocha --recursive && npm run textlint && npm run eslint:md && npm run eslint && npm run build"
+    "test:example": "find ./src -name '*-example.js' | xargs babel-node",
+    "test": "mocha --recursive && npm run test:example && npm run textlint && npm run eslint:md && npm run eslint && npm run build"
   },
   "keywords": [
     "plugin",

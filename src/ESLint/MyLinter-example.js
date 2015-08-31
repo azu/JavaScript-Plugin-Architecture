@@ -1,7 +1,8 @@
 "use strict";
 import assert from "assert";
 import MyLinter from "./MyLinter";
-import noConsole from "./noConsole";
+import noConsole from "./no-console";
+
 let linter = new MyLinter();
 linter.loadPlugin(noConsole);
 var results = linter.lint(`console.log("test")`);
