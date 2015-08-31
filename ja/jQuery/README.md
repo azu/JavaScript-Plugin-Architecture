@@ -93,6 +93,19 @@ calculator.fn = calculator.prototype;
 「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」
 というルールがあるだけとも言えます。
 
+## エコシステム
+
+最初に述べたように、このプラグインの仕組みはあるグローバルオブジェクトに依存しており、
+これはスクリプトを`<script>`要素で読み込むだけで拡張することを前提とした作りといえます。
+
+```html
+<script src="jquery.js"></script>
+<script src="greenify.js"></script>
+```
+
+まだNode.jsで使われているCommonJSやES6 Modulesといったものがなかった際に使われていた仕組みであるため、
+それらと組み合わせる際には少し不向きな拡張の仕組みといえるかもしれません。
+
 ## まとめ
 
 ここではjQueryプラグインの仕組みや実装について学びました。
@@ -106,3 +119,4 @@ calculator.fn = calculator.prototype;
 
 - [Plugins | jQuery Learning Center](https://learn.jquery.com/plugins/ "Plugins | jQuery Learning Center")
 - [jQuery拡張の仕組み 〜 JSおくのほそ道 #013 - Qiita](http://qiita.com/hosomichi/items/29b19ed3ebd0df9361ae)
+- [The npm Blog — Using jQuery plugins with npm](http://blog.npmjs.org/post/112064849860/using-jquery-plugins-with-npm "The npm Blog — Using jQuery plugins with npm")
