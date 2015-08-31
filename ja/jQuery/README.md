@@ -1,4 +1,4 @@
-# jQueryのPlugin
+# jQuery
 
 jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブジェクトにメソッドを追加することが出来ます。
 
@@ -14,6 +14,46 @@ jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブ
 ```
 
 ## どういう仕組み?
+
+このjQueryプラグインがどのような仕組みで動いているのかを見てみましょう。
+
+jQueryプラグインはprototype拡張のように `$.fn.greenify = function (){}` と拡張するルールでした。
+
+`jQuery.fn`の実装を見てみると、実態は`jQuery.prototype`であるため実際にprototype拡張していることがわかります。
+
+```
+// https://github.com/jquery/jquery/blob/2.1.4/src/core.js#L39
+jQuery.fn = jQuery.prototype = {
+    // prototypeの実装
+}
+```
+
+
+`$()`は内部的に`new`をしてjQueryオブジェクトを返すので、このjQueryオブジェクトではprototypeに拡張したメソッドが利用できます。
+
+```
+$(document.body); // 返り値はjQueryのインスタンス
+```
+
+つまり、jQueryプラグインはJavaScriptのprototypeをそのまま利用しているだけに過ぎないということがわかります。
+
+## どういう用途に向いている?
+
+jQueryプラグインの仕組みがわかったのでどういう用途に有効な仕組みなのか考えてみましょう。
+
+単純なprototype拡張であると言えるので、利点はJavaScriptのprototypeと同様と言えるかもしれません。
+動的にメソッドを追加するだけではなく、既存の実装を上書きするmonkey patchのようなものもプラグインとして追加することができます。
+
+## どういう用途に向いていない?
+
+これもJavaScriptのprototypeと同様で、prototypeによる拡張は柔軟すぎるため、
+jQuery自体がプラグインのコントロールをすることが難しいです。
+
+また、プラグインが拡張するjQueryの実装に依存し易いため、
+jQueryのバージョンによって動かなくなるプラグインが発生しやすいです。
+
+jQueryではそこをどうやってカバーしているかというと、
+ドキュメント化されてないAPIは触っていけないというルールを設けているだけとなっています。
 
 ## 実装してみよう
 
@@ -49,4 +89,20 @@ calculator.fn = calculator.prototype;
 [import, calculator-example.js](../../src/jQuery/calculator-example.js)
 
 実装をみてもらうと分かりますが、JavaScriptの`prototype`の仕組みをそのまま利用しています。
-そのため、特別な実装は必要なく「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」というルールがあるだけとも言えます。
+そのため、特別な実装は必要なく
+「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」
+というルールがあるだけとも言えます。
+
+## まとめ
+
+ここではjQueryプラグインの仕組みや実装について学びました。
+
+- jQueryプラグインは `jQuery.fn` を拡張する
+- `jQuery.fn` は `jQuery.prototype` と同じである
+- jQueryプラグインとは`jQuery.prototype`を拡張したものといえる
+- 柔軟であるが、プラグインが行うことを制御することが難しい
+
+## 参考資料
+
+[Plugins | jQuery Learning Center](https://learn.jquery.com/plugins/ "Plugins | jQuery Learning Center")
+- [jQuery拡張の仕組み 〜 JSおくのほそ道 #013 - Qiita](http://qiita.com/hosomichi/items/29b19ed3ebd0df9361ae)
