@@ -34,6 +34,8 @@
     "eslint": "^1.3.0",
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
     "espower-babel": "^3.3.0",
+    "esprima": "^2.5.0",
+    "estraverse": "^4.1.0",
     "gitbook-cli": "^0.3.4",
     "gitbook-plugin-richquotes": "0.0.5",
     "gitbook-summary-to-path": "^1.0.1",
