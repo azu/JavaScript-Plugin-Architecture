@@ -1,4 +1,4 @@
-# jQueryのPlugin
+# jQuery
 
 jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブジェクトにメソッドを追加することが出来ます。
 
@@ -14,6 +14,29 @@ jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブ
 ```
 
 ## どういう仕組み?
+
+このjQueryプラグインがどのような仕組みで動いているのかを見てみましょう。
+
+jQueryプラグインはprototype拡張のように `$.fn.greenify = function (){}` と拡張するルールでした。
+
+`jQuery.fn`の実装を見てみると、実態は`jQuery.prototype`であるため実際にprototype拡張していることがわかります。
+
+```
+// https://github.com/jquery/jquery/blob/2.1.4/src/core.js#L39
+jQuery.fn = jQuery.prototype = {
+    // prototypeの実装
+}
+```
+
+
+`$()`は内部的に`new`をしてjQueryオブジェクトを返すので、このjQueryオブジェクトではprototypeに拡張したメソッドが利用できます。
+
+```
+$(document.body); // 返り値はjQueryのインスタンス
+```
+
+
+つまり、jQueryプラグインはJavaScriptのprototypeをそのまま利用しているだけに過ぎないということがわかります。
 
 ## 実装してみよう
 
@@ -49,4 +72,6 @@ calculator.fn = calculator.prototype;
 [import, calculator-example.js](../../src/jQuery/calculator-example.js)
 
 実装をみてもらうと分かりますが、JavaScriptの`prototype`の仕組みをそのまま利用しています。
-そのため、特別な実装は必要なく「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」というルールがあるだけとも言えます。
+そのため、特別な実装は必要なく
+「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」
+というルールがあるだけとも言えます。
