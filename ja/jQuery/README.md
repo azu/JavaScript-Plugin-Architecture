@@ -103,7 +103,7 @@ calculator.fn = calculator.prototype;
 <script src="greenify.js"></script>
 ```
 
-まだNode.jsで使われているCommonJSやES6 Modulesといったものがなかった際に使われていた仕組みであるため、
+まだNode.jsで使われているCommonJSやES6 Modulesといったものがなかった時代に作られた仕組みであるため、
 それらと組み合わせる際には少し不向きな拡張の仕組みといえるかもしれません。
 
 ## まとめ
