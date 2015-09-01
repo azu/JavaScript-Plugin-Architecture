@@ -44,7 +44,7 @@ MyLinterは単純で以下の2つのメソッドを持つクラスとして実�
 MyLinterで[no-console.js](#no-console.js)を読み込ませて、
 
 ```js
-function add(x, y){{
+function add(x, y){
     console.log(x, y);
     return x + y;
 }
