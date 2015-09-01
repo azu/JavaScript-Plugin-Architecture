@@ -7,17 +7,17 @@ class RuleContext extends EventEmitter {
         this.emit("report", message);
     }
 }
-export default class MyLint {
+export default class MyLinter {
     constructor() {
         this._emitter = new EventEmitter();
         this._ruleContext = new RuleContext();
     }
 
-    loadPlugin(plugin) {
-        var rule = plugin(this._ruleContext);
+    loadRule(rule) {
+        var ruleExports = rule(this._ruleContext);
         // on(nodeType, nodeTypeCallback);
-        Object.keys(rule).forEach(nodeType => {
-            this._emitter.on(nodeType, rule[nodeType]);
+        Object.keys(ruleExports).forEach(nodeType => {
+            this._emitter.on(nodeType, ruleExports[nodeType]);
         });
     }
 
