@@ -28,7 +28,7 @@ ESLintサイト上には、上記のように書かれていることからも�
 
 ### MyLinter
 
-MyLinterは単純で以下の2つのメソッドを持つクラスとして実装しました。
+MyLinterは単純な2つのメソッドを持つクラスとして実装しました。
 
 - `MyLinter#loadRule(rule): void`
     - 利用するルールを登録する処理
@@ -37,11 +37,11 @@ MyLinterは単純で以下の2つのメソッドを持つクラスとして実�
     - `code`を受け取りルールによってLintした結果を返す
     - Lint結果はエラーメッセージの配列とする
 
-実際に実装したものが以下のようになっています。
+実装したものが以下のようになっています。
 
 [import, src/ESLint/MyLinter.js](../../src/ESLint/MyLinter.js)
 
-MyLinterで[no-console.js](#no-console.js)を読み込ませて、
+このMyLinterを使って、`MyLinter#load`で[no-console.js](#no-console.js)を読み込ませて、
 
 ```js
 function add(x, y){
@@ -55,16 +55,21 @@ add(1, 3);
 
 [import, src/ESLint/MyLinter-example.js](../../src/ESLint/MyLinter-example.js)
 
-コードには`console`というオブジェクトが含まれているので_"Unexpected console statement."_というエラーメッセージが取得出来ました。   
+コードには`console`という名前のオブジェクトが含まれているので、 _"Unexpected console statement."_ というエラーメッセージが取得出来ました。   
 
 ### RuleContext
 
 もう一度、[MyLinter.js](#MyLinter.js)を見てみると、`RuleContext`というシンプルなクラスがあることに気づくと思います。
 
-この`RuleContext`はいわゆるルールから使えるユーティリティメソッドをまとめたもので、
+この`RuleContext`はルールから使えるユーティリティメソッドをまとめたもので、
 今回は`RuleContext#report`というエラーメッセージをルールからMyLinterへ通知するものだけを実装しています。
 
-ESLintのプラグインアーキテクチャの特徴でもありますが、プラグインが本体の実装がについては知らなくて、
-Contextという本体から与えられたものだけを使うので、ルールが行える事を制御しやすい作りといえます。
+ルールの実装の方を見てみると、直接オブジェクトをexportしてる訳ではなく、
+`context` つまり`RuleContext`のインスタンスを受け取っていることが分かると思います。
+
+[import, no-console.js](../../src/ESLint/no-console.js)
+
+このようにして、ルールは `context` という与えられたものだけを使うので、ルールができることを制御しやすくなり、
+ルールがMyLinter本体の実装の詳細を知らなくても良くなります。
 
 ## エコシステム
