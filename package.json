@@ -25,7 +25,8 @@
     "eslint:md": "eslint -c .md.eslintrc --ext .md ja/**/*.md",
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
     "test:example": "find ./src -name '*-example.js' | xargs babel-node",
-    "test": "mocha && npm run test:example && npm run textlint && npm run eslint:md && npm run eslint && npm run build"
+    "test:js": "mocha",
+    "test": "npm-run-all --parallel test:js test:example textlint eslint:md eslint build"
   },
   "keywords": [
     "plugin",
@@ -41,6 +42,7 @@
     "gitbook-summary-to-path": "^1.0.1",
     "jsdom": "^3.0.0",
     "mocha": "^2.2.5",
+    "npm-run-all": "^1.2.8",
     "power-assert": "^1.0.0",
     "textlint": "^3.2.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
