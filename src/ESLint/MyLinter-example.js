@@ -6,7 +6,7 @@ import noConsole from "./no-console";
 let linter = new MyLinter();
 linter.loadRule(noConsole);
 var code = `
-function add(x, y){{
+function add(x, y){
     console.log(x, y);
     return x + y;
 }
