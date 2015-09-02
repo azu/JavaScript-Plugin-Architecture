@@ -113,7 +113,7 @@ debug("Hello");
 <video controls>
 <source src='./movie/traverse.webm' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 <source src='./movie/traverse.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-<p>動画を再生するには、mp4をサポートしたブラウザが必要です。</p>
+<p>動画を再生するには、webmまたはmp4をサポートしたブラウザが必要です。</p>
 </video> 
 
 その他、ESLintのルールの書き方についてはドキュメントや以下の記事を見てみるといいでしょう。
