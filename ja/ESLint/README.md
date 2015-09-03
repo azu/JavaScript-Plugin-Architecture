@@ -252,11 +252,15 @@ ESLintのように与えられたコードを読み取ってチェックする�
 ## どういう用途に向いていない?
 
 逆に与えられたコード(AST)を書き換えするようなことをする場合には、
-プラグインが同時に処理を行うためプラグイン間で競合するような変更がある場合に破綻してしまいます。
+ルールを同時に処理を行うためルール間で競合するような変更がある場合に破綻してしまいます。
 
 そのため、この仕組みに加えてもう一つ抽象レイヤーを設けないと対応は難しいと思います。
 
 つまり、read-writeなプラグインのアーキテクチャとしては単純にこのパターンだけでは難しい部分が出てくるでしょう。
+
+> **NOTE** ESLint 2.0でautofixing、つまり書き換えの機能の導入が予定されています。
+> これは`SourceCode`抽象オブジェクトをルールに、書き換えのコマンドを蓄積して最後に実際に書き換えを行うという抽象レイヤーを設けています。
+> - [Implement autofixing · Issue #3134 · eslint/eslint](https://github.com/eslint/eslint/issues/3134 "Implement autofixing · Issue #3134 · eslint/eslint")
 
 ## この仕組みを使ってるもの
 
@@ -264,3 +268,32 @@ ESLintのように与えられたコードを読み取ってチェックする�
     - テキストやMarkdownをパースしてASTにしてLintするツール
    
 ## エコシステム
+
+ESLintのルールはただのJavaScriptファイルであり、またESLintは主に開発時に使うツールとなっています。
+
+ルール自体を[npm](https://www.npmjs.com/ "npm")で公開したり、ルールや設定をまとめたものをESLintでは"Plugin"と呼び、
+こちらもnpmで公開して利用するのが一般的な使い方になっています。
+
+また、ESLintはデフォルトで有効なルールがないので、設定ファイルを作るか、
+[sindresorhus/xo](https://github.com/sindresorhus/xo "sindresorhus/xo")といったESLintのラッパーを利用する形となります。
+
+ESLint公式の設定として`eslint:recommended`が用意されていて、これを`extends`することで推奨の設定を継承できます。
+
+```json
+{
+    "extends": "eslint:recommended"
+}
+```
+
+これらの設定自体もJavaScriptで表現できるため、設定もnpmで公開して利用できるようになっています。
+
+- [Shareable Configs - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/developer-guide/shareable-configs "Documentation - ESLint - Pluggable JavaScript linter")
+
+これはコーディングルールが多種多様なように、ESLintで必要なルールも個人差があるので、
+柔軟に対応できるようにするためでもあり、_The pluggable linting utility_を表現している仕組みとなってます。
+
+このように、ESLintルールや設定といった殆どの部分をJavaScriptのモジュールの仕組みで利用できるようにし、
+それらを[npm](https://www.npmjs.com/ "npm")を使って公開しやすいような形を取っています。
+
+設定なしで使えるのが一番楽ですが、そこが現実として難しいため、
+柔軟な設定のしくみと設定を共有しやすい形を持っていると言えます。
