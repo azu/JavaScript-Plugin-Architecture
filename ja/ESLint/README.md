@@ -124,19 +124,68 @@ debug("Hello");
 ## どういう仕組み?
 
 ESLintはコードをパースしてASTにして、そのASTをJavaScriptで書いたルールでチェックしてレポートする
-というおおまかな仕組みは分かりました。
+という大まかな仕組みは分かりました。
 
-では、このルールをプラグインとする仕組みがどのようにして動いているのか見て行きましょう。
+次に、このルールをプラグインとする仕組みがどのようにして動いているのか見て行きましょう。
 
 ESLintのLintは次のような3つの手順で行われています。
 
-1. ルール毎に使っているNodeTypeをイベント登録する
-2. ASTをtraverseしながら、NodeTypeのイベントを発火する
-3. ルールから`context.report`された内容を集めて表示する
+1. ルール毎に使っている`Node.type`をイベント登録する
+2. ASTをtraverseしながら、`Node.type`のイベントを発火する
+3. ルールから`context.report()`された内容を集めて表示する
 
-## どういう用途に向いている?
-## どういう用途に向いていない?
-## この仕組みを使ってるもの
+このイベントの登録と発火にはEventEmitterを使っていて、
+ESLint本体に対してルールは複数あるので、典型的なPub/Subパターンとなっています。
+
+擬似的なコードで表現すると以下のような流れでLintの処理が行われています。
+
+```js
+import {parse} from "esprima";
+import {traverse} from "estraverse";
+import {EventEmitter} from "events";
+
+function lint(code){
+    // コードをパースしてASTにする
+    var ast = parse(code);
+    // イベントの登録場所
+    var emitter = new EventEmitter();
+    var results = [];
+    emitter.on("report", message => {
+        // 3. のためのreportされた内容を集める
+        results.push(message);
+    });
+    // 利用するルール一覧
+    var ruleList = getAllRules();
+    // 1. ルール毎に使っている`Node.type`をイベント登録する
+    ruleList.forEach(rule => {
+        // それぞれのルールに定義されているメソッド一覧を取得
+        // e.g) MemberExpression(node){}
+        // => {"MemberExpression" : function(node){}, ... } というオブジェクト
+        var methodObject = getDefinedMethod(rule);
+        Object.keys(methodObject).forEach(nodeType => {
+            emitter.on(nodeType, methodList[nodeType]);
+        });
+    });
+    // 2. ASTをtraverseしながら、`Node.type`のイベントを発火する
+    traverse(ast, {
+        // 1.で登録したNode.typeがあるならここで呼ばれる
+        enter: (node) => {
+            emitter.emit(node.type, node);
+        },
+        leave: (node) => {
+            emitter.emit(`${node.type}:exit`, node);
+        }
+    });
+    // 3. ルールから`context.report()`された内容を集めて表示する
+    console.log(results.join("\n"));
+}
+```
+
+Pub/Subパターンを上手く使うことで、ASTをtraverseするのが一巡のみでそれぞれのルールに対して
+どういうコードであるかという情報が`emit`で通知できていることがわかります。
+
+もう少し具体的にするため、実装して動かせるようなものを作ってこの仕組みについて見ていきます。
+
 ## 実装してみよう
 
 今回は、ESLintのルールを解釈できるシンプルなLintの処理を書いてみます。
@@ -189,5 +238,10 @@ add(1, 3);
 
 このようにして、ルールは `context` という与えられたものだけを使うので、ルールができることを制御しやすくなり、
 ルールがMyLinter本体の実装の詳細を知らなくても良くなります。
+
+
+## どういう用途に向いている?
+## どういう用途に向いていない?
+## この仕組みを使ってるもの
 
 ## エコシステム
