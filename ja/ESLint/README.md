@@ -79,7 +79,7 @@ ESLintではルールをどうやって使っているかというと、ASTは�
 そのASTを深さ優先で探索していきながらそれぞれ登録したルールに対して、
 「今`"MemberExpression"` typeのNodeに到達した」といったことを通知することを繰り返しています。
 
-先ほどの`console.log`のASTにおける`MemberExpression` typeのNodeとは以下のオブジェクトをことを言います。
+先ほどの`console.log`のASTにおける`MemberExpression` typeのNodeとは以下のオブジェクトのことを言います。
 
 ```json
 {
