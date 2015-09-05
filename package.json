@@ -26,7 +26,8 @@
     "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
     "test:example": "find ./src -name '*-example.js' | xargs babel-node",
     "test:js": "mocha",
-    "test": "npm-run-all --parallel test:js test:example textlint eslint:md eslint build"
+    "test": "npm-run-all --parallel test:js test:example textlint eslint:md eslint build",
+    "coveralls": "punctuate-coverage 'ja/**/*.md' | coveralls"
   },
   "keywords": [
     "plugin",
@@ -34,6 +35,7 @@
   ],
   "devDependencies": {
     "babel": "^5.8.23",
+    "coveralls": "^2.11.4",
     "eslint": "^1.3.0",
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
     "espower-babel": "^3.3.0",
@@ -44,6 +46,7 @@
     "mocha": "^2.2.5",
     "npm-run-all": "^1.2.8",
     "power-assert": "^1.0.0",
+    "punctuate-coverage": "^1.0.3",
     "textlint": "^3.2.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
   },
