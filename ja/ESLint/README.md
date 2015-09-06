@@ -8,8 +8,8 @@
 
 > The pluggable linting utility for JavaScript and JSX
 
-ESLintサイト上には、上記のように書かれていることからもわかりますが、プラグインに重きを置いた設計となっているので、
-今回はESLintのプラグインアーキテクチャについてを見て行きましょう
+ESLintサイト上には、上記のように書かれていることからもわかりますが、プラグインに重きを置いた設計となっています。
+今回はESLintのプラグインアーキテクチャがどうなっているかを見て行きましょう。
 
 ## どう書ける?
 
@@ -75,9 +75,8 @@ ESLintではこのASTを使って、変数が未使用であるとか[no-console
 ルールをどう書けるかという話に戻すと、`context`というオブジェクトはただのユーティリティ関数と思ってもらって問題なくて、
 returnしてるメソッドをもったオブジェクトがルールの本体と言えます。
 
-ESLintではルールをどうやって使っているかというと、ASTは木構造のとなってるので、
-そのASTを深さ優先で探索していきながらそれぞれ登録したルールに対して、
-「今`"MemberExpression"` typeのNodeに到達した」といったことを通知することを繰り返しています。
+ESLintではルールをどうやって使っているかというと、ASTを深さ優先で探索していきます。
+そして、ASTを探索しながら「`"MemberExpression"` typeのNodeに到達した」と登録したルールに対して通知することを繰り返しています。
 
 先ほどの`console.log`のASTにおける`MemberExpression` typeのNodeとは以下のオブジェクトのことを言います。
 
@@ -246,7 +245,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 つまり、read-onlyなプラグインのアーキテクチャとしてはパフォーマンスも期待できると思います。
 
 また、ルールは `context` という与えられたものだけを使うようになっているため、ルールと本体が密結合にはなりにくいです。
-また`context`に何を与えるかを決める事で、ルールが行える範囲を制御しやすいと言えます。
+そのため`context`に何を与えるかを決める事で、ルールが行える範囲を制御しやすいと言えます。
 
 ## どういう用途に向いていない?
 
@@ -273,8 +272,8 @@ ESLintのルールはただのJavaScriptファイルであり、またESLintは�
 ルール自体を[npm](https://www.npmjs.com/ "npm")で公開したり、ルールや設定をまとめたものをESLintでは"Plugin"と呼び、
 こちらもnpmで公開して利用するのが一般的な使い方になっています。
 
-また、ESLintはデフォルトで有効なルールがないので、設定ファイルを作るか、
-[sindresorhus/xo](https://github.com/sindresorhus/xo "sindresorhus/xo")といったESLintのラッパーを利用する形となります。
+また、ESLintはデフォルトで有効なルールはありません。
+そのため、設定ファイルを作るか、[sindresorhus/xo](https://github.com/sindresorhus/xo "sindresorhus/xo")といったESLintのラッパーを利用する形となります。
 
 ESLint公式の設定として`eslint:recommended`が用意されていて、これを`extends`することで推奨の設定を継承できます。
 
@@ -288,14 +287,10 @@ ESLint公式の設定として`eslint:recommended`が用意されていて、こ
 
 - [Shareable Configs - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/developer-guide/shareable-configs "Documentation - ESLint - Pluggable JavaScript linter")
 
-これはコーディングルールが多種多様なように、ESLintで必要なルールも個人差があるので、
-柔軟に対応できるようにするためでもあり、_The pluggable linting utility_を表現している仕組みとなってます。
+コーディングルールが多種多様なように、ESLintで必要なルールも個人差があると思います。
+そういったことに柔軟に対応できるようにするためでもあり、_The pluggable linting utility_を表現している仕組みとなってます。
 
-このように、ESLintルールや設定といった殆どの部分をJavaScriptのモジュールの仕組みで利用できるようにし、
-それらを[npm](https://www.npmjs.com/ "npm")を使って公開しやすいような形を取っています。
-
-設定なしで使えるのが一番楽ですが、そこが現実として難しいため、
-柔軟な設定のしくみと設定を共有しやすい形を持っていると言えます。
+設定なしで使えるのが一番楽ですが、そこが現実として難しいため柔軟な設定のしくみと設定を共有しやすい形を持っていると言えます。
 
 ## まとめ
 
