@@ -1,5 +1,7 @@
 # ESLint
 
+> この文章はESLint [v1.3.0](https://github.com/eslint/eslint/releases/tag/v1.3.0 "v1.3.0")を元に書かれています。
+
 [ESLint](http://eslint.org/ "ESLint")はJavaScriptのコードをJavaScriptで書かれたルールによって検証するLintツールです。
 
 大まかな動作としては、検証したいJavaScriptのコードをパースしてできたAST(抽象構文木)をルールで検証し、エラーや警告を出力します。

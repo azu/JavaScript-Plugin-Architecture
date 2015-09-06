@@ -1,5 +1,7 @@
 # jQuery
 
+> この文章はjQuery [2.1.4](https://github.com/jquery/jquery/releases/tag/2.1.4 "2.1.4")を元に書かれています。
+
 jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブジェクトにメソッドを追加することが出来ます。
 
 次の`greenify`プラグインでは、`$(document.body).greenify();`というメソッド呼び出しが可能になります。
