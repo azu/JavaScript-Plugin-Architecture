@@ -3,6 +3,13 @@
   "description": "JavaScriptライブラリやツールのプラグインの仕組み",
   "plugins": [
     "include-codeblock",
-    "richquotes"
-  ]
+    "richquotes",
+    "edit-link"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/",
+      "label": "Edit This Page"
+    }
+  }
 }
