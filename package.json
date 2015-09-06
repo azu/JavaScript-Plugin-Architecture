@@ -23,13 +23,14 @@
     "build": "gitbook build",
     "eslint": "eslint src/**/*.js",
     "eslint:md": "eslint -c .md.eslintrc --ext .md ja/**/*.md",
-    "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word",
+    "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word --rule max-ten -f pretty-error",
     "test:example": "find ./src -name '*-example.js' | xargs babel-node",
     "test:js": "mocha",
     "test": "npm-run-all --parallel test:js test:example textlint eslint:md eslint build",
     "coveralls": "punctuate-coverage 'ja/**/*.md' | coveralls"
   },
   "keywords": [
+    "ebook",
     "plugin",
     "extension"
   ],
@@ -48,6 +49,7 @@
     "power-assert": "^1.0.0",
     "punctuate-coverage": "^1.0.3",
     "textlint": "^3.2.0",
+    "textlint-rule-max-ten": "^1.0.1",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
   },
   "dependencies": {
