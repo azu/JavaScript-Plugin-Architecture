@@ -9,6 +9,7 @@
 > The pluggable linting utility for JavaScript and JSX
 
 ESLintサイト上には、上記のように書かれていることからもわかりますが、プラグインに重きを置いた設計となっています。
+
 今回はESLintのプラグインアーキテクチャがどうなっているかを見て行きましょう。
 
 ## どう書ける?
