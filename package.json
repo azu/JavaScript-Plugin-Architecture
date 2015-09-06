@@ -23,7 +23,7 @@
     "build": "gitbook build",
     "eslint": "eslint src/**/*.js",
     "eslint:md": "eslint -c .md.eslintrc --ext .md ja/**/*.md",
-    "textlint": "summary-to-path | xargs textlint --rule spellcheck-tech-word --rule max-ten -f pretty-error",
+    "textlint": "summary-to-path | xargs textlint -f pretty-error --rule spellcheck-tech-word --rule max-ten --rule no-mix-dearu-desumasu",
     "test:example": "find ./src -name '*-example.js' | xargs babel-node",
     "test:js": "mocha",
     "test": "npm-run-all --parallel test:js test:example textlint eslint:md eslint build",
@@ -50,6 +50,7 @@
     "punctuate-coverage": "^1.0.3",
     "textlint": "^3.2.0",
     "textlint-rule-max-ten": "^1.0.1",
+    "textlint-rule-no-mix-dearu-desumasu": "^1.0.1",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
   },
   "dependencies": {
