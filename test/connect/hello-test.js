@@ -20,7 +20,7 @@ describe("hello", function () {
         return fetch("http://localhost:3000")
             .then(res => res.text())
             .then(text => {
-                assert.equal(text,
+                assert.equal(text, responseText);
             });
     });
 });
