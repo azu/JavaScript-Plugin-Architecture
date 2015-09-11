@@ -1,19 +1,26 @@
 // LICENSE : MIT
 "use strict";
-var assert = require("power-assert");
+import assert from "power-assert";
 import connect from "connect"
 import hello from "../../src/connect/hello";
-
+import http from "http";
+import fetch from "node-fetch";
 describe("hello", function () {
-    before(function () {
-        var connect = require('connect');
-        var http = require('http');
+    var responseText = "test";
+    var server;
+    before(function (done) {
         var app = connect();
-        app.use(hello("test"));
-        http.createServer(app).listen(3000, done);
+        app.use(hello(responseText));
+        server = http.createServer(app).listen(3000, done);
     });
-    after(function (done) {
+    after(function () {
+        server.close();
     });
-    it("should return test", function ()
-    );
+    it("should return response text", function () {
+        return fetch("http://localhost:3000")
+            .then(res => res.text())
+            .then(text => {
+                assert.equal(text,
+            });
+    });
 });
