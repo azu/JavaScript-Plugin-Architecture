@@ -13,5 +13,5 @@ export default function () {
             "X-Content-Type-Options": "nosniff"
         });
         next();
-    }
+    };
 }
