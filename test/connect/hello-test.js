@@ -2,6 +2,7 @@
 "use strict";
 import assert from "power-assert";
 import connect from "connect"
+import nosniff from "../../src/connect/nosniff";
 import hello from "../../src/connect/hello";
 import http from "http";
 import fetch from "node-fetch";
@@ -10,6 +11,7 @@ describe("hello", function () {
     var server;
     before(function (done) {
         var app = connect();
+        app.use(nosniff());
         app.use(hello(responseText));
         server = http.createServer(app).listen(3000, done);
     });
@@ -22,5 +24,11 @@ describe("hello", function () {
             .then(text => {
                 assert.equal(text, responseText);
             });
+    });
+    it("should return response has `X-Content-Type-Options` header", function () {
+        return fetch("http://localhost:3000")
+            .then(res => {
+                assert.equal(res.headers.get("x-content-type-options"), "nosniff");
+            })
     });
 });
