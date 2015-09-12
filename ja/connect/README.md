@@ -9,3 +9,4 @@ _middleware_という拡張する仕組みを持っていて、connectが持つ�
 
 ## どう書ける?
 
+[import, connect-inline-example.js](../../src/connect/connect-inline-example.js)
