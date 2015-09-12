@@ -78,8 +78,7 @@ describe("connect", function () {
         });
         it("should return request as response", function () {
             var requestBody = {
-                name: "Hubot",
-                login: "hubot"
+                key: "value"
             };
             return fetch("http://localhost:3000", {
                 method: "POST",
