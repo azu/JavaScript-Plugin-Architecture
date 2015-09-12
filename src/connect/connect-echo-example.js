@@ -1,6 +1,7 @@
 "use strict";
 import connect from "connect";
 import http from "http";
+import fetch from "node-fetch";
 import assert from "assert";
 var app = connect();
 // add Error handling
@@ -16,6 +17,7 @@ app.use(function (req, res) {
 //create node.js http server and listen on port
 var server = http.createServer(app).listen(3000, request);
 
+var closeServer = server.close.bind(server);
 // request => response
 function request() {
     var requestBody = {
@@ -28,6 +30,5 @@ function request() {
         .then(res => res.text())
         .then(text => {
             assert.deepEqual(text, requestBody);
-            server.close();
-        }).catch(console.error.bind(console));
+        }).then(closeServer, closeServer);
 }
