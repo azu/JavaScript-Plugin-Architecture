@@ -18,10 +18,13 @@ app.use(hello(responseText));
 var server = http.createServer(app).listen(3000, request);
 
 function request() {
+    var closeServer = server.close.bind(server);
     fetch("http://localhost:3000")
         .then(res => res.text())
         .then(text => {
             assert.equal(text, responseText);
             server.close();
-        }).catch(console.error.bind(console));
+        })
+        .catch(console.error.bind(console))
+        .then(closeServer, closeServer);
 }

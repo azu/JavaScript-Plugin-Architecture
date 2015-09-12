@@ -17,9 +17,9 @@ app.use(function (req, res) {
 //create node.js http server and listen on port
 var server = http.createServer(app).listen(3000, request);
 
-var closeServer = server.close.bind(server);
 // request => response
 function request() {
+    var closeServer = server.close.bind(server);
     var requestBody = {
         "key": "value"
     };

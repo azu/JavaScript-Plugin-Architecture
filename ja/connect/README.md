@@ -12,4 +12,12 @@ _middleware_という拡張する仕組みを持っていて、connectが持つ�
 Connectを使った簡単なEchoサーバを書いてみましょう。
 Echoサーバとは、送られてきたリクエストの内容をそのままレスポンスとして返すサーバのことです。
 
-[import, connect-inline-example.js](../../src/connect/connect-inline-example.js)
+[import, connect-echo-example.js](../../src/connect/connect-echo-example.js)
+
+このEchoサーバに対して、以下のようなリクエストBodyを送信すると、レスポンスとして同じ値が返ってきます。
+
+```json
+{
+    "key": "value"
+}
+```
