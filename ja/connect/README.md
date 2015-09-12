@@ -9,4 +9,7 @@ _middleware_という拡張する仕組みを持っていて、connectが持つ�
 
 ## どう書ける?
 
+Connectを使った簡単なEchoサーバを書いてみましょう。
+Echoサーバとは、送られてきたリクエストの内容をそのままレスポンスとして返すサーバのことです。
+
 [import, connect-inline-example.js](../../src/connect/connect-inline-example.js)

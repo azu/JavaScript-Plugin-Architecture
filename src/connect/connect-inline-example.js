@@ -1,8 +1,13 @@
 "use strict";
-import assert from "assert";
 import connect from "connect";
 import http from "http";
 var app = connect();
+// add Error handling
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send(err.message);
+    next();
+});
 // add "X-Content-Type-Options" to response
 app.use(function (req, res, next) {
     res.setHeader("X-Content-Type-Options", "nosniff");
