@@ -6,10 +6,10 @@
   },
   "author": "azu",
   "email": "azuciao@gmail.com",
-  "homepage": "JavaScript-Plugin-Architecture",
+  "homepage": "https://github.com/azu/JavaScript-Plugin-Architecture",
   "license": "MIT",
   "bugs": {
-    "url": "JavaScript-Plugin-Architecture/issues"
+    "url": "https://github.com/azu/JavaScript-Plugin-Architecture/issues"
   },
   "version": "0.1.1",
   "description": "JavaScript Plugin Architecture book.",
