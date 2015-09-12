@@ -1,18 +1,18 @@
 {
-  "name": "plugin-design-patterns",
+  "name": "javaScript-plugin-architecture",
   "repository": {
     "type": "git",
-    "url": "https://github.com/azu/plugin-design-patterns.git"
+    "url": "https://github.com/azu/JavaScript-Plugin-Architecture"
   },
   "author": "azu",
   "email": "azuciao@gmail.com",
-  "homepage": "https://github.com/azu/plugin-design-patterns",
+  "homepage": "JavaScript-Plugin-Architecture",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/azu/plugin-design-patterns/issues"
+    "url": "JavaScript-Plugin-Architecture/issues"
   },
   "version": "0.1.1",
-  "description": "JavaScript plugin design pattens book.",
+  "description": "JavaScript Plugin Architecture book.",
   "main": "index.js",
   "directories": {
     "test": "test"
