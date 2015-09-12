@@ -61,6 +61,7 @@ rules:
       - from: 今日もJS祭り
         to:   今日もjs祭り
 
+  - expected: ESLint
   - expected: Connect
     specs:
       - from: connect
