@@ -8,17 +8,20 @@ import http from "http";
 import fetch from "node-fetch";
 const responseText = "response text";
 var app = connect();
+// add Error handling
 app.use(errorHandler());
+// add "X-Content-Type-Options" to response
 app.use(nosniff());
+// respond to all requests
 app.use(hello(responseText));
+//create node.js http server and listen on port
+var server = http.createServer(app).listen(3000, request);
 
-var server = http.createServer(app).listen(3000, () => {
+function request() {
     fetch("http://localhost:3000")
         .then(res => res.text())
         .then(text => {
             assert.equal(text, responseText);
             server.close();
         }).catch(console.error.bind(console));
-});
-
-
+}
