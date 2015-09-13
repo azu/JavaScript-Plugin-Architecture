@@ -5,7 +5,7 @@
 [Connect](https://github.com/senchalabs/connect "Connect")はNode.jsで動くHTTPサーバフレームワークです。
 _middleware_という拡張する仕組みを持っていて、Connectが持つ機能自体はとても少ないです。
 
-この章ではConnectの_middleware_の仕組みついて見て行きましょう。
+この章ではConnectの_middleware_の仕組みについて見て行きましょう。
 
 ## どう書ける?
 
