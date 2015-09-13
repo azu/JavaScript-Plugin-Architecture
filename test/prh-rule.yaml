@@ -60,9 +60,15 @@ rules:
       # 日本語+単語境界の仕様は自分で調べてね…！
       - from: 今日もJS祭り
         to:   今日もjs祭り
-
+# プロジェクト固有の単語
   - expected: ESLint
+
   - expected: Connect
     specs:
       - from: connect
         to:   Connect
+
+  - expected: プラグインアーキテクチャ
+    pattern:
+      - プラグイン機構
+      - プラグインのアーキテクチャ
