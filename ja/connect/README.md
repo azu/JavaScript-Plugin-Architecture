@@ -47,4 +47,4 @@ Echoサーバでは `req.pipe(res);` という形でリクエストをそのま�
 基本的にどの_middleware_も`app.use(middleware)`という形で拡張でき、
 モジュールとして実装すれば再利用もしやすい形となっています。
 
-> **Note** _middleware_となる関数の引数が4つであると、それはエラーハンドリングの_middleware_とするという、connectの独自のルールがあります。
+> **Note** _middleware_となる関数の引数が4つであると、それはエラーハンドリングの_middleware_とするという、Connectの独自のルールがあります。
