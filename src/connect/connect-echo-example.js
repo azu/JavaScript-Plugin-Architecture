@@ -20,7 +20,7 @@ let server = http.createServer(app).listen(3000, request);
 // request => response
 function request() {
     let closeServer = server.close.bind(server);
-    let requestBody = {
+    const requestBody = {
         "key": "value"
     };
     fetch("http://localhost:3000", {

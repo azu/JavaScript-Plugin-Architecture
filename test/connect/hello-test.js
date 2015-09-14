@@ -9,7 +9,7 @@ import echo from "../../src/connect/echo";
 import http from "http";
 import fetch from "node-fetch";
 describe("connect", function () {
-    let responseText = "test";
+    const responseText = "test";
     let server;
     describe("errorHandler", function () {
         beforeEach(function (done) {
