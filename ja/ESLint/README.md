@@ -148,22 +148,22 @@ import {EventEmitter} from "events";
 
 function lint(code){
     // コードをパースしてASTにする
-    var ast = parse(code);
+    let ast = parse(code);
     // イベントの登録場所
-    var emitter = new EventEmitter();
-    var results = [];
+    let emitter = new EventEmitter();
+    let results = [];
     emitter.on("report", message => {
         // 3. のためのreportされた内容を集める
         results.push(message);
     });
     // 利用するルール一覧
-    var ruleList = getAllRules();
+    let ruleList = getAllRules();
     // 1. ルール毎に使っている`Node.type`をイベント登録する
     ruleList.forEach(rule => {
         // それぞれのルールに定義されているメソッド一覧を取得
         // e.g) MemberExpression(node){}
         // => {"MemberExpression" : function(node){}, ... } というオブジェクト
-        var methodObject = getDefinedMethod(rule);
+        let methodObject = getDefinedMethod(rule);
         Object.keys(methodObject).forEach(nodeType => {
             emitter.on(nodeType, methodList[nodeType]);
         });

@@ -9,11 +9,11 @@ import echo from "../../src/connect/echo";
 import http from "http";
 import fetch from "node-fetch";
 describe("connect", function () {
-    var responseText = "test";
-    var server;
+    let responseText = "test";
+    let server;
     describe("errorHandler", function () {
         beforeEach(function (done) {
-            var app = connect();
+            let app = connect();
             app.use(errorHandler());
             app.use((req, res, next) => {
                 next(new Error("wrong"));
@@ -34,7 +34,7 @@ describe("connect", function () {
     });
     describe("hello", function () {
         beforeEach(function (done) {
-            var app = connect();
+            let app = connect();
             app.use(errorHandler());
             app.use(hello(responseText));
             server = http.createServer(app).listen(3000, done);
@@ -52,7 +52,7 @@ describe("connect", function () {
     });
     describe("sniff", function () {
         beforeEach(function (done) {
-            var app = connect();
+            let app = connect();
             app.use(nosniff());
             app.use(hello(responseText));
             server = http.createServer(app).listen(3000, done);
@@ -69,7 +69,7 @@ describe("connect", function () {
     });
     describe("echo", function () {
         beforeEach(function (done) {
-            var app = connect();
+            let app = connect();
             app.use(echo());
             server = http.createServer(app).listen(3000, done);
         });
@@ -77,7 +77,7 @@ describe("connect", function () {
             server && server.close();
         });
         it("should return request as response", function () {
-            var requestBody = {
+            let requestBody = {
                 key: "value"
             };
             return fetch("http://localhost:3000", {
