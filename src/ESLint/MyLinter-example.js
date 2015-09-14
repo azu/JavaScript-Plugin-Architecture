@@ -5,7 +5,7 @@ import noConsole from "./no-console";
 
 let linter = new MyLinter();
 linter.loadRule(noConsole);
-let code = `
+const code = `
 function add(x, y){
     console.log(x, y);
     return x + y;

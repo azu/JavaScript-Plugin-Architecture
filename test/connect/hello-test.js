@@ -77,9 +77,9 @@ describe("connect", function () {
             server && server.close();
         });
         it("should return request as response", function () {
-            let requestBody = {
+            const requestBody = Object.freeze({
                 key: "value"
-            };
+            });
             return fetch("http://localhost:3000", {
                 method: "POST",
                 headers: {
