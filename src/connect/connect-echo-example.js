@@ -3,7 +3,7 @@ import connect from "connect";
 import http from "http";
 import fetch from "node-fetch";
 import assert from "assert";
-var app = connect();
+let app = connect();
 // add Error handling
 app.use(function (err, req, res, next) {
     console.error(err.stack);
@@ -15,12 +15,12 @@ app.use(function (req, res) {
     req.pipe(res);
 });
 //create node.js http server and listen on port
-var server = http.createServer(app).listen(3000, request);
+let server = http.createServer(app).listen(3000, request);
 
 // request => response
 function request() {
-    var closeServer = server.close.bind(server);
-    var requestBody = {
+    let closeServer = server.close.bind(server);
+    const requestBody = {
         "key": "value"
     };
     fetch("http://localhost:3000", {

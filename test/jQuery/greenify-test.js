@@ -7,7 +7,7 @@ const testbed = fs.readFileSync(__dirname + "/fixtures/testbed.html", "utf-8");
 const jquery = fs.readFileSync(__dirname + "/../../node_modules/jquery/dist/jquery.js", "utf-8");
 const greenify = fs.readFileSync(__dirname + "/../../src/jQuery/greenify.js", "utf-8");
 describe("greenify", function () {
-    var $, document;
+    let $, document;
     before(done => {
         jsdom.env({
             html: testbed,

@@ -14,7 +14,7 @@ export default class MyLinter {
     }
 
     loadRule(rule) {
-        var ruleExports = rule(this._ruleContext);
+        let ruleExports = rule(this._ruleContext);
         // on(nodeType, nodeTypeCallback);
         Object.keys(ruleExports).forEach(nodeType => {
             this._emitter.on(nodeType, ruleExports[nodeType]);
@@ -23,12 +23,12 @@ export default class MyLinter {
 
 
     lint(code) {
-        var messages = [];
-        var addMessage = (message)=> {
+        let messages = [];
+        let addMessage = (message)=> {
             messages.push(message);
         };
         this._ruleContext.on("report", addMessage);
-        var ast = parse(code);
+        let ast = parse(code);
         traverse(ast, {
             enter: (node) => {
                 this._emitter.emit(node.type, node);

@@ -7,7 +7,7 @@ import connect from "connect";
 import http from "http";
 import fetch from "node-fetch";
 const responseText = "response text";
-var app = connect();
+let app = connect();
 // add Error handling
 app.use(errorHandler());
 // add "X-Content-Type-Options" to response
@@ -15,10 +15,10 @@ app.use(nosniff());
 // respond to all requests
 app.use(hello(responseText));
 //create node.js http server and listen on port
-var server = http.createServer(app).listen(3000, request);
+let server = http.createServer(app).listen(3000, request);
 
 function request() {
-    var closeServer = server.close.bind(server);
+    let closeServer = server.close.bind(server);
     fetch("http://localhost:3000")
         .then(res => res.text())
         .then(text => {
