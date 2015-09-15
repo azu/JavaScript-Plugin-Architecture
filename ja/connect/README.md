@@ -49,3 +49,48 @@ Echoサーバでは `req.pipe(res);` という形でリクエストをそのま�
 
 > **Note** _middleware_となる関数の引数が4つであると、それはエラーハンドリングの_middleware_とするという、Connect独自のルールがあります。
 
+## どういう仕組み
+
+Connectの_middleware_がどのような仕組みで動いているのかを見ていきます。
+
+`app`に登録した_middleware_は、リクエスト時に呼び出されているので、
+`app`のどこかに利用する_middleware_を保持していることは推測できると思います。
+
+Connectでは`app.stack`にまだに_middleware_が保持されています。
+次のような`app.stack`の中身を表示見ることで、_middleware_が登録順で保持されていることがわかります。
+
+[import connect-trace-example.js](../../src/connect/connect-trace-example.js)
+
+後は、サーバへリクエストがやってきた時に、それぞれの_middleware_を順番に呼び出しています。
+
+上記の例だと以下の順番で_middleware_が呼び出されることになります。
+
+- errorHandler
+- nosniff
+- hello
+
+エラーハンドリングの_middleware_はエラー時のみ呼ばれるため例外なので、
+[nosniff.js](#nosniff.js) -> [hello.js](#hello.js) と呼び出されます。
+
+[import nosniff.js](../../src/connect/nosniff.js)
+
+`nosniff.js`は、処理が終わったら`next()`を呼び出していて、
+この`next()`が次の_middleware_へ行くという意味になります。
+
+次に、`hello.js`を見てみると、`next()`がないことがわかります。
+
+[import hello.js](../../src/connect/hello.js)
+
+`next()`がないということは`hello.js`がこの連続する_middleware_の最後となっていることがわかります。
+仮に、これより先に_middleware_が登録されていたとしても無視されます。
+
+このような_middleware_を繋げた形を_middleware stack_と呼ぶことがあります。
+
+HTTPサーバではこのような_middleware stack_を作って使うものは既にあり、
+PythonのWSGI MiddlewareやRubyのRackなどが該当します。
+
+Connectは`use`というメソッドで_middleware_を使うことからも分かりますが、
+Rackを参考にして実装されています。
+
+- [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
+
