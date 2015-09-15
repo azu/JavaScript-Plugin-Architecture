@@ -84,6 +84,20 @@ Connectでは`app.stack`にまだに_middleware_が保持されています。
 `next()`がないということは`hello.js`がこの連続する_middleware_の最後となっていることがわかります。
 仮に、これより先に_middleware_が登録されていたとしても無視されます。
 
+つまり、処理的には以下のようにstackを先頭から一個づつ取り出して、処理していくという方法が取られています。
+
+```js
+let req = "...",
+    res = "...";
+function next(){
+    let middleware = app.stack.shift();
+    // nextが呼ばれれば次のmiddleware
+    middleware(req, res, next);
+}
+next();// 初回
+```
+
+
 このような_middleware_を繋げた形を_middleware stack_と呼ぶことがあります。
 
 HTTPサーバではこのような_middleware stack_を作って使うものは既にあり、
@@ -94,3 +108,7 @@ Rackを参考にして実装されています。
 
 - [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
 
+次に、この_middleware stack_をどう処理しているのかを、
+具体的な実装を書きながら見て行きましょう。
+
+## 実装してみよう
