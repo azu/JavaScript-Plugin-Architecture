@@ -3,7 +3,6 @@ import errorHandler from "./errorHandler";
 import hello from "./hello";
 import nosniff from "./nosniff";
 import connect from "connect";
-import http from "http";
 
 const responseText = "response text";
 let app = connect();
