@@ -8,7 +8,7 @@ function setHeaders(res, headers) {
     });
 }
 export default function () {
-    return function (req, res, next) {
+    return function nosniff(req, res, next) {
         setHeaders(res, {
             "X-Content-Type-Options": "nosniff"
         });
