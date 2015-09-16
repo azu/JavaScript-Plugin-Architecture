@@ -6,6 +6,7 @@ import assert from "assert";
 import connect from "connect";
 import http from "http";
 import fetch from "node-fetch";
+
 const responseText = "response text";
 let app = connect();
 // add Error handling
@@ -14,6 +15,7 @@ app.use(errorHandler());
 app.use(nosniff());
 // respond to all requests
 app.use(hello(responseText));
+
 //create node.js http server and listen on port
 let server = http.createServer(app).listen(3000, request);
 

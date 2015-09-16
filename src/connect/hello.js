@@ -1,6 +1,6 @@
 "use strict";
 export default function (text) {
-    return function (req, res) {
+    return function hello(req, res) {
         res.end(text);
     };
 }
