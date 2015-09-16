@@ -4,5 +4,3 @@ node_js: "stable"
 cache:
   directories:
     - node_modules
-after_script:
-  - npm run-script coveralls
