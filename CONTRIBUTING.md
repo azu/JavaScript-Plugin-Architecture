@@ -6,11 +6,11 @@ Contributeは大きく分けて、既存の文章の修正や執筆 と Proposal
 
 ## 文章の修正
 
-typoなどを見つけた場合は1文字修正でもいいので、Pull Requestを送っていただけると助かります。
+typoなどを見つけた場合は、1文字の修正からでも問題無いので、Pull Requestを送っていただけると助かります。
 
 表記揺れを発見した場合は単純にIssueを立ててもらうか、Pull Requestでの修正をいただけると嬉しいです。
 
-また、この書籍では[test/prh-rule.yaml](test/prh-rule.yaml)という辞書を使い表記揺れを辞書でテストできるようにしています。
+また、この書籍では[test/prh-rule.yaml](test/prh-rule.yaml)で定義した辞書を使い表記揺れを辞書でテストできるようにしています。
 辞書による表記揺れの検知が可能そうであるなら、そちらも合わせてご指摘いただけるとありがたいです。
 
 - [textlint + prhで表記ゆれを検出する | Web Scratch](http://efcl.info/2015/09/14/textlint-rule-prh/ "textlint + prhで表記ゆれを検出する | Web Scratch")
