@@ -88,6 +88,8 @@ Connectが登録された_middleware_をどう処理するかというと、
 
 つまり、処理的には以下のようにstackを先頭から一個づつ取り出して、処理していくという方法が取られています。
 
+Connectの行っている処理を抽象的なコードで書くと以下のような形となっています。
+
 ```js
 let req = "...",
     res = "...";
@@ -103,12 +105,11 @@ next();// 初回
 このような_middleware_を繋げた形を_middleware stack_と呼ぶことがあります。
 
 _middleware stack_で構成されるHTTPサーバとして、PythonのWSGI MiddlewareやRubyのRackなどがあります。
-
 ConnectはRackと同じく`use`で_middleware_を指定することからも分かりますが、
 Rackを参考にして実装されています。
 
 - [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
 
-次に、この_middleware stack_の具体的な実装を書きながら見て行きましょう。
+次は、先ほど抽象的なコードとなっていたものを、具体的な実装にしていきます。
 
 ## 実装してみよう
