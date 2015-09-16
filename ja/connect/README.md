@@ -71,6 +71,7 @@ Connectが登録された_middleware_をどう処理するかというと、
 - hello
 
 エラーハンドリングの_middleware_は処理中にエラーが起きた時のみ呼ばれます。
+
 そのため、通常は [nosniff.js](#nosniff.js) -> [hello.js](#hello.js) の順で呼び出されます。
 
 [import nosniff.js](../../src/connect/nosniff.js)
