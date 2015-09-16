@@ -108,7 +108,6 @@ Rackを参考にして実装されています。
 
 - [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
 
-次に、この_middleware stack_をどう処理しているのかを、
-具体的な実装を書きながら見て行きましょう。
+次に、この_middleware stack_の具体的な実装を書きながら見て行きましょう。
 
 ## 実装してみよう
