@@ -102,8 +102,7 @@ next();// 初回
 
 このような_middleware_を繋げた形を_middleware stack_と呼ぶことがあります。
 
-このような_middleware stack_で構成されるHTTPサーバとして、
-PythonのWSGI MiddlewareやRubyのRackなどが該当します。
+_middleware stack_で構成されるHTTPサーバとして、PythonのWSGI MiddlewareやRubyのRackなどがあります。
 
 ConnectはRackと同じく`use`で_middleware_を指定することからも分かりますが、
 Rackを参考にして実装されています。
