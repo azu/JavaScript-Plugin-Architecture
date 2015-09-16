@@ -100,10 +100,10 @@ next();// 初回
 
 このような_middleware_を繋げた形を_middleware stack_と呼ぶことがあります。
 
-HTTPサーバではこのような_middleware stack_を作って使うものは既にあり、
+このような_middleware stack_で構成されるHTTPサーバとして、
 PythonのWSGI MiddlewareやRubyのRackなどが該当します。
 
-Connectは`use`というメソッドで_middleware_を使うことからも分かりますが、
+ConnectはRackと同じく`use`で_middleware_を指定することからも分かりますが、
 Rackを参考にして実装されています。
 
 - [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
