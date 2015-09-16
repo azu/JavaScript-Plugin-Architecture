@@ -61,7 +61,7 @@ Connectでは`app.stack`に_middleware_を配列として保持しています�
 
 [import connect-trace-example.js](../../src/connect/connect-trace-example.js)
 
-後は、サーバへリクエストがやってきた時に、それぞれの_middleware_を順番に呼び出しています。
+後は、サーバがリクエストを受け取った時に、それぞれの_middleware_を順番に呼び出しています。
 
 上記の例だと以下の順番で_middleware_が呼び出されることになります。
 
