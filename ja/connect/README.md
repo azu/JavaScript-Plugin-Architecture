@@ -57,7 +57,7 @@ Connectの_middleware_がどのような仕組みで動いているのかを見�
 そのため、`app`のどこかに利用する_middleware_を保持していることは推測できると思います。
 
 Connectでは`app.stack`に_middleware_を配列として保持しています。
-次のようにして`app.stack`の中身を表示見ることで、_middleware_が登録順で保持されていることがわかります。
+次のようにして`app.stack`の中身を表示してみると、_middleware_が登録順で保持されていることがわかります。
 
 [import connect-trace-example.js](../../src/connect/connect-trace-example.js)
 
