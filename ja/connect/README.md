@@ -76,7 +76,7 @@ Connectが登録された_middleware_をどう処理するかというと、
 
 [import nosniff.js](../../src/connect/nosniff.js)
 
-`nosniff.js`は、処理が終わったら`next()`を呼び出していて、
+`nosniff.js`は、HTTPヘッダを設定し終わったら`next()`を呼び出していて、
 この`next()`が次の_middleware_へ行くという意味になります。
 
 次に、`hello.js`を見てみると、`next()`がないことがわかります。
