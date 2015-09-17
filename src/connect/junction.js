@@ -4,20 +4,20 @@ function isErrorHandingMiddleware(middleware) {
     let arity = middleware.length;
     return arity === 3;
 }
-function applyMiddleware(error, text, middleware, next) {
+function applyMiddleware(error, data, middleware, next) {
     let errorOnMiddleware = null;
     try {
         if (error && isErrorHandingMiddleware(middleware)) {
-            middleware(error, text, next);
+            middleware(error, data, next);
         } else {
-            middleware(text, next);
+            middleware(data, next);
         }
         return;
     } catch (error) {
         errorOnMiddleware = error;
     }
     // skip the middleware or Error on the middleware
-    next(errorOnMiddleware, text);
+    next(errorOnMiddleware, data);
 }
 
 export default class Junction {
@@ -29,7 +29,7 @@ export default class Junction {
         this.stack.push(middleware);
     }
 
-    process(text, callback) {
+    process(initialData, callback) {
         let next = (error, data) => {
             let middleware = this.stack.shift();
             if (!middleware) {
@@ -37,6 +37,6 @@ export default class Junction {
             }
             applyMiddleware(error, data, middleware, next);
         };
-        next(null, text);
+        next(null, initialData);
     }
 }
