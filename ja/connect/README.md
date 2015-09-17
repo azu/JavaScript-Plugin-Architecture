@@ -36,11 +36,12 @@ Echoサーバでは `req.pipe(res);` という形でリクエストをそのま�
 
 それぞれの処理を_middleware_としてファイルを分けて実装し、`app.use(middleware)`で処理を追加しています。
 
-[import errorHandler.js](../../src/connect/errorHandler.js)
 
 [import nosniff.js](../../src/connect/nosniff.js)
 
 [import hello.js](../../src/connect/hello.js)
+
+[import errorHandler.js](../../src/connect/errorHandler.js)
 
 [import connect-example.js](../../src/connect/connect-example.js)
 
@@ -66,9 +67,9 @@ Connectが登録された_middleware_をどう処理するかというと、
 
 上記の例だと以下の順番で_middleware_が呼び出されることになります。
 
-- errorHandler
 - nosniff
 - hello
+- errorHandler
 
 エラーハンドリングの_middleware_は処理中にエラーが起きた時のみ呼ばれます。
 
