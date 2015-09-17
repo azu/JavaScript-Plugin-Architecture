@@ -1,6 +1,23 @@
 "use strict";
-function applyMiddleware(text, middleware, next) {
-    middleware(text, next);
+function isErrorHandingMiddleware(middleware) {
+    // middleware(error, text, next)
+    var arity = middleware.length;
+    return arity === 3;
+}
+function applyMiddleware(error, text, middleware, next) {
+    let errorOnMiddleware = null;
+    try {
+        if (error && isErrorHandingMiddleware(middleware)) {
+            middleware(error, text, next);
+        } else {
+            middleware(text, next);
+        }
+        return;
+    } catch (error) {
+        errorOnMiddleware = error;
+    }
+    // skip the middleware or Error on the middleware
+    next(errorOnMiddleware, text);
 }
 
 export default class Junction {
@@ -18,7 +35,7 @@ export default class Junction {
             if (!middleware) {
                 return callback(error, data);
             }
-            applyMiddleware(data, middleware, next);
+            applyMiddleware(error, data, middleware, next);
         };
         next(null, text);
     }
