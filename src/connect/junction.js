@@ -1,7 +1,7 @@
 "use strict";
 function isErrorHandingMiddleware(middleware) {
     // middleware(error, text, next)
-    var arity = middleware.length;
+    let arity = middleware.length;
     return arity === 3;
 }
 function applyMiddleware(error, text, middleware, next) {
