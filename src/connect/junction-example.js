@@ -1,6 +1,6 @@
 "use strict";
 import Junction from "./junction";
-import assert from "power-assert";
+import assert from "assert";
 let junction = new Junction();
 junction.use(function toUpperCase(res, next) {
     res.value = res.value.toUpperCase();
@@ -10,7 +10,7 @@ junction.use(function exclamationMark(res, next) {
     res.value = res.value + "!";
     next();
 });
-junction.use(function (error, res, next) {
+junction.use(function errorHandling(error, res, next) {
     console.error(error.stack);
     next();
 });
