@@ -72,3 +72,6 @@ rules:
     pattern:
       - プラグイン機構
       - プラグインのアーキテクチャ
+  - expected: middleware
+    pattern:
+      - ミドルウェア

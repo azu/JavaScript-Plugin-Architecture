@@ -121,7 +121,7 @@ Rackを参考にして実装されています。
 
 [import junction.js](../../src/connect/junction.js)
 
-実装を見てみると、`use`で_middleware_を登録して、`process`で登録したミドルウェアを順番に実行していきます。
+実装を見てみると、`use`で_middleware_を登録して、`process`で登録した_middleware_を順番に実行していきます。
 そのため、`Junction`自体は渡されたデータは何も処理せずに、_middleware_との中継のみをしています。
 
 登録する_middleware_はConnectと同じで、処理をしたら`next`を呼んで、次の_middleware_が処理するというのを繰り返しています。
