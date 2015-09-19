@@ -195,3 +195,8 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 - Connectは_middleware_を使ったHTTPサーバライブラリ
 - Connect自体のは機能は少ない
 - 複数の_middleware_を組わせてアプリケーションを作る
+
+## 参考資料
+
+- [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5)
+- [Pylons のコンセプト — Pylons 0.9.7 documentation](http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html)
