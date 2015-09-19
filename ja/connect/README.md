@@ -115,9 +115,9 @@ Rackを参考にして実装されています。
 
 ## 実装してみよう
 
-`Junction`というConnectライクな_middleware_をサポートしたものを作成してみます。
+JunctionというConnectライクな_middleware_をサポートしたものを作成してみます。
 
-`Junction`は、`use(middleware)` と `process(value, (error, result) => { });`を持っているシンプルなクラスです。
+Junctionは、`use(middleware)` と `process(value, (error, result) => { });`を持っているシンプルなクラスです。
 
 [import junction.js](../../src/connect/junction.js)
 
@@ -130,3 +130,35 @@ Rackを参考にして実装されています。
 
 [import junction-example.js](../../src/connect/junction-example.js)
 
+
+## どういう用途に向いている?
+
+ConnectやJunctionの実装を見てみると分かりますが、このアーキテクチャでは機能の詳細は_middleware_で実装できます。
+そのため、本体の実装は_middleware_に提供するインタフェースの決定、エラーハンドリングの手段の提供するだけでとても小さいものとなっています。
+
+今回は紹介していませんが、Connectにはルーティングに関する機能があります。
+しかし、この機能も「与えられたパスにマッチした場合のみに反応する_middleware_を登録する」という単純なものです。
+
+```js
+app.use("/foo", function fooMiddleware(req, res, next) {
+    // req.url starts with "/foo"
+    next();
+});
+```
+
+このアーキテクチャは、入力があり出力がある場合にコアとなる部分は小さく実装できることが分かります。
+
+そのため、ConnectやRackなどのHTTPサーバでは「リクエストに対してレスポンスを返す」というのが決まっているので、
+このアーキテクチャは適しています。
+
+## どういう用途に向いていない?
+
+このアーキテクチャでは機能の詳細が_middleware_で実装できます。
+その中で多くの機能を_middleware_で実装していくと、_middleware_間に依存関係が生じることがあります。
+
+これにより、`use(middleware)` で登録する順番が変わるだけで挙動が変わる事があります。
+_middleware_は柔軟ですが、_middleware_間で起きる前提の解決を利用者が行う必要があります。
+
+そのため、プラグイン同士の独立性や明確な依存関係を扱いたい場合には不向きといえるでしょう。
+
+これらを解消するためにコアはそのままにして、最初から幾つかの_middleware stack_を作ったものが提供されるケースもあります。
