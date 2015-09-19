@@ -263,7 +263,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 > これはルールからの書き換えのコマンドを`SourceCode`というオブジェクトに集約して、最後に実際の書き換えを行うという抽象レイヤーを設けています。
 > - [Implement autofixing · Issue #3134 · eslint/eslint](https://github.com/eslint/eslint/issues/3134 "Implement autofixing · Issue #3134 · eslint/eslint")
 
-## この仕組みを使ってるもの
+## この仕組みを使っているもの
 
 - [azu/textlint](https://github.com/azu/textlint "azu/textlint")
     - テキストやMarkdownをパースしてASTにしてLintするツール

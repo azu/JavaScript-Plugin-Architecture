@@ -180,7 +180,7 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 > [WSGI ミドルウェア](http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html#wsgi-middleware "WSGI ミドルウェア")より引用
 
 
-## この仕組みを使ってるもの
+## この仕組みを使っているもの
 
 - [Express](http://expressjs.com/ "Express")
     - Connectと_middleware_の互換性がある
@@ -188,3 +188,15 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 - [wooorm/retext](https://github.com/wooorm/retext "wooorm/retext")
     - `use`でプラグインを登録していくテキスト処理ライブラリ
     
+## まとめ
+
+ここではConnectのプラグインアーキテクチャについて学びました。
+
+- Connectは_middleware_を使ったHTTPサーバライブラリである
+- Connect自体は機能は少ない
+- 複数の_middleware_を組わせてアプリケーションを作ることができる
+
+## 参考資料
+
+- [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5)
+- [Pylons のコンセプト — Pylons 0.9.7 documentation](http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html)
