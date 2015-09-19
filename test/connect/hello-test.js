@@ -14,20 +14,20 @@ describe("connect", function () {
     describe("errorHandler", function () {
         beforeEach(function (done) {
             let app = connect();
-            app.use(errorHandler());
             app.use((req, res, next) => {
                 next(new Error("wrong"));
             });
+            app.use(errorHandler());
             server = http.createServer(app).listen(3000, done);
         });
         afterEach(function () {
             server && server.close();
         });
-        it("should return 500 status response", function () {
+        it("should return 404 status response", function () {
             return fetch("http://localhost:3000")
                 .then(res => res.status)
                 .then(status => {
-                    assert(status, 500);
+                    assert(status, 404);
                 });
         });
 
