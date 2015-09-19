@@ -1,6 +1,6 @@
 # jQuery
 
-> この文章はjQuery [2.1.4](https://github.com/jquery/jquery/releases/tag/2.1.4 "2.1.4")を元に書かれています。
+> この文章は[jQuery](http://jquery.com/ "jQuery") 2.1.4を元に書かれています。
 
 jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブジェクトにメソッドを追加することが出来ます。
 
