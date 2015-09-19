@@ -159,6 +159,32 @@ app.use("/foo", function fooMiddleware(req, res, next) {
 これにより、`use(middleware)` で登録する順番が変わるだけで挙動が変わる事があります。
 _middleware_は柔軟ですが、_middleware_間で起きる前提の解決を利用者が行う必要があります。
 
-そのため、プラグイン同士の独立性や明確な依存関係を扱いたい場合には不向きといえるでしょう。
+そのため、プラグイン同士の強い独立性や明確な依存関係を扱いたい場合には不向きといえるでしょう。
 
 これらを解消するためにコアはそのままにして、最初から幾つかの_middleware stack_を作ったものが提供されるケースもあります。
+
+## エコシステム
+
+Connect自体の機能は少ないため、その分_middleware_が多くあるのが特徴的です。
+
+- [github.com/senchalabs/connect#middleware](https://github.com/senchalabs/connect#middleware)
+- [Express middleware](http://expressjs.com/resources/middleware.html "Express middleware")
+
+また、それぞれの_middleware_が小さな単機能であり、それを組み合わせて使うように作られているケースが多いです。
+
+これは、_middleware_が層となっていてそれを重ねていく作り、つまり_middleware stack_の形を取ることが多いからであるとも言えます。
+
+![pylons_as_onion](img/pylons_as_onion.png)
+
+> ミドルウェアでラップするプロセスは、概念的にたまねぎの中の層と同様の構造をもたらします。
+> [WSGI ミドルウェア](http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html#wsgi-middleware "WSGI ミドルウェア")より引用
+
+
+## この仕組みを使ってるもの
+
+- [Express](http://expressjs.com/ "Express")
+    - Connectと_middleware_の互換性がある
+    - 元々はConnectを利用していたが[4.0.0](https://github.com/strongloop/express/blob/4.0.0/History.md "4.0.0")で自前の実装に変更
+- [wooorm/retext](https://github.com/wooorm/retext "wooorm/retext")
+    - `use`でプラグインを登録していくテキスト処理ライブラリ
+    
