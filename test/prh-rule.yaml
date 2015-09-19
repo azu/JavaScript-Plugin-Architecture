@@ -75,3 +75,5 @@ rules:
   - expected: middleware
     pattern:
       - ミドルウェア
+  - expected: は
+    pattern: のは
