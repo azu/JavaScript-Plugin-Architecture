@@ -140,9 +140,9 @@ ConnectやJunctionの実装を見てみると分かりますが、このアー�
 しかし、この機能も「与えられたパスにマッチした場合のみに反応する_middleware_を登録する」という単純なものです。
 
 ```js
-app.use('/foo', function fooMiddleware(req, res, next) {
-  // req.url starts with "/foo"
-  next();
+app.use("/foo", function fooMiddleware(req, res, next) {
+    // req.url starts with "/foo"
+    next();
 });
 ```
 
