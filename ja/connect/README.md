@@ -188,3 +188,10 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 - [wooorm/retext](https://github.com/wooorm/retext "wooorm/retext")
     - `use`でプラグインを登録していくテキスト処理ライブラリ
     
+## まとめ
+
+ここではConnectのプラグインアーキテクチャについて学びました。
+
+- Connectは_middleware_を使ったHTTPサーバライブラリ
+- Connect自体のは機能は少ない
+- 複数の_middleware_を組わせてアプリケーションを作る
