@@ -180,7 +180,7 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 > [WSGI ミドルウェア](http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html#wsgi-middleware "WSGI ミドルウェア")より引用
 
 
-## この仕組みを使ってるもの
+## この仕組みを使っているもの
 
 - [Express](http://expressjs.com/ "Express")
     - Connectと_middleware_の互換性がある

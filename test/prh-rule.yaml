@@ -77,3 +77,5 @@ rules:
       - ミドルウェア
   - expected: は
     pattern: のは
+  - expected: 使っているもの
+    pattern: 使ってるもの
