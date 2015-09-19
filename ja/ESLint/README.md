@@ -1,6 +1,6 @@
 # ESLint
 
-> この文章はESLint [v1.3.0](https://github.com/eslint/eslint/releases/tag/v1.3.0 "v1.3.0")を元に書かれています。
+> この文章は[ESLint](http://eslint.org/ "ESLint") 1.3.0を元に書かれています。
 
 [ESLint](http://eslint.org/ "ESLint")はJavaScriptのコードをJavaScriptで書かれたルールによって検証するLintツールです。
 
