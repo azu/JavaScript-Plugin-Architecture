@@ -32,7 +32,7 @@ Echoサーバでは `req.pipe(res);` という形でリクエストをそのま�
 もう少し_middleware_をプラグインらしくモジュールとして実装したものを見てみます。
 
 次の[connect-example.js](#connect-example.js)は、あらゆるリクエストに対して、
-`"response text"`というレスポンスを`"X-Content-Type-Options"`ヘッダを付けて返すだけのものです。
+`"response text"`というレスポンスを`"X-Content-Type-Options"`ヘッダを付けて返すだけのサーバです。
 
 それぞれの処理を_middleware_としてファイルを分けて実装し、`app.use(middleware)`で処理を追加しています。
 
