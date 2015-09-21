@@ -41,6 +41,7 @@
     "espower-babel": "^3.3.0",
     "gitbook-cli": "^0.3.6",
     "gitbook-plugin-edit-link": "^1.4.1",
+    "gitbook-plugin-github-buttons": "^1.2.2",
     "gitbook-plugin-include-codeblock": "^1.4.0",
     "gitbook-plugin-japanese-support": "0.0.1",
     "gitbook-plugin-richquotes": "0.0.5",
