@@ -1,10 +1,18 @@
 {
   "title": "JavaScript Plugin Architecture",
   "description": "JavaScriptライブラリやツールのプラグインの仕組み",
+  "author": "azu",
+  "githubId": "azu/JavaScript-Plugin-Architecture",
+  "author": {
+    "username": "azu",
+    "urls.profile": "http://github.com/azu",
+    "accounts.github": "azu"
+  },
   "plugins": [
     "include-codeblock",
     "richquotes",
-    "edit-link"
+    "edit-link",
+    "japanese-support"
   ],
   "pluginsConfig": {
     "edit-link": {
