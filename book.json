@@ -1,4 +1,5 @@
 {
+  "gitbook": "^2.0.0",
   "title": "JavaScript Plugin Architecture",
   "description": "JavaScriptライブラリやツールのプラグインの仕組み",
   "author": "azu",
