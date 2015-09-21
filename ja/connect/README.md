@@ -194,7 +194,7 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 
 - Connectは_middleware_を使ったHTTPサーバライブラリである
 - Connect自体は機能は少ない
-- 複数の_middleware_を組わせてアプリケーションを作ることができる
+- 複数の_middleware_を組み合わせてアプリケーションを作ることができる
 
 ## 参考資料
 
