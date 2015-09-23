@@ -1,6 +1,6 @@
 # Contributeのやりかた
 
-この書籍ではJavaScriptにおけるプラグインのアーキテクチャを色々なライブラリやツールを元に紹介する形をとっています。
+この書籍ではJavaScriptにおけるプラグインアーキテクチャを色々なライブラリやツールを元に紹介する形をとっています。
 
 Contributeは大きく分けて、既存の文章の修正や執筆 と Proposalの提案などがあります。
 
@@ -107,7 +107,7 @@ Closes #8454
 
 ```
                          scope        commit title
-                         
+
         commit type       /                /      
                 \        |                |
                  feat(ngInclude): add template url parameter to events
