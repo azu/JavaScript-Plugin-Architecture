@@ -187,7 +187,9 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
     - 元々はConnectを利用していたが[4.0.0](https://github.com/strongloop/express/blob/4.0.0/History.md "4.0.0")で自前の実装に変更
 - [wooorm/retext](https://github.com/wooorm/retext "wooorm/retext")
     - `use`でプラグインを登録していくテキスト処理ライブラリ
-    
+- [r7kamura/stackable-fetcher](https://github.com/r7kamura/stackable-fetcher "r7kamura/stackable-fetcher")
+    - `use`でプラグインを登録して処理を追加できるTTPクライアントライブラリ
+
 ## まとめ
 
 ここではConnectのプラグインアーキテクチャについて学びました。
