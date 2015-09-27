@@ -40,4 +40,7 @@ Pull Request、コミットのやりかたなどが書かれています。
 
 ## License
 
-MIT
+© azu
+
+コードはMITライセンスで利用できます。
+文章は[CC BY-NC 4.0](http://creativecommons.org/licenses/by-nc/4.0/ "CC BY-NC 4.0")で利用できます。
