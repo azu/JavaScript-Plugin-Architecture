@@ -67,6 +67,7 @@ rules:
     specs:
       - from: connect
         to:   Connect
+  - expected: gulp
 
   - expected: プラグインアーキテクチャ
     pattern:

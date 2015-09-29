@@ -62,6 +62,8 @@
   "dependencies": {
     "esprima": "^2.5.0",
     "estraverse": "^4.1.0",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.6",
     "jquery": "^2.1.4"
   }
 }
