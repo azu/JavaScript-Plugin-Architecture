@@ -1,10 +1,10 @@
 "use strict";
 import {Transform} from "stream";
-let prefixBuffer = function (buffer, prefix) {
+export function prefixBuffer(buffer, prefix) {
     return Buffer.concat([Buffer(prefix), buffer]);
-};
+}
 
-let prefixStream = function (prefix) {
+export function prefixStream(prefix) {
     return new Transform({
         transform: function (chunk, encoding, next) {
             let buffer = prefixBuffer(chunk, prefix);
@@ -12,7 +12,7 @@ let prefixStream = function (prefix) {
             next();
         }
     });
-};
+}
 
 let gulpTransform = function (prefix) {
     // enable `objectMode` of the stream for vinyl File objects.
