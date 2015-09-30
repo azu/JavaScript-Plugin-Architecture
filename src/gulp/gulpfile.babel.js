@@ -1,4 +1,3 @@
-// LICENSE : MIT
 "use strict";
 import gulp from "gulp";
 import gulpPrefixer from "./gulp-prefixer";

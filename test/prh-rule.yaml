@@ -68,6 +68,11 @@ rules:
       - from: connect
         to:   Connect
   - expected: gulp
+  - expected: タスク自動化ツール
+    patterns:
+      - /Task Runner/i
+      - タスクランナー
+      - タスク管理ツール
 
   - expected: プラグインアーキテクチャ
     pattern:
