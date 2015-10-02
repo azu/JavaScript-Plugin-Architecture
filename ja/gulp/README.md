@@ -74,6 +74,8 @@ gulp.task("sass", function() {
 2. 取得したファイルの先頭に"prefix text"という文字列を追加する
 3. 変更したファイルを`build/`ディレクトリに出力する
 
+### Stream
+
 [gulp-prefixer.js](#gulp-prefixer.js)を見てみると、`gulpPrefixer`という[Transform Stream](https://nodejs.org/api/stream.html#stream_class_stream_transform "stream.Transform")のインスタンスを返していることが分かります。
 
 Transform Streamというものが出てきましたが、Node.jsのStreamは次の4種類があります。
@@ -102,6 +104,8 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 
 そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、
 JavaScriptのオブジェクトそのものをStreamで流せるようになっています。
+
+### vinyl
 
 gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトがStreamとして流れてきます。
 このvinylは _Virtual file format_ というように、データをラップした抽象フォーマットのオブジェクトです。
