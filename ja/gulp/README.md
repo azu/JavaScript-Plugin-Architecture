@@ -74,7 +74,56 @@ gulp.task("sass", function() {
 2. 取得したファイルの先頭に"prefix text"という文字列を追加する
 3. 変更したファイルを`build/`ディレクトリに出力する
 
+[gulp-prefixer.js](#gulp-prefixer.js)を見てみると、`gulpPrefixer`という[Transform Stream](https://nodejs.org/api/stream.html#stream_class_stream_transform "stream.Transform")のインスタンスを返していることが分かります。
 
+Transform Streamというものが出てきましたが、Node.jsのStreamは次の4種類があります。
+
+- Readable Stream
+- Transform Stream
+- Writable Stream
+- Duplex Stream
+
+今回の`default`タスクの処理をそれぞれ当てはめると次のようになっています。
+
+1. `./*.*`にマッチするファイルを取得 = Readable Stream
+2. 取得したファイルの先頭に"prefix text"という文字列を追加する = Transform Stream
+3. 変更したファイルを`build/`ディレクトリに出力する = Writable Stream
+
+あるファイルを _Read_ して、 _Transform_ したものを、別のところに _Write_ としているというよくあるデータの流れと言えます。
+
+[gulp-prefixer.js](#gulp-prefixer.js)では、gulpから流れてきたデータをStreamとして受け取り、
+そのデータを変更したもの次のStreamに流すということを行っています。
+
+「gulpから流れてきたデータ」を扱うために`readableObjectMode`と`writableObjectMode`をそれぞれ`true`にしています。
+この _ObjectMode_ というのは名前の通り、Streamでオブジェクトが流れるという設定のことです。
+
+通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html "Buffer")というバイナリデータを扱います。
+この[Buffer](https://nodejs.org/api/buffer.html "Buffer")は文字列オブジェクトと相互変換が可能ですが、複数の値を持ったオブジェクトを扱うのは少し変更です。
+
+そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、
+JavaScriptのオブジェクトそのものをStreamで流せるようになっています。
+
+gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトがStreamとして流れてきます。
+このvinylは _Virtual file format_ というように、データをラップした抽象フォーマットのオブジェクトです。
+
+なぜこういった抽象フォーマットが必要なのかは次のことを考えてみると分かりやすいと思います。
+
+`gulp.src`で読み込んだファイルの中身のみが、Transform Streamに渡されてしまうと、
+Transform Streamからはそのファイルのパスや読み取り属性などの詳細な情報を知ることができません。
+そのため、`gulp.src`で読み込んだファイルはvinylでラップされ、ファイルの中身は`contents`として参照できるようになっています。
+
+この抽象フォーマットの`contents`はStreamまたはBufferとなっているので、
+両方対応する場合は以下のように両方のパターンに対応したコードを書く必要があります。
+
+```js
+if (file.isBuffer()) {
+    file.contents = prefixBuffer(file.contents, prefix);
+}
+
+if (file.isStream()) {
+    file.contents = file.contents.pipe(prefixStream(prefix));
+}
+```
 
 - [ ] どういう用途に向いている?
 - [ ] どういう用途に向いていない?
