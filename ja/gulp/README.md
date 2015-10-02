@@ -31,12 +31,12 @@ import sass from "gulp-sass";
 import autoprefixer from "gulp-autoprefixer";
 import minify from "gulp-minify-css";
 
-gulp.task('sass', function() {
-  return gulp.src('sass/*.scss')
-    .pipe(sass())
-    .pipe(autoprefixer())
-    .pipe(minify())
-    .pipe(gulp.dest('css'));
+gulp.task("sass", function() {
+    return gulp.src("sass/*.scss")
+        .pipe(sass())
+        .pipe(autoprefixer())
+        .pipe(minify())
+        .pipe(gulp.dest("css"));
 });
 ```
 
