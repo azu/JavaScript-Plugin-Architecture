@@ -14,7 +14,7 @@ export function prefixStream(prefix) {
     });
 }
 
-let gulpTransform = function (prefix) {
+let gulpPrefixer = function (prefix) {
     // enable `objectMode` of the stream for vinyl File objects.
     return new Transform({
         // Takes in vinyl File objects
@@ -35,4 +35,4 @@ let gulpTransform = function (prefix) {
     });
 };
 
-export default gulpTransform;
+export default gulpPrefixer;

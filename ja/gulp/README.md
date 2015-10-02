@@ -55,12 +55,12 @@ gulp.task("sass", function() {
 
 ここでは`gulp-prefixer`という、それぞれのファイルに対して先頭に特定の文字列を追加するgulpプラグインを書いていきます。
 
-同様の名前のプラグインが公式のドキュメントで「プラグインの書き方」の例として紹介されているので合わせてみると良いでしょう。
+同様の名前のプラグインが公式のドキュメントで「プラグインの書き方」の例として紹介されているので合わせて見ると良いでしょう。
 
-- [gulp/docs/writing-a-plugin at master · gulpjs/gulp](https://github.com/gulpjs/gulp/tree/master/docs/writing-a-plugin "gulp/docs/writing-a-plugin at master · gulpjs/gulp")
-- [gulp/dealing-with-streams.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/dealing-with-streams.md "gulp/dealing-with-streams.md at master · gulpjs/gulp")
+- [gulp/docs/writing-a-plugin](https://github.com/gulpjs/gulp/tree/master/docs/writing-a-plugin "gulp/docs/writing-a-plugin at master · gulpjs/gulp")
+- [gulp/dealing-with-streams.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/dealing-with-streams.md "gulp/dealing-with-streams.md at master · gulpjs/gulp")
 
-gulpプラグインは一般的にオプションを受け取り、NodeのStreamを返す関数として実装されます。
+多くのgulpプラグインはオプションを受け取り、NodeのStreamを返す関数として実装されます。
 
 [import gulp-prefixer.js](../../src/gulp/gulp-prefixer.js)
 
@@ -68,11 +68,12 @@ gulpプラグインは一般的にオプションを受け取り、NodeのStream
 
 [import gulpfile.babel.js](../../src/gulp/gulpfile.babel.js)
 
-この`default`タスクが実行されると次のような処理が行われます。
+この`default`タスクは次のような処理が行われます。
 
 1. `./*.*`にマッチするファイルを取得(全てのファイル)
 2. 取得したファイルの先頭に"prefix text"という文字列を追加する
-3. 変更したされたファイルを`build/`ディレクトリに出力する
+3. 変更したファイルを`build/`ディレクトリに出力する
+
 
 
 - [ ] どういう用途に向いている?
