@@ -97,29 +97,32 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 そのデータを変更したもの次のStreamに流すということを行っています。
 
 「gulpから流れてきたデータ」を扱うために`readableObjectMode`と`writableObjectMode`をそれぞれ`true`にしています。
-この _ObjectMode_ というのは名前の通り、Streamでオブジェクトが流れるという設定のことです。
+この _ObjectMode_ というのは名前の通り、Streamでオブジェクトが流すための設定です。
 
 通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html "Buffer")というバイナリデータを扱います。
-この[Buffer](https://nodejs.org/api/buffer.html "Buffer")は文字列オブジェクトと相互変換が可能ですが、複数の値を持ったオブジェクトを扱うのは少し変更です。
+この[Buffer](https://nodejs.org/api/buffer.html "Buffer")は文字列オブジェクトと相互変換が可能ですが、複数の値を持ったオブジェクトを扱うのは少し大変です。
 
 そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、
 JavaScriptのオブジェクトそのものをStreamで流せるようになっています。
 
 ### vinyl
 
-gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトがStreamとして流れてきます。
-このvinylは _Virtual file format_ というように、データをラップした抽象フォーマットのオブジェクトです。
+gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトがStreamで流れてきます。
+このvinylは _Virtual file format_ という呼ばれているもので、ファイル情報と中身をラップしたgulp用の作成された抽象フォーマットです。
 
 なぜこういった抽象フォーマットが必要なのかは次のことを考えてみると分かりやすいと思います。
 
 `gulp.src`で読み込んだファイルの中身のみが、Transform Streamに渡されてしまうと、
 Transform Streamからはそのファイルのパスや読み取り属性などの詳細な情報を知ることができません。
+
 そのため、`gulp.src`で読み込んだファイルはvinylでラップされ、ファイルの中身は`contents`として参照できるようになっています。
 
-この抽象フォーマットの`contents`はStreamまたはBufferとなっているので、
-両方対応する場合は以下のように両方のパターンに対応したコードを書く必要があります。
+### vinylの中身を処理する
+
+先ほどのTransform Streamの中身を見てみましょう。
 
 ```js
+// file は `vinyl` オブジェクト
 if (file.isBuffer()) {
     file.contents = prefixBuffer(file.contents, prefix);
 }
@@ -128,6 +131,59 @@ if (file.isStream()) {
     file.contents = file.contents.pipe(prefixStream(prefix));
 }
 ```
+
+`vinyl`抽象フォーマットの`contents`プロパティには、読み込んだファイルのBufferまたはStreamが格納されています。
+そのため両方のパターンに対応したコードする場合はどちらが来ても問題ないように書く必要があります。
+
+> **NOTE**: gulp pluginは必ずしも両方のパターンに対応しないといけないのではなく、Bufferだけに対応したものも多いです。しかし、その場合にStreamが来た時のErrorイベントを通知することがガイドラインで推奨されています。 - [gulp/guidelines.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
+
+`contents`にどちらのタイプが格納されているかは、ひとつ前のStreamで決定されます。
+
+```js
+gulp.src("./*.*")
+    .pipe(gulpPrefixer("prefix text"))
+    .pipe(gulp.dest("build"));
+```
+
+この場合は、`gulp.src`により決定されます。
+`gulp.src`はデフォルトでは、`contents`にBufferを格納するので、この場合はBufferで処理されることになります。
+
+`gulp.src`はオプションに`{ buffer: false }`を渡すことで`contents`にStreamを流すことも可能です。
+
+```js
+gulp.src("./*.*", { buffer: false })
+        .pipe(gulpPrefixer("prefix text"))
+        .pipe(gulp.dest("build"));
+```
+
+### 変換処理
+
+最後にBufferとStreamのそれぞれの変換処理を見てみます。
+
+```js
+export function prefixBuffer(buffer, prefix) {
+    return Buffer.concat([Buffer(prefix), buffer]);
+}
+
+export function prefixStream(prefix) {
+    return new Transform({
+        transform: function (chunk, encoding, next) {
+            // chunkにはBufferが流れてくる
+            let buffer = prefixBuffer(chunk, prefix);
+            this.push(buffer);
+            next();
+        }
+    });
+}
+```
+
+やってみたBufferの先頭に`prefix`の文字列をBufferとして結合して返すだけの処理が行われています。
+
+この変換処理自体は、gulpに依存したものはないため、通常のライブラリに渡して処理するということが可能です。
+BufferはStringと相互変換が可能であるため、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
+
+つまり、prefixを付けるといった変換処理自体は、既存のライブラリをそのまま使うことができるようになっています。
+
 
 - [ ] どういう用途に向いている?
 - [ ] どういう用途に向いていない?
