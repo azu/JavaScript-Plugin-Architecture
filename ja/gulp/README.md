@@ -93,17 +93,16 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 
 あるファイルを _Read_ して、 _Transform_ したものを、別のところに _Write_ としているというよくあるデータの流れと言えます。
 
-[gulp-prefixer.js](#gulp-prefixer.js)では、gulpから流れてきたデータをStreamとして受け取り、
-そのデータを変更したもの次のStreamに流すということを行っています。
+[gulp-prefixer.js](#gulp-prefixer.js)では、gulpから流れてきたデータをStreamで受け取り、
+そのデータを変更したもの次へ渡すTransform Streamとなっています。
 
 「gulpから流れてきたデータ」を扱うために`readableObjectMode`と`writableObjectMode`をそれぞれ`true`にしています。
-この _ObjectMode_ というのは名前の通り、Streamでオブジェクトが流すための設定です。
+この _ObjectMode_ というのは名前の通り、Streamでオブジェクトを流すための設定です。
 
 通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html "Buffer")というバイナリデータを扱います。
-この[Buffer](https://nodejs.org/api/buffer.html "Buffer")は文字列オブジェクトと相互変換が可能ですが、複数の値を持ったオブジェクトを扱うのは少し大変です。
+この[Buffer](https://nodejs.org/api/buffer.html "Buffer")はStringと相互変換が可能ですが、複数の値を持ったオブジェクトのようなものは扱えません。
 
-そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、
-JavaScriptのオブジェクトそのものをStreamで流せるようになっています。
+そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、これが有効の場合はBufferやString以外のJavaScriptオブジェクトをStreamで流せるようになっています。
 
 ### vinyl
 
@@ -182,7 +181,7 @@ export function prefixStream(prefix) {
 この変換処理自体は、gulpに依存したものはないため、通常のライブラリに渡して処理するということが可能です。
 BufferはStringと相互変換が可能であるため、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
 
-つまり、prefixを付けるといった変換処理自体は、既存のライブラリをそのまま使うことができるようになっています。
+つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
 
 
 - [ ] どういう用途に向いている?

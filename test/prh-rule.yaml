@@ -83,3 +83,6 @@ rules:
       - ミドルウェア
   - expected: 使っているもの
     pattern: 使ってるもの
+  - expected: String
+    patterns:
+      - 文字列オブジェクト
