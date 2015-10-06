@@ -1,6 +1,6 @@
 # Connect
 
-> この文章は[Connect](https://github.com/senchalabs/connect "Connect")70 3.4.0を元に書かれています。
+> この文章は[Connect](https://github.com/senchalabs/connect "Connect") 3.4.0を元に書かれています。
 
 [Connect](https://github.com/senchalabs/connect "Connect")はNode.jsで動くHTTPサーバフレームワークです。
 _middleware_という拡張する仕組みを持っていて、Connectが持つ機能自体はとても少ないです。
