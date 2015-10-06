@@ -6,12 +6,12 @@
 ビルドやテストなどといったタスクを実行するためのツールで、
 それぞれのタスクをJavaScriptで書くことができるようになっています。
 
-タスクは複数の処理の実行順序を定義したものとなっていて、APIとしては`gulp.task`が用意されています。
+タスクは複数の処理の実行順序を定義したものとなっていて、タスクを定義するAPIとしては`gulp.task`が用意されています。
 また、それぞれの処理はNode.jsの[Stream](https://nodejs.org/api/stream.html "Stream")として実装することで、
 処理をStreamでつなげる(`pipe`)することができ、複数の処理を一時ファイルなしでできるようになっています。
 
 それぞれの処理はgulpのプラグインという形でモジュール化されているため、
-利用者はモジュールを読み込み、`pipe()`で繋ぐだけでタスクの定義ができるツールです。
+利用者はモジュールを読み込み、`pipe()`で繋ぐだけでタスクの定義ができるツールとなっています。
 
 ## どう書ける?
 
@@ -64,7 +64,7 @@ gulp.task("sass", function() {
 
 [import gulp-prefixer.js](../../src/gulp/gulp-prefixer.js)
 
-ここで実装した`gulp-prefixer`は、gulpのタスクで次のように書くことで利用できます。
+ここで実装した`gulp-prefixer`は、次のようにしてタスクに組み込むことができます。
 
 [import gulpfile.babel.js](../../src/gulp/gulpfile.babel.js)
 
@@ -77,6 +77,31 @@ gulp.task("sass", function() {
 ### Stream
 
 [gulp-prefixer.js](#gulp-prefixer.js)を見てみると、`gulpPrefixer`という[Transform Stream](https://nodejs.org/api/stream.html#stream_class_stream_transform "stream.Transform")のインスタンスを返していることが分かります。
+
+```js
+let gulpPrefixer = function (prefix) {
+    // enable `objectMode` of the stream for vinyl File objects.
+    return new Transform({
+        // Takes in vinyl File objects
+        writableObjectMode: true,
+        // Outputs vinyl File objects
+        readableObjectMode: true,
+        transform: function (file, encoding, next) {
+            if (file.isBuffer()) {
+                file.contents = prefixBuffer(file.contents, prefix);
+            }
+
+            if (file.isStream()) {
+                file.contents = file.contents.pipe(prefixStream(prefix));
+            }
+            this.push(file);
+            next();
+        }
+    });
+};
+
+export default gulpPrefixer;
+```
 
 Transform Streamというものが出てきましたが、Node.jsのStreamは次の4種類があります。
 
@@ -104,10 +129,15 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 
 そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、これが有効の場合はBufferやString以外のJavaScriptオブジェクトをStreamで流せるようになっています。
 
+Node.js Streamについては以下を合わせて参照するといいでしょう。
+
+- [Stream Node.js Manual & Documentation](https://nodejs.org/api/stream.html "Stream Node.js Manual &amp; Documentation")
+- [substack/stream-handbook](https://github.com/substack/stream-handbook "substack/stream-handbook")
+
 ### vinyl
 
 gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトがStreamで流れてきます。
-このvinylは _Virtual file format_ という呼ばれているもので、ファイル情報と中身をラップしたgulp用の作成された抽象フォーマットです。
+このvinylは _Virtual file format_ という呼ばれているもので、ファイル情報と中身をラップしたgulp用に作成された抽象フォーマットです。
 
 なぜこういった抽象フォーマットが必要なのかは次のことを考えてみると分かりやすいと思います。
 
@@ -167,7 +197,8 @@ export function prefixBuffer(buffer, prefix) {
 export function prefixStream(prefix) {
     return new Transform({
         transform: function (chunk, encoding, next) {
-            // chunkにはBufferが流れてくる
+            // ObjectMode:falseのTransform Stream
+            // StreamのchunkにはBufferが流れてくる
             let buffer = prefixBuffer(chunk, prefix);
             this.push(buffer);
             next();
@@ -176,13 +207,14 @@ export function prefixStream(prefix) {
 }
 ```
 
-やってみたBufferの先頭に`prefix`の文字列をBufferとして結合して返すだけの処理が行われています。
+やってきたBufferの先頭に`prefix`の文字列をBufferとして結合して返すだけの処理が行われています。
 
 この変換処理自体は、gulpに依存したものはないため、通常のライブラリに渡して処理するということが可能です。
 BufferはStringと相互変換が可能であるため、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
 
 つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
 
+gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、そのインタフェースとして既存のNode.js Streamを使っていると言えます。
 
 - [ ] どういう用途に向いている?
 - [ ] どういう用途に向いていない?
