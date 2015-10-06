@@ -67,6 +67,12 @@ rules:
     specs:
       - from: connect
         to:   Connect
+  - expected: gulp
+  - expected: タスク自動化ツール
+    patterns:
+      - /Task Runner/i
+      - タスクランナー
+      - タスク管理ツール
 
   - expected: プラグインアーキテクチャ
     pattern:
@@ -75,7 +81,8 @@ rules:
   - expected: middleware
     pattern:
       - ミドルウェア
-  - expected: は
-    pattern: のは
   - expected: 使っているもの
     pattern: 使ってるもの
+  - expected: String
+    patterns:
+      - 文字列オブジェクト

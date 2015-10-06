@@ -54,7 +54,7 @@
     "power-assert": "^1.0.0",
     "textlint": "^3.3.0",
     "textlint-rule-max-ten": "^1.1.0",
-    "textlint-rule-no-mix-dearu-desumasu": "^1.0.1",
+    "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
     "textlint-rule-prh": "^1.0.1",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
@@ -62,6 +62,8 @@
   "dependencies": {
     "esprima": "^2.5.0",
     "estraverse": "^4.1.0",
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.6",
     "jquery": "^2.1.4"
   }
 }
