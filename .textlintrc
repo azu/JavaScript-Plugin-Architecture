@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "jtf-style"
+  ],
   "rules": {
     "max-ten": {
       "max": 3
