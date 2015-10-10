@@ -15,6 +15,10 @@
       "rulePaths": [
         "test/prh-rule.yaml"
       ]
-    }
+    },
+    "jtf-style/2.1.5.カタカナ": false,
+    "jtf-style/2.1.6.カタカナの長音": false,
+    "jtf-style/4.2.2.疑問符(？)": false,
+    "jtf-style/4.3.1.丸かっこ（）": false
   }
 }

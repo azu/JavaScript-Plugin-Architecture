@@ -17,7 +17,7 @@ ESLintサイト上には、上記のように書かれていることからも�
 ## どう書ける?
 
 ESLintでは`.eslintrc`という設定ファイルに利用するルールの設定をして使うため、
-実行方法についてはドキュメントを参照して下さい。
+実行方法についてはドキュメントを参照してください。
 
 - [Documentation - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/user-guide/configuring "Documentation - ESLint - Pluggable JavaScript linter")
 
@@ -252,7 +252,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 
 ## どういう用途に向いていない?
 
-逆に与えられたコード(AST)を書き換えするようなことをする場合には、
+逆に与えられたコード（AST）を書き換えするようなことをする場合には、
 ルールを同時に処理を行うためルール間で競合するような変更がある場合に破綻してしまいます。
 
 そのため、この仕組みに加えてもう1つ抽象レイヤーを設けないと対応は難しいと思います。
