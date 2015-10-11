@@ -2,7 +2,7 @@
 
 > この文章は[Connect](https://github.com/senchalabs/connect "Connect") 3.4.0を元に書かれています。
 
-[Connect](https://github.com/senchalabs/connect "Connect")はNode.jsで動くHTTPサーバフレームワークです。
+[Connect](https://github.com/senchalabs/connect "Connect")はNode.jsで動くHTTPサーバーフレームワークです。
 _middleware_という拡張する仕組みを持っていて、Connectが持つ機能自体はとても少ないです。
 
 この章ではConnectの_middleware_の仕組みについて見て行きましょう。
@@ -23,7 +23,7 @@ Echoサーバとは、送られてきたリクエストの内容をそのまま�
 ```
 
 `app.use(middleware)` という形で、_middleware_と呼ばれる関数には`request`や`response`といったオブジェクトが渡されます。
-この`request`や`response`を_middleware_で処理することでログを取ったり、任意のレスポンスを返したり出来るようになっています。
+この`request`や`response`を_middleware_で処理することでログを取ったり、任意のレスポンスを返したりできるようになっています。
 
 Echoサーバでは `req.pipe(res);` という形でリクエストをそのままレスポンスとして流す事で実現されています。
 
@@ -73,7 +73,7 @@ Connectが登録された_middleware_をどう処理するかというと、
 
 エラーハンドリングの_middleware_は処理中にエラーが起きた時のみ呼ばれます。
 
-そのため、通常は [nosniff.js](#nosniff.js) -> [hello.js](#hello.js) の順で呼び出されます。
+そのため、通常は [nosniff.js](#nosniff.js) → [hello.js](#hello.js) の順で呼び出されます。
 
 [import nosniff.js](../../src/connect/nosniff.js)
 
@@ -194,7 +194,7 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
 
 ここではConnectのプラグインアーキテクチャについて学びました。
 
-- Connectは_middleware_を使ったHTTPサーバライブラリである
+- Connectは_middleware_を使ったHTTPサーバーライブラリである
 - Connect自体は機能は少ない
 - 複数の_middleware_を組み合わせてアプリケーションを作ることができる
 

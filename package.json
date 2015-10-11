@@ -53,7 +53,7 @@
     "npm-run-all": "^1.2.8",
     "power-assert": "^1.0.0",
     "textlint": "^3.7.1",
-    "textlint-plugin-jtf-style": "^0.1.9",
+    "textlint-plugin-jtf-style": "^0.6.0",
     "textlint-rule-max-ten": "^1.1.0",
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",

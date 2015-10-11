@@ -40,7 +40,7 @@ gulp.task("sass", function() {
 });
 ```
 
-ここでは、gulpプラグインの仕組みについて扱うので、gulpの使い方については詳しくは以下を参照して下さい。
+ここでは、gulpプラグインの仕組みについて扱うので、gulpの使い方については詳しくは以下を参照してください。
 
 - [gulp/docs at master · gulpjs/gulp](https://github.com/gulpjs/gulp/tree/master/docs)
 - [現場で使えるgulp入門 - gulpとは何か | CodeGrid](https://app.codegrid.net/entry/gulp-1)
@@ -114,7 +114,7 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 
 1. `./*.*`にマッチするファイルを取得 = Readable Stream
 2. 取得したファイルの先頭に"prefix text"という文字列を追加する = Transform Stream
-3. 変更したファイルを`build/`ディレクトリに出力する = Writable Stream
+3. 変更したファイルを `build/` ディレクトリに出力する = Writable Stream
 
 あるファイルを _Read_ して、 _Transform_ したものを、別のところに _Write_ としているというよくあるデータの流れと言えます。
 
@@ -124,7 +124,7 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 「gulpから流れてきたデータ」を扱うために`readableObjectMode`と`writableObjectMode`をそれぞれ`true`にしています。
 この _ObjectMode_ というのは名前の通り、Streamでオブジェクトを流すための設定です。
 
-通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html "Buffer")というバイナリデータを扱います。
+通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html "Buffer")というバイナリーデータを扱います。
 この[Buffer](https://nodejs.org/api/buffer.html "Buffer")はStringと相互変換が可能ですが、複数の値を持ったオブジェクトのようなものは扱えません。
 
 そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、これが有効の場合はBufferやString以外のJavaScriptオブジェクトをStreamで流せるようになっています。

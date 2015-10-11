@@ -92,7 +92,7 @@ calculator.fn = calculator.prototype;
 
 実装をみてもらうと分かりますが、JavaScriptの`prototype`の仕組みをそのまま利用しています。
 そのため、特別な実装は必要なく
-「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張して下さい」
+「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張してください」
 というルールがあるだけとも言えます。
 
 ## エコシステム

@@ -17,7 +17,7 @@ ESLintサイト上には、上記のように書かれていることからも�
 ## どう書ける?
 
 ESLintでは`.eslintrc`という設定ファイルに利用するルールの設定をして使うため、
-実行方法についてはドキュメントを参照して下さい。
+実行方法についてはドキュメントを参照してください。
 
 - [Documentation - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/user-guide/configuring "Documentation - ESLint - Pluggable JavaScript linter")
 
