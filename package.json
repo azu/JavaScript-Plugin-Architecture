@@ -39,7 +39,7 @@
     "eslint": "^1.3.0",
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
     "espower-babel": "^3.3.0",
-    "gitbook-cli": "^1.0.0",
+    "gitbook-cli": "^0.3.6",
     "gitbook-plugin-edit-link": "^1.4.1",
     "gitbook-plugin-ga": "^0.2.1",
     "gitbook-plugin-github-buttons": "^1.2.2",
@@ -48,6 +48,7 @@
     "gitbook-plugin-richquotes": "0.0.5",
     "gitbook-summary-to-path": "^1.0.1",
     "jsdom": "^6.3.0",
+    "mdast": "^2.1.0",
     "mocha": "^2.2.5",
     "node-fetch": "^1.3.2",
     "npm-run-all": "^1.2.8",
@@ -57,6 +58,7 @@
     "textlint-rule-max-ten": "^1.1.0",
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
+    "unist-util-select": "^1.0.0",
     "textlint-rule-prh": "^2.0.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1"
   },
@@ -65,6 +67,7 @@
     "estraverse": "^4.1.0",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "stemming-x-keywords": "^1.0.3"
   }
 }

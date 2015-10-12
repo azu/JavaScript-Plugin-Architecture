@@ -3,9 +3,11 @@
 import {getFilePathListAsync}  from "gitbook-summary-to-path";
 import path from "path";
 import fs from "fs";
+import mdast from "mdast";
+var select = require('unist-util-select');
 const rootDir = path.join(__dirname, "..");
 const keywordInfo = require("./keywords.json");
-
+const Org = fs.readFileSync(__dirname + "/../ORGANIZATION.md","utf-8");
 function getKeywords(matchPath) {
     return getFilePathListAsync(__dirname + "/../SUMMARY.md").then(fileList => {
         let filteredList = fileList.filter(filePath => {
@@ -32,6 +34,8 @@ function isNotContain(content, keywords) {
 // キーワードが書くコンテンツに含まれているかをテストする
 describe("keywords", function () {
     it("Each chapter contain the keyword", function (done) {
+        let ast = mdast.parse(Org);
+        let headingPrs = select(ast, "heading, heading + paragraph");
         let promises = Object.keys(keywordInfo).map(key => {
             return getKeywords(key).then(({filePath, content, keywords}) => {
                 let unusedKeywords = isNotContain(content, keywords);
