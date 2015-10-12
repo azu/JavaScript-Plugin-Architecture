@@ -1,7 +1,7 @@
 # Summary
 
 * [README](README.md)
-* [Introduction](ja/introduction/README.md)
+* [この書籍の内容について](ORGANIZATION.md)
 * [jQuery](ja/jQuery/README.md)
 * [ESLint](ja/ESLint/README.md)
 * [Connect](ja/connect/README.md)
