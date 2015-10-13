@@ -1,5 +1,10 @@
 # この書籍の内容について
 
+## [Introduction](ja/introduction/README.md)
+
+この書籍の目的について書かれています。
+なぜプラグインアーキテクチャを学ぶ必要があるのか、どのようにして学ぶことができるのかについて書かれています。
+
 ## [jQuery](ja/jQuery/README.md)
 
 jQueryのプラグインについて解説しています。
