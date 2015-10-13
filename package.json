@@ -50,6 +50,7 @@
     "jsdom": "^6.3.0",
     "mdast": "^2.1.0",
     "mocha": "^2.2.5",
+    "nlcst-to-string": "^1.0.0",
     "node-fetch": "^1.3.2",
     "npm-run-all": "^1.2.8",
     "power-assert": "^1.0.0",
@@ -58,9 +59,9 @@
     "textlint-rule-max-ten": "^1.1.0",
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
-    "unist-util-select": "^1.0.0",
-    "textlint-rule-prh": "^2.0.0",
-    "textlint-rule-spellcheck-tech-word": "^4.0.1"
+    "textlint-rule-prh": "^1.0.1",
+    "textlint-rule-spellcheck-tech-word": "^4.0.1",
+    "unist-util-select": "^1.0.0"
   },
   "dependencies": {
     "esprima": "^2.5.0",
@@ -68,6 +69,7 @@
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
     "jquery": "^2.1.4",
-    "stemming-x-keywords": "^1.0.3"
+    "stemming-x-keywords": "^1.0.3",
+    "unist-util-is": "^1.0.0"
   }
 }
