@@ -39,7 +39,7 @@
     "eslint": "^1.3.0",
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
     "espower-babel": "^3.3.0",
-    "gitbook-cli": "^0.3.6",
+    "gitbook-cli": "^1.0.0",
     "gitbook-plugin-edit-link": "^1.4.1",
     "gitbook-plugin-ga": "^0.2.1",
     "gitbook-plugin-github-buttons": "^1.2.2",
@@ -47,7 +47,7 @@
     "gitbook-plugin-japanese-support": "0.0.1",
     "gitbook-plugin-richquotes": "0.0.5",
     "gitbook-summary-to-path": "^1.0.1",
-    "jsdom": "^6.3.0",
+    "jsdom": "^7.0.1",
     "mdast": "^2.1.0",
     "mocha": "^2.2.5",
     "nlcst-to-string": "^1.0.0",
@@ -59,8 +59,9 @@
     "textlint-rule-max-ten": "^1.1.0",
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
-    "textlint-rule-prh": "^1.0.1",
+    "textlint-rule-prh": "^2.0.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1",
+    "unist-util-parents": "^0.1.1",
     "unist-util-select": "^1.0.0"
   },
   "dependencies": {
