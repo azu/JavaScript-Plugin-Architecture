@@ -42,25 +42,31 @@ function isAlreadyCheckKeyword(list, keyword) {
     return list.indexOf(keyword) !== -1;
 }
 
-function checkKeyword(text){
+// P ASTからキーワードを抽出する
+function getKeywordsOfParagraphsAsync(paragraphs) {
+    let _keywords = [];
+    let promiseList = paragraphs.map(p => {
+        let text = nlcstToString(p);
+        return getKeywords(text).then(keywords => {
+            _keywords = _keywords.concat(keywords);
+        });
+    });
+    return Promise.all(promiseList).then(()=> {
+        return _keywords;
+    });
+}
+function checkKeyword(text) {
     let ast = mdast.parse(text);
     let headerLinks = select(parents(ast), "heading link[href]");
     let paragraphList = headerLinks.map(link => {
         let filePath = path.resolve(rootDir, link.href);
         let paragraphs = findAllAfter(ast, link.parent.node, "paragraph");
-        let results = {
-            filePath: filePath,
-            content: fs.readFileSync(filePath, "utf-8"),
-            keywords: []
-        };
-        let keywords = paragraphs.map(p => {
-            let text = nlcstToString(p);
-            return getKeywords(text).then(a => {
-                results.keywords = results.keywords.concat(a);
-            });
-        });
-        return Promise.all(keywords).then(()=> {
-            return results;
+        return getKeywordsOfParagraphsAsync(paragraphs).then(keywords => {
+            return {
+                filePath: filePath,
+                content: fs.readFileSync(filePath, "utf-8"),
+                keywords: keywords
+            };
         });
     });
     return Promise.all(paragraphList).then(results => {
