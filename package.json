@@ -61,6 +61,8 @@
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
     "textlint-rule-prh": "^2.0.0",
     "textlint-rule-spellcheck-tech-word": "^4.0.1",
+    "stemming-x-keywords": "^1.0.3",
+    "unist-util-is": "^1.0.0",
     "unist-util-parents": "^0.1.1",
     "unist-util-select": "^1.0.0"
   },
@@ -69,8 +71,6 @@
     "estraverse": "^4.1.0",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
-    "jquery": "^2.1.4",
-    "stemming-x-keywords": "^1.0.3",
-    "unist-util-is": "^1.0.0"
+    "jquery": "^2.1.4"
   }
 }
