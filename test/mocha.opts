@@ -1,2 +1,3 @@
+--timeout 100000
 --recursive
 --compilers js:espower-babel/guess
