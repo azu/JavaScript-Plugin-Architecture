@@ -214,10 +214,31 @@ BufferはStringと相互変換が可能であるため、多くのgulpプラグ�
 
 つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
 
-gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、そのインタフェースとして既存のNode.js Streamを使っていると言えます。
+gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、
+そのインタフェースとして既存のNode.js Streamを使っていると言えます。
 
-- [ ] どういう用途に向いている?
+## どういう用途に向いている?
+
 - [ ] どういう用途に向いていない?
-- [ ] この仕組みを使っているもの
-- [ ] 実装してみよう
-- [ ] エコシステム
+
+## エコシステム
+
+gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
+この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインターフェースとしてNode.js Streamを使っています。
+
+gulpではプラグインは単機能であること推奨しています。
+
+> Your plugin should only do one thing, and do it well. 
+> -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
+
+一つのプラグインで複数の処理をすることは可能ですが、Node.js Streamに乗ることでこの事を解決しています。
+
+元々、Transform Streamは一つの処理を行うことに向いていて、`pipe`を繋げることで複数の処理を行うため、
+gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解決しています。
+
+また、gulpはタスク自動化ツールであるため、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
+Node.js Streamのデフォルトでは流れるデータが`Buffer`であるため、そのままでは既存のライブラリでは扱いにくい問題を
+データとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを流す事で緩和しています。
+
+このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリを使って作りやすくしています。
+これにより再利用できるプラグインが多くできることでエコシステムを構築していると言えます。
