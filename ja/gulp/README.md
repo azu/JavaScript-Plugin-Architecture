@@ -217,10 +217,6 @@ BufferはStringと相互変換が可能であるため、多くのgulpプラグ�
 gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、
 そのインタフェースとして既存のNode.js Streamを使っていると言えます。
 
-## どういう用途に向いている?
-
-- [ ] どういう用途に向いていない?
-
 ## エコシステム
 
 gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
@@ -242,3 +238,31 @@ Node.js Streamのデフォルトでは流れるデータが`Buffer`であるた�
 
 このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリを使って作りやすくしています。
 これにより再利用できるプラグインが多くできることでエコシステムを構築していると言えます。
+
+## どういう用途に向いている?
+
+gulpはそれ自体はデータの流れを管理するだけであり、タスクを実現するためにはプラグインが重要になります。
+タスクには様々な処理が想定されるため、必要になるプラグインも種類が多く必要です。
+
+gulpの中でgulpらしいという部分は[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを中間フォーマットとして決めた事です。
+これにより既存のライブラリをラップしただけのプラグインが作りやすくなっています。
+
+またgulpは、Gruntとは異なり、タスクをJavaScriptのコードして表現します。
+これにより、プラグインの組み合わせだけだと実現できない場合に、直接コードを書くことで対応するといった対処法を取ることができます。
+
+そのため、プラグインの行う処理の範囲が予測できない場合に、gulpのように中間フォーマットとデータの流し方だけを決めるというやり方は向いています。
+
+## どういう用途に向いていない?
+
+プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせの問題はgulpでも発生します。
+
+例えば、[Browserify](https://github.com/substack/node-browserify)はNode.js Streamを扱えますが、
+先頭に置かないと他のプラグインと組わせて利用できない問題があります。
+
+- [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
+
+このような問題に対してgulpはガイドラインやレシピといったドキュメントを充実させることで対処しています。
+
+- [gulp/docs at master · gulpjs/gulp](https://github.com/gulpjs/gulp/tree/master/docs "gulp/docs at master · gulpjs/gulp")
+
+そのため、プラグインの仕組みとして組み合わせの問題を防止するのは難しいです。
