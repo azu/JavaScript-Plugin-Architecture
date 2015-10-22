@@ -227,10 +227,9 @@ gulpではプラグインは単機能であること推奨しています。
 > Your plugin should only do one thing, and do it well. 
 > -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
 
-1つのプラグインで複数の処理をすることは可能ですが、Node.js Streamに乗ることでこの事を解決しています。
-
-元々、Transform Streamは1つの変換処理を行うことに向いています。その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
 gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解決しています。
+
+元々、Transform Streamは1つの変換処理を行うことに向いていて、その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
 
 また、gulpはタスク自動化ツールであるため、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
 Node.js Streamのデフォルトでは流れるデータが`Buffer`であるため、そのままでは既存のライブラリでは扱いにくい問題を
