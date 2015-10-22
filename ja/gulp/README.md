@@ -265,7 +265,7 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 
 - [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
 
-また、gulpは単機能のプラグインを推奨していますが、これはAPIとしてそういう制限がある訳ではないためあくまでルールとなっています。
+また、gulpは単機能のプラグインを推奨していますが、これはAPIとしてそういう制限があるわけではないためあくまでルールとなっています。
 
 このような問題に対してgulpはガイドラインやレシピといったドキュメントを充実させることで対処しています。
 
