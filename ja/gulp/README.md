@@ -252,6 +252,11 @@ gulpの中でgulpらしいという部分は[vinyl](https://github.com/gulpjs/vi
 
 そのため、プラグインの行う処理の範囲が予測できない場合に、gulpのように中間フォーマットとデータの流し方だけを決めるというやり方は向いています。
 
+まとめると
+
+- 既存のライブラリをプラグイン化しやすい
+- 必要なプラグインがない場合も、設定としてコードを書くことで対応できる
+
 ## どういう用途に向いていない?
 
 プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせの問題はgulpでも発生します。
@@ -261,8 +266,18 @@ gulpの中でgulpらしいという部分は[vinyl](https://github.com/gulpjs/vi
 
 - [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
 
+また、gulpは単機能のプラグインを推奨していますが、これはAPIとしてそういう制限がある訳ではないためあくまでルールとなっています。
+
 このような問題に対してgulpはガイドラインやレシピといったドキュメントを充実させることで対処しています。
 
 - [gulp/docs at master · gulpjs/gulp](https://github.com/gulpjs/gulp/tree/master/docs "gulp/docs at master · gulpjs/gulp")
 
-そのため、プラグインの仕組みとして組み合わせの問題を防止するのは難しいです。
+既存のライブラリをプラグイン化しやすい一方、
+プラグインとライブラリのオプションが異なったり、利用者はプラグイン化したライブラリの扱い方を学ぶ必要があります。
+
+ライブラリとプラグインの作者が異なるケースも多いため、同様の機能を持つプラグインが複数できたり、質もバラバラとなりやすいです。
+
+まとめると
+
+- プラグインの組み合わせ問題は利用者が解決しないといけない
+- 同様の機能を持つプラグインが生まれやすい
