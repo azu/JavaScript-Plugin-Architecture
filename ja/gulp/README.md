@@ -220,16 +220,16 @@ gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl
 ## エコシステム
 
 gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
-この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインターフェースとしてNode.js Streamを使っています。
+この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインタフェースとしてNode.js Streamを使っています。
 
 gulpではプラグインは単機能であること推奨しています。
 
 > Your plugin should only do one thing, and do it well. 
 > -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
 
-一つのプラグインで複数の処理をすることは可能ですが、Node.js Streamに乗ることでこの事を解決しています。
+1つのプラグインで複数の処理をすることは可能ですが、Node.js Streamに乗ることでこの事を解決しています。
 
-元々、Transform Streamは一つの処理を行うことに向いていて、`pipe`を繋げることで複数の処理を行うため、
+元々、Transform Streamは1つの変換処理を行うことに向いています。その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
 gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解決しています。
 
 また、gulpはタスク自動化ツールであるため、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
