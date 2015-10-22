@@ -280,3 +280,20 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 
 - プラグインの組み合わせ問題は利用者が解決しないといけない
 - 同様の機能を持つプラグインが生まれやすい
+
+## この仕組みを使っているもの
+
+- [sighjs/sigh](https://github.com/sighjs/sigh "sighjs/sigh")
+    - gulpプラグインそのものをサポートしています。
+
+## まとめ
+
+ここではgulpのプラグインアーキテクチャについて学びました。
+
+- gulpはタスク自動化ツール
+- JavaScriptで設定を書くことができる
+- gulpは中間フォーマットとデータの流れを決めている
+- 中間フォーマットは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクト
+- データの流れは既存のNode.js Stream
+- 既存のライブラリをラップしたプラグインが作りやすい
+- 同様の機能を持つプラグインが登場しやすい
