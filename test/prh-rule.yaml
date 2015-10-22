@@ -86,3 +86,6 @@ rules:
   - expected: String
     patterns:
       - 文字列オブジェクト
+
+  - expected: わけでは
+    patterns: 訳では

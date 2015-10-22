@@ -214,10 +214,69 @@ BufferはStringと相互変換が可能であるため、多くのgulpプラグ�
 
 つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
 
-gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、そのインタフェースとして既存のNode.js Streamを使っていると言えます。
+gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、
+そのインタフェースとして既存のNode.js Streamを使っていると言えます。
 
-- [ ] どういう用途に向いている?
-- [ ] どういう用途に向いていない?
-- [ ] この仕組みを使っているもの
-- [ ] 実装してみよう
-- [ ] エコシステム
+## エコシステム
+
+gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
+この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインタフェースとしてNode.js Streamを使っています。
+
+gulpではプラグインは単機能であること推奨しています。
+
+> Your plugin should only do one thing, and do it well. 
+> -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
+
+gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解決しています。
+
+元々、Transform Streamは1つの変換処理を行うことに向いていて、その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
+
+また、gulpはタスク自動化ツールであるため、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
+Node.js Streamのデフォルトでは流れるデータが`Buffer`であるため、そのままでは既存のライブラリでは扱いにくい問題を
+データとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを流す事で緩和しています。
+
+このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリを使って作りやすくしています。
+これにより再利用できるプラグインが多くできることでエコシステムを構築していると言えます。
+
+## どういう用途に向いている?
+
+gulpはそれ自体はデータの流れを管理するだけであり、タスクを実現するためにはプラグインが重要になります。
+タスクには様々な処理が想定されるため、必要になるプラグインも種類が様々なものとなります。
+
+gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを中間フォーマットと決めたことで、
+既存のライブラリをラップしただけのプラグインが作りやすくなっています。
+
+またgulpは、Gruntとは異なり、タスクをJavaScriptのコードして表現します。
+これにより、プラグインの組み合わせだけだと実現できない場合に、直接コードを書くことで対応するといった対処法を取ることができます。
+
+そのため、プラグインの行う処理の範囲が予測できない場合に、gulpのように中間フォーマットとデータの流し方だけを決めるというやり方は向いています。
+
+まとめると
+
+- 既存のライブラリをプラグイン化しやすい
+- 必要なプラグインがない場合も、設定としてコードを書くことで対応できる
+
+## どういう用途に向いていない?
+
+プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせの問題はgulpでも発生します。
+
+例えば、[Browserify](https://github.com/substack/node-browserify)はNode.js Streamを扱えますが、
+先頭に置かないと他のプラグインと組わせて利用できない問題があります。
+
+- [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
+
+また、gulpは単機能のプラグインを推奨していますが、これはAPIとしてそういう制限があるわけではないためあくまでルールとなっています。
+
+このような問題に対してgulpはガイドラインやレシピといったドキュメントを充実させることで対処しています。
+
+- [gulp/docs at master · gulpjs/gulp](https://github.com/gulpjs/gulp/tree/master/docs "gulp/docs at master · gulpjs/gulp")
+
+既存のライブラリをプラグイン化しやすい一方、
+プラグインとライブラリのオプションが異なったり、利用者はプラグイン化したライブラリの扱い方を学ぶ必要があります。
+
+ライブラリとプラグインの作者が異なるケースも多いため、同様の機能を持つプラグインが複数できたり、質もバラバラとなりやすいです。
+
+まとめると
+
+- プラグインの組み合わせ問題は利用者が解決しないといけない
+- 同様の機能を持つプラグインが生まれやすい

@@ -233,7 +233,7 @@ add(1, 3);
 この`RuleContext`はルールから使えるユーティリティメソッドをまとめたもので、
 今回は`RuleContext#report`というエラーメッセージをルールからMyLinterへ通知するものだけを実装しています。
 
-ルールの実装の方を見てみると、直接オブジェクトをexportしてる訳ではなく、
+ルールの実装の方を見てみると、直接オブジェクトをexportしてるわけではなく、
 `context` つまり`RuleContext`のインスタンスを受け取っていることが分かると思います。
 
 [import, no-console.js](../../src/ESLint/no-console.js)
