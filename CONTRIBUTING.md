@@ -126,6 +126,10 @@ Closes #8454
 chore: コミットメッセージ
 ```
 
+Karmaのガイドラインもわかりやすく整理されています。
+
+- [karma-runner/06-git-commit-msg.md at master · karma-runner/karma](https://github.com/karma-runner/karma/blob/master/docs/dev/06-git-commit-msg.md "karma-runner/06-git-commit-msg.md at master · karma-runner/karma")
+
 このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog "conventional-changelog")による自動生成のためでもありますが、
 取り込むときに調整できるので無視してもらっても問題はありません。
 
