@@ -211,7 +211,7 @@ export function prefixStream(prefix) {
 
 やってきたBufferの先頭に`prefix`の文字列をBufferとして結合して返すだけの処理が行われています。
 
-この変換処理自体は、gulpに依存したものはないため、通常のライブラリに渡して処理するということが可能です。
+この変換処理自体は、gulpに依存したものではないため、通常のライブラリに渡して処理するということが可能です。
 BufferはStringと相互変換が可能であるため、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
 
 つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
@@ -263,7 +263,7 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせ問題はgulpでも発生します。
 
 例えば、[Browserify](https://github.com/substack/node-browserify)はNode.js Streamを扱えますが、
-変換の開始点にしていない場合に問題が発生します。
+変換の開始点としていない場合に問題が発生します。
 
 - [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
 
