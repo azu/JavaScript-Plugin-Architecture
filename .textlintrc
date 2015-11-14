@@ -6,7 +6,9 @@
     "max-ten": {
       "max": 3
     },
-    "textlint-rule-no-doubled-joshi": true,
+    "no-doubled-joshi": {
+      "min_interval": 1
+    },
     "spellcheck-tech-word": true,
     "no-mix-dearu-desumasu": true,
     "no-start-duplicated-conjunction": {
