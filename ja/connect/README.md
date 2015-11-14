@@ -106,7 +106,7 @@ next();// 初回
 
 _middleware stack_で構成されるHTTPサーバとして、PythonのWSGI MiddlewareやRubyのRackなどがあります。
 ConnectはRackと同じく`use`で_middleware_を指定することからも分かりますが、
-Rackを参考にして実装されています。
+Rackを参考にした実装となっています。
 
 - [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
 
