@@ -73,8 +73,8 @@ console.log("Hello!");
 
 - [JavaScript AST explorer](http://felix-kling.de/esprima_ast_explorer/#/FNrLHi8ngW "JavaScript AST explorer")
 
-ESLintではこのASTを使って、変数が未使用であるとか[no-console.js](#no-console.js)のように`console.log`などがコードに残ってないかなどを
-ルールを元にチェックすることができます。
+ESLintではこのASTを使って、変数が未使用であるとか[no-console.js](#no-console.js)のように
+`console.log`などがコードに残ってないかなどをルールを元にチェックすることができます。
 
 ルールをどう書けるかという話に戻すと、`context`というオブジェクトはただのユーティリティ関数と考えて問題ありません。
 ルールの本体は関数が`return`してるメソッドをもったオブジェクトです。
