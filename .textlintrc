@@ -9,11 +9,14 @@
     "no-doubled-joshi": {
       "min_interval": 1
     },
-    "spellcheck-tech-word": true,
-    "no-mix-dearu-desumasu": true,
+    "sentence-length": {
+      "max": 100
+    },
     "no-start-duplicated-conjunction": {
       "interval": 2
     },
+    "spellcheck-tech-word": true,
+    "no-mix-dearu-desumasu": true,
     "prh": {
       "rulePaths": [
         "test/prh.yml"

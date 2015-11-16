@@ -62,6 +62,7 @@
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
     "textlint-rule-prh": "^2.0.0",
+    "textlint-rule-sentence-length": "^1.0.4",
     "textlint-rule-spellcheck-tech-word": "^4.0.1",
     "unist-util-is": "^1.0.0",
     "unist-util-parents": "^0.1.1",
