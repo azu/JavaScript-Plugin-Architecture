@@ -8,7 +8,7 @@ jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブ
 
 [import, greenify.js](../../src/jQuery/greenify.js)
 
-実際に利用するためには、`jquery.js`を読み込んだ後に`greenify.js`を読み込ませる必要があります。
+実際に利用するため際は、`jquery.js`を読み込んだ後に`greenify.js`を読み込ませる必要があります。
 
 ```html
 <script src="jquery.js"></script>
@@ -43,19 +43,19 @@ $(document.body); // 返り値はjQueryのインスタンス
 
 jQueryプラグインの仕組みがわかったのでどういう用途に有効な仕組みなのか考えてみましょう。
 
-単純なprototype拡張であると言えるので、利点はJavaScriptのprototypeと同様と言えるかもしれません。
+単純なprototype拡張であると言えるので、利点はJavaScriptのprototypeと同様です。
 動的にメソッドを追加するだけではなく、既存の実装を上書きするmonkey patchのようなものもプラグインとして追加することができます。
 
 ## どういう用途に向いていない?
 
 これもJavaScriptのprototypeと同様で、prototypeによる拡張は柔軟すぎるため、
-jQuery自体がプラグインのコントロールをすることが難しいです。
+jQuery自体がプラグインのコントロールをすることは難しいです。
 
 また、プラグインが拡張するjQueryの実装に依存し易いため、
 jQueryのバージョンによって動かなくなるプラグインが発生しやすいです。
 
-jQueryではそこをどうやってカバーしているかというと、
-ドキュメント化されてないAPIは触っていけないというルールを設けているだけとなっています。
+jQueryではドキュメント化されてないAPIを触っていけないというルールを設けていますが、
+これは必ずしも守られているわけではありません。
 
 ## 実装してみよう
 
@@ -97,8 +97,8 @@ calculator.fn = calculator.prototype;
 
 ## エコシステム
 
-最初に述べたように、このプラグインの仕組みはあるグローバルオブジェクトに依存しており、
-これはスクリプトを`<script>`要素で読み込むだけで拡張することを前提とした作りといえます。
+このプラグインの仕組みはあるグローバルオブジェクトに依存しており、
+これはスクリプトを`<script>`要素で読み込むだけで拡張することを前提とした作りです。
 
 ```html
 <script src="jquery.js"></script>
@@ -115,7 +115,7 @@ calculator.fn = calculator.prototype;
 - jQueryプラグインは `jQuery.fn` を拡張する
 - `jQuery.fn` は `jQuery.prototype` と同じである
 - jQueryプラグインとは`jQuery.prototype`を拡張したものといえる
-- 柔軟であるが、プラグインが行うことを制御することが難しい
+- 何でもできるためプラグインが行うことを制御することのは難しい
 
 ## 参考資料
 

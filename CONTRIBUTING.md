@@ -2,7 +2,7 @@
 
 この書籍ではJavaScriptにおけるプラグインアーキテクチャを色々なライブラリやツールを元に紹介する形をとっています。
 
-Contributeは大きく分けて、既存の文章の修正や執筆 と Proposalの提案などがあります。
+Contributeは大きく分けて、既存の文章の修正や執筆とProposalの提案などがあります。
 
 ## 文章の修正
 
@@ -22,7 +22,7 @@ Proposalとは、書籍に載せたいプラグインアーキテクチャにつ
 例えば、XXXというライブラリ/ツールのアーキテクチャについてのIssueを立てる場合、
 以下のような事が1行とかでもいいので書かれていれば参考になります。
 
-仕組みについて調べるのが大変な場合は飛ばしてもらっても問題ありません。
+仕組みについて調べるのが大変な場合は飛ばしても問題ありません。
 JavaScriptはとにかく柔軟な言語なので、こういうプラグインの形式を取ってるというのを知らせるだけでも有用だと思います。
 
 ```
@@ -65,7 +65,7 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 
 ```
 
-以下からこのテンプレートを使ったIssueを立てることが出来ます。
+以下からこのテンプレートで使ったIssueを立てることが出来ます。
 
 - [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?title=XXX&body=%23+XXX%E3%81%AE%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%0D%0AURL%3A+%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E6%9B%B8%E3%81%91%E3%82%8B%3F%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BB%95%E7%B5%84%E3%81%BF%3F%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BA%8B%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%82%8B%3F%0D%0A%0D%0A%23%23+%E3%81%93%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%8B%E3%82%82%E3%81%AE%0D%0A)
 
@@ -87,7 +87,7 @@ npm test
 
 ## コミットメッセージ
 
-Angular.jsのGit Commit Guidelinesをベースとしています。
+AngularJSのGit Commit Guidelinesをベースとしています。
 
 - [conventional-changelog/angular.md at master · ajoslin/conventional-changelog](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md "conventional-changelog/angular.md at master · ajoslin/conventional-changelog")
 

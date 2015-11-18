@@ -3,13 +3,13 @@
 > この文章は[Connect](https://github.com/senchalabs/connect "Connect") 3.4.0を元に書かれています。
 
 [Connect](https://github.com/senchalabs/connect "Connect")はNode.jsで動くHTTPサーバーフレームワークです。
-_middleware_という拡張する仕組みを持っていて、Connectが持つ機能自体はとても少ないです。
+_middleware_という拡張する仕組みを持ち、Connectが持つ機能自体はとても少ないです。
 
 この章ではConnectの_middleware_の仕組みについて見て行きましょう。
 
 ## どう書ける?
 
-Connectを使った簡単なEchoサーバを書いてみましょう。
+Connectを使い簡単なEchoサーバを書いてみましょう。
 Echoサーバとは、送られてきたリクエストの内容をそのままレスポンスとして返すサーバのことです。
 
 [import, connect-echo-example.js](../../src/connect/connect-echo-example.js)
@@ -23,7 +23,7 @@ Echoサーバとは、送られてきたリクエストの内容をそのまま�
 ```
 
 `app.use(middleware)` という形で、_middleware_と呼ばれる関数には`request`や`response`といったオブジェクトが渡されます。
-この`request`や`response`を_middleware_で処理することでログを取ったり、任意のレスポンスを返したりできるようになっています。
+この`request`や`response`を_middleware_で処理することでログを取ったり、任意のレスポンスを返しことができるようになっています。
 
 Echoサーバでは `req.pipe(res);` という形でリクエストをそのままレスポンスとして流す事で実現されています。
 
@@ -62,8 +62,7 @@ Connectでは`app.stack`に_middleware_を配列として保持しています�
 
 [import connect-trace-example.js](../../src/connect/connect-trace-example.js)
 
-Connectが登録された_middleware_をどう処理するかというと、
-サーバがリクエストを受け取った時に、それぞれ順番に呼び出しています。
+Connectは登録された_middleware_を、サーバがリクエストを受け取りそれぞれ順番に呼び出しています。
 
 上記の例だと以下の順番で_middleware_が呼び出されることになります。
 
@@ -77,19 +76,19 @@ Connectが登録された_middleware_をどう処理するかというと、
 
 [import nosniff.js](../../src/connect/nosniff.js)
 
-`nosniff.js`は、HTTPヘッダを設定し終わったら`next()`を呼び出していて、
+`nosniff.js`は、HTTPヘッダを設定し終わったら`next()`を呼び出し、
 この`next()`が次の_middleware_へ行くという意味になります。
 
-次に、`hello.js`を見てみると、`next()`がないことがわかります。
+次に、`hello.js`を見てみると、`next()`がありません。
 
 [import hello.js](../../src/connect/hello.js)
 
 `next()`がないということは`hello.js`がこの連続する_middleware_の最後となっていることがわかります。
 仮に、これより先に_middleware_が登録されていたとしても無視されます。
 
-つまり、処理的には以下のようにstackを先頭から一個づつ取り出して、処理していくという方法が取られています。
+つまり、処理的には以下のようにstackを先頭から一個づつ取り出し、処理していくという方法が取られています。
 
-Connectの行っている処理を抽象的なコードで書くと以下のような形となっています。
+Connectの行っている処理を抽象的なコードで書くと以下のような形になっています。
 
 ```js
 let req = "...",
@@ -103,11 +102,11 @@ next();// 初回
 ```
 
 
-このような_middleware_を繋げた形を_middleware stack_と呼ぶことがあります。
+このような_middleware_を繋げたものを_middleware stack_と呼ぶことがあります。
 
 _middleware stack_で構成されるHTTPサーバとして、PythonのWSGI MiddlewareやRubyのRackなどがあります。
 ConnectはRackと同じく`use`で_middleware_を指定することからも分かりますが、
-Rackを参考にして実装されています。
+Rackを参考にした実装となっています。
 
 - [Ruby - Rack解説 - Rackの構造とRack DSL - Qiita](http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5 "Ruby - Rack解説 - Rackの構造とRack DSL - Qiita")
 
@@ -115,14 +114,14 @@ Rackを参考にして実装されています。
 
 ## 実装してみよう
 
-JunctionというConnectライクな_middleware_をサポートしたものを作成してみます。
+Connectライクな_middleware_をサポートしたJunctionというクラスを作成してみます。
 
 Junctionは、`use(middleware)` と `process(value, (error, result) => { });`を持っているシンプルなクラスです。
 
 [import junction.js](../../src/connect/junction.js)
 
 実装を見てみると、`use`で_middleware_を登録して、`process`で登録した_middleware_を順番に実行していきます。
-そのため、`Junction`自体は渡されたデータは何も処理せずに、_middleware_との中継のみをしています。
+そのため、`Junction`自体は渡されたデータの処理をせずに、_middleware_の中継のみをしています。
 
 登録する_middleware_はConnectと同じで、処理をしたら`next`を呼んで、次の_middleware_が処理するというのを繰り返しています。
 
@@ -133,7 +132,7 @@ Junctionは、`use(middleware)` と `process(value, (error, result) => { });`を
 
 ## どういう用途に向いている?
 
-ConnectやJunctionの実装を見てみると分かりますが、このアーキテクチャでは機能の詳細は_middleware_で実装できます。
+ConnectやJunctionの実装を見てみると分かりますが、このアーキテクチャでは機能の詳細を_middleware_で実装できます。
 そのため、本体の実装は_middleware_に提供するインタフェースの決定、エラーハンドリングの手段の提供するだけでとても小さいものとなっています。
 
 今回は紹介していませんが、Connectにはルーティングに関する機能があります。
@@ -146,7 +145,7 @@ app.use("/foo", function fooMiddleware(req, res, next) {
 });
 ```
 
-このアーキテクチャは、入力があり出力がある場合にコアとなる部分は小さく実装できることが分かります。
+このアーキテクチャは、入力と出力がある場合にコアとなる部分は小さく実装できることが分かります。
 
 そのため、ConnectやRackなどのHTTPサーバでは「リクエストに対してレスポンスを返す」というのが決まっているので、
 このアーキテクチャは適しています。
@@ -154,10 +153,10 @@ app.use("/foo", function fooMiddleware(req, res, next) {
 ## どういう用途に向いていない?
 
 このアーキテクチャでは機能の詳細が_middleware_で実装できます。
-その中で多くの機能を_middleware_で実装していくと、_middleware_間に依存関係が生じることがあります。
+その中で多くの機能を_middleware_で実装していくと、_middleware_間に依存関係を作ってしまう事があります。
 
-これにより、`use(middleware)` で登録する順番が変わるだけで挙動が変わる事があります。
-_middleware_は柔軟ですが、_middleware_間で起きる前提の解決を利用者が行う必要があります。
+この場合、`use(middleware)` で登録する順番により挙動が変わります。
+_middleware_の利用者が、間で起きる前提の解決を行う必要があります。
 
 そのため、プラグイン同士の強い独立性や明確な依存関係を扱いたい場合には不向きといえるでしょう。
 
@@ -165,14 +164,14 @@ _middleware_は柔軟ですが、_middleware_間で起きる前提の解決を�
 
 ## エコシステム
 
-Connect自体の機能は少ないため、その分_middleware_が多くあるのが特徴的です。
+Connect自体の機能は少ないですが、その分_middleware_の種類が多くあります。
 
 - [github.com/senchalabs/connect#middleware](https://github.com/senchalabs/connect#middleware)
 - [Express middleware](http://expressjs.com/resources/middleware.html "Express middleware")
 
 また、それぞれの_middleware_が小さな単機能であり、それを組み合わせて使うように作られているケースが多いです。
 
-これは、_middleware_が層となっていてそれを重ねていく作り、つまり_middleware stack_の形を取ることが多いからであるとも言えます。
+これは、_middleware_が層として重なっている作り、つまり_middleware stack_の形を取ることが多いからであるとも言えます。
 
 ![pylons_as_onion](img/pylons_as_onion.png)
 
@@ -186,17 +185,17 @@ Connect自体の機能は少ないため、その分_middleware_が多くある�
     - Connectと_middleware_の互換性がある
     - 元々はConnectを利用していたが[4.0.0](https://github.com/strongloop/express/blob/4.0.0/History.md "4.0.0")で自前の実装に変更
 - [wooorm/retext](https://github.com/wooorm/retext "wooorm/retext")
-    - `use`でプラグインを登録していくテキスト処理ライブラリ
+    - `use`でプラグイン登録していくテキスト処理ライブラリ
 - [r7kamura/stackable-fetcher](https://github.com/r7kamura/stackable-fetcher "r7kamura/stackable-fetcher")
-    - `use`でプラグインを登録して処理を追加できるHTTPクライアントライブラリ
+    - `use`でプラグイン登録して処理を追加できるHTTPクライアントライブラリ
 
 ## まとめ
 
 ここではConnectのプラグインアーキテクチャについて学びました。
 
 - Connectは_middleware_を使ったHTTPサーバーライブラリである
-- Connect自体は機能は少ない
-- 複数の_middleware_を組み合わせてアプリケーションを作ることができる
+- Connect自体の機能は少ない
+- 複数の_middleware_を組み合わせることでHTTPサーバを作ることができる
 
 ## 参考資料
 

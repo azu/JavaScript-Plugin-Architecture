@@ -6,8 +6,9 @@
 ビルドやテストなどといったタスクを実行するためのツールで、
 それぞれのタスクをJavaScriptで書くことができるようになっています。
 
-タスクは複数の処理の実行順序を定義したものとなっていて、タスクを定義するAPIとしては`gulp.task`が用意されています。
-また、それぞれの処理はNode.jsの[Stream](https://nodejs.org/api/stream.html "Stream")でつなげることで、複数の処理を一時ファイルなしでできるようになっています。
+ここでいうタスクとは複数の処理からなる処理の固まりのことです。
+このタスクを定義するAPIとして`gulp.task`が用意されています。
+また、それぞれの処理はNode.jsの[Stream](https://nodejs.org/api/stream.html "Stream")を使いつなげることで、複数の処理を一時ファイルなしでできるようになっています。
 
 それぞれの処理はgulpのプラグインという形でモジュール化されているため、
 利用者はモジュールを読み込み、`pipe()`で繋ぐだけでタスクの定義ができるツールとなっています。
@@ -39,7 +40,7 @@ gulp.task("sass", function() {
 });
 ```
 
-ここでは、gulpプラグインの仕組みについて扱うので、gulpの使い方については詳しくは以下を参照してください。
+ここでは、gulpプラグインの仕組みについて扱うので、gulpの使い方について詳しくは以下を参照してください。
 
 - [gulp/docs at master · gulpjs/gulp](https://github.com/gulpjs/gulp/tree/master/docs)
 - [現場で使えるgulp入門 - gulpとは何か | CodeGrid](https://app.codegrid.net/entry/gulp-1)
@@ -47,12 +48,13 @@ gulp.task("sass", function() {
 
 ## どういう仕組み?
 
-実際にgulpプラグインを書きながら、どのような仕組みで処理同士が連携を取って動作しているのかを見ていきましょう。
+実際にgulpプラグインを書きながら、どのような仕組みで処理同士が連携を取り動作しているのかを見ていきましょう。
 
 先ほどのgulpのタスクの例では、既にモジュール化された処理を`pipe`で繋げただけであるため、
 それぞれの処理がどのように実装されているかはよく分かりませんでした。
 
-ここでは`gulp-prefixer`という、それぞれのファイルに対して先頭に特定の文字列を追加するgulpプラグインを書いていきます。
+ここでは`gulp-prefixer`というgulpプラグインを書いていきます。
+`gulp-prefixer`は与えられたそれぞれのファイルに対して先頭に特定の文字列の追加を行うプラグインです。
 
 同様の名前のプラグインが公式のドキュメントで「プラグインの書き方」の例として紹介されているので合わせて見ると良いでしょう。
 
@@ -123,10 +125,11 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 「gulpから流れてきたデータ」を扱うために`readableObjectMode`と`writableObjectMode`をそれぞれ`true`にしています。
 この _ObjectMode_ というのは名前の通り、Streamでオブジェクトを流すための設定です。
 
-通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html "Buffer")というバイナリーデータを扱います。
-この[Buffer](https://nodejs.org/api/buffer.html "Buffer")はStringと相互変換が可能ですが、複数の値を持ったオブジェクトのようなものは扱えません。
+通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html)というバイナリーデータを扱います。
+この[Buffer](https://nodejs.org/api/buffer.html)はStringと相互変換が可能できます。
+しかし、一方で複数の値を持ったオブジェクトのようなものは扱えません。
 
-そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、これが有効の場合はBufferやString以外のJavaScriptオブジェクトをStreamで流せるようになっています。
+そのため、Node.js Streamには[Object Mode](https://nodejs.org/api/stream.html#stream_object_mode "Object Mode")があり、有効の場合はBufferやString以外のJavaScriptオブジェクトをStreamで流せるようになっています。
 
 Node.js Streamについては以下を合わせて参照するといいでしょう。
 
@@ -138,16 +141,18 @@ Node.js Streamについては以下を合わせて参照するといいでしょ
 gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトがStreamで流れてきます。
 このvinylは _Virtual file format_ という呼ばれているもので、ファイル情報と中身をラップしたgulp用に作成された抽象フォーマットです。
 
-なぜこういった抽象フォーマットが必要なのかは次のことを考えてみると分かりやすいと思います。
+なぜこういった抽象フォーマットが必要なのかは次のことを考えてみると分かりやすいです。
 
-`gulp.src`で読み込んだファイルの中身のみが、Transform Streamに渡されてしまうと、
-Transform Streamからはそのファイルのパスや読み取り属性などの詳細な情報を知ることができません。
+- Streamで流れてきたデータの拡張子を知りたい
+- Streamで流れてきたデータの読み取り属性をチェックしたい
+- Streamで流れてきたデータと同じ場所にファイルを書き出したい
 
+ファイルの中身だけがStreamで流れた場合は、ファイルのパスや読み取り属性などの詳細な情報を知ることができません。
 そのため、`gulp.src`で読み込んだファイルはvinylでラップされ、ファイルの中身は`contents`として参照できるようになっています。
 
 ### vinylの中身を処理する
 
-先ほどのTransform Streamの中身を見てみましょう。
+次はTransform Streamの具体的な処理を見てみましょう。
 
 ```js
 // file は `vinyl` オブジェクト
@@ -186,7 +191,7 @@ gulp.src("./*.*", { buffer: false })
 
 ### 変換処理
 
-最後にBufferとStreamのそれぞれの変換処理を見てみます。
+最後にBufferとStreamそれぞれの変換処理を見てみます。
 
 ```js
 export function prefixBuffer(buffer, prefix) {
@@ -208,12 +213,12 @@ export function prefixStream(prefix) {
 
 やってきたBufferの先頭に`prefix`の文字列をBufferとして結合して返すだけの処理が行われています。
 
-この変換処理自体は、gulpに依存したものはないため、通常のライブラリに渡して処理するということが可能です。
+この変換処理自体は、gulpに依存したものではないため、通常のライブラリに渡して処理するということが可能です。
 BufferはStringと相互変換が可能であるため、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
 
 つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
 
-gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りすることで入力/変換/出力を行い、
+gulpプラグインは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りし、
 そのインタフェースとして既存のNode.js Streamを使っていると言えます。
 
 ## エコシステム
@@ -221,25 +226,25 @@ gulpプラグインの仕組みは[vinyl](https://github.com/gulpjs/vinyl "vinyl
 gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
 この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインタフェースとしてNode.js Streamを使っています。
 
-gulpではプラグインは単機能であること推奨しています。
+gulpではプラグインが持つ機能は1つ(単機能)であること推奨しています。
 
-> Your plugin should only do one thing, and do it well. 
+> Your plugin should only do one thing, and do it well.
 > -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
 
 gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解決しています。
 
-元々、Transform Streamは1つの変換処理を行うことに向いていて、その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
+元々、Transform Streamは1つの変換処理を行うことが得意であり、その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
 
 また、gulpはタスク自動化ツールであるため、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
 Node.js Streamのデフォルトでは流れるデータが`Buffer`であるため、そのままでは既存のライブラリでは扱いにくい問題を
 データとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを流す事で緩和しています。
 
-このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリを使って作りやすくしています。
+このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリで作りやすくしています。
 これにより再利用できるプラグインが多くできることでエコシステムを構築していると言えます。
 
 ## どういう用途に向いている?
 
-gulpはそれ自体はデータの流れを管理するだけであり、タスクを実現するためにはプラグインが重要になります。
+gulp自体はデータの流れを管理するだけであり、タスクを実現するためにはプラグインが重要になります。
 タスクには様々な処理が想定されるため、必要になるプラグインも種類が様々なものとなります。
 
 gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを中間フォーマットと決めたことで、
@@ -248,7 +253,7 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 またgulpは、Gruntとは異なり、タスクをJavaScriptのコードして表現します。
 これにより、プラグインの組み合わせだけだと実現できない場合に、直接コードを書くことで対応するといった対処法を取ることができます。
 
-そのため、プラグインの行う処理の範囲が予測できない場合に、gulpのように中間フォーマットとデータの流し方だけを決めるというやり方は向いています。
+そのため、プラグインの行う処理が予測できない場合に、中間フォーマットとデータの流し方だけを決めるというやり方は向いています。
 
 まとめると
 
@@ -257,10 +262,10 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 
 ## どういう用途に向いていない?
 
-プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせの問題はgulpでも発生します。
+プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせ問題はgulpでも発生します。
 
 例えば、[Browserify](https://github.com/substack/node-browserify)はNode.js Streamを扱えますが、
-先頭に置かないと他のプラグインと組わせて利用できない問題があります。
+変換の開始点としていない場合に問題が発生します。
 
 - [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
 
