@@ -34,7 +34,8 @@
     "extension"
   ],
   "devDependencies": {
-    "babel": "^6.3.13",
+    "babel-cli": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
     "connect": "^3.4.0",
     "eslint": "^1.3.0",
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
