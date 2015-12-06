@@ -34,11 +34,12 @@
     "extension"
   ],
   "devDependencies": {
-    "babel": "^5.8.23",
+    "babel-cli": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
     "connect": "^3.4.0",
     "eslint": "^1.3.0",
     "eslint-plugin-markdown": "git://github.com/eslint/eslint-plugin-markdown.git",
-    "espower-babel": "^3.3.0",
+    "espower-babel": "^4.0.0",
     "gitbook-cli": "^1.0.0",
     "gitbook-plugin-edit-link": "^2.0.0",
     "gitbook-plugin-ga": "^1.0.0",
@@ -57,7 +58,7 @@
     "stemming-x-keywords": "^1.0.3",
     "textlint": "^5.0.0-beta.0",
     "textlint-plugin-jtf-style": "^0.8.3",
-    "textlint-rule-max-ten": "^1.1.0",
+    "textlint-rule-max-ten": "^2.0.0",
     "textlint-rule-no-doubled-joshi": "^2.0.0",
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.3",
