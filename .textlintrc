@@ -6,6 +6,7 @@
     "max-ten": {
       "max": 3
     },
+    "no-double-negative-ja": true,
     "no-doubled-joshi": {
       "min_interval": 1
     },
