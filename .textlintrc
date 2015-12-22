@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "jtf-style"
-  ],
   "rules": {
     "max-ten": {
       "max": 3
@@ -23,10 +20,12 @@
         "test/prh.yml"
       ]
     },
-    "jtf-style/2.1.2.漢字": false,
-    "jtf-style/2.1.5.カタカナ": false,
-    "jtf-style/2.1.6.カタカナの長音": false,
-    "jtf-style/4.2.2.疑問符(？)": false,
-    "jtf-style/4.3.1.丸かっこ（）": false
+    "preset-jtf-style": {
+      "2.1.2.漢字": false,
+      "2.1.5.カタカナ": false,
+      "2.1.6.カタカナの長音": false,
+      "4.2.2.疑問符(？)": false,
+      "4.3.1.丸かっこ（）": false
+    }
   }
 }
