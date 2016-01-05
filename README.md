@@ -33,6 +33,14 @@ JavaScriptの世界では1つの大きなライブラリよりも小さいなも
 
     npm test
 
+### 文章カバレッジ
+
+[textlint](https://github.com/textlint/textlint "textlint")と[textlint-formatter-codecov](https://github.com/azu/textlint-formatter-codecov "textlint-formatter-codecov")を使って出してる文章に対するカバレッジ
+
+[![codecov.io](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/coverage.svg?branch=master)](https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master)
+
+![codecov.io](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
+
 ## Contributing
 
 [CONTRIBUTING.md](./CONTRIBUTING.md)に、書籍で扱うべきプラグインアーキテクチャのProposalの書き方や
