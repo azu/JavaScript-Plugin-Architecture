@@ -27,6 +27,7 @@
     "test:example": "find ./src -name '*-example.js' | xargs babel-node",
     "test:js": "mocha",
     "test": "npm-run-all --parallel test:js test:example textlint eslint:md eslint build",
+    "textlint:strict": "summary-to-path | xargs textlint -c coverage.textlintrc",
     "travis:coverage": "summary-to-path | xargs textlint -c coverage.textlintrc -f codecov | codecov"
   },
   "keywords": [
