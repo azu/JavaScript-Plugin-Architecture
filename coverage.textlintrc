@@ -1,7 +1,8 @@
 {
   "rules": {
     "max-ten": {
-      "max": 3
+      "max": 3,
+      "strict": true
     },
     "no-double-negative-ja": true,
     "no-doubled-joshi": {
