@@ -1,6 +1,8 @@
 sudo: false
 language: node_js
 node_js: "stable"
+after_success:
+  - npm run travis:coverage
 cache:
   directories:
     - node_modules
