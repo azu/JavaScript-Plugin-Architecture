@@ -39,7 +39,7 @@ JavaScriptの世界では1つの大きなライブラリよりも小さいなも
 
 [![codecov.io](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/coverage.svg?branch=master)](https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master)
 
-![codecov.io](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
+![coverage graph](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
 
 ## Contributing
 
