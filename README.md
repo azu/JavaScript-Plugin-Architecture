@@ -37,9 +37,17 @@ JavaScriptの世界では1つの大きなライブラリよりも小さいなも
 
 [textlint](https://github.com/textlint/textlint "textlint")と[textlint-formatter-codecov](https://github.com/azu/textlint-formatter-codecov "textlint-formatter-codecov")を使って出してる文章に対するカバレッジ
 
+100％を理想的目標として、それに対する現実的な値をカバレッジの％として表現しています。
+
 [![codecov.io](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/coverage.svg?branch=master)](https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master)
 
 ![coverage graph](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
+
+現在の文章カバレッジは以下のコマンドでも確認することができます。
+
+```
+npm run textlint:coverage
+```
 
 ## Contributing
 

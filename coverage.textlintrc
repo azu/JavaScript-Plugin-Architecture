@@ -5,6 +5,7 @@
       "max": 3,
       "strict": true
     },
+    "unexpanded-acronym": true,
     "no-double-negative-ja": true,
     "no-doubled-joshi": {
       "min_interval": 1,
