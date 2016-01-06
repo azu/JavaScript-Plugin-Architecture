@@ -39,7 +39,6 @@
   "devDependencies": {
     "babel-cli": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
-    "codecov-json-to-lcov": "^1.1.1",
     "codecov.io": "^0.1.6",
     "connect": "^3.4.0",
     "eslint": "^1.3.0",
