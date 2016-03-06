@@ -3,7 +3,7 @@
 import {getKeywords}  from "stemming-x-keywords";
 import path from "path";
 import fs from "fs";
-import mdast from "mdast";
+import remark from "remark";
 import parents from "unist-util-parents";
 import select from "unist-util-select";
 import isUnist from "unist-util-is";
@@ -56,7 +56,7 @@ function getKeywordsOfParagraphsAsync(paragraphs) {
     });
 }
 function checkKeyword(text) {
-    let ast = mdast.parse(text);
+    let ast = remark.parse(text);
     let headerLinks = select(parents(ast), "heading link[href]");
     let paragraphList = headerLinks.map(link => {
         let filePath = path.resolve(rootDir, link.href);
