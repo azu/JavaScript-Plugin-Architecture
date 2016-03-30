@@ -61,7 +61,7 @@
     "power-assert": "^1.0.0",
     "remark": "^4.1.1",
     "stemming-x-keywords": "^1.0.3",
-    "textlint": "^6.0.2",
+    "textlint": "^6.1.0",
     "textlint-formatter-codecov": "^1.0.2",
     "textlint-formatter-lcov": "^1.0.2",
     "textlint-rule-max-ten": "^2.0.0",
