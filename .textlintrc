@@ -7,6 +7,8 @@
     "no-doubled-joshi": {
       "min_interval": 1
     },
+    "no-dropping-the-ra": true,
+    "no-doubled-conjunctive-particle-ga": true,
     "sentence-length": {
       "max": 100
     },
