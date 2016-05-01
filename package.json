@@ -72,7 +72,7 @@
     "textlint-rule-no-mix-dearu-desumasu": "^1.1.0",
     "textlint-rule-no-start-duplicated-conjunction": "^1.0.7",
     "textlint-rule-preset-jtf-style": "^2.0.0",
-    "textlint-rule-prh": "^2.0.0",
+    "textlint-rule-prh": "^3.0.1",
     "textlint-rule-sentence-length": "^1.0.4",
     "textlint-rule-spellcheck-tech-word": "^5.0.0",
     "textlint-rule-unexpanded-acronym": "^1.2.0",
