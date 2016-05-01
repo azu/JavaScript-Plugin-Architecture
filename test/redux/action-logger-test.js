@@ -27,6 +27,6 @@ describe("logger-test", function () {
     it("should output log", function () {
         const action = {type: "FOO"};
         dispatch(action);
-        assert.deepEqual(logs, [action]);
+        assert.deepEqual(logs, [action, initialState]);
     });
 });

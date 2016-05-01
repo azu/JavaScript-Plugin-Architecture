@@ -13,6 +13,8 @@ export default function createLogger(options = defaultOptions) {
     const logger = options.logger || defaultOptions.logger;
     return store => next => action => {
         logger.log(action);
-        return next(action);
+        const value = next(action);
+        logger.log(store.getState());
+        return value;
     };
 }
