@@ -2,7 +2,7 @@
 "use strict";
 const assert = require("power-assert");
 import {createStore, applyMiddleware} from "redux";
-import createLogger from "../../src/redux/action-logger";
+import createLogger from "../../src/redux/logger";
 const initialState = {};
 const reducer = (state = initialState, action) => state;
 
