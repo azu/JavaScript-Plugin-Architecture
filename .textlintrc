@@ -3,12 +3,13 @@
     "max-ten": {
       "max": 3
     },
+    "no-doubled-conjunctive-particle-ga": true,
+    "no-doubled-conjunction": true,
     "no-double-negative-ja": true,
     "no-doubled-joshi": {
       "min_interval": 1
     },
     "no-dropping-the-ra": true,
-    "no-doubled-conjunctive-particle-ga": true,
     "sentence-length": {
       "max": 100
     },
