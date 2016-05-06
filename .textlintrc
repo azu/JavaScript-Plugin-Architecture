@@ -18,7 +18,11 @@
       "interval": 2
     },
     "spellcheck-tech-word": true,
-    "no-mix-dearu-desumasu": true,
+    "no-mix-dearu-desumasu": {
+      "preferInHeader": "",
+      "preferInBody": "ですます",
+      "preferInList": "である"
+    },
     "prh": {
       "rulePaths": [
         "test/prh.yml"

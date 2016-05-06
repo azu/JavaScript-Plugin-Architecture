@@ -50,7 +50,7 @@ gulp.task("sass", function() {
 
 実際にgulpプラグインを書きながら、どのような仕組みで処理同士が連携を取り動作しているのかを見ていきましょう。
 
-先ほどのgulpタスクの例では、既にモジュール化された処理を`pipe`で繋げただけであるため、
+先ほどのgulpタスクの例では、既にモジュール化された処理を`pipe`で繋げただけで、
 それぞれの処理がどのように実装されているかはよく分かりませんでした。
 
 ここでは`gulp-prefixer`というgulpプラグインを書いていきます。
@@ -214,7 +214,7 @@ export function prefixStream(prefix) {
 やってきたBufferの先頭に`prefix`の文字列をBufferとして結合して返すだけの処理が行われています。
 
 この変換処理自体は、gulpに依存したものではないため、通常のライブラリに渡して処理するということが可能です。
-BufferはStringと相互変換が可能であるため、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
+BufferはStringと相互変換が可能なので、多くのgulpプラグインと呼ばれるものは、`gulpPrefixer`と`prefixBuffer`にあたる部分だけを実装しています。
 
 つまり、prefixを付けるといった変換処理自体は、既存のライブラリで行うことができるようになっています。
 
@@ -226,17 +226,17 @@ gulpプラグインは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジ�
 gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
 この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインタフェースとしてNode.js Streamを使っています。
 
-gulpではプラグインが持つ機能は1つ(単機能)であること推奨しています。
+gulpではプラグインが持つ機能は1つ(単機能)とすることを推奨しています。
 
 > Your plugin should only do one thing, and do it well.
 > -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
 
 gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解決しています。
 
-元々、Transform Streamは1つの変換処理を行うことが得意であり、その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
+元々、Transform Streamは1つの変換処理を行うことが得意なので、その変換処理を`pipe`を繋げることで複数の処理を行う事できます。
 
-また、gulpはタスク自動化ツールであるため、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
-Node.js Streamのデフォルトでは流れるデータが`Buffer`であるため、そのままでは既存のライブラリでは扱いにくい問題を
+また、gulpはタスク自動化ツールなので、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
+Node.js Streamのデフォルトでは流れるデータが`Buffer`となり、そのままでは既存のライブラリでは扱いにくい問題を
 データとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを流す事で緩和しています。
 
 このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリで作りやすくしています。
@@ -244,7 +244,7 @@ Node.js Streamのデフォルトでは流れるデータが`Buffer`であるた�
 
 ## どういう用途に向いている?
 
-gulp自体はデータの流れを管理するだけであり、タスクを実現するためにはプラグインが重要になります。
+gulp自体はデータの流れを管理するだけで、タスクを実現するためにはプラグインが重要になります。
 タスクには様々な処理が想定されるため、必要になるプラグインも種類が様々なものとなります。
 
 gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを中間フォーマットと決めたことで、

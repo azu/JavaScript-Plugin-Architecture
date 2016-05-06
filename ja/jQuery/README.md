@@ -2,7 +2,7 @@
 
 > この文章は[jQuery](http://jquery.com/ "jQuery") 2.1.4を元に書かれています。
 
-jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブジェクトにメソッドを追加することが出来ます。
+jQueryでは`$.fn`を拡張する事で、`$()`の返り値となるjQueryオブジェクトにメソッドを追加することが出来ます。
 
 次の`greenify`プラグインでは、`$(document.body).greenify();`というメソッド呼び出しが可能になります。
 
@@ -21,7 +21,7 @@ jQueryでは`$.fn`を拡張する事で、`$()`の返り値であるjQueryオブ
 
 jQueryプラグインはprototype拡張のように `$.fn.greenify = function (){}` と拡張するルールでした。
 
-`jQuery.fn`の実装を見てみると、実態は`jQuery.prototype`であるため実際にprototype拡張していることがわかります。
+`jQuery.fn`の実装を見てみると、実態は`jQuery.prototype`なので、prototype拡張していることがわかります。
 
 ```js
 // https://github.com/jquery/jquery/blob/2.1.4/src/core.js#L39
@@ -43,7 +43,7 @@ $(document.body); // 返り値はjQueryのインスタンス
 
 jQueryプラグインの仕組みがわかったのでどういう用途に有効な仕組みなのか考えてみましょう。
 
-単純なprototype拡張であると言えるので、利点はJavaScriptのprototypeと同様です。
+単純なprototype拡張なので、利点はJavaScriptのprototypeと同様です。
 動的にメソッドを追加するだけではなく、既存の実装を上書きするmonkey patchのようなものもプラグインとして追加することができます。
 
 ## どういう用途に向いていない?
@@ -105,7 +105,7 @@ calculator.fn = calculator.prototype;
 <script src="greenify.js"></script>
 ```
 
-まだNode.jsで使われているCommonJSやES6 Modulesといったものがなかった時代に作られた仕組みであるため、
+まだNode.jsで使われているCommonJSやES6 Modulesなどがなかった時代に作られた仕組みなので、
 それらと組み合わせる際には少し不向きな拡張の仕組みといえるかもしれません。
 
 ## まとめ

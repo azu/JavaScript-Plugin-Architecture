@@ -73,8 +73,7 @@ console.log("Hello!");
 
 - [JavaScript AST explorer](http://felix-kling.de/esprima_ast_explorer/#/FNrLHi8ngW "JavaScript AST explorer")
 
-ESLintではこのASTを使って、変数が未使用であるとか[no-console.js](#no-console.js)のように
-`console.log`などがコードに残ってないかなどをルールを元にチェックすることができます。
+ESLintではこのASTを使って、[no-console.js](#no-console.js)のように`console.log`などがコードに残ってないかなどをルールを元にチェックすることができます。
 
 ルールをどう書けるかという話に戻すと、`context`というオブジェクトはただのユーティリティ関数と考えて問題ありません。
 ルールの本体は関数が`return`してるメソッドをもったオブジェクトです。
@@ -99,8 +98,7 @@ ESLintではこのASTを使って、変数が未使用であるとか[no-console
 }
 ```
 
-[no-console.js](#no-console.js)のルールを見ると`MemberExpression` typeのNodeが `node.object.name === "console"` であるなら
-`console`が残ってると判断してエラーレポートすると読めてくると思います。
+[no-console.js](#no-console.js)のルールを見ると`MemberExpression` typeのNodeが `node.object.name === "console"` となった場合に、`console`が残ってると判断してエラーレポートすると読めてくると思います。
 
 ASTの探索がイメージしにくい場合は以下のルールで探索の動作を見てみると分かりやすいかもしれません。
 
@@ -184,8 +182,8 @@ function lint(code){
 }
 ```
 
-Pub/Subパターンを上手く使うことで、ASTをtraverseするのが一巡のみでそれぞれのルールに対して
-どういうコードであるかという情報が`emit`で通知できていることがわかります。
+Pub/Subパターンを上手く使うことで、ASTを走査するのが一度のみで、
+それぞれのルールに対してどういうコードかという情報が`emit`で通知できていることがわかります。
 
 もう少し具体的にするため、実装して動かせるようなものを作ってこの仕組みについて見ていきます。
 
@@ -234,8 +232,8 @@ add(1, 3);
 この`RuleContext`はルールから使えるユーティリティメソッドをまとめたものです。
 今回は`RuleContext#report`というエラーメッセージをルールからMyLinterへ通知するものだけを実装しています。
 
-ルールの実装の方を見てみると、直接オブジェクトをexportしてるわけではなく、
-`context` つまり`RuleContext`のインスタンスを受け取っていることが分かると思います。
+ルールの実装の方を見てみると、直接オブジェクトをexportしないで、
+`context`として`RuleContext`のインスタンスを受け取っていることが分かると思います。
 
 [import, no-console.js](../../src/ESLint/no-console.js)
 
@@ -258,7 +256,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 
 そのため、この仕組みに加えてもう1つ抽象レイヤーを設けないと対応は難しいです。
 
-つまり、read-writeなプラグインアーキテクチャとしては単純にこのパターンだけでは難しい部分が出てくるでしょう。
+つまり、read-writeなプラグインアーキテクチャとしては単純にこのパターンだけでは難しい部分が出てくると思います。
 
 > **NOTE** ESLint 2.0でautofixing、つまり書き換えの機能の導入が予定されています。
 > これはルールからの書き換えのコマンドを`SourceCode`というオブジェクトに集約して、最後に実際の書き換えを行うという抽象レイヤーを設けています。
@@ -271,7 +269,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 
 ## エコシステム
 
-ESLintのルールは関数を公開したただのJavaScriptモジュールであるため、
+ESLintのルールはただのJavaScriptモジュールなので、
 ルール自体を[npm](https://www.npmjs.com/ "npm")で公開することができます。
 
 また、ESLintはデフォルトで有効なルールはありません。
