@@ -98,7 +98,8 @@ ESLintではこのASTを使って、[no-console.js](#no-console.js)のように`
 }
 ```
 
-[no-console.js](#no-console.js)のルールを見ると`MemberExpression` typeのNodeが `node.object.name === "console"` となった場合に、`console`が残ってると判断してエラーレポートすると読めてくると思います。
+[no-console.js](#no-console.js)のルールを見ると`MemberExpression` typeのNodeが `node.object.name === "console"` となった場合に、
+`console`が残ってると判断してエラーレポートすると読めてくると思います。
 
 ASTの探索がイメージしにくい場合は以下のルールで探索の動作を見てみると分かりやすいかもしれません。
 
