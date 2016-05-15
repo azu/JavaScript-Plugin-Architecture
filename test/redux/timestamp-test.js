@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-describe("logger-test", function () {
+describe("timestamp-test", function () {
     let store, dispatch;
     beforeEach(() => {
         store = applyMiddleware(timestamp)(createStore)(reducer);
