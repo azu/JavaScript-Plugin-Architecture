@@ -1,10 +1,10 @@
 // LICENSE : MIT
 "use strict";
 const assert = require("power-assert");
-import applyMiddleware from "../../src/redux/apply-middleware";
-import Dispatcher from "../../src/redux/Dispatcher";
-import timestamp from "../../src/redux/timestamp";
-import createLogger from "../../src/redux/logger";
+import applyMiddleware from "../../src/Redux/apply-middleware";
+import Dispatcher from "../../src/Redux/Dispatcher";
+import timestamp from "../../src/Redux/timestamp";
+import createLogger from "../../src/Redux/logger";
 describe("middleware", function () {
     it("could apply logger middleware", function () {
         const dispatcher = new Dispatcher();

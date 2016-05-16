@@ -2,7 +2,7 @@
 "use strict";
 const assert = require("power-assert");
 import {createStore, applyMiddleware} from "redux";
-import timestamp from "../../src/redux/timestamp";
+import timestamp from "../../src/Redux/timestamp";
 const initialState = {};
 const reducer = (state = initialState, action) => {
     switch (action.type) {
