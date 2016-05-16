@@ -62,7 +62,7 @@ store.subscribe(() => {
 });
 // 3. Storeの変更をするActionをdispatch
 store.dispatch({
-    type: "AddTodo":
+    type: "AddTodo",
     title: "Todo title"
 });
 ```
