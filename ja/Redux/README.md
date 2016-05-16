@@ -23,28 +23,63 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 
 Reduxの使い方についてはここでは解説しませんが、Reduxの拡張である _Middleware_ も、この三原則に基づいた仕組みとなっています。
 
+_Middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
+[connect](../connect/README.md)の違いを意識しながら、Reduxの _Middleware_ の仕組みを見ていきましょう。
+
+## どう書ける?
+
 3行でReduxの仕組みを書くと以下のようになります。
 
 - 操作を表現するオブジェクトをActionと呼ぶ - 一般にコマンドパターンのコマンドと同様のもの
 - Actionを受け取りStateを書き換える関数を _Reducer_ と呼ぶ - ReducerはStoreに事前に登録する
 - ActionをDispatch(`store.dispatch(action)`)することで、ActionをReducerへ通知する
 
-_Middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
-[connect](../connect/README.md)の違いを意識しながら、Reduxの _Middleware_ の仕組みを見ていきましょう。
-
-## どう書ける?
+実際に次のようなコードを見てみます。
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from "redux";
+import logger from "./middleware-logger";
+import crashReporter from "./middleware-crash-reporter";
+// 4. Actionを受け取り新しいStateを返すReducer関数
+const reducer = (state = {}, action) => {
+    switch(action.type){
+        case "AddTodo":
+            return Object.assign({}, state, { title: action.title });
+        default:
+            return state;
+    }
+}
+// 1. `logger`と`crashReporter`のmiddlewareを適応した`createStore`関数を作る
+const createStoreWithMiddleware = applyMiddleware(logger, crashReporter)(createStore);
 
-// applyMiddleware takes createStore() and returns
-// a function with a compatible API.
-let createStoreWithMiddleware = applyMiddleware(logger, crashReporter)(createStore);
+// 2. Reducerを登録したStoreを作成
+const store = createStoreWithMiddleware(reducer);
 
-// Use it like you would use createStore()
-let todoApp = combineReducers(reducers);
-let store = createStoreWithMiddleware(todoApp);
+store.subscribe(() => {
+    // 5. Stateが変更されたら呼ばれる
+    const state = store.getState();
+    // 現在のStateを取得
+});
+// 3. Storeの変更をするActionをdispatch
+store.dispatch({
+    type: "AddTodo":
+    title: "Todo title"
+});
 ```
+
+1. `logger`と`crashReporter`のmiddlewareを適応した`createStore`関数を作る
+2. Reducerを登録したStoreを作成
+3. (Storeの変更をする)Actionをdispatch
+4. Actionを受け取り新しいStateを返すReducer関数
+5. Stateが変更されたら呼ばれる
+
+というような流れで動作します。
+
+上記の処理のうち、 3-4の間が _Middleware_ が処理する場所となっています。
+
+`dispatch(action)` -> (_Middleware_ の処理) -> reducerにより新しいStateの作成 -> (Stateが変わったら) -> `subscribe`で登録したコールバックを呼ぶ
+
+次は`applyMiddleware`がどのように _Middleware_ を登録しているのかを見ていきましょう。
 
 ## どういう仕組み?
 
