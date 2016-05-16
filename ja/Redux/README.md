@@ -7,7 +7,7 @@
 
 Reduxは[Flux](https://facebook.github.io/flux/ "Flux")アーキテクチャに類似する仕組みであるため、事前にFluxについて学習していると良いです。
 
-Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrinciples.html "Three Principles | Redux")と呼ばれる3つの制約の上で成立しています。
+Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrinciples.html "Three Principles | Redux")(以下、三原則)と呼ばれる3つの制約の上で成立しています。
 
 - Single source of truth
     - アプリケーション全体のStateは一つのStateツリーとして保存される
@@ -16,12 +16,12 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 - Changes are made with pure functions
     - Actionを受け取りStateを書き換えるReducerと呼ばれるpure functionを作る
     
-この[Three Principles](http://redux.js.org/docs/introduction/ThreePrinciples.html "Three Principles | Redux")についての詳細はドキュメントなどを参照してください。
+この三原則についての詳細はドキュメントなどを参照してください。
 
 - [Read Me | Redux](http://redux.js.org/)
 - [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://egghead.io/series/getting-started-with-redux)
 
-Reduxの使い方についてはここでは解説しませんが、Reduxの拡張である _Middleware_ も、このThree Principlesに基づいた仕組みとなっています。
+Reduxの使い方についてはここでは解説しませんが、Reduxの拡張である _Middleware_ も、この三原則に基づいた仕組みとなっています。
 
 3行でReduxの仕組みを書くと以下のようになります。
 
@@ -29,8 +29,8 @@ Reduxの使い方についてはここでは解説しませんが、Reduxの拡�
 - Actionを受け取りStateを書き換える関数を _Reducer_ と呼ぶ - ReducerはStoreに事前に登録する
 - ActionをDispatch(`store.dispatch(action)`)することで、ActionをReducerへ通知する
 
-つまり、_Middleware_もStateそのものを直接書き換える事はできません。
-この部分が類似の仕組みを持つ[connect](../connect/README.md)との違いになっています。
+_Middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
+[connect](../connect/README.md)の違いを意識しながら、Reduxの _Middleware_ の仕組みを見ていきましょう。
 
 ## どう書ける?
 
@@ -73,6 +73,9 @@ let store = createStoreWithMiddleware(todoApp);
 ## この仕組みを使ってるもの
 
 - Connectに似ている
+- _Middleware_もStateそのものを直接書き換える事はできません。
+- この部分が類似の仕組みを持つ[connect](../connect/README.md)との違いになっています。
+
 
 
 [Redux]: https://github.com/reactjs/redux  "reactjs/redux: Predictable state container for JavaScript apps"
