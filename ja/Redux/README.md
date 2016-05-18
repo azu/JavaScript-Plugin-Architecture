@@ -101,7 +101,7 @@ export default function createLogger(options = defaultOptions) {
 `return`している高階関数の連なりが _Middleware_ の本体となります。
 
 ```js
-const middleware = store => next => action => {}
+const middleware = store => next => action => {};
 ```
 
 上記のArrowFunctionの連なりが一見すると何をしているのかが分かりにくいですが、
@@ -109,12 +109,12 @@ const middleware = store => next => action => {}
 
 ```js
 const middleware = (store) => {
-   return (next) => {
-      return (action) => {
-        // Middlewareの処理
-      }
-   }
-}
+    return (next) => {
+        return (action) => {
+            // Middlewareの処理
+        };
+    };
+};
 ```
 
 ただ単に関数を返す関数(高階関数)を作っているだけだと分かります。
@@ -125,7 +125,6 @@ const middleware = (store) => {
 
 この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _Middleware_ を適応した場合は、
 **次の** _Middleware_ を呼び出すという事を表現しています。
-
 
 ## どういう仕組み?
 
