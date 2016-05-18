@@ -131,6 +131,9 @@ const middleware = (store) => {
 この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _Middleware_ を適応した場合は、
 **次の** _Middleware_ を呼び出すという事を表現しています。
 
+Reduxの _Middleware_ の仕組みは単純ですが、見慣れないデザインであるために複雑であるように見えます。
+実際に同じ仕組みを実装しながら、Reduxの _Middleware_ について学んでいきましょう。
+
 ## どういう仕組み?
 
 - 高階関数をapplyしている
