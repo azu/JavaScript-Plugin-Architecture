@@ -21,7 +21,7 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 - [Read Me | Redux](http://redux.js.org/)
 - [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://egghead.io/series/getting-started-with-redux)
 
-Reduxの使い方についてはここでは解説しませんが、Reduxの拡張である _Middleware_ も、この三原則に基づいた仕組みとなっています。
+Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _Middleware_ も、この三原則に基づいた仕組みとなっています。
 
 _Middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
 [connect](../connect/README.md)の違いを意識しながら、Reduxの _Middleware_ の仕組みを見ていきましょう。
@@ -50,7 +50,82 @@ Reduxの例として次のようなコードを見てみます。
 
 `dispatch(action)` -> (_Middleware_ の処理) -> reducerにより新しいStateの作成 -> (Stateが変わったら) -> `subscribe`で登録したコールバックを呼ぶ
 
-次は`applyMiddleware`がどのように _Middleware_ を登録しているのかを見ていきましょう。
+次は _Middleware_ はどういう拡張を行えるのかを見ていきます。
+ 
+## Middleware
+
+Reduxでは第三者が拡張できる仕組みを _Middleware_ と呼んでいます。
+
+- [Middleware | Redux](http://redux.js.org/docs/advanced/Middleware.html "Middleware | Redux")
+
+どのような拡張を _Middleware_ で書けるのか、実際の例を見てみます。
+次の _Middleware_ はStoreがdispatchしたActionと、その前後でStateにどういう変更があったのかを出力するロガーです。
+
+[import, logger.js](../../src/Redux/logger.js)
+
+この _Middleware_ は次のようにReduxに対して適用できます。
+
+```js
+import {createStore, applyMiddleware} from "redux";
+const createStoreWithMiddleware = applyMiddleware(createLogger())(createStore);
+```
+
+この時、見た目上は `store` に対して _Middleware_ が適用されているように見えますが、
+実際には`store.dispatch`に対して適用され、拡張された`dispatch`メソッドが作成されています。
+
+これにより、以下のように`dispatch`を実行する際に _Middleware_ の処理が実行されてから、
+実際に`dispatch`されるというのがReduxの _Middleware_ による拡張のポイントになっています。
+
+```js
+store.dispatch({
+    type: "AddTodo",
+    title: "Todo title"
+});
+```
+
+さきほどの`logger.js`を見てみます。
+
+```js
+export default function createLogger(options = defaultOptions) {
+    const logger = options.logger || defaultOptions.logger;
+    return store => next => action => {
+        logger.log(action);
+        const value = next(action);
+        logger.log(store.getState());
+        return value;
+    };
+}
+```
+
+`createLogger`は、loggerにオプションを渡すためのものなので置いておき、
+`return`している高階関数の連なりが _Middleware_ の本体となります。
+
+```js
+const middleware = store => next => action => {}
+```
+
+上記のArrowFunctionの連なりが一見すると何をしているのかが分かりにくいですが、
+これは下記のように展開することができます。
+
+```js
+const middleware = (store) => {
+   return (next) => {
+      return (action) => {
+        // Middlewareの処理
+      }
+   }
+}
+```
+
+ただ単に関数を返す関数(高階関数)を作っているだけだと分かります。
+
+これを踏まえて logger.js をもう一度見てみると、`next(action)` の前後にログ表示を挟んでいることが分かります。
+
+[import, logger.js](../../src/Redux/logger.js)
+
+この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _Middleware_ を適応した場合は、
+**次の** _Middleware_ を呼び出すという事を表現しています。
+
 
 ## どういう仕組み?
 

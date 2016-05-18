@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware} from "redux";
-import logger from "./logger";
-import crashReporter from "./timestamp";
+import createLogger from "./logger";
+import timestamp from "./timestamp";
 // 4. Actionを受け取り新しいStateを返すReducer関数
 const reducer = (state = {}, action) => {
     switch (action.type) {
@@ -11,7 +11,7 @@ const reducer = (state = {}, action) => {
     }
 };
 // 1. `logger`と`crashReporter`のmiddlewareを適応した`createStore`関数を作る
-const createStoreWithMiddleware = applyMiddleware(logger, crashReporter)(createStore);
+const createStoreWithMiddleware = applyMiddleware(createLogger(), timestamp)(createStore);
 
 // 2. Reducerを登録したStoreを作成
 const store = createStoreWithMiddleware(reducer);
