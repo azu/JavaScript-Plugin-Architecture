@@ -30,7 +30,7 @@ describe("middleware", function () {
         const dispatchWithMiddleware = applyMiddleware(middleware)(middlewareAPI);
         const action = {type: "FOO"};
         // then
-        dispatcher.onDispatch(payload => {
+        dispatcher.subscribe(payload => {
             if(payload.type === "FOO"){
                 state.isUpdated = true;
             }
@@ -44,7 +44,7 @@ describe("middleware", function () {
         const dispatchWithMiddleware = applyMiddleware(timestamp)(dispatcher);
         const action = {type: "FOO"};
         // then
-        dispatcher.onDispatch(payload => {
+        dispatcher.subscribe(payload => {
             assert(typeof payload.timeStamp === "number");
             done();
         });

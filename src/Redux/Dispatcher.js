@@ -1,36 +1,28 @@
-// LICENSE : MIT
 "use strict";
-const assert = require("assert");
 const EventEmitter = require("events");
 export const ON_DISPATCH = "__ON_DISPATCH__";
 /**
- * payload The payload object that must have `type` property.
- * @typedef {Object} DispatcherPayload
+ * The action object that must have `type` property.
+ * @typedef {Object} Action
  * @property {String} type The event type to dispatch.
  * @public
  */
 export default class Dispatcher extends EventEmitter {
     /**
-     * add onAction handler and return unbind function
-     * @param {function(DispatcherPayload)} payloadHandler
+     * subscribe `dispatch` and call handler. it return release function
+     * @param {function(Action)} actionHandler
      * @returns {Function} call the function and release handler
-     * @public
      */
-    onDispatch(payloadHandler) {
-        this.on(ON_DISPATCH, payloadHandler);
-        return this.removeListener.bind(this, ON_DISPATCH, payloadHandler);
+    subscribe(actionHandler) {
+        this.on(ON_DISPATCH, actionHandler);
+        return this.removeListener.bind(this, ON_DISPATCH, actionHandler);
     }
 
     /**
      * dispatch action object.
-     * StoreGroups receive this action and reduce state.
-     * @param {DispatcherPayload} payload
-     * @public
+     * @param {Action} action
      */
-    dispatch(payload) {
-        assert(payload !== undefined && payload !== null, "payload should not null or undefined");
-        assert(typeof payload.type === "string", "payload's type should be string");
-        this.emit(ON_DISPATCH, payload);
+    dispatch(action) {
+        this.emit(ON_DISPATCH, action);
     }
-
 }

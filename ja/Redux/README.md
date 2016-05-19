@@ -55,6 +55,8 @@ Reduxの例として次のようなコードを見てみます。
 dispatch(action) -> (_Middleware_ の処理) -> reducerにより新しいStateの作成 -> (Stateが変わったら) -> subscribeで登録したコールバックを呼ぶ
 ```
 
+- [ ] 図にしたほうがいい
+
 次は _Middleware_ によりどのような拡張ができるのかを見ていきます。
  
 ## Middleware
@@ -128,13 +130,33 @@ const middleware = (store) => {
 
 [import, logger.js](../../src/Redux/logger.js)
 
+- [ ] ログを挟んでいる図
+
 この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _Middleware_ を適応した場合は、
 **次の** _Middleware_ を呼び出すという事を表現しています。
 
-Reduxの _Middleware_ の仕組みは単純ですが、見慣れないデザインであるために複雑であるように見えます。
+Reduxの _Middleware_ の仕組みは単純ですが、見慣れないデザインなので複雑に見えます。
 実際に同じ仕組みを実装しながら、Reduxの _Middleware_ について学んでいきましょう。
 
 ## どういう仕組み?
+
+_Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispatch`とはどういう事をしているのでしょうか?
+
+簡潔に書くと、Reduxの`store.dispatch(action)`は`store.subscribe(callback)`で登録した`callback`に`actionを渡し呼び出すだけです。
+
+これよくみるPub/Subのパターンですが、今回はこのPub/Subパターンの実装からみていきましょう。
+
+[ESLint](../ESLint/README.md)と同様でEventEmitterを使い、`dispatch`と`subscribe`を持つ`Dispatcher`を実装すると以下のようになります。
+
+[import, Dispatcher.js](../../src/Redux/Dispatcher.js)
+
+`Dispatcher`はActionオブジェクトを`dispatch`すると、`subscribe`で登録されていたコールバック関数を呼び出すという単純なものです。
+
+また、この`Dispatcher`の実装はReduxのものとは異なるので、あくまで理解のための参考実装です。
+
+> Unlike Flux, Redux does not have the concept of a Dispatcher  
+> This is because it relies on pure functions instead of event emitters  
+> -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
 - 高階関数をapplyしている
 - http://rackt.github.io/redux/docs/advanced/Middleware.html
