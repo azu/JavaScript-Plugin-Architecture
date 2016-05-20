@@ -1,11 +1,16 @@
-// LICENSE : MIT
 "use strict";
-// core -
-// next - next function
-// action - action object
+/*
+   => api - middleware api
+       => next - next/dispatch function
+          => action - action object
+
+ */
 const applyMiddlewares = (...middlewares) => {
     return middlewareAPI => {
-        const originalDispatch = middlewareAPI.dispatch.bind(middlewareAPI);
+        const originalDispatch = (action) => {
+            middlewareAPI.dispatch(action);
+        };
+        // `api` is middlewareAPI
         const wrapMiddleware = middlewares.map(middleware => {
             return middleware(middlewareAPI);
         });

@@ -146,6 +146,8 @@ _Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 
 これよくみるPub/Subのパターンですが、今回はこのPub/Subパターンの実装からみていきましょう。
 
+### Dispatcher
+
 [ESLint](../ESLint/README.md)と同様でEventEmitterを使い、`dispatch`と`subscribe`を持つ`Dispatcher`を実装すると以下のようになります。
 
 [import, Dispatcher.js](../../src/Redux/Dispatcher.js)
@@ -158,14 +160,27 @@ _Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 > This is because it relies on pure functions instead of event emitters  
 > -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
-- 高階関数をapplyしている
-- http://rackt.github.io/redux/docs/advanced/Middleware.html
-- その機構のコードへのリンク
-- その仕組みやプラグインについてドキュメントへのリンク
+### applyMiddleware
 
-## 実装してみよう
+次に、 _Middleware_ を適応する処理となる `applyMiddleware`を実装していきます。
+先ほども書いたように、 _Middleware_ は `dispatch` を拡張する仕組みです。
 
-- [ ] DispatcherベースのMiddleware
+`applyMiddleware`は`dispatch`と _Middleware_ を受け取り、 _Middleware_ で拡張した `dispatch` を返す関数です。
+
+[import, apply-middleware.js](../../src/Redux/apply-middleware.js)
+
+この`applyMiddleware`はReduxのものと同じなので、
+次のように _Middleware_ を適応した `dispatch` 関数を作成できます。
+
+[import, apply-middleware-example.js](../../src/Redux/apply-middleware-example.js)
+
+`applyMiddleware`でtimestampをActionに付加する _Middleware_ を適用しているため、
+この`dispatchWithMiddleware`で`dispatch`したActionには自動的に`timestamp`プロパティが追加されています。
+
+```js
+const dispatchWithMiddleware = applyMiddleware(createLogger(), timestamp)(middlewareAPI);
+dispatchWithMiddleware({type: "FOO"});
+```
 
 ## どういう事に向いてる?
 
