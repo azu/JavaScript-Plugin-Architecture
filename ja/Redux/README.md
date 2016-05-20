@@ -174,13 +174,27 @@ _Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 
 [import, apply-middleware-example.js](../../src/Redux/apply-middleware-example.js)
 
-`applyMiddleware`でtimestampをActionに付加する _Middleware_ を適用しているため、
-この`dispatchWithMiddleware`で`dispatch`したActionには自動的に`timestamp`プロパティが追加されています。
+`applyMiddleware`で`timestamp`をActionに付加する _Middleware_ を適用しています。
+これにより`dispatchWithMiddleware(action)`した`action`には自動的に`timestamp`プロパティが追加されています。
 
 ```js
 const dispatchWithMiddleware = applyMiddleware(createLogger(), timestamp)(middlewareAPI);
 dispatchWithMiddleware({type: "FOO"});
 ```
+
+ここで _Middleware_ には`middlewareAPI`として定義した2つのメソッドを持つオブジェクトが渡されています。
+しかし、`getState`は読み込みのみで、_Middleware_にはStateを直接書き換える手段が用意されていません。
+また、もう1つの`dispatch`もActionオブジェクトを書き換えられますが、結局できることは`dispatch`するだけです。
+
+この事から _Middleware_ にも三原則が適用されている事が分かります。
+
+- State is read-only
+    - StateはActionを経由しないと書き換えることができない
+
+_Middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
+しかし、 _Middleware_ が直接的に結果(State)を直接書き換える事はできません。
+これは、Connectが最終的な結果(`response`)を書き換えできるの対して、
+Reduxの _Middleware_ は扱える範囲が`dispatch`からReducerまでと線引されている違いと言えます。
 
 ## どういう事に向いてる?
 

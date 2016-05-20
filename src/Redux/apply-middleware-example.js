@@ -14,7 +14,8 @@ dispatcher.subscribe(action => {
 const state = {};
 const middlewareAPI = {
     getState(){
-        return state;
+        // shallow-copy state
+        return Object.assign({}, state);
     },
     dispatch(action){
         dispatcher.dispatch(action);
