@@ -16,7 +16,7 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
     - StateはActionを経由しないと書き換えることができない
 - Changes are made with pure functions
     - Actionを受け取りStateを書き換えるReducerと呼ばれるpure functionを作る
-    
+
 この三原則についての詳細はドキュメントなどを参照してください。
 
 - [Read Me | Redux](http://redux.js.org/)
@@ -58,7 +58,7 @@ dispatch(action) -> (_Middleware_ の処理) -> reducerにより新しいState�
 - [ ] 図にしたほうがいい
 
 次は _Middleware_ によりどのような拡張ができるのかを見ていきます。
- 
+
 ## Middleware
 
 Reduxでは第三者が拡張できる仕組みを _Middleware_ と呼んでいます。
@@ -156,8 +156,8 @@ _Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 
 また、この`Dispatcher`の実装はReduxのものとは異なるので、あくまで理解のための参考実装です。
 
-> Unlike Flux, Redux does not have the concept of a Dispatcher  
-> This is because it relies on pure functions instead of event emitters  
+> Unlike Flux, Redux does not have the concept of a Dispatcher
+> This is because it relies on pure functions instead of event emitters
 > -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
 ### applyMiddleware
@@ -193,8 +193,9 @@ dispatchWithMiddleware({type: "FOO"});
 
 _Middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
 しかし、 _Middleware_ が直接的に結果(State)を直接書き換える事はできません。
-これは、Connectが最終的な結果(`response`)を書き換えできるの対して、
-Reduxの _Middleware_ は扱える範囲が`dispatch`からReducerまでと線引されている違いと言えます。
+
+Connectの _Middleware_ は最終的な結果(`response`)を書き換えできます。
+一方、Reduxの _Middleware_ は扱える範囲が`dispatch`からReducerまでと線引されている違いと言えます。
 
 ## どういう事に向いてる?
 
