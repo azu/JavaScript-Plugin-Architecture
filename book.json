@@ -1,13 +1,9 @@
 {
-  "gitbook": "^2.5.2",
+  "gitbook": "2.x.x",
   "title": "JavaScript Plugin Architecture",
   "description": "JavaScriptライブラリやツールのプラグインの仕組み",
   "githubId": "azu/JavaScript-Plugin-Architecture",
-  "author": {
-    "username": "azu",
-    "urls.profile": "http://github.com/azu",
-    "accounts.github": "azu"
-  },
+  "author": "azu",
   "plugins": [
     "include-codeblock",
     "richquotes",
