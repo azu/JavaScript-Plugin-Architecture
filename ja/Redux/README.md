@@ -222,6 +222,8 @@ Reducerという命令を元に新しいStateを作り出す仕組みを設け�
 
 つまり、プラグインそのものだけで全ての処理が完結するわけではありません。
 プラグインで処理した結果を受け取り、その結果を処理する実装も同時に必要となっています。
+Reduxでは _Middleware_ を前提とした処理を実装として書くことも多いです。
+
 そういう意味ではプラグインと実装が密接といえるかもしれません。
 
 そのため、プラグインのみで全処理が完結するような機能を作る仕組みは向いていません。
@@ -237,5 +239,10 @@ Reducerという命令を元に新しいStateを作り出す仕組みを設け�
 
 ## 参考
 
+- [Middleware | Redux](http://redux.js.org/docs/advanced/Middleware.html)
+- [10. Middleware · happypoulp/redux-tutorial Wiki](https://github.com/happypoulp/redux-tutorial/wiki/10.-Middleware)
+- [Brian Troncone – Redux Middleware: Behind the Scenes](http://briantroncone.com/?p=529)
+- [ReduxのMiddlewareについて理解したいマン | moxt](https://hogehuga.com/post-1123/)
+- [Understanding Redux Middleware — Medium](https://medium.com/@meagle/understanding-87566abcfb7a#.8fr4jmjwz)
 
 [Redux]: https://github.com/reactjs/redux  "reactjs/redux: Predictable state container for JavaScript apps"
