@@ -195,26 +195,54 @@ _Middleware_ という仕組み自体は[Connect](../connect/README.md)と似て
 しかし、 _Middleware_ が直接的に結果(State)を直接書き換える事はできません。
 
 Connectの _Middleware_ は最終的な結果(`response`)を書き換えできます。
-一方、Reduxの _Middleware_ は扱える範囲が`dispatch`からReducerまでと線引されている違いと言えます。
+一方、Reduxの _Middleware_ は扱える範囲が「`dispatch`からReducerまで」と線引されている違いと言えます。
 
 ## どういう事に向いてる?
 
-- アスペクト的に前後に処理を挟むことができる
-    - ログへの利用
-- 値自体は直接操作できない
-- 受取るデータは変換できる
+Reduxの _Middleware_ そのものも三原則に基づいた仕組みとなっています。
+_Middleware_ はActionオブジェクトを自由に書き換えたり、Actionを無視したりできます。
+一方、Stateを直接は書き換える事ができません。
+
+多くのプラグインの仕組みでは、プラグインに特権的な機能を与えている事が多いですが、
+Reduxの _Middleware_ は書き込みのような特権的な要素も制限されています。
+
+_Middleware_ に与えられている特権的なAPIとしては、`getState()` と `dispatch()`ですが、
+どちらも書き込みをするようなAPIではありません。
+
+このように、プラグインに対して一定の権限を持つAPIを与えつつ、
+原則を壊すような特権を与えない事を目的としている場合に向いています。
 
 ## どういう事に向いていない?
 
-- [ ] TODO
-- 変換の仕組み上、書き換え等を行うプラグインを扱いにくい
+一方、プラグインにも書き込み権限を与えないためには、
+プラグイン間でやり取りする中間的なデータが必要になります。
 
-## この仕組みを使っているもの
+ReduxではActionオブジェクトというような命令(コマンド)を表現したオブジェクトに対して、
+Reducerという命令を元に新しいStateを作り出す仕組みを設けていました。
 
-- Connectに似ている
-- _Middleware_もStateそのものを直接書き換える事はできません
-- この部分が類似の仕組みを持つ[connect](../connect/README.md)との違いになっています
+つまり、プラグインそのものだけで全ての処理が完結するわけではありません。
+プラグインで処理した結果を受け取り、その結果を処理する実装も同時に必要となっています。
+Reduxでは _Middleware_ を前提とした処理を実装として書くことも多いです。
 
+そういう意味ではプラグインと実装が密接といえるかもしれません。
 
+そのため、プラグインのみで全処理が完結するような機能を作る仕組みは向いていません。
+
+## まとめ
+
+ここでは[Redux][]のプラグインアーキテクチャについて学びました。
+
+- Reduxの _Middleware_ はActionオブジェクトに対する処理を書ける
+- _Middleware_ に対しても三原則が適応されている
+- _Middleware_ に対しても扱える機能の制限を適応しやすい
+- _Middleware_ のみで全ての処理が完結するわけではない
+
+## 参考
+
+- [Middleware | Redux](http://redux.js.org/docs/advanced/Middleware.html)
+- [10. Middleware · happypoulp/redux-tutorial Wiki](https://github.com/happypoulp/redux-tutorial/wiki/10.-Middleware)
+- [Brian Troncone – Redux Middleware: Behind the Scenes](http://briantroncone.com/?p=529)
+- [ReduxのMiddlewareについて理解したいマン | moxt](https://hogehuga.com/post-1123/)
+- [Understanding Redux Middleware — Medium](https://medium.com/@meagle/understanding-87566abcfb7a#.8fr4jmjwz)
 
 [Redux]: https://github.com/reactjs/redux  "reactjs/redux: Predictable state container for JavaScript apps"
