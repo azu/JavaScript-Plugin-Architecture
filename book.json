@@ -4,6 +4,9 @@
   "description": "JavaScriptライブラリやツールのプラグインの仕組み",
   "githubId": "azu/JavaScript-Plugin-Architecture",
   "author": "azu",
+  "pdf": {
+    "fontFamily": "mplus"
+  },
   "plugins": [
     "include-codeblock",
     "richquotes",
