@@ -2,7 +2,7 @@
 
 この書籍はJavaScriptのライブラリやツールにおけるプラグインアーキテクチャについて見ていく事を目的としたものです。
 
-## Introduction
+## はじめに
 
 JavaScriptの世界では1つの大きなライブラリよりも小さいなものを組み合わせていくようなスタイルが多く見られます。
 
@@ -12,26 +12,6 @@ JavaScriptの世界では1つの大きなライブラリよりも小さいなも
 > -- [OSS開発の活発さの維持と良いソフトウェア設計の間には緊張関係があるのだろうか? - t-wadaのブログ](http://t-wada.hatenablog.jp/entry/active-oss-development-vs-simplicity "OSS開発の活発さの維持と良いソフトウェア設計の間には緊張関係があるのだろうか? - t-wadaのブログ")
 
 この書籍では、JavaScriptにおけるプラグインアーキテクチャ、そのエコシステムを形成してるライブラリやツールなどの実装を学ぶことが目的となっています。
-
-## Contributing
-
-この書籍は無料で読みことができ、同時に修正や新しいページを書く権利があります。
-
-[CONTRIBUTING.md](https://github.com/azu/JavaScript-Plugin-Architecture/blob/master/CONTRIBUTING.md)に、書籍で扱うべきプラグインアーキテクチャのProposalの書き方や
-Pull Request、コミットのやりかたなどが書かれています。
-
-間違いやライブラリのアップデートへの追従など何かあれば、IssueやPull Requestをよろしくお願いします。
-
-ソースコードは全てGitHubに公開されています。
-
-- [azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture)
-
-## License
-
-MIT/CC BY-NC © azu
-
-- コードはMITライセンスで利用できます
-- 文章は[CC BY-NC 4.0](http://creativecommons.org/licenses/by-nc/4.0/ "CC BY-NC 4.0")で利用できます
 
 ## この書籍の内容について
 
@@ -62,3 +42,23 @@ gulpではデータの流れとして既存のNode.js Streamを使い、そこ�
 アプリケーションのStateを管理するライブラリであるReduxのプラグインアーキテクチャについて解説しています。
 Reduxでは **Middleware** と呼ばれる拡張の仕組みを持っていますが、Connectとの類似点や相違点があります。
 小さなReduxの実装を作りながら **Middleware** の仕組みについて学びます。
+
+## Contributing
+
+この書籍は無料で読みことができ、同時に修正や新しいページを書く権利があります。
+
+[CONTRIBUTING.md](https://github.com/azu/JavaScript-Plugin-Architecture/blob/master/CONTRIBUTING.md)に、書籍で扱うべきプラグインアーキテクチャのProposalの書き方や
+Pull Request、コミットのやりかたなどが書かれています。
+
+間違いやライブラリのアップデートへの追従など何かあれば、IssueやPull Requestをよろしくお願いします。
+
+ソースコードは全てGitHubに公開されています。
+
+- [azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture)
+
+## License
+
+MIT/CC BY-NC © azu
+
+- コードはMITライセンスで利用できます
+- 文章は[CC BY-NC 4.0](http://creativecommons.org/licenses/by-nc/4.0/ "CC BY-NC 4.0")で利用できます
