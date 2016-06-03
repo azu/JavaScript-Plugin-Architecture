@@ -4,7 +4,7 @@
 
 以下の形式で読むことができます。
 
-- [Web版](https://www.gitbook.com/book/azu/javascript-plugin-architecture/details)
+- [Web版](https://azu.gitbooks.io/javascript-plugin-architecture/content/)
 - [PDF形式](https://www.gitbook.com/download/pdf/book/azu/javascript-plugin-architecture)
 - [ePub形式](https://www.gitbook.com/download/epub/book/azu/javascript-plugin-architecture)
 - [Mobi形式](https://www.gitbook.com/download/mobi/book/azu/javascript-plugin-architecture)
