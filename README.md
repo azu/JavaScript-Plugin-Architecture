@@ -52,7 +52,7 @@ Reduxでは **Middleware** と呼ばれる拡張の仕組みを持っていま�
 
 ## Contributing
 
-この書籍は無料で読みことができ、同時に修正や新しいページを書く権利があります。
+この書籍は無料で読むことができ、同時に修正や新しいページを書く権利があります。
 
 [CONTRIBUTING.md](https://github.com/azu/JavaScript-Plugin-Architecture/blob/master/CONTRIBUTING.md)に、書籍で扱うべきプラグインアーキテクチャのProposalの書き方や
 Pull Request、コミットのやりかたなどが書かれています。
