@@ -110,7 +110,7 @@ calculator.fn = calculator.prototype;
 
 ## まとめ
 
-ここではjQueryプラグインの仕組みや実装について学びました。
+ここではjQueryのプラグインアーキテクチャについて学びました。
 
 - jQueryプラグインは `jQuery.fn` を拡張する
 - `jQuery.fn` は `jQuery.prototype` と同じである

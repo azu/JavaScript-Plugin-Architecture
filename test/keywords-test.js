@@ -10,7 +10,7 @@ import isUnist from "unist-util-is";
 import nlcstToString  from "nlcst-to-string";
 
 const rootDir = path.join(__dirname, "..");
-const OrganizationText = fs.readFileSync(path.join(rootDir, "ORGANIZATION.md"), "utf-8");
+const OrganizationText = fs.readFileSync(path.join(rootDir, "README.md"), "utf-8");
 function isNotContain(content, keywords) {
     // 含んでないものだけを返す
     return keywords.filter(keyword => {
@@ -57,9 +57,11 @@ function getKeywordsOfParagraphsAsync(paragraphs) {
 }
 function checkKeyword(text) {
     let ast = remark.parse(text);
-    let headerLinks = select(parents(ast), "heading link[href]");
-    let paragraphList = headerLinks.map(link => {
-        let filePath = path.resolve(rootDir, link.href);
+    let headerLinks = select(parents(ast), "heading link[url]");
+    let paragraphList = headerLinks.filter(link => {
+        return /ja/.test(link.url);
+    }).map(link => {
+        let filePath = path.resolve(rootDir, link.url);
         let paragraphs = findAllAfter(ast, link.parent.node, "paragraph");
         return getKeywordsOfParagraphsAsync(paragraphs).then(keywords => {
             return {
