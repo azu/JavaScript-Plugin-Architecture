@@ -2,6 +2,13 @@
 
 この書籍はJavaScriptのライブラリやツールにおけるプラグインアーキテクチャについて見ていく事を目的としたものです。
 
+以下の形式で読むことができます。
+
+- [Web版](https://www.gitbook.com/book/azu/javascript-plugin-architecture/details)
+- [PDF形式](https://www.gitbook.com/download/pdf/book/azu/javascript-plugin-architecture)
+- [ePub形式](https://www.gitbook.com/download/epub/book/azu/javascript-plugin-architecture)
+- [Mobi形式](https://www.gitbook.com/download/mobi/book/azu/javascript-plugin-architecture)
+
 ## はじめに
 
 JavaScriptの世界では1つの大きなライブラリよりも小さいなものを組み合わせていくようなスタイルが多く見られます。
