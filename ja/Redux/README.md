@@ -55,7 +55,9 @@ Reduxの例として次のようなコードを見てみます。
 dispatch(action) -> (_Middleware_ の処理) -> reducerにより新しいStateの作成 -> (Stateが変わったら) -> subscribeで登録したコールバックを呼ぶ
 ```
 
-- [ ] 図にしたほうがいい
+![Redux flow](./img/redux-unidir-ui-arch.jpg)
+
+via [staltz.com/unidirectional-user-interface-architectures.html](http://staltz.com/unidirectional-user-interface-architectures.html)o
 
 次は _Middleware_ によりどのような拡張ができるのかを見ていきます。
 
@@ -130,7 +132,10 @@ const middleware = (store) => {
 
 [import, logger.js](../../src/Redux/logger.js)
 
-- [ ] ログを挟んでいる図
+
+この _Middleware_ は次のようなイメージで動作します。
+
+![dispatch-log.js flow](./img/dispatch-log.js.png)
 
 この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _Middleware_ を適応した場合は、
 **次の** _Middleware_ を呼び出すという事を表現しています。
