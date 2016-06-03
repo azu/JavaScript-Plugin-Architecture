@@ -1,5 +1,5 @@
 {
-  "gitbook": "2.x.x",
+  "gitbook": "3.x.x",
   "title": "JavaScript Plugin Architecture",
   "description": "JavaScriptライブラリやツールのプラグインの仕組み",
   "githubId": "azu/JavaScript-Plugin-Architecture",
@@ -9,9 +9,13 @@
     "richquotes",
     "edit-link",
     "japanese-support",
-    "ga"
+    "ga",
+    "github"
   ],
   "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/azu/JavaScript-Plugin-Architecture"
+    },
     "github-buttons": {
       "repo": "azu/JavaScript-Plugin-Architecture",
       "types": [
