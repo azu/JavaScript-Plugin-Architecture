@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/azu/JavaScript-Plugin-Architecture/issues"
   },
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "JavaScript Plugin Architecture book.",
   "main": "index.js",
   "directories": {
