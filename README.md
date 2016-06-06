@@ -9,6 +9,17 @@
 - [ePub形式](https://www.gitbook.com/download/epub/book/azu/javascript-plugin-architecture)
 - [Mobi形式](https://www.gitbook.com/download/mobi/book/azu/javascript-plugin-architecture)
 
+[GitHub](https://github.com/azu/JavaScript-Plugin-Architecture)上で直接Markdownファイルを読むこともできますが、
+その場合は[Web版](https://azu.gitbooks.io/javascript-plugin-architecture/content/)で読むことをオススメします。
+
+Twitterのハッシュタグは[#js_plugin_book](https://twitter.com/search?f=tweets&q=%23js_plugin_book&src=typd "Twitter #js_plugin_book")
+
+更新情報は[RSS](https://github.com/azu/JavaScript-Plugin-Architecture/releases.atom)や[リリースノート](https://github.com/azu/JavaScript-Plugin-Architecture/releases)から見ることができます。
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="js_plugin_book" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="http://b.hatena.ne.jp/entry/https://github.com/azu/JavaScript-Plugin-Architecture" class="hatena-bookmark-button" data-hatena-bookmark-title="JavaScript Plugin Architecture" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="はてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="はてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
 ## はじめに
 
 JavaScriptの世界では1つの大きなライブラリよりも小さいなものを組み合わせていくようなスタイルが多く見られます。
