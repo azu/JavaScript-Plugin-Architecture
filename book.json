@@ -19,12 +19,6 @@
     "github": {
       "url": "https://github.com/azu/JavaScript-Plugin-Architecture"
     },
-    "github-buttons": {
-      "repo": "azu/JavaScript-Plugin-Architecture",
-      "types": [
-        "star"
-      ]
-    },
     "edit-link": {
       "base": "https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/",
       "label": "Edit This Page"

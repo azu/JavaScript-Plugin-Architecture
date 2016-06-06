@@ -49,7 +49,6 @@
     "gitbook-plugin-edit-link": "^2.0.0",
     "gitbook-plugin-ga": "^1.0.0",
     "gitbook-plugin-github": "^2.0.0",
-    "gitbook-plugin-github-buttons": "^2.0.0",
     "gitbook-plugin-include-codeblock": "^1.9.0",
     "gitbook-plugin-japanese-support": "0.0.1",
     "gitbook-plugin-richquotes": "0.0.7",
