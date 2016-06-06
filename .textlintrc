@@ -1,4 +1,7 @@
 {
+  "filters": {
+    "comments": true
+  },
   "rules": {
     "max-ten": {
       "max": 3
