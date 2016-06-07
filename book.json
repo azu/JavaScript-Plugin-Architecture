@@ -5,7 +5,7 @@
   "githubId": "azu/JavaScript-Plugin-Architecture",
   "author": "azu",
   "pdf": {
-    "fontFamily": "arial"
+    "fontFamily": "nato-sans"
   },
   "plugins": [
     "include-codeblock",
