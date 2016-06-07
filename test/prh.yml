@@ -23,6 +23,7 @@ rules:
   - expected: middleware
     pattern:
       - ミドルウェア
+      - Middleware
   - expected: 使っているもの
     pattern: 使ってるもの
   - expected: String

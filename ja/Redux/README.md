@@ -22,10 +22,10 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 - [Read Me | Redux](http://redux.js.org/)
 - [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://egghead.io/series/getting-started-with-redux)
 
-Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _Middleware_ も、この三原則に基づいた仕組みとなっています。
+Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _middleware_ も、この三原則に基づいた仕組みとなっています。
 
-_Middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
-[connect](../connect/README.md)の違いを意識しながら、Reduxの _Middleware_ の仕組みを見ていきましょう。
+_middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
+[connect](../connect/README.md)の違いを意識しながら、Reduxの _middleware_ の仕組みを見ていきましょう。
 
 ## どう書ける?
 
@@ -49,41 +49,41 @@ Reduxの例として次のようなコードを見てみます。
 
 というような流れで動作します。
 
-上記の処理のうち、 3から4の間が _Middleware_ が処理する場所となっています。
+上記の処理のうち、 3から4の間が _middleware_ が処理する場所となっています。
 
 ```
-dispatch(action) -> (_Middleware_ の処理) -> reducerにより新しいStateの作成 -> (Stateが変わったら) -> subscribeで登録したコールバックを呼ぶ
+dispatch(action) -> (_middleware_ の処理) -> reducerにより新しいStateの作成 -> (Stateが変わったら) -> subscribeで登録したコールバックを呼ぶ
 ```
 
 ![Redux flow](./img/redux-unidir-ui-arch.jpg)
 
 via [staltz.com/unidirectional-user-interface-architectures.html](http://staltz.com/unidirectional-user-interface-architectures.html)o
 
-次は _Middleware_ によりどのような拡張ができるのかを見ていきます。
+次は _middleware_ によりどのような拡張ができるのかを見ていきます。
 
-## Middleware
+## middleware
 
-Reduxでは第三者が拡張できる仕組みを _Middleware_ と呼んでいます。
+Reduxでは第三者が拡張できる仕組みを _middleware_ と呼んでいます。
 
 - [Middleware | Redux](http://redux.js.org/docs/advanced/Middleware.html "Middleware | Redux")
 
-どのような拡張を _Middleware_ で書けるのか、実際の例を見てみます。
-次の _Middleware_ はStoreがdispatchしたActionと、その前後でStateにどういう変更があったのかを出力するロガーです。
+どのような拡張を _middleware_ で書けるのか、実際の例を見てみます。
+次の _middleware_ はStoreがdispatchしたActionと、その前後でStateにどういう変更があったのかを出力するロガーです。
 
 [import, logger.js](../../src/Redux/logger.js)
 
-この _Middleware_ は次のようにReduxに対して適用できます。
+この _middleware_ は次のようにReduxに対して適用できます。
 
 ```js
 import {createStore, applyMiddleware} from "redux";
 const createStoreWithMiddleware = applyMiddleware(createLogger())(createStore);
 ```
 
-この時、見た目上は `store` に対して _Middleware_ が適用されているように見えますが、
+この時、見た目上は `store` に対して _middleware_ が適用されているように見えますが、
 実際には`store.dispatch`に対して適用され、拡張された`dispatch`メソッドが作成されています。
 
-これにより、`dispatch`を実行する際に _Middleware_ の処理を挟む事ができます。
-これがReduxの _Middleware_ による拡張ポイントになっています。
+これにより、`dispatch`を実行する際に _middleware_ の処理を挟む事ができます。
+これがReduxの _middleware_ による拡張ポイントになっています。
 
 ```js
 store.dispatch({
@@ -107,7 +107,7 @@ export default function createLogger(options = defaultOptions) {
 ```
 
 `createLogger`は、loggerにオプションを渡すためのものなので置いておき、
-`return`している高階関数の連なりが _Middleware_ の本体となります。
+`return`している高階関数の連なりが _middleware_ の本体となります。
 
 ```js
 const middleware = store => next => action => {};
@@ -133,19 +133,19 @@ const middleware = (store) => {
 [import, logger.js](../../src/Redux/logger.js)
 
 
-この _Middleware_ は次のようなイメージで動作します。
+この _middleware_ は次のようなイメージで動作します。
 
 ![dispatch-log.js flow](./img/dispatch-log.js.png)
 
-この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _Middleware_ を適応した場合は、
-**次の** _Middleware_ を呼び出すという事を表現しています。
+この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _middleware_ を適応した場合は、
+**次の** _middleware_ を呼び出すという事を表現しています。
 
-Reduxの _Middleware_ の仕組みは単純ですが、見慣れないデザインなので複雑に見えます。
-実際に同じ仕組みを実装しながら、Reduxの _Middleware_ について学んでいきましょう。
+Reduxの _middleware_ の仕組みは単純ですが、見慣れないデザインなので複雑に見えます。
+実際に同じ仕組みを実装しながら、Reduxの _middleware_ について学んでいきましょう。
 
 ## どういう仕組み?
 
-_Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispatch`とはどういう事をしているのでしょうか?
+_middleware_ は`dispatch`をラップする処理ですが、そもそも`dispatch`とはどういう事をしているのでしょうか?
 
 簡潔に書くと、Reduxの`store.dispatch(action)`は`store.subscribe(callback)`で登録した`callback`に`actionを渡し呼び出すだけです。
 
@@ -165,21 +165,21 @@ _Middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 > This is because it relies on pure functions instead of event emitters
 > -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
-### applyMiddleware
+### applymiddleware
 
-次に、 _Middleware_ を適応する処理となる `applyMiddleware`を実装していきます。
-先ほども書いたように、 _Middleware_ は `dispatch` を拡張する仕組みです。
+次に、 _middleware_ を適応する処理となる `applyMiddleware`を実装していきます。
+先ほども書いたように、 _middleware_ は `dispatch` を拡張する仕組みです。
 
-`applyMiddleware`は`dispatch`と _Middleware_ を受け取り、 _Middleware_ で拡張した `dispatch` を返す関数です。
+`applyMiddleware`は`dispatch`と _middleware_ を受け取り、 _middleware_ で拡張した `dispatch` を返す関数です。
 
 [import, apply-middleware.js](../../src/Redux/apply-middleware.js)
 
 この`applyMiddleware`はReduxのものと同じなので、
-次のように _Middleware_ を適応した `dispatch` 関数を作成できます。
+次のように _middleware_ を適応した `dispatch` 関数を作成できます。
 
 [import, apply-middleware-example.js](../../src/Redux/apply-middleware-example.js)
 
-`applyMiddleware`で`timestamp`をActionに付加する _Middleware_ を適用しています。
+`applyMiddleware`で`timestamp`をActionに付加する _middleware_ を適用しています。
 これにより`dispatchWithMiddleware(action)`した`action`には自動的に`timestamp`プロパティが追加されています。
 
 ```js
@@ -187,31 +187,31 @@ const dispatchWithMiddleware = applyMiddleware(createLogger(), timestamp)(middle
 dispatchWithMiddleware({type: "FOO"});
 ```
 
-ここで _Middleware_ には`middlewareAPI`として定義した2つのメソッドを持つオブジェクトが渡されています。
-しかし、`getState`は読み込みのみで、_Middleware_にはStateを直接書き換える手段が用意されていません。
+ここで _middleware_ には`middlewareAPI`として定義した2つのメソッドを持つオブジェクトが渡されています。
+しかし、`getState`は読み込みのみで、_middleware_にはStateを直接書き換える手段が用意されていません。
 また、もう1つの`dispatch`もActionオブジェクトを書き換えられますが、結局できることは`dispatch`するだけです。
 
-この事から _Middleware_ にも三原則が適用されている事が分かります。
+この事から _middleware_ にも三原則が適用されている事が分かります。
 
 - State is read-only
     - StateはActionを経由しないと書き換えることができない
 
-_Middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
-しかし、 _Middleware_ が直接的に結果(State)を直接書き換える事はできません。
+_middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
+しかし、 _middleware_ が直接的に結果(State)を直接書き換える事はできません。
 
-Connectの _Middleware_ は最終的な結果(`response`)を書き換えできます。
-一方、Reduxの _Middleware_ は扱える範囲が「`dispatch`からReducerまで」と線引されている違いと言えます。
+Connectの _middleware_ は最終的な結果(`response`)を書き換えできます。
+一方、Reduxの _middleware_ は扱える範囲が「`dispatch`からReducerまで」と線引されている違いと言えます。
 
 ## どういう事に向いてる?
 
-Reduxの _Middleware_ そのものも三原則に基づいた仕組みとなっています。
-_Middleware_ はActionオブジェクトを自由に書き換えたり、Actionを無視したりできます。
+Reduxの _middleware_ そのものも三原則に基づいた仕組みとなっています。
+_middleware_ はActionオブジェクトを自由に書き換えたり、Actionを無視したりできます。
 一方、Stateを直接は書き換える事ができません。
 
 多くのプラグインの仕組みでは、プラグインに特権的な機能を与えている事が多いですが、
-Reduxの _Middleware_ は書き込みのような特権的な要素も制限されています。
+Reduxの _middleware_ は書き込みのような特権的な要素も制限されています。
 
-_Middleware_ に与えられている特権的なAPIとしては、`getState()` と `dispatch()`ですが、
+_middleware_ に与えられている特権的なAPIとしては、`getState()` と `dispatch()`ですが、
 どちらも書き込みをするようなAPIではありません。
 
 このように、プラグインに対して一定の権限を持つAPIを与えつつ、
@@ -227,7 +227,7 @@ Reducerという命令を元に新しいStateを作り出す仕組みを設け�
 
 つまり、プラグインそのものだけで全ての処理が完結するわけではありません。
 プラグインで処理した結果を受け取り、その結果を処理する実装も同時に必要となっています。
-Reduxでは _Middleware_ を前提とした処理を実装として書くことも多いです。
+Reduxでは _middleware_ を前提とした処理を実装として書くことも多いです。
 
 そういう意味ではプラグインと実装が密接といえるかもしれません。
 
@@ -237,10 +237,10 @@ Reduxでは _Middleware_ を前提とした処理を実装として書くこと�
 
 ここでは[Redux][]のプラグインアーキテクチャについて学びました。
 
-- Reduxの _Middleware_ はActionオブジェクトに対する処理を書ける
-- _Middleware_ に対しても三原則が適応されている
-- _Middleware_ に対しても扱える機能の制限を適応しやすい
-- _Middleware_ のみで全ての処理が完結するわけではない
+- Reduxの _middleware_ はActionオブジェクトに対する処理を書ける
+- _middleware_ に対しても三原則が適応されている
+- _middleware_ に対しても扱える機能の制限を適応しやすい
+- _middleware_ のみで全ての処理が完結するわけではない
 
 ## 参考
 
