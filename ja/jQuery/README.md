@@ -82,8 +82,8 @@ calculator.fn = calculator.prototype;
 また、モジュールで依存関係を示していますがやっていることはjQueryと同じで、[calculator.js](#calculator.js)を読み込んでから[calculator-plugin.js](#calculator-plugin.js)を読み込んでいるだけですね。
 
 ```html
-<script src="jquery.js"></script>
-<script src="greenify.js"></script>
+<script src="calculator.js"></script>
+<script src="calculator-plugin.js"></script>
 ```
 
 これを使うと`calculator#add`といったメソッドが利用できるようになるので、以下のように書くことが出来ます。
