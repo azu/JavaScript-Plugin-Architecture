@@ -61,8 +61,8 @@ gulpではデータの流れとして既存のNode.js Streamを使い、そこ�
 ### [Redux](ja/Redux/README.md)
 
 アプリケーションのStateを管理ライブラリのReduxのプラグインアーキテクチャについて解説しています。
-Reduxでは **Middleware** と呼ばれる拡張の仕組みを持っていますが、Connectとの類似点や相違点があります。
-小さなReduxの実装を作りながら **Middleware** の仕組みについて学びます。
+Reduxでは **middleware** と呼ばれる拡張の仕組みを持っていますが、Connectとの類似点や相違点があります。
+小さなReduxの実装を作りながら **middleware** の仕組みについて学びます。
 
 ## Contributing
 
