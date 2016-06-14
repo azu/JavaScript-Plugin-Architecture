@@ -35,3 +35,6 @@ rules:
 
   - expected: 三原則
     patterns: 3原則
+
+  - expected: しやすい
+    patterns: し易い
