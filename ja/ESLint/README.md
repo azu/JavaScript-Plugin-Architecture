@@ -304,5 +304,5 @@ ESLint公式の設定として`eslint:recommended`が用意されています。
 - ルールは`context`を受け取る以外は本体の実装の詳細を知らなくて良い
 - ルールがread-onlyだと簡単で効率的
 - read-writeとする場合は気を付ける必要がある
-- 設定をJavaScriptで表現できます
+- 設定をJavaScriptで表現できる
 - 設定をnpmで共有できる作りになっている
