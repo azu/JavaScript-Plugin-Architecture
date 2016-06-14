@@ -202,7 +202,7 @@ _middleware_ という仕組み自体は[Connect](../connect/README.md)と似て
 Connectの _middleware_ は最終的な結果(`response`)を書き換えできます。
 一方、Reduxの _middleware_ は扱える範囲が「`dispatch`からReducerまで」と線引されている違いと言えます。
 
-## どういう事に向いてる?
+## どういう事に向いている?
 
 Reduxの _middleware_ そのものも三原則に基づいた仕組みとなっています。
 _middleware_ はActionオブジェクトを自由に書き換えたり、Actionを無視したりできます。
