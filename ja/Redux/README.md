@@ -24,8 +24,8 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 
 Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _middleware_ も、この三原則に基づいた仕組みとなっています。
 
-_middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
-[connect](../connect/README.md)の違いを意識しながら、Reduxの _middleware_ の仕組みを見ていきましょう。
+_middleware_ という名前からも分かるように、[Connect](../connect/README.md)の仕組みと類似点があります。
+[Connect](../connect/README.md)の違いを意識しながら、Reduxの _middleware_ の仕組みを見ていきましょう。
 
 ## どう書ける?
 
@@ -41,7 +41,7 @@ Reduxの例として次のようなコードを見てみます。
 
 [import, redux-example.js](../../src/Redux/redux-example.js)
 
-1. `logger`と`crashReporter`のmiddlewareを適応した`createStore`関数を作る
+1. `logger`と`crashReporter`のmiddlewareを適用した`createStore`関数を作る
 2. Reducerを登録したStoreを作成
 3. (Storeの変更をする)Actionをdispatch
 4. Actionを受け取り新しいStateを返すReducer関数
@@ -137,7 +137,7 @@ const middleware = (store) => {
 
 ![dispatch-log.js flow](./img/dispatch-log.js.png)
 
-この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _middleware_ を適応した場合は、
+この場合の `next` は `dispatch` と言い換えても問題ありませんが、複数の _middleware_ を適用した場合は、
 **次の** _middleware_ を呼び出すという事を表現しています。
 
 Reduxの _middleware_ の仕組みは単純ですが、見慣れないデザインなので複雑に見えます。
@@ -147,9 +147,9 @@ Reduxの _middleware_ の仕組みは単純ですが、見慣れないデザイ�
 
 _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispatch`とはどういう事をしているのでしょうか?
 
-簡潔に書くと、Reduxの`store.dispatch(action)`は`store.subscribe(callback)`で登録した`callback`に`actionを渡し呼び出すだけです。
+簡潔に書くと、Reduxの`store.dispatch(action)`は`store.subscribe(callback)`で登録した`callback`に`action`を渡し呼び出すだけです。
 
-これよくみるPub/Subのパターンですが、今回はこのPub/Subパターンの実装からみていきましょう。
+これはよくみるPub/Subのパターンですが、今回はこのPub/Subパターンの実装からみていきましょう。
 
 ### Dispatcher
 
@@ -161,13 +161,13 @@ _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 
 また、この`Dispatcher`の実装はReduxのものとは異なるので、あくまで理解のための参考実装です。
 
-> Unlike Flux, Redux does not have the concept of a Dispatcher
+> Unlike Flux, Redux does not have the concept of a Dispatcher.
 > This is because it relies on pure functions instead of event emitters
 > -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
-### applymiddleware
+### applyMiddleware
 
-次に、 _middleware_ を適応する処理となる `applyMiddleware`を実装していきます。
+次に、 _middleware_ を適用する処理となる `applyMiddleware`を実装していきます。
 先ほども書いたように、 _middleware_ は `dispatch` を拡張する仕組みです。
 
 `applyMiddleware`は`dispatch`と _middleware_ を受け取り、 _middleware_ で拡張した `dispatch` を返す関数です。
@@ -175,7 +175,7 @@ _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 [import, apply-middleware.js](../../src/Redux/apply-middleware.js)
 
 この`applyMiddleware`はReduxのものと同じなので、
-次のように _middleware_ を適応した `dispatch` 関数を作成できます。
+次のように _middleware_ を適用した `dispatch` 関数を作成できます。
 
 [import, apply-middleware-example.js](../../src/Redux/apply-middleware-example.js)
 
@@ -238,8 +238,8 @@ Reduxでは _middleware_ を前提とした処理を実装として書くこと�
 ここでは[Redux][]のプラグインアーキテクチャについて学びました。
 
 - Reduxの _middleware_ はActionオブジェクトに対する処理を書ける
-- _middleware_ に対しても三原則が適応されている
-- _middleware_ に対しても扱える機能の制限を適応しやすい
+- _middleware_ に対しても三原則が適用されている
+- _middleware_ に対しても扱える機能の制限を適用しやすい
 - _middleware_ のみで全ての処理が完結するわけではない
 
 ## 参考
