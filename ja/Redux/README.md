@@ -24,8 +24,8 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 
 Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _middleware_ も、この三原則に基づいた仕組みとなっています。
 
-_middleware_ という名前からも分かるように、[connect](../connect/README.md)の仕組みと類似点があります。
-[connect](../connect/README.md)の違いを意識しながら、Reduxの _middleware_ の仕組みを見ていきましょう。
+_middleware_ という名前からも分かるように、[Connect](../connect/README.md)の仕組みと類似点があります。
+[Connect](../connect/README.md)の違いを意識しながら、Reduxの _middleware_ の仕組みを見ていきましょう。
 
 ## どう書ける?
 
