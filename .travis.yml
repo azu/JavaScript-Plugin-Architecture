@@ -1,15 +1,10 @@
 sudo: false
-language: ruby
+language: node_js
 rvm:
 - '2.2'
-env:
-  - NODE_JS_VERSION='6'
-install:
-  - nvm install $NODE_JS_VERSION
-  - nvm use $NODE_JS_VERSION
-  - npm install
-script:
-  - npm test
+node_js: "stable"
+before_install:
+  - rvm use --install $TRAVIS_RUBY_VERSION --install --binary
 after_success:
   - npm run travis:coverage
 after_failure:
