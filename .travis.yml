@@ -2,7 +2,6 @@ sudo: false
 language: ruby
 rvm:
 - '2.1.4'
-node_js: "stable"
 env:
   - NODE_JS_VERSION='stable'
 install:
