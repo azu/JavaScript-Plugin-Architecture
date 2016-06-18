@@ -3,6 +3,8 @@ language: node_js
 node_js: "stable"
 after_success:
   - npm run travis:coverage
+after_failure:
+  - sh .travis/review-textlint.sh
 cache:
   directories:
     - node_modules
