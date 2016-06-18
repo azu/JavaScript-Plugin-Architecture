@@ -5,6 +5,7 @@ rvm:
 env:
   - NODE_JS_VERSION='6'
 install:
+  - nvm install $NODE_JS_VERSION
   - nvm use $NODE_JS_VERSION
 script:
   - npm test
