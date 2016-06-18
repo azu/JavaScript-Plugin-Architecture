@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ "$CI_PULL_REQUEST" == false ] || [ -z "$CI_PULL_REQUEST" ]; then
   echo 'not pull request.'
   exit 0
