@@ -23,7 +23,7 @@ Echoサーバとは、送られてきたリクエストの内容をそのまま�
 ```
 
 `app.use(middleware)` という形で、 _middleware_ と呼ばれる関数には`request`や`response`といったオブジェクトが渡されます。
-この`request`や`response`を _middleware_ で処理してログを取ったり、任意のレスポンスを返したりできるようになっています。
+この`request`や`response`を _middleware_ で処理することで、ログを取ったり、任意のレスポンスを返すことができます。
 
 Echoサーバでは `req.pipe(res);` という形でリクエストをそのままレスポンスとして流す事で実現されています。
 
