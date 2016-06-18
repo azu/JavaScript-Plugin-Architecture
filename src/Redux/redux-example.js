@@ -10,7 +10,7 @@ const reducer = (state = {}, action) => {
         return state;
     }
 };
-// 1. `logger`と`crashReporter`のmiddlewareを適応した`createStore`関数を作る
+// 1. `logger`と`crashReporter`のmiddlewareを適用した`createStore`関数を作る
 const createStoreWithMiddleware = applyMiddleware(createLogger(), timestamp)(createStore);
 
 // 2. Reducerを登録したStoreを作成
