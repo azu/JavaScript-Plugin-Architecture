@@ -165,7 +165,7 @@ _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 > This is because it relies on pure functions instead of event emitters
 > -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
-### applymiddleware
+### applyMiddleware
 
 次に、 _middleware_ を適応する処理となる `applyMiddleware`を実装していきます。
 先ほども書いたように、 _middleware_ は `dispatch` を拡張する仕組みです。

@@ -24,7 +24,13 @@ rules:
   - expected: middleware
     pattern:
       - ミドルウェア
-      - Middleware
+      - /\bMiddleware/
+    specs:
+      - from: Middleware
+        to:   middleware
+      - from: applyMiddleware
+        to:   applyMiddleware
+
   - expected: 使っているもの
     pattern: 使ってるもの
   - expected: String
