@@ -110,7 +110,7 @@ Node.jsで使われているCommonJSやES6 Modulesなどがなかった時代に
 
 ## まとめ
 
-ここではjqueryのプラグインアーキテクチャについて学びました。
+ここではjQueryのプラグインアーキテクチャについて学びました。
 
 - jQueryプラグインは `jQuery.fn` を拡張する
 - `jQuery.fn` は `jQuery.prototype` と同じである
