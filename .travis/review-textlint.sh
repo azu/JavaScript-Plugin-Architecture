@@ -4,6 +4,22 @@ if [ "$TRAVIS_PULL_REQUEST" = "false" ] || [ -z "$TRAVIS_PULL_REQUEST" ]; then
   echo 'not pull request.'
   exit 0
 fi
+# fetch other branch
+if [ "$TRAVIS" == "true" ]; then
+  #resolving `detached HEAD` by attaching HEAD to the `TRAVIS_FROM_BRANCH` branch
+  TRAVIS_FROM_BRANCH="travis_from_branch"
+  git branch $TRAVIS_FROM_BRANCH
+  git checkout $TRAVIS_FROM_BRANCH
+
+  #fetching `TRAVIS_BRANCH` branch
+  git fetch origin $TRAVIS_BRANCH
+  git checkout -qf FETCH_HEAD
+  git branch $TRAVIS_BRANCH
+  git checkout $TRAVIS_BRANCH
+
+  #switch to `TRAVIS_FROM_BRANCH`
+  git checkout $TRAVIS_FROM_BRANCH
+fi
 
 gem install --no-document checkstyle_filter-git saddler saddler-reporter-github
 
@@ -14,6 +30,7 @@ gem install --no-document checkstyle_filter-git saddler saddler-reporter-github
 diffBranchName=$(git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}')
 # 変更行のみを対象にする
 echo "${diffBranchName}...HEAD"
+echo "textlint -> review_comments"
 git diff --name-only --diff-filter=ACMR ${diffBranchName} \
 | grep -a '.*.md$' \
 | xargs $(npm bin)/textlint -f checkstyle \
