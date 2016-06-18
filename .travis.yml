@@ -1,6 +1,12 @@
 sudo: false
-language: node_js
+language: ruby
+rvm:
+- '2.1.4'
 node_js: "stable"
+env:
+  - NODE_JS_VERSION='stable'
+install:
+  - nvm use $NODE_JS_VERSION
 after_success:
   - npm run travis:coverage
 after_failure:
