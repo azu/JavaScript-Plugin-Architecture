@@ -7,6 +7,7 @@ env:
 install:
   - nvm install $NODE_JS_VERSION
   - nvm use $NODE_JS_VERSION
+  - npm install
 script:
   - npm test
 after_success:
