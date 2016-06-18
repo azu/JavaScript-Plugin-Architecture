@@ -1,10 +1,6 @@
 sudo: false
 language: node_js
-rvm:
-- '2.2'
 node_js: "stable"
-before_install:
-  - rvm use --install $TRAVIS_RUBY_VERSION --install --binary
 after_success:
   - npm run travis:coverage
 after_failure:
