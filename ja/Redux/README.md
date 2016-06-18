@@ -161,7 +161,7 @@ _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispa
 
 また、この`Dispatcher`の実装はReduxのものとは異なるので、あくまで理解のための参考実装です。
 
-> Unlike Flux, Redux does not have the concept of a Dispatcher
+> Unlike Flux, Redux does not have the concept of a Dispatcher.
 > This is because it relies on pure functions instead of event emitters
 > -- [Prior Art | Redux](http://redux.js.org/docs/introduction/PriorArt.html "Prior Art | Redux")
 
