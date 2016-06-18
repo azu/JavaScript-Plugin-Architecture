@@ -147,7 +147,7 @@ Reduxの _middleware_ の仕組みは単純ですが、見慣れないデザイ�
 
 _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispatch`とはどういう事をしているのでしょうか?
 
-簡潔に書くと、Reduxの`store.dispatch(action)`は`store.subscribe(callback)`で登録した`callback`に`actionを渡し呼び出すだけです。
+簡潔に書くと、Reduxの`store.dispatch(action)`は`store.subscribe(callback)`で登録した`callback`に`action`を渡し呼び出すだけです。
 
 これよくみるPub/Subのパターンですが、今回はこのPub/Subパターンの実装からみていきましょう。
 
