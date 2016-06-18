@@ -3,6 +3,7 @@ rules:
 # ルールの書き方については https://github.com/vvakame/prh を参照する
 # https://github.com/vvakame/prh/blob/master/misc/prh.yml
 # プロジェクト固有の単語
+  - expected: jQuery
   - expected: ESLint
 
   - expected: Connect
