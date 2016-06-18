@@ -3,9 +3,11 @@ language: ruby
 rvm:
 - '2.1.4'
 env:
-  - NODE_JS_VERSION='stable'
+  - NODE_JS_VERSION='6'
 install:
   - nvm use $NODE_JS_VERSION
+script:
+  - npm test
 after_success:
   - npm run travis:coverage
 after_failure:

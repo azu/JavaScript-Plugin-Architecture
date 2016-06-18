@@ -14,7 +14,7 @@ gem install --no-document checkstyle_filter-git saddler saddler-reporter-github
 diffBranchName=$(git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}')
 # 変更行のみを対象にする
 git diff --name-only --diff-filter=ACMR ${diffBranchName} \
-| grep -a '*.md$' \
+| grep -a '.*.md$' \
 | xargs $(npm bin)/textlint -f checkstyle \
 | checkstyle_filter-git diff ${diffBranchName} \
 | saddler report \
