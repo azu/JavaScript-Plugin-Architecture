@@ -6,6 +6,7 @@
     "max-ten": {
       "max": 3
     },
+    "ja-no-abusage": true,
     "no-nfd": true,
     "max-kanji-continuous-len": true,
     "no-doubled-conjunctive-particle-ga": true,
