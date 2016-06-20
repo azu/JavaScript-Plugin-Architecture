@@ -14,7 +14,7 @@
 
 ### 表示の確認
 
-`npm start`でGitBookのローカルサーバを立ち上げて表示を確認出来ます。
+`npm start`でGitBookのローカルサーバを立ち上げて表示を確認できます。
 
     npm start
 
@@ -34,7 +34,7 @@
 
 ![coverage graph](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
 
-現在の文章カバレッジは以下のコマンドでも確認することができます。
+現在の文章カバレッジは次のコマンドでも確認することができます。
 
 ```
 npm run textlint:coverage
@@ -54,21 +54,21 @@ typoなどを見つけた場合は、1文字の修正からでも問題無いの
 表記揺れを発見した場合は単純にIssueを立ててもらうか、Pull Requestでの修正をいただけると嬉しいです。
 
 また、この書籍では[test/prh-rule.yaml](test/prh-rule.yaml)で定義した辞書を使い表記揺れを辞書でテストできるようにしています。
-辞書による表記揺れの検知が可能そうであるなら、そちらも合わせてご指摘いただけるとありがたいです。
+辞書による表記揺れの検知が可能なら、そちらも合わせてご指摘いただけるとありがたいです。
 
 - [textlint + prhで表記ゆれを検出する | Web Scratch](http://efcl.info/2015/09/14/textlint-rule-prh/ "textlint + prhで表記ゆれを検出する | Web Scratch")
 
+```
 ## Proposalの書き方
 
 Proposalとは、書籍に載せたいプラグインアーキテクチャについてのIssueを立てることを言います。
 
-例えば、XXXというライブラリ/ツールのアーキテクチャについてのIssueを立てる場合、
-以下のような事が1行とかでもいいので書かれていれば参考になります。
+たとえば、XXXというライブラリ/ツールのアーキテクチャについてのIssueを立てる場合、
+次のようなことが1行とかでもいいので書かれていれば参考になります。
 
 仕組みについて調べるのが大変な場合は飛ばしても問題ありません。
 JavaScriptはとにかく柔軟な言語なので、こういうプラグインの形式を取ってるというのを知らせるだけでも有用だと思います。
 
-```
 # XXXのアーキテクチャ
 
 ## どう書ける?
@@ -81,18 +81,18 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 - その機構のコードへのリンク
 - その仕組みやプラグインについてドキュメントへのリンク
 
-## どういう事に向いている?
+## どういうことに向いている?
 
 - どういう用途で使われてる(ユースケース)
-- 変換する毎にファイルとして吐き出さないので、高速に複数の変換をするのに向いている 等
+- 変換する毎にファイルとして吐き出さないので、高速に複数の変換をするのに向いている等
 
-## どういう事に向いていない?
+## どういうことに向いていない?
 
-- 変換の仕組み上書き換え等を行うプラグインを扱いにくい 等
+- 変換の仕組み上書き換え等を行うプラグインを扱いにくい等
 
-## この仕組みを使ってるもの
+## この仕組みを使っているもの
 
-- XXX以外にも同様の仕組みを使ってるものがあるなら
+- XXX以外にも同様の仕組みを使っているものがあるなら
 
 ----
 
@@ -100,21 +100,20 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 
 - [ ] どう書ける?
 - [ ] どういう仕組み?
-- [ ] どういう事に向いている?
-- [ ] どういう事に向いていない?
+- [ ] どういうことに向いている?
+- [ ] どういうことに向いていない?
 - [ ] この仕組みを使っているもの
 - [ ] 実装してみよう
 - [ ] エコシステム
-
 ```
 
-以下からこのテンプレートで使ったIssueを立てることが出来ます。
+以下からこのテンプレートで使ったIssueを立てることができます。
 
-- [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?title=XXX&body=%23+XXX%E3%81%AE%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%0D%0AURL%3A+%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E6%9B%B8%E3%81%91%E3%82%8B%3F%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BB%95%E7%B5%84%E3%81%BF%3F%0D%0A%0D%0A%23%23+%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E4%BA%8B%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%82%8B%3F%0D%0A%0D%0A%23%23+%E3%81%93%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%8B%E3%82%82%E3%81%AE%0D%0A)
+- [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?title=Proposal:XXX&body=%23+XXXのアーキテクチャ%0D%0AURL%3A)
 
 ### Proposalの具体例
 
-現在ある[Proposal一覧](https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal)を参考にしてみると良いかもしれません。
+現在ある[Proposal一覧](https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal)を参考にしてみるとよいかもしれません。
 
 - [jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture/issues/8 "jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture")
 
@@ -134,7 +133,7 @@ AngularJSのGit Commit Guidelinesをベースとしています。
 
 - [conventional-changelog/angular.md at master · ajoslin/conventional-changelog](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md "conventional-changelog/angular.md at master · ajoslin/conventional-changelog")
 
-以下のような形で1行目に概要、3行目から本文、最後に関連するIssue(任意)を書きます。
+次のような形で1行目に概要、3行目から本文、最後に関連するIssue(任意)を書きます。
 
 ```
 feat(ngInclude): add template url parameter to events
@@ -163,7 +162,7 @@ Closes #8454
  issues          Closes #8454
 ```
 
-1行の`feat`や`fix`といったcommit typeは、迷ったらとりあえず`chore`と書いて、`scope`も省略して問題ないので以下のような形でも問題ありません。
+1行の`feat`や`fix`といったcommit typeは、迷ったらとりあえず`chore`と書いて、`scope`も省略して問題ないので次のような形でも問題ありません。
 
 ```
 chore: コミットメッセージ
@@ -172,7 +171,7 @@ chore: コミットメッセージ
 このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog "conventional-changelog")による自動生成のためでもありますが、
 取り込むときに調整できるので無視してもらっても問題はありません。
 
-以下を見てみると良いかもしれません。
+以下を見てみるとよいかもしれません。
 
 - [良いChangeLog、良くないChangeLog | Web Scratch](http://efcl.info/2015/06/18/good-changelog/ "良いChangeLog、良くないChangeLog | Web Scratch")
 - [われわれは、いかにして変更点を追うか](http://azu.github.io/slide/cto/changelog.html "われわれは、いかにして変更点を追うか")

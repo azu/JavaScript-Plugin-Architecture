@@ -1,8 +1,8 @@
 # JavaScript Plugin Architecture [![Build Status](https://travis-ci.org/azu/JavaScript-Plugin-Architecture.svg?branch=master)](https://travis-ci.org/azu/JavaScript-Plugin-Architecture)
 
-この書籍はJavaScriptのライブラリやツールにおけるプラグインアーキテクチャについて見ていく事を目的としたものです。
+この書籍はJavaScriptのライブラリやツールにおけるプラグインアーキテクチャについて見ていくことを目的としたものです。
 
-以下の形式で読むことができます。
+次の形式で読むことができます。
 
 - [Web版](https://azu.gitbooks.io/javascript-plugin-architecture/content/)
 - [PDF形式](https://www.gitbook.com/download/pdf/book/azu/javascript-plugin-architecture)
@@ -27,7 +27,7 @@ Twitterのハッシュタグは[#js_plugin_book](https://twitter.com/search?f=tw
 
 JavaScriptの世界では1つの大きなライブラリよりも小さいなものを組み合わせていくようなスタイルが多く見られます。
 小さなものを組み合わせて作るためには、プラグインと呼ばれる拡張の仕組みが必要となります。
-またそのようなプラグインがたくさんあるエコシステムの土台を作るには、プラグインアーキテクチャが重要になると言えます。
+またそのようなプラグインがたくさんあるエコシステムの土台を作るには、プラグインアーキテクチャが重要になるといえます。
 
 > ソフトウェアの構造に「プラグイン機構」を設け、ユーザコミュニティから開発者コミュニティへの質的な転換を図るのは、ソフトウェア設計からエコシステム設計へとつながる  
 > -- [OSS開発の活発さの維持と良いソフトウェア設計の間には緊張関係があるのだろうか? - t-wadaのブログ](http://t-wada.hatenablog.jp/entry/active-oss-development-vs-simplicity "OSS開発の活発さの維持と良いソフトウェア設計の間には緊張関係があるのだろうか? - t-wadaのブログ")
@@ -73,7 +73,7 @@ Pull Request、コミットのやりかたなどが書かれています。
 
 間違いやライブラリのアップデートへの追従など何かあれば、IssueやPull Requestをよろしくお願いします。
 
-ソースコードは全てGitHubに公開されています。
+ソースコードはすべてGitHubに公開されています。
 
 - [azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture)
 
