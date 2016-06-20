@@ -6,3 +6,4 @@
 * [Connect](ja/connect/README.md)
 * [gulp](ja/gulp/README.md)
 * [Redux](ja/Redux/README.md)
+* [CONTRIBUTING](./CONTRIBUTING.md)
