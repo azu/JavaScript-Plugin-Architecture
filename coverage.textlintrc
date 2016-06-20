@@ -8,6 +8,7 @@
       "max": 3,
       "strict": true
     },
+    "ja-no-abusage": true,
     "unexpanded-acronym": true,
     "no-nfd": true,
     "max-kanji-continuous-len": true,
