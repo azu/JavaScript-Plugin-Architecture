@@ -3,7 +3,7 @@
 > この文章は[Connect](https://github.com/senchalabs/connect "Connect") 3.4.0を元に書かれています。
 
 [Connect](https://github.com/senchalabs/connect "Connect")はNode.jsで動くHTTPサーバーフレームワークです。
- _middleware_ という拡張する仕組みを持ち、Connectが持つ機能自体はとても少ないです。
+ _middleware_ という拡張する仕組みを持ち、Connectがもつ機能自体はとても少ないです。
 
 この章ではConnectの _middleware_ の仕組みについて見て行きましょう。
 
@@ -14,7 +14,7 @@ Echoサーバとは、送られてきたリクエストの内容をそのまま�
 
 [import, connect-echo-example.js](../../src/connect/connect-echo-example.js)
 
-このEchoサーバに対して、以下のようなリクエストBodyを送信すると、レスポンスとして同じ値が返ってきます。
+このEchoサーバに対して、次のようなリクエストBodyを送信すると、レスポンスとして同じ値が返ってきます。
 
 ```json
 {
@@ -25,7 +25,7 @@ Echoサーバとは、送られてきたリクエストの内容をそのまま�
 `app.use(middleware)` という形で、 _middleware_ と呼ばれる関数には`request`や`response`といったオブジェクトが渡されます。
 この`request`や`response`を _middleware_ で処理することで、ログを取ったり、任意のレスポンスを返すことができます。
 
-Echoサーバでは `req.pipe(res);` という形でリクエストをそのままレスポンスとして流す事で実現されています。
+Echoサーバでは `req.pipe(res);` という形でリクエストをそのままレスポンスとして流すことで実現されています。
 
 ### middlewareをモジュールとして実装
 
@@ -64,7 +64,7 @@ Connectでは`app.stack`に _middleware_ を配列として保持しています
 
 Connectは登録された _middleware_ を、サーバがリクエストを受け取りそれぞれ順番に呼び出しています。
 
-上記の例だと以下の順番で _middleware_ が呼び出されることになります。
+上記の例だと次の順番で _middleware_ が呼び出されることになります。
 
 - nosniff
 - hello
@@ -86,9 +86,9 @@ Connectは登録された _middleware_ を、サーバがリクエストを受�
 `next()`がないということは`hello.js`がこの連続する _middleware_ の最後となっていることがわかります。
 仮に、これより先に _middleware_ が登録されていたとしても無視されます。
 
-つまり、処理的には以下のようにstackを先頭から一個づつ取り出し、処理していくという方法が取られています。
+つまり、処理的には次のようにstackを先頭から一個づつ取り出し、処理していくという方法が取られています。
 
-Connectの行っている処理を抽象的なコードで書くと以下のような形になっています。
+Connectの行っている処理を抽象的なコードで書くと次のような形になっています。
 
 ```js
 let req = "...",
@@ -153,7 +153,7 @@ app.use("/foo", function fooMiddleware(req, res, next) {
 ## どういう用途に向いていない?
 
 このアーキテクチャでは機能の詳細が _middleware_ で実装できます。
-しかし、多くの機能を _middleware_ で実装していくと、 _middleware_ 間に依存関係を作ってしまう事があります。
+しかし、多くの機能を _middleware_ で実装していくと、 _middleware_ 間に依存関係を作ってしまうことがあります。
 
 この場合、`use(middleware)` で登録する順番により挙動が変わります。
 _middleware_ の利用者が、間で起きる前提の解決を行う必要があります。
@@ -171,7 +171,7 @@ Connect自体の機能は少ないですが、その分 _middleware_ の種類�
 
 また、それぞれの _middleware_ が小さな単機能となっていて、それを組み合わせて使うように作られているケースが多いです。
 
-これは、 _middleware_ が層として重なっている作り、つまり _middleware stack_ の形を取ることが多いためだと言えます。
+これは、 _middleware_ が層として重なっている作り、つまり _middleware stack_ の形を取ることが多いためだといえます。
 
 ![pylons_as_onion](img/pylons_as_onion.png)
 

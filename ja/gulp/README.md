@@ -15,7 +15,7 @@
 
 ## どう書ける?
 
-例えば、[Sass](http://sass-lang.com/ "Sass")で書いたファイルを次のように処理したいとします。
+たとえば、[Sass](http://sass-lang.com/ "Sass")で書いたファイルを次のように処理したいとします。
 
 1. `sass/*.scss`のファイルを読み込む
 2. 読み込んだsassファイルを`sass`でコンパイル
@@ -23,7 +23,7 @@
 4. CSSファイルをそれぞれ`minify`で圧縮する
 5. 圧縮したCSSファイルをそれぞれ`css`ディレクトリに出力する
 
-この一連の処理は以下のようなタスクとして定義することができます。
+この一連の処理は次のようなタスクとして定義することができます。
 
 ```js
 import gulp from "gulp";
@@ -50,13 +50,13 @@ gulp.task("sass", function() {
 
 実際にgulpプラグインを書きながら、どのような仕組みで処理同士が連携を取り動作しているのかを見ていきましょう。
 
-先ほどのgulpタスクの例では、既にモジュール化された処理を`pipe`で繋げただけで、
+先ほどのgulpタスクの例では、すでにモジュール化された処理を`pipe`で繋げただけで、
 それぞれの処理がどのように実装されているかはよく分かりませんでした。
 
 ここでは`gulp-prefixer`というgulpプラグインを書いていきます。
 `gulp-prefixer`は与えられたそれぞれのファイルに対して先頭に特定の文字列の追加を行うプラグインです。
 
-同様の名前のプラグインが公式のドキュメントで「プラグインの書き方」の例として紹介されているので合わせて見ると良いでしょう。
+同様の名前のプラグインが公式のドキュメントで「プラグインの書き方」の例として紹介されているので合わせて見るとよいでしょう。
 
 - [gulp/docs/writing-a-plugin](https://github.com/gulpjs/gulp/tree/master/docs/writing-a-plugin "gulp/docs/writing-a-plugin at master · gulpjs/gulp")
 - [gulp/dealing-with-streams.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/dealing-with-streams.md "gulp/dealing-with-streams.md at master · gulpjs/gulp")
@@ -71,7 +71,7 @@ gulp.task("sass", function() {
 
 この`default`タスクは次のような処理が行われます。
 
-1. `./*.*`にマッチするファイルを取得(全てのファイル)
+1. `./*.*`にマッチするファイルを取得(すべてのファイル)
 2. 取得したファイルの先頭に"prefix text"という文字列を追加する
 3. 変更したファイルを`build/`ディレクトリに出力する
 
@@ -117,13 +117,13 @@ Transform Streamというものが出てきましたが、Node.jsのStreamは次
 2. 取得したファイルの先頭に"prefix text"という文字列を追加する = Transform Stream
 3. 変更したファイルを `build/` ディレクトリに出力する = Writable Stream
 
-あるファイルを _Read_ して、 _Transform_ したものを、別のところに _Write_ としているというよくあるデータの流れと言えます。
+あるファイルを _Read_ して、 _Transform_ したものを、別のところに _Write_ としているというよくあるデータの流れといえます。
 
 [gulp-prefixer.js](#gulp-prefixer.js)では、gulpから流れてきたデータをStreamで受け取り、
 そのデータを変更したもの次へ渡すTransform Streamとなっています。
 
 「gulpから流れてきたデータ」を扱うために`readableObjectMode`と`writableObjectMode`をそれぞれ`true`にしています。
-この _ObjectMode_ というのは名前の通り、Streamでオブジェクトを流すための設定です。
+この _ObjectMode_ というのは名前のとおり、Streamでオブジェクトを流すための設定です。
 
 通常のNode.js Streamは[Buffer](https://nodejs.org/api/buffer.html)というバイナリーデータを扱います。
 この[Buffer](https://nodejs.org/api/buffer.html)はStringと相互変換が可能できます。
@@ -219,14 +219,14 @@ BufferはStringと相互変換が可能なので、多くのgulpプラグイン�
 つまり、prefixを付けるといった変換処理は、既存のライブラリで行うことができるようになっています。
 
 gulpプラグインは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトのデータをプラグイン同士でやり取りし、
-そのインタフェースとして既存のNode.js Streamを使っていると言えます。
+そのインタフェースとして既存のNode.js Streamを使っているといえます。
 
 ## エコシステム
 
 gulpのプラグインが行う処理は「入力に対して出力を返す」が主となっています。
 この受け渡すデータとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを使い、受け渡すAPIのインタフェースとしてNode.js Streamを使っています。
 
-gulpではプラグインが持つ機能は1つ(単機能)とすることを推奨しています。
+gulpではプラグインがもつ機能は1つ(単機能)とすることを推奨しています。
 
 > Your plugin should only do one thing, and do it well.
 > -- [gulp/guidelines.md](https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md "gulp/guidelines.md at master · gulpjs/gulp")
@@ -235,17 +235,17 @@ gulpは既存のNode.js Streamに乗ることで独自のAPIを使わずに解�
 
 元々、Transform Streamは1つの変換処理を行うことが得意なので、その変換処理を`pipe`を繋げることで複数の処理を行うことができます。
 
-また、gulpはタスク自動化ツールなので、既存のライブラリをそのままタスクとして使いやすくすることが重要だと言えます。
+また、gulpはタスク自動化ツールなので、既存のライブラリをそのままタスクとして使いやすくすることが重要だといえます。
 Node.js Streamのデフォルトでは流れるデータが`Buffer`となり、そのままでは既存のライブラリでは扱いにくい問題を
-データとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを流す事で緩和しています。
+データとして[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを流すことで緩和しています。
 
 このようにして、gulpはタスクに必要な単機能のプラグインを既存のライブラリで作りやすくしています。
-これにより再利用できるプラグインが多くできることでエコシステムを構築していると言えます。
+これにより再利用できるプラグインが多くできることでエコシステムを構築しているといえます。
 
 ## どういう用途に向いている?
 
 gulp自体はデータの流れを管理するだけで、タスクを実現するためにはプラグインが重要になります。
-タスクには様々な処理が想定されるため、必要になるプラグインも種類が様々なものとなります。
+タスクにはさまざまな処理が想定されるため、必要になるプラグインも種類がさまざまなものとなります。
 
 gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを中間フォーマットと決めたことで、
 既存のライブラリをラップしただけのプラグインが作りやすくなっています。
@@ -264,7 +264,7 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 
 プラグインを複数組み合わせ扱うものに共通することですが、プラグインの組み合わせ問題はgulpでも発生します。
 
-例えば、[Browserify](https://github.com/substack/node-browserify)はNode.js Streamを扱えますが、
+たとえば、[Browserify](https://github.com/substack/node-browserify)はNode.js Streamを扱えますが、
 変換の開始点としていない場合に問題が発生します。
 
 - [gulp/browserify-transforms.md at master · gulpjs/gulp](https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md "gulp/browserify-transforms.md at master · gulpjs/gulp")
@@ -278,12 +278,12 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 既存のライブラリをプラグイン化しやすい一方、
 プラグインとライブラリのオプションが異なったり、利用者はプラグイン化したライブラリの扱い方を学ぶ必要があります。
 
-ライブラリとプラグインの作者が異なるケースも多いため、同様の機能を持つプラグインが複数できたり、質もバラバラとなりやすいです。
+ライブラリとプラグインの作者が異なるケースも多いため、同様の機能をもつプラグインが複数できたり、質もバラバラとなりやすいです。
 
 まとめると
 
 - プラグインの組み合わせ問題は利用者が解決しないといけない
-- 同様の機能を持つプラグインが生まれやすい
+- 同様の機能をもつプラグインが生まれやすい
 
 ## この仕組みを使っているもの
 
@@ -300,4 +300,4 @@ gulpでは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクトを�
 - 中間フォーマットは[vinyl](https://github.com/gulpjs/vinyl "vinyl")オブジェクト
 - データの流れは既存のNode.js Stream
 - 既存のライブラリをラップしたプラグインが作りやすい
-- 同様の機能を持つプラグインが登場しやすい
+- 同様の機能をもつプラグインが登場しやすい

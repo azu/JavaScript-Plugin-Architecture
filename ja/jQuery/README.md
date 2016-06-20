@@ -2,7 +2,7 @@
 
 > この文章は[jQuery](http://jquery.com/ "jQuery") 2.1.4を元に書かれています。
 
-jQueryでは`$.fn`を拡張する事で、`$()`の返り値となるjQueryオブジェクトにメソッドを追加することが出来ます。
+jQueryでは`$.fn`を拡張することで、`$()`の返り値となるjQueryオブジェクトにメソッドを追加することができます。
 
 次の`greenify`プラグインでは、`$(document.body).greenify();`というメソッド呼び出しが可能になります。
 
@@ -61,7 +61,7 @@ jQueryではドキュメント化されてないAPIを触っていけないと�
 
 `calculator`という拡張可能な計算機をjQuery Pluginと同じ方法で作ってみたいと思います。
 
-`calculator` は以下のような形となります。
+`calculator` は次のような形となります。
 
 [import, calculator.js](../../src/jQuery/calculator.js)
 
@@ -86,14 +86,14 @@ calculator.fn = calculator.prototype;
 <script src="calculator-plugin.js"></script>
 ```
 
-これを使うと`calculator#add`といったメソッドが利用できるようになるので、以下のように書くことが出来ます。
+これを使うと`calculator#add`といったメソッドが利用できるようになるので、次のように書くことができます。
 
 [import, calculator-example.js](../../src/jQuery/calculator-example.js)
 
 実装をみてもらうと分かりますが、JavaScriptの`prototype`の仕組みをそのまま利用しています。
 そのため、特別な実装は必要なく
 「拡張する時は`calculator.prototype`の代わりに`calculator.fn`を拡張してください」
-というルールがあるだけとも言えます。
+というルールがあるだけともいえます。
 
 ## エコシステム
 

@@ -6,7 +6,7 @@
 
 大まかな動作としては、検証したいJavaScriptのコードをパースしてできたAST(抽象構文木)をルールで検証し、エラーや警告を出力します。
 
-このルールがプラグインとして書くことができ、ESLintの全てのルールはプラグインとして実装されています。
+このルールがプラグインとして書くことができ、ESLintのすべてのルールはプラグインとして実装されています。
 
 > The pluggable linting utility for JavaScript and JSX
 
@@ -21,7 +21,7 @@ ESLintでは`.eslintrc`という設定ファイルに利用するルールの設
 
 - [Documentation - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/user-guide/configuring "Documentation - ESLint - Pluggable JavaScript linter")
 
-ESLintにおけるルールとは、以下のような関数をexportしたモジュールです。
+ESLintにおけるルールとは、次のような関数をexportしたモジュールです。
 関数には`context`オブジェクトが渡されるので、それに対して1つのオブジェクトを返すようにします。
 
 [import, no-console.js](../../src/ESLint/no-console.js)
@@ -29,13 +29,13 @@ ESLintにおけるルールとは、以下のような関数をexportしたモ�
 ESLintではコードを文字列ではなくASTを元にチェックしていきます。
 ASTについてはここでは詳細を省きますが、コードをJavaScriptのオブジェクトで表現した木構造のデータだと思えば問題ないと思います。
 
-例えば、
+たとえば、
 
 ```js
 console.log("Hello!");
 ```
 
-というコードをパースしてASTにすると以下のようなオブジェクトとして取得できます。
+というコードをパースしてASTにすると次のようなオブジェクトとして取得できます。
 
 ```json
 {
@@ -81,7 +81,7 @@ ESLintではこのASTを使って、[no-console.js](#no-console.js)のように`
 このオブジェクトはNodeのtypeをキーとしたメソッドを持っています。
 そして、ASTを探索しながら「`"MemberExpression"` typeのNodeに到達した」と登録したルールに対して通知(メソッド呼び出し)を繰り返しています。
 
-先ほどの`console.log`のASTにおける`MemberExpression` typeのNodeとは以下のオブジェクトのことを言います。
+先ほどの`console.log`のASTにおける`MemberExpression` typeのNodeとは次のオブジェクトのことを言います。
 
 ```json
 {
@@ -101,7 +101,7 @@ ESLintではこのASTを使って、[no-console.js](#no-console.js)のように`
 [no-console.js](#no-console.js)のルールを見ると`MemberExpression` typeのNodeが `node.object.name === "console"` となった場合に、
 `console`が残ってると判断してエラーレポートすると読めてくると思います。
 
-ASTの探索がイメージしにくい場合は以下のルールで探索の動作を見てみると分かりやすいかもしれません。
+ASTの探索がイメージしにくい場合は次のルールで探索の動作を見てみると分かりやすいかもしれません。
 
 - [azu.github.io/visualize_estraverse/](http://azu.github.io/visualize_estraverse/ "visualize estraverse step")
 
@@ -118,7 +118,7 @@ debug("Hello");
 <p>動画を再生するには、webmまたはmp4をサポートしたブラウザが必要です。</p>
 </video>
 
-その他、ESLintのルールの書き方についてはドキュメントや以下の記事を見てみるといいでしょう。
+その他、ESLintのルールの書き方についてはドキュメントや次の記事を見てみるといいでしょう。
 
 - [Documentation - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/developer-guide/working-with-rules "Documentation - ESLint - Pluggable JavaScript linter")
 - [コードのバグはコードで見つけよう！｜サイバーエージェント 公式エンジニアブログ](http://ameblo.jp/principia-ca/entry-11837554210.html "コードのバグはコードで見つけよう！｜サイバーエージェント 公式エンジニアブログ")
@@ -139,7 +139,7 @@ ESLintのLintは次のような3つの手順で行われています。
 このイベントの登録と発火にはEventEmitterを使い、
 ESLint本体に対してルールは複数あるので、典型的なPub/Subパターンとなっています。
 
-擬似的なコードで表現すると以下のような流れでLintの処理が行われています。
+擬似的なコードで表現すると次のような流れでLintの処理が行われています。
 
 ```js
 import {parse} from "esprima";
@@ -197,7 +197,7 @@ Pub/Subパターンを上手く使うことで、ASTを走査するのが一度�
 
 ### MyLinter
 
-MyLinterは単純な2つのメソッドを持つクラスとして実装しました。
+MyLinterは単純な2つのメソッドをもつクラスとして実装しました。
 
 - `MyLinter#loadRule(rule): void`
     - 利用するルールを登録する処理
@@ -206,7 +206,7 @@ MyLinterは単純な2つのメソッドを持つクラスとして実装しま�
     - `code`を受け取りルールによってLintした結果を返す
     - Lint結果はエラーメッセージの配列とする
 
-実装したものが以下のようになっています。
+実装したものが次のようになっています。
 
 [import, src/ESLint/MyLinter.js](../../src/ESLint/MyLinter.js)
 
@@ -224,7 +224,7 @@ add(1, 3);
 
 [import, src/ESLint/MyLinter-example.js](../../src/ESLint/MyLinter-example.js)
 
-コードには`console`という名前のオブジェクトが含まれているので、 _"Unexpected console statement."_ というエラーメッセージが取得出来ました。   
+コードには`console`という名前のオブジェクトが含まれているので、 _"Unexpected console statement."_ というエラーメッセージが取得できました。   
 
 ### RuleContext
 
@@ -248,7 +248,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 つまり、read-onlyなプラグインアーキテクチャとしてはパフォーマンスも期待できると思います。
 
 また、ルールは `context` という与えられたものだけを使うようになっているため、ルールと本体が密結合にはなりにくいです。
-そのため`context`に何を与えるかを決める事で、ルールが行える範囲を制御しやすいと言えます。
+そのため`context`に何を与えるかを決めることで、ルールが行える範囲を制御しやすいといえます。
 
 ## どういう用途に向いていない?
 
@@ -293,7 +293,7 @@ ESLint公式の設定として`eslint:recommended`が用意されています。
 設定なしで使えると一番楽ですが、設定なしだと誰でも使えるツールにするのは難しいです。
 それを解消するために柔軟な設定のしくみと設定を共有しやすくしています。
 
-これは_The pluggable linting utility_を表現している仕組みと言えるかもしれません。
+これは_The pluggable linting utility_を表現している仕組みといえるかもしれません。
 
 ## まとめ
 
@@ -301,7 +301,7 @@ ESLint公式の設定として`eslint:recommended`が用意されています。
 
 - ESLintはJavaScriptでルールを書ける
 - ASTの木構造を走査しながらPub/Subパターンでチェックする
-- ルールは`context`を受け取る以外は本体の実装の詳細を知らなくて良い
+- ルールは`context`を受け取る以外は本体の実装の詳細を知らなくてよい
 - ルールがread-onlyだと簡単で効率的
 - read-writeとする場合は気を付ける必要がある
 - 設定をJavaScriptで表現できる
