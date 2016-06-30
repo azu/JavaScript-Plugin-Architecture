@@ -1,14 +1,13 @@
 // LICENSE : MIT
 "use strict";
 import {getKeywords}  from "stemming-x-keywords";
-import path from "path";
-import fs from "fs";
-import remark from "remark";
-import parents from "unist-util-parents";
-import select from "unist-util-select";
-import isUnist from "unist-util-is";
-import nlcstToString  from "nlcst-to-string";
-
+const fs = require("fs");
+const path = require("path");
+const remark = require("remark")();
+const parents = require("unist-util-parents");
+const select = require("unist-util-select");
+const isUnist = require("unist-util-is");
+const nlcstToString = require("nlcst-to-string");
 const rootDir = path.join(__dirname, "..");
 const OrganizationText = fs.readFileSync(path.join(rootDir, "README.md"), "utf-8");
 function isNotContain(content, keywords) {
