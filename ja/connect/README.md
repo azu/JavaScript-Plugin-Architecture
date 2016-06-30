@@ -155,8 +155,8 @@ app.use("/foo", function fooMiddleware(req, res, next) {
 このアーキテクチャでは機能の詳細が _middleware_ で実装できます。
 しかし、多くの機能を _middleware_ で実装していくと、 _middleware_ 間に依存関係を作ってしまうことがあります。
 
-この場合、`use(middleware)` で登録する順番により挙動が変わります。
-そのため、利用者が _middleware_ 間の依存関係を解決する必要があります。
+この場合、`use(middleware)` で登録する順番により挙動が変わるため、
+利用者が _middleware_ 間の依存関係を解決する必要があります。
 
 そのため、プラグイン同士の強い独立性や明確な依存関係を扱いたい場合には不向きといえるでしょう。
 
