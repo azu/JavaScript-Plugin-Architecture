@@ -5,7 +5,7 @@
           => action - action object
 
  */
-const applyMiddlewares = (...middlewares) => {
+const applyMiddleware = (...middlewares) => {
     return middlewareAPI => {
         const originalDispatch = (action) => {
             middlewareAPI.dispatch(action);
@@ -24,4 +24,4 @@ const applyMiddlewares = (...middlewares) => {
     };
 };
 
-export default applyMiddlewares;
+export default applyMiddleware;
