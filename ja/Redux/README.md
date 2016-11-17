@@ -68,7 +68,7 @@ Reduxでは第三者が拡張できる仕組みを _middleware_ と呼んでい�
 - [Middleware | Redux](http://redux.js.org/docs/advanced/Middleware.html "Middleware | Redux")
 
 どのような拡張を _middleware_ で書けるのか、実際の例を見てみます。
-次の _middleware_ はStoreがdispatchしたActionと、その前後でStateにどういう変更があったのかを出力するロガーです。
+次の _middleware_ はStoreがdispatchしたActionと、その前後でStateにどのような変更があったのかを出力するロガーです。
 
 [import, logger.js](../../src/Redux/logger.js)
 
@@ -143,7 +143,7 @@ const middleware = (store) => {
 Reduxの _middleware_ の仕組みは単純ですが、見慣れないデザインなので複雑に見えます。
 実際に同じ仕組みを実装しながら、Reduxの _middleware_ について学んでいきましょう。
 
-## どういう仕組み?
+## どのような仕組み?
 
 _middleware_ は`dispatch`をラップする処理ですが、そもそも`dispatch`とはどういうことをしているのでしょうか?
 
