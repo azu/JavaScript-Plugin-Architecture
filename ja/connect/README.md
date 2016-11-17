@@ -50,7 +50,7 @@ Echoサーバでは `req.pipe(res);` という形でリクエストをそのま�
 
 > **Note** _middleware_ となる関数の引数が4つであると、それはエラーハンドリングの _middleware_ とするという、Connect独自のルールがあります。
 
-## どういう仕組み?
+## どのような仕組み?
 
 Connectの _middleware_ がどのような仕組みで動いているのかを見ていきます。
 
@@ -130,7 +130,7 @@ Junctionは、`use(middleware)` と `process(value, (error, result) => { });`を
 [import junction-example.js](../../src/connect/junction-example.js)
 
 
-## どういう用途に向いている?
+## どのような用途に向いている?
 
 ConnectやJunctionの実装を見てみると分かりますが、このアーキテクチャでは機能の詳細を _middleware_ で実装できます。
 そのため、本体の実装は _middleware_ に提供するインタフェースの決定、エラーハンドリングの手段を提供するだけでとても小さいものとなっています。
@@ -150,7 +150,7 @@ app.use("/foo", function fooMiddleware(req, res, next) {
 そのため、ConnectやRackなどのHTTPサーバでは「リクエストに対してレスポンスを返す」というのが決まっているので、
 このアーキテクチャは適しています。
 
-## どういう用途に向いていない?
+## どのような用途に向いていない?
 
 このアーキテクチャでは機能の詳細が _middleware_ で実装できます。
 しかし、多くの機能を _middleware_ で実装していくと、 _middleware_ 間に依存関係を作ってしまうことがあります。
