@@ -165,7 +165,7 @@ function lint(code){
         // => {"MemberExpression" : function(node){}, ... } というオブジェクト
         let methodObject = getDefinedMethod(rule);
         Object.keys(methodObject).forEach(nodeType => {
-            emitter.on(nodeType, methodList[nodeType]);
+            emitter.on(nodeType, rule[nodeType]);
         });
     });
     // 2. ASTをtraverseしながら、`Node.type`のイベントを発火する
