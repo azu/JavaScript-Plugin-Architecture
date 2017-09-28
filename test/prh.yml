@@ -15,9 +15,9 @@ rules:
   - expected: gulp
   - expected: タスク自動化ツール
     patterns:
-      - /Task Runner/i
       - タスクランナー
       - タスク管理ツール
+      - Task Runner
 
   - expected: プラグインアーキテクチャ
     pattern:
