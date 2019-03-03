@@ -34,7 +34,7 @@
 
 ![coverage graph](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
 
-現在の文章カバレッジは次のコマンドでも確認することができます。
+現在の文章カバレッジは次のコマンドでも確認できます。
 
 ```
 npm run textlint:coverage

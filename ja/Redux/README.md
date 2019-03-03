@@ -114,7 +114,7 @@ const middleware = store => next => action => {};
 ```
 
 上記のArrowFunctionの連なりが一見すると何をしているのかが分かりにくいですが、
-これは次のように展開することができます。
+これは次のように展開できます。
 
 ```js
 const middleware = (store) => {
