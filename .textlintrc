@@ -6,6 +6,7 @@
     "max-ten": {
       "max": 3
     },
+    "ja-no-redundant-expression": true,
     "ja-no-successive-word": true,
     "ja-no-abusage": true,
     "no-nfd": true,

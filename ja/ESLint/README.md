@@ -73,7 +73,7 @@ console.log("Hello!");
 
 - [JavaScript AST explorer](http://felix-kling.de/esprima_ast_explorer/#/FNrLHi8ngW "JavaScript AST explorer")
 
-ESLintではこのASTを使って、[no-console.js](#no-console.js)のように`console.log`などがコードに残ってないかなどをルールを元にチェックすることができます。
+ESLintではこのASTを使って、[no-console.js](#no-console.js)のように`console.log`などがコードに残ってないかなどをルールを元にチェックできます。
 
 ルールをどう書けるかという話に戻すと、`context`というオブジェクトはただのユーティリティ関数と考えて問題ありません。
 ルールの本体は関数が`return`してるメソッドをもったオブジェクトです。
@@ -271,7 +271,7 @@ ESLintのように与えられたコードを読み取ってチェックする�
 ## エコシステム
 
 ESLintのルールはただのJavaScriptモジュールなので、
-ルール自体を[npm](https://www.npmjs.com/ "npm")で公開することができます。
+ルール自体を[npm](https://www.npmjs.com/ "npm")で公開できます。
 
 また、ESLintはデフォルトで有効なルールはありません。
 そのため、利用する際は設定ファイルを作るか、[sindresorhus/xo](https://github.com/sindresorhus/xo "sindresorhus/xo")といったESLintのラッパーを利用する形となります。
