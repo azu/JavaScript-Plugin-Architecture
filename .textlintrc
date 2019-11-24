@@ -3,6 +3,7 @@
     "comments": true
   },
   "rules": {
+    "@textlint-ja/no-synonyms": true,
     "max-ten": {
       "max": 3
     },
