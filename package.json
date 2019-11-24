@@ -38,11 +38,13 @@
     "extension"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@textlint-ja/textlint-rule-no-synonyms": "^1.0.1",
-    "babel-cli": "^6.3.13",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.9.0",
+    "babel-preset-power-assert": "^3.0.0",
     "codecov.io": "^0.1.6",
     "connect": "^3.7.0",
     "eslint": "^3.10.2",
@@ -57,7 +59,7 @@
     "gitbook-summary-to-path": "^1.1.0",
     "jsdom": "^9.2.1",
     "lcov-summary": "^1.0.1",
-    "mocha": "^3.1.2",
+    "mocha": "^6.2.2",
     "nlcst-to-string": "^2.0.3",
     "node-fetch": "^1.3.2",
     "npm-run-all": "^4.1.5",
@@ -95,6 +97,8 @@
   "dependencies": {
     "esprima": "^2.5.0",
     "estraverse": "^4.1.0",
+    "gitbook-plugin-include-codeblock": "^3.2.2",
+    "gitbook-plugin-richquotes": "0.0.9",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
     "jquery": "^3.4.1"
