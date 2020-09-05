@@ -1,4 +1,4 @@
-# JavaScript Plugin Architecture [![Build Status](https://travis-ci.org/azu/JavaScript-Plugin-Architecture.svg?branch=master)](https://travis-ci.org/azu/JavaScript-Plugin-Architecture)
+# JavaScript Plugin Architecture [![Actions Status: test](https://github.com/azu/JavaScript-Plugin-Architecture/workflows/test/badge.svg)](https://github.com/azu/JavaScript-Plugin-Architecture/actions?query=workflow%3A"test")
 
 この書籍はJavaScriptのライブラリやツールにおけるプラグインアーキテクチャについて見ていくことを目的としたものです。
 
