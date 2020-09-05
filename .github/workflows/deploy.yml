@@ -1,0 +1,38 @@
+name: test
+on:
+  push:
+    branches:
+      - master
+env:
+  CI: true
+jobs:
+  test:
+    name: "Test on Node.js ${{ matrix.node-version }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
+      - name: Build ebook
+        run: |
+          docker build . -t honkit
+          docker run -v `pwd`:`pwd` -w `pwd` honkit node_modules/.bin/honkit pdf . _book/JavaScript-Plugin-Architecture.pdf
+          docker run -v `pwd`:`pwd` -w `pwd` honkit node_modules/.bin/honkit epub . _book/JavaScript-Plugin-Architecture.epub
+          docker run -v `pwd`:`pwd` -w `pwd` honkit node_modules/.bin/honkit mobi . _book/JavaScript-Plugin-Architecture.mobi
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_book
