@@ -1,0 +1,636 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ESLint · JavaScript Plugin Architecture</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.6">
+        <meta name="author" content="azu">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-richquotes/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../connect/" />
+    
+    
+    <link rel="prev" href="../jQuery/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    この書籍について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../jQuery/">
+            
+                <a href="../jQuery/">
+            
+                    
+                    jQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    ESLint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../connect/">
+            
+                <a href="../connect/">
+            
+                    
+                    Connect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../gulp/">
+            
+                <a href="../gulp/">
+            
+                    
+                    gulp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Redux/">
+            
+                <a href="../Redux/">
+            
+                    
+                    Redux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../CONTRIBUTING.html">
+            
+                <a href="../../CONTRIBUTING.html">
+            
+                    
+                    CONTRIBUTING
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >ESLint</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="eslint">ESLint</h1>
+<blockquote>
+<p>&#x3053;&#x306E;&#x6587;&#x7AE0;&#x306F;<a href="http://eslint.org/" title="ESLint" target="_blank">ESLint</a> 1.3.0&#x3092;&#x5143;&#x306B;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+<p><a href="http://eslint.org/" title="ESLint" target="_blank">ESLint</a>&#x306F;JavaScript&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;JavaScript&#x3067;&#x66F8;&#x304B;&#x308C;&#x305F;&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x3088;&#x3063;&#x3066;&#x691C;&#x8A3C;&#x3059;&#x308B;Lint&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x5927;&#x307E;&#x304B;&#x306A;&#x52D5;&#x4F5C;&#x3068;&#x3057;&#x3066;&#x306F;&#x3001;&#x691C;&#x8A3C;&#x3057;&#x305F;&#x3044;JavaScript&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3066;&#x3067;&#x304D;&#x305F;AST(&#x62BD;&#x8C61;&#x69CB;&#x6587;&#x6728;)&#x3092;&#x30EB;&#x30FC;&#x30EB;&#x3067;&#x691C;&#x8A3C;&#x3057;&#x3001;&#x30A8;&#x30E9;&#x30FC;&#x3084;&#x8B66;&#x544A;&#x3092;&#x51FA;&#x529B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x304C;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x3057;&#x3066;&#x66F8;&#x304F;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x3001;ESLint&#x306E;&#x3059;&#x3079;&#x3066;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x306F;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<blockquote>
+<p>The pluggable linting utility for JavaScript and JSX</p>
+</blockquote>
+<p>ESLint&#x30B5;&#x30A4;&#x30C8;&#x4E0A;&#x306B;&#x306F;&#x3001;&#x4E0A;&#x8A18;&#x306E;&#x3088;&#x3046;&#x306B;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304B;&#x3089;&#x3082;&#x308F;&#x304B;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x91CD;&#x304D;&#x3092;&#x7F6E;&#x3044;&#x305F;&#x8A2D;&#x8A08;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4ECA;&#x56DE;&#x306F;ESLint&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x304C;&#x3069;&#x3046;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x304B;&#x3092;&#x898B;&#x3066;&#x884C;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<h2 id="&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;">&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?</h2>
+<p>ESLint&#x3067;&#x306F;<code>.eslintrc</code>&#x3068;&#x3044;&#x3046;&#x8A2D;&#x5B9A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x5229;&#x7528;&#x3059;&#x308B;&#x30EB;&#x30FC;&#x30EB;&#x306E;&#x8A2D;&#x5B9A;&#x3092;&#x3057;&#x3066;&#x4F7F;&#x3046;&#x305F;&#x3081;&#x3001;&#x5B9F;&#x884C;&#x65B9;&#x6CD5;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x53C2;&#x7167;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<ul>
+<li><a href="http://eslint.org/docs/user-guide/configuring" title="Documentation - ESLint - Pluggable JavaScript linter" target="_blank">Documentation - ESLint - Pluggable JavaScript linter</a></li>
+</ul>
+<p>ESLint&#x306B;&#x304A;&#x3051;&#x308B;&#x30EB;&#x30FC;&#x30EB;&#x3068;&#x306F;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x95A2;&#x6570;&#x3092;export&#x3057;&#x305F;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3067;&#x3059;&#x3002;&#x95A2;&#x6570;&#x306B;&#x306F;<code>context</code>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x6E21;&#x3055;&#x308C;&#x308B;&#x306E;&#x3067;&#x3001;&#x305D;&#x308C;&#x306B;&#x5BFE;&#x3057;&#x3066;1&#x3064;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x8FD4;&#x3059;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">&quot;MemberExpression&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
+            <span class="hljs-keyword">if</span> (node.object.name === <span class="hljs-string">&quot;console&quot;</span>) {
+                context.report(node, <span class="hljs-string">&quot;Unexpected console statement.&quot;</span>);
+            }
+        }
+    };
+};
+</code></pre>
+<p>ESLint&#x3067;&#x306F;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x6587;&#x5B57;&#x5217;&#x3067;&#x306F;&#x306A;&#x304F;AST&#x3092;&#x5143;&#x306B;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;
+AST&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3053;&#x3053;&#x3067;&#x306F;&#x8A73;&#x7D30;&#x3092;&#x7701;&#x304D;&#x307E;&#x3059;&#x304C;&#x3001;&#x30B3;&#x30FC;&#x30C9;&#x3092;JavaScript&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x8868;&#x73FE;&#x3057;&#x305F;&#x6728;&#x69CB;&#x9020;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3060;&#x3068;&#x601D;&#x3048;&#x3070;&#x554F;&#x984C;&#x306A;&#x3044;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello!&quot;</span>);
+</code></pre>
+<p>&#x3068;&#x3044;&#x3046;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3066;AST&#x306B;&#x3059;&#x308B;&#x3068;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3068;&#x3057;&#x3066;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Program&quot;</span>,
+    <span class="hljs-string">&quot;body&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;ExpressionStatement&quot;</span>,
+            <span class="hljs-string">&quot;expression&quot;</span>: {
+                <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;CallExpression&quot;</span>,
+                <span class="hljs-string">&quot;callee&quot;</span>: {
+                    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;MemberExpression&quot;</span>,
+                    <span class="hljs-string">&quot;computed&quot;</span>: <span class="hljs-literal">false</span>,
+                    <span class="hljs-string">&quot;object&quot;</span>: {
+                        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Identifier&quot;</span>,
+                        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;console&quot;</span>
+                    },
+                    <span class="hljs-string">&quot;property&quot;</span>: {
+                        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Identifier&quot;</span>,
+                        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;log&quot;</span>
+                    }
+                },
+                <span class="hljs-string">&quot;arguments&quot;</span>: [
+                    {
+                        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Literal&quot;</span>,
+                        <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;Hello!&quot;</span>,
+                        <span class="hljs-string">&quot;raw&quot;</span>: <span class="hljs-string">&quot;\&quot;Hello!\&quot;&quot;</span>
+                    }
+                ]
+            }
+        }
+    ],
+    <span class="hljs-string">&quot;sourceType&quot;</span>: <span class="hljs-string">&quot;script&quot;</span>
+}
+</code></pre>
+<ul>
+<li><a href="http://felix-kling.de/esprima_ast_explorer/#/FNrLHi8ngW" title="JavaScript AST explorer" target="_blank">JavaScript AST explorer</a></li>
+</ul>
+<p>ESLint&#x3067;&#x306F;&#x3053;&#x306E;AST&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3001;<a href="#no-console.js">no-console.js</a>&#x306E;&#x3088;&#x3046;&#x306B;<code>console.log</code>&#x306A;&#x3069;&#x304C;&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x6B8B;&#x3063;&#x3066;&#x306A;&#x3044;&#x304B;&#x306A;&#x3069;&#x3092;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x5143;&#x306B;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;&#x304B;&#x3068;&#x3044;&#x3046;&#x8A71;&#x306B;&#x623B;&#x3059;&#x3068;&#x3001;<code>context</code>&#x3068;&#x3044;&#x3046;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306F;&#x305F;&#x3060;&#x306E;&#x30E6;&#x30FC;&#x30C6;&#x30A3;&#x30EA;&#x30C6;&#x30A3;&#x95A2;&#x6570;&#x3068;&#x8003;&#x3048;&#x3066;&#x554F;&#x984C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x30EB;&#x30FC;&#x30EB;&#x306E;&#x672C;&#x4F53;&#x306F;&#x95A2;&#x6570;&#x304C;<code>return</code>&#x3057;&#x3066;&#x308B;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x3082;&#x3063;&#x305F;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306F;Node&#x306E;type&#x3092;&#x30AD;&#x30FC;&#x3068;&#x3057;&#x305F;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x6301;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x3057;&#x3066;&#x3001;AST&#x3092;&#x63A2;&#x7D22;&#x3057;&#x306A;&#x304C;&#x3089;&#x300C;<code>&quot;MemberExpression&quot;</code> type&#x306E;Node&#x306B;&#x5230;&#x9054;&#x3057;&#x305F;&#x300D;&#x3068;&#x767B;&#x9332;&#x3057;&#x305F;&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x901A;&#x77E5;(&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x547C;&#x3073;&#x51FA;&#x3057;)&#x3092;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x5148;&#x307B;&#x3069;&#x306E;<code>console.log</code>&#x306E;AST&#x306B;&#x304A;&#x3051;&#x308B;<code>MemberExpression</code> type&#x306E;Node&#x3068;&#x306F;&#x6B21;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x3053;&#x3068;&#x3092;&#x8A00;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;MemberExpression&quot;</span>,
+    <span class="hljs-string">&quot;computed&quot;</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-string">&quot;object&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Identifier&quot;</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;console&quot;</span>
+    },
+    <span class="hljs-string">&quot;property&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Identifier&quot;</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;log&quot;</span>
+    }
+}
+</code></pre>
+<p><a href="#no-console.js">no-console.js</a>&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x898B;&#x308B;&#x3068;<code>MemberExpression</code> type&#x306E;Node&#x304C; <code>node.object.name === &quot;console&quot;</code> &#x3068;&#x306A;&#x3063;&#x305F;&#x5834;&#x5408;&#x306B;&#x3001;
+<code>console</code>&#x304C;&#x6B8B;&#x3063;&#x3066;&#x308B;&#x3068;&#x5224;&#x65AD;&#x3057;&#x3066;&#x30A8;&#x30E9;&#x30FC;&#x30EC;&#x30DD;&#x30FC;&#x30C8;&#x3059;&#x308B;&#x3068;&#x8AAD;&#x3081;&#x3066;&#x304F;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>AST&#x306E;&#x63A2;&#x7D22;&#x304C;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3057;&#x306B;&#x304F;&#x3044;&#x5834;&#x5408;&#x306F;&#x6B21;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x3067;&#x63A2;&#x7D22;&#x306E;&#x52D5;&#x4F5C;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x5206;&#x304B;&#x308A;&#x3084;&#x3059;&#x3044;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<ul>
+<li><a href="http://azu.github.io/visualize_estraverse/" title="visualize estraverse step" target="_blank">azu.github.io/visualize_estraverse/</a></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debug</span>(<span class="hljs-params">string</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(string);
+}
+debug(<span class="hljs-string">&quot;Hello&quot;</span>);
+</code></pre>
+<video controls>
+<source src="./movie/traverse.webm" type="video/webm">
+<source src="./movie/traverse.mp4" type="video/mp4">
+<p>&#x52D5;&#x753B;&#x3092;&#x518D;&#x751F;&#x3059;&#x308B;&#x306B;&#x306F;&#x3001;webm&#x307E;&#x305F;&#x306F;mp4&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x305F;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x304C;&#x5FC5;&#x8981;&#x3067;&#x3059;&#x3002;</p>
+</video>
+
+<p>&#x305D;&#x306E;&#x4ED6;&#x3001;ESLint&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x306E;&#x66F8;&#x304D;&#x65B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3084;&#x6B21;&#x306E;&#x8A18;&#x4E8B;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3044;&#x3044;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<ul>
+<li><a href="http://eslint.org/docs/developer-guide/working-with-rules" title="Documentation - ESLint - Pluggable JavaScript linter" target="_blank">Documentation - ESLint - Pluggable JavaScript linter</a></li>
+<li><a href="http://ameblo.jp/principia-ca/entry-11837554210.html" title="&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x30D0;&#x30B0;&#x306F;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x898B;&#x3064;&#x3051;&#x3088;&#x3046;&#xFF01;&#xFF5C;&#x30B5;&#x30A4;&#x30D0;&#x30FC;&#x30A8;&#x30FC;&#x30B8;&#x30A7;&#x30F3;&#x30C8; &#x516C;&#x5F0F;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30D6;&#x30ED;&#x30B0;" target="_blank">&#x30B3;&#x30FC;&#x30C9;&#x306E;&#x30D0;&#x30B0;&#x306F;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x898B;&#x3064;&#x3051;&#x3088;&#x3046;&#xFF01;&#xFF5C;&#x30B5;&#x30A4;&#x30D0;&#x30FC;&#x30A8;&#x30FC;&#x30B8;&#x30A7;&#x30F3;&#x30C8; &#x516C;&#x5F0F;&#x30A8;&#x30F3;&#x30B8;&#x30CB;&#x30A2;&#x30D6;&#x30ED;&#x30B0;</a></li>
+</ul>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;?</h2>
+<p>ESLint&#x306F;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3066;AST&#x306B;&#x3057;&#x3066;&#x3001;&#x305D;&#x306E;AST&#x3092;JavaScript&#x3067;&#x66F8;&#x3044;&#x305F;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x4F7F;&#x3044;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x3068;&#x3044;&#x3046;&#x5927;&#x307E;&#x304B;&#x306A;&#x4ED5;&#x7D44;&#x307F;&#x306F;&#x5206;&#x304B;&#x308A;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<p>&#x6B21;&#x306B;&#x3001;&#x3053;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x3059;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x304C;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x52D5;&#x3044;&#x3066;&#x3044;&#x308B;&#x306E;&#x304B;&#x898B;&#x3066;&#x884C;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<p>ESLint&#x306E;Lint&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;3&#x3064;&#x306E;&#x624B;&#x9806;&#x3067;&#x884C;&#x308F;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ol>
+<li>&#x30EB;&#x30FC;&#x30EB;&#x6BCE;&#x306B;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;<code>Node.type</code>&#x3092;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767B;&#x9332;&#x3059;&#x308B;</li>
+<li>AST&#x3092;traverse&#x3057;&#x306A;&#x304C;&#x3089;&#x3001;<code>Node.type</code>&#x306E;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3059;&#x308B;</li>
+<li>&#x30EB;&#x30FC;&#x30EB;&#x304B;&#x3089;<code>context.report()</code>&#x3055;&#x308C;&#x305F;&#x5185;&#x5BB9;&#x3092;&#x96C6;&#x3081;&#x3066;&#x8868;&#x793A;&#x3059;&#x308B;</li>
+</ol>
+<p>&#x3053;&#x306E;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x306E;&#x767B;&#x9332;&#x3068;&#x767A;&#x706B;&#x306B;&#x306F;EventEmitter&#x3092;&#x4F7F;&#x3044;&#x3001;
+ESLint&#x672C;&#x4F53;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x30EB;&#x30FC;&#x30EB;&#x306F;&#x8907;&#x6570;&#x3042;&#x308B;&#x306E;&#x3067;&#x3001;&#x5178;&#x578B;&#x7684;&#x306A;Pub/Sub&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x64EC;&#x4F3C;&#x7684;&#x306A;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x8868;&#x73FE;&#x3059;&#x308B;&#x3068;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x6D41;&#x308C;&#x3067;Lint&#x306E;&#x51E6;&#x7406;&#x304C;&#x884C;&#x308F;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> {parse} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;esprima&quot;</span>;
+<span class="hljs-keyword">import</span> {traverse} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;estraverse&quot;</span>;
+<span class="hljs-keyword">import</span> {EventEmitter} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;events&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lint</span>(<span class="hljs-params">code</span>)</span>{
+    <span class="hljs-comment">// &#x30B3;&#x30FC;&#x30C9;&#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3066;AST&#x306B;&#x3059;&#x308B;</span>
+    <span class="hljs-keyword">let</span> ast = parse(code);
+    <span class="hljs-comment">// &#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x306E;&#x767B;&#x9332;&#x5834;&#x6240;</span>
+    <span class="hljs-keyword">let</span> emitter = <span class="hljs-keyword">new</span> EventEmitter();
+    <span class="hljs-keyword">let</span> results = [];
+    emitter.on(<span class="hljs-string">&quot;report&quot;</span>, message =&gt; {
+        <span class="hljs-comment">// 3. &#x306E;&#x305F;&#x3081;&#x306E;report&#x3055;&#x308C;&#x305F;&#x5185;&#x5BB9;&#x3092;&#x96C6;&#x3081;&#x308B;</span>
+        results.push(message);
+    });
+    <span class="hljs-comment">// &#x5229;&#x7528;&#x3059;&#x308B;&#x30EB;&#x30FC;&#x30EB;&#x4E00;&#x89A7;</span>
+    <span class="hljs-keyword">let</span> ruleList = getAllRules();
+    <span class="hljs-comment">// 1. &#x30EB;&#x30FC;&#x30EB;&#x6BCE;&#x306B;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;`Node.type`&#x3092;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x767B;&#x9332;&#x3059;&#x308B;</span>
+    ruleList.forEach(<span class="hljs-function"><span class="hljs-params">rule</span> =&gt;</span> {
+        <span class="hljs-comment">// &#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x4E00;&#x89A7;&#x3092;&#x53D6;&#x5F97;</span>
+        <span class="hljs-comment">// e.g) MemberExpression(node){}</span>
+        <span class="hljs-comment">// =&gt; {&quot;MemberExpression&quot; : function(node){}, ... } &#x3068;&#x3044;&#x3046;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;</span>
+        <span class="hljs-keyword">let</span> methodObject = getDefinedMethod(rule);
+        <span class="hljs-built_in">Object</span>.keys(methodObject).forEach(<span class="hljs-function"><span class="hljs-params">nodeType</span> =&gt;</span> {
+            emitter.on(nodeType, methodList[nodeType]);
+        });
+    });
+    <span class="hljs-comment">// 2. AST&#x3092;traverse&#x3057;&#x306A;&#x304C;&#x3089;&#x3001;`Node.type`&#x306E;&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x767A;&#x706B;&#x3059;&#x308B;</span>
+    traverse(ast, {
+        <span class="hljs-comment">// 1.&#x3067;&#x767B;&#x9332;&#x3057;&#x305F;Node.type&#x304C;&#x3042;&#x308B;&#x306A;&#x3089;&#x3053;&#x3053;&#x3067;&#x547C;&#x3070;&#x308C;&#x308B;</span>
+        enter: <span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> {
+            emitter.emit(node.type, node);
+        },
+        <span class="hljs-attr">leave</span>: <span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> {
+            emitter.emit(<span class="hljs-string">`<span class="hljs-subst">${node.type}</span>:exit`</span>, node);
+        }
+    });
+    <span class="hljs-comment">// 3. &#x30EB;&#x30FC;&#x30EB;&#x304B;&#x3089;`context.report()`&#x3055;&#x308C;&#x305F;&#x5185;&#x5BB9;&#x3092;&#x96C6;&#x3081;&#x3066;&#x8868;&#x793A;&#x3059;&#x308B;</span>
+    <span class="hljs-built_in">console</span>.log(results.join(<span class="hljs-string">&quot;\n&quot;</span>));
+}
+</code></pre>
+<p>Pub/Sub&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x4E0A;&#x624B;&#x304F;&#x4F7F;&#x3046;&#x3053;&#x3068;&#x3067;&#x3001;AST&#x3092;&#x8D70;&#x67FB;&#x3059;&#x308B;&#x306E;&#x304C;&#x4E00;&#x5EA6;&#x306E;&#x307F;&#x3067;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x30B3;&#x30FC;&#x30C9;&#x304B;&#x3068;&#x3044;&#x3046;&#x60C5;&#x5831;&#x304C;<code>emit</code>&#x3067;&#x901A;&#x77E5;&#x3067;&#x304D;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3082;&#x3046;&#x5C11;&#x3057;&#x5177;&#x4F53;&#x7684;&#x306B;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x52D5;&#x304B;&#x305B;&#x308B;&#x3088;&#x3046;&#x306A;&#x3082;&#x306E;&#x3092;&#x4F5C;&#x3063;&#x3066;&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x306B;&#x3064;&#x3044;&#x3066;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x307F;&#x3088;&#x3046;">&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x307F;&#x3088;&#x3046;</h2>
+<p>&#x4ECA;&#x56DE;&#x306F;&#x3001;ESLint&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x89E3;&#x91C8;&#x3067;&#x304D;&#x308B;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x306A;Lint&#x306E;&#x51E6;&#x7406;&#x3092;&#x66F8;&#x3044;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x5229;&#x7528;&#x3059;&#x308B;&#x30EB;&#x30FC;&#x30EB;&#x306F;&#x5148;&#x307B;&#x3069;&#x3082;&#x51FA;&#x3066;&#x304D;&#x305F;<a href="#no-console.js">no-console.js</a>&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x4F7F;&#x3044;&#x3001;&#x3053;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x540C;&#x3058;&#x3088;&#x3046;&#x306B;JavaScript&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x691C;&#x8A3C;&#x3067;&#x304D;&#x308B;<code>MyLinter</code>&#x3092;&#x66F8;&#x3044;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="mylinter">MyLinter</h3>
+<p>MyLinter&#x306F;&#x5358;&#x7D14;&#x306A;2&#x3064;&#x306E;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x3082;&#x3064;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<ul>
+<li><code>MyLinter#loadRule(rule): void</code><ul>
+<li>&#x5229;&#x7528;&#x3059;&#x308B;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x767B;&#x9332;&#x3059;&#x308B;&#x51E6;&#x7406;</li>
+<li><code>rule</code>&#x306F;<a href="#no-console.js">no-console.js</a>&#x304C;export&#x3057;&#x305F;&#x3082;&#x306E;</li>
+</ul>
+</li>
+<li><code>MyLinter#lint(code): string[]</code><ul>
+<li><code>code</code>&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x3088;&#x3063;&#x3066;Lint&#x3057;&#x305F;&#x7D50;&#x679C;&#x3092;&#x8FD4;&#x3059;</li>
+<li>Lint&#x7D50;&#x679C;&#x306F;&#x30A8;&#x30E9;&#x30FC;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x306E;&#x914D;&#x5217;&#x3068;&#x3059;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<p>&#x5B9F;&#x88C5;&#x3057;&#x305F;&#x3082;&#x306E;&#x304C;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> {parse} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;esprima&quot;</span>;
+<span class="hljs-keyword">import</span> {traverse} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;estraverse&quot;</span>;
+<span class="hljs-keyword">import</span> {EventEmitter} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;events&quot;</span>;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RuleContext</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+    report(node, message) {
+        <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">&quot;report&quot;</span>, message);
+    }
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLinter</span> </span>{
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">this</span>._emitter = <span class="hljs-keyword">new</span> EventEmitter();
+        <span class="hljs-keyword">this</span>._ruleContext = <span class="hljs-keyword">new</span> RuleContext();
+    }
+
+    loadRule(rule) {
+        <span class="hljs-keyword">let</span> ruleExports = rule(<span class="hljs-keyword">this</span>._ruleContext);
+        <span class="hljs-comment">// on(nodeType, nodeTypeCallback);</span>
+        <span class="hljs-built_in">Object</span>.keys(ruleExports).forEach(<span class="hljs-function"><span class="hljs-params">nodeType</span> =&gt;</span> {
+            <span class="hljs-keyword">this</span>._emitter.on(nodeType, ruleExports[nodeType]);
+        });
+    }
+
+
+    lint(code) {
+        <span class="hljs-keyword">let</span> messages = [];
+        <span class="hljs-keyword">let</span> addMessage = <span class="hljs-function">(<span class="hljs-params">message</span>)=&gt;</span> {
+            messages.push(message);
+        };
+        <span class="hljs-keyword">this</span>._ruleContext.on(<span class="hljs-string">&quot;report&quot;</span>, addMessage);
+        <span class="hljs-keyword">let</span> ast = parse(code);
+        traverse(ast, {
+            <span class="hljs-attr">enter</span>: <span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> {
+                <span class="hljs-keyword">this</span>._emitter.emit(node.type, node);
+            },
+            <span class="hljs-attr">leave</span>: <span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> {
+                <span class="hljs-keyword">this</span>._emitter.emit(<span class="hljs-string">`<span class="hljs-subst">${node.type}</span>:exit`</span>, node);
+            }
+        });
+        <span class="hljs-keyword">this</span>._ruleContext.removeListener(<span class="hljs-string">&quot;report&quot;</span>, addMessage);
+        <span class="hljs-keyword">return</span> messages;
+    }
+}
+</code></pre>
+<p>&#x3053;&#x306E;MyLinter&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3001;<code>MyLinter#load</code>&#x3067;<a href="#no-console.js">no-console.js</a>&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x307E;&#x305B;&#x3066;&#x3001;</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">x, y</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(x, y);
+    <span class="hljs-keyword">return</span> x + y;
+}
+add(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);
+</code></pre>
+<p>&#x3068;&#x3044;&#x3046;&#x30B3;&#x30FC;&#x30C9;&#x3092;Lint&#x3057;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> assert <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;assert&quot;</span>;
+<span class="hljs-keyword">import</span> MyLinter <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./MyLinter&quot;</span>;
+<span class="hljs-keyword">import</span> noConsole <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./no-console&quot;</span>;
+
+<span class="hljs-keyword">let</span> linter = <span class="hljs-keyword">new</span> MyLinter();
+linter.loadRule(noConsole);
+<span class="hljs-keyword">const</span> code = <span class="hljs-string">`
+function add(x, y){
+    console.log(x, y);
+    return x + y;
+}
+add(1, 3);
+`</span>;
+<span class="hljs-keyword">let</span> results = linter.lint(code);
+assert(results.length &gt; <span class="hljs-number">0</span>);
+assert.equal(results[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;Unexpected console statement.&quot;</span>);
+</code></pre>
+<p>&#x30B3;&#x30FC;&#x30C9;&#x306B;&#x306F;<code>console</code>&#x3068;&#x3044;&#x3046;&#x540D;&#x524D;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x542B;&#x307E;&#x308C;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x3001; <em>&quot;Unexpected console statement.&quot;</em> &#x3068;&#x3044;&#x3046;&#x30A8;&#x30E9;&#x30FC;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x304C;&#x53D6;&#x5F97;&#x3067;&#x304D;&#x307E;&#x3057;&#x305F;&#x3002;   </p>
+<h3 id="rulecontext">RuleContext</h3>
+<p>&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x3001;<a href="#MyLinter.js">MyLinter.js</a>&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;<code>RuleContext</code>&#x3068;&#x3044;&#x3046;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x306A;&#x30AF;&#x30E9;&#x30B9;&#x304C;&#x3042;&#x308B;&#x3053;&#x3068;&#x306B;&#x6C17;&#x3065;&#x304F;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;<code>RuleContext</code>&#x306F;&#x30EB;&#x30FC;&#x30EB;&#x304B;&#x3089;&#x4F7F;&#x3048;&#x308B;&#x30E6;&#x30FC;&#x30C6;&#x30A3;&#x30EA;&#x30C6;&#x30A3;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x307E;&#x3068;&#x3081;&#x305F;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;&#x4ECA;&#x56DE;&#x306F;<code>RuleContext#report</code>&#x3068;&#x3044;&#x3046;&#x30A8;&#x30E9;&#x30FC;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x3092;&#x30EB;&#x30FC;&#x30EB;&#x304B;&#x3089;MyLinter&#x3078;&#x901A;&#x77E5;&#x3059;&#x308B;&#x3082;&#x306E;&#x3060;&#x3051;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30EB;&#x30FC;&#x30EB;&#x306E;&#x5B9F;&#x88C5;&#x306E;&#x65B9;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;&#x76F4;&#x63A5;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;export&#x3057;&#x306A;&#x3044;&#x3067;&#x3001;
+<code>context</code>&#x3068;&#x3057;&#x3066;<code>RuleContext</code>&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x3063;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">&quot;MemberExpression&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
+            <span class="hljs-keyword">if</span> (node.object.name === <span class="hljs-string">&quot;console&quot;</span>) {
+                context.report(node, <span class="hljs-string">&quot;Unexpected console statement.&quot;</span>);
+            }
+        }
+    };
+};
+</code></pre>
+<p>&#x3053;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x306F; <code>context</code> &#x3068;&#x3044;&#x3046;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x305F;&#x3082;&#x306E;&#x3060;&#x3051;&#x3092;&#x4F7F;&#x3046;&#x306E;&#x3067;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x304C;MyLinter&#x672C;&#x4F53;&#x306E;&#x5B9F;&#x88C5;&#x306E;&#x8A73;&#x7D30;&#x3092;&#x77E5;&#x3089;&#x306A;&#x304F;&#x3066;&#x3082;&#x826F;&#x304F;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?</h2>
+<p>&#x3053;&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306F;Pub/Sub&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3092;&#x4E0A;&#x624B;&#x304F;&#x4F7F;&#x3044;&#x3001;
+ESLint&#x306E;&#x3088;&#x3046;&#x306B;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x8AAD;&#x307F;&#x53D6;&#x3063;&#x3066;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x3088;&#x3046;&#x306A;&#x4F7F;&#x3044;&#x65B9;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3064;&#x307E;&#x308A;&#x3001;read-only&#x306A;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x3068;&#x3057;&#x3066;&#x306F;&#x30D1;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30F3;&#x30B9;&#x3082;&#x671F;&#x5F85;&#x3067;&#x304D;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305F;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x306F; <code>context</code> &#x3068;&#x3044;&#x3046;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x305F;&#x3082;&#x306E;&#x3060;&#x3051;&#x3092;&#x4F7F;&#x3046;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x3068;&#x672C;&#x4F53;&#x304C;&#x5BC6;&#x7D50;&#x5408;&#x306B;&#x306F;&#x306A;&#x308A;&#x306B;&#x304F;&#x3044;&#x3067;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;<code>context</code>&#x306B;&#x4F55;&#x3092;&#x4E0E;&#x3048;&#x308B;&#x304B;&#x3092;&#x6C7A;&#x3081;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x304C;&#x884C;&#x3048;&#x308B;&#x7BC4;&#x56F2;&#x3092;&#x5236;&#x5FA1;&#x3057;&#x3084;&#x3059;&#x3044;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?</h2>
+<p>&#x9006;&#x306B;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x305F;&#x30B3;&#x30FC;&#x30C9;(AST)&#x3092;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x5834;&#x5408;&#x306B;&#x306F;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x540C;&#x6642;&#x306B;&#x51E6;&#x7406;&#x3092;&#x884C;&#x3046;&#x305F;&#x3081;&#x30EB;&#x30FC;&#x30EB;&#x9593;&#x3067;&#x7AF6;&#x5408;&#x3059;&#x308B;&#x3088;&#x3046;&#x306A;&#x5909;&#x66F4;&#x304C;&#x3042;&#x308B;&#x5834;&#x5408;&#x306B;&#x7834;&#x7DBB;&#x3057;&#x3066;&#x3057;&#x307E;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x306B;&#x52A0;&#x3048;&#x3066;&#x3082;&#x3046;1&#x3064;&#x62BD;&#x8C61;&#x30EC;&#x30A4;&#x30E4;&#x30FC;&#x3092;&#x8A2D;&#x3051;&#x306A;&#x3044;&#x3068;&#x5BFE;&#x5FDC;&#x306F;&#x96E3;&#x3057;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3064;&#x307E;&#x308A;&#x3001;read-write&#x306A;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x3068;&#x3057;&#x3066;&#x306F;&#x5358;&#x7D14;&#x306B;&#x3053;&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3060;&#x3051;&#x3067;&#x306F;&#x96E3;&#x3057;&#x3044;&#x90E8;&#x5206;&#x304C;&#x51FA;&#x3066;&#x304F;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<blockquote class="clearfix alert alert-info"><strong class="fa fa-2x fa-edit"></strong>
+<p> ESLint 2.0&#x3067;autofixing&#x3001;&#x3064;&#x307E;&#x308A;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x306E;&#x6A5F;&#x80FD;&#x306E;&#x5C0E;&#x5165;&#x304C;&#x4E88;&#x5B9A;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;
+&#x3053;&#x308C;&#x306F;&#x30EB;&#x30FC;&#x30EB;&#x304B;&#x3089;&#x306E;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;<code>SourceCode</code>&#x3068;&#x3044;&#x3046;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306B;&#x96C6;&#x7D04;&#x3057;&#x3066;&#x3001;&#x6700;&#x5F8C;&#x306B;&#x5B9F;&#x969B;&#x306E;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x3092;&#x884C;&#x3046;&#x3068;&#x3044;&#x3046;&#x62BD;&#x8C61;&#x30EC;&#x30A4;&#x30E4;&#x30FC;&#x3092;&#x8A2D;&#x3051;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/eslint/eslint/issues/3134" title="Implement autofixing &#xB7; Issue #3134 &#xB7; eslint/eslint" target="_blank">Implement autofixing &#xB7; Issue #3134 &#xB7; eslint/eslint</a></li>
+</ul>
+</blockquote>
+<h2 id="&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;">&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;</h2>
+<ul>
+<li><a href="https://github.com/azu/textlint" title="azu/textlint" target="_blank">azu/textlint</a><ul>
+<li>&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x3084;Markdown&#x3092;&#x30D1;&#x30FC;&#x30B9;&#x3057;&#x3066;AST&#x306B;&#x3057;&#x3066;Lint&#x3059;&#x308B;&#x30C4;&#x30FC;&#x30EB;</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;">&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;</h2>
+<p>ESLint&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x306F;&#x305F;&#x3060;&#x306E;JavaScript&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x306A;&#x306E;&#x3067;&#x3001;&#x30EB;&#x30FC;&#x30EB;&#x81EA;&#x4F53;&#x3092;<a href="https://www.npmjs.com/" title="npm" target="_blank">npm</a>&#x3067;&#x516C;&#x958B;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305F;&#x3001;ESLint&#x306F;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x6709;&#x52B9;&#x306A;&#x30EB;&#x30FC;&#x30EB;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x5229;&#x7528;&#x3059;&#x308B;&#x969B;&#x306F;&#x8A2D;&#x5B9A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F5C;&#x308B;&#x304B;&#x3001;<a href="https://github.com/sindresorhus/xo" title="sindresorhus/xo" target="_blank">sindresorhus/xo</a>&#x3068;&#x3044;&#x3063;&#x305F;ESLint&#x306E;&#x30E9;&#x30C3;&#x30D1;&#x30FC;&#x3092;&#x5229;&#x7528;&#x3059;&#x308B;&#x5F62;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>ESLint&#x516C;&#x5F0F;&#x306E;&#x8A2D;&#x5B9A;&#x3068;&#x3057;&#x3066;<code>eslint:recommended</code>&#x304C;&#x7528;&#x610F;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3092;<code>extends</code>&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x63A8;&#x5968;&#x306E;&#x8A2D;&#x5B9A;&#x3092;&#x7D99;&#x627F;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;extends&quot;</span>: <span class="hljs-string">&quot;eslint:recommended&quot;</span>
+}
+</code></pre>
+<p>&#x3053;&#x308C;&#x3089;&#x306E;&#x8A2D;&#x5B9A;&#x81EA;&#x4F53;&#x3082;JavaScript&#x3067;&#x8868;&#x73FE;&#x3067;&#x304D;&#x308B;&#x305F;&#x3081;&#x3001;&#x8A2D;&#x5B9A;&#x3082;npm&#x3067;&#x516C;&#x958B;&#x3057;&#x3066;&#x5229;&#x7528;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="http://eslint.org/docs/developer-guide/shareable-configs" title="Documentation - ESLint - Pluggable JavaScript linter" target="_blank">Shareable Configs - ESLint - Pluggable JavaScript linter</a></li>
+</ul>
+<p>&#x30B3;&#x30FC;&#x30C7;&#x30A3;&#x30F3;&#x30B0;&#x30EB;&#x30FC;&#x30EB;&#x304C;&#x591A;&#x7A2E;&#x591A;&#x69D8;&#x306A;&#x3088;&#x3046;&#x306B;&#x3001;ESLint&#x3067;&#x5FC5;&#x8981;&#x306A;&#x30EB;&#x30FC;&#x30EB;&#x3082;&#x500B;&#x4EBA;&#x5DEE;&#x304C;&#x3042;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;&#x8A2D;&#x5B9A;&#x306A;&#x3057;&#x3067;&#x4F7F;&#x3048;&#x308B;&#x3068;&#x4E00;&#x756A;&#x697D;&#x3067;&#x3059;&#x304C;&#x3001;&#x8A2D;&#x5B9A;&#x306A;&#x3057;&#x3060;&#x3068;&#x8AB0;&#x3067;&#x3082;&#x4F7F;&#x3048;&#x308B;&#x30C4;&#x30FC;&#x30EB;&#x306B;&#x3059;&#x308B;&#x306E;&#x306F;&#x96E3;&#x3057;&#x3044;&#x3067;&#x3059;&#x3002;&#x305D;&#x308C;&#x3092;&#x89E3;&#x6D88;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x67D4;&#x8EDF;&#x306A;&#x8A2D;&#x5B9A;&#x306E;&#x3057;&#x304F;&#x307F;&#x3068;&#x8A2D;&#x5B9A;&#x3092;&#x5171;&#x6709;&#x3057;&#x3084;&#x3059;&#x304F;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x306F;<em>The pluggable linting utility</em>&#x3092;&#x8868;&#x73FE;&#x3057;&#x3066;&#x3044;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x3068;&#x3044;&#x3048;&#x308B;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<h2 id="&#x307E;&#x3068;&#x3081;">&#x307E;&#x3068;&#x3081;</h2>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;ESLint&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x3073;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<ul>
+<li>ESLint&#x306F;JavaScript&#x3067;&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x66F8;&#x3051;&#x308B;</li>
+<li>AST&#x306E;&#x6728;&#x69CB;&#x9020;&#x3092;&#x8D70;&#x67FB;&#x3057;&#x306A;&#x304C;&#x3089;Pub/Sub&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3067;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;</li>
+<li>&#x30EB;&#x30FC;&#x30EB;&#x306F;<code>context</code>&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308B;&#x4EE5;&#x5916;&#x306F;&#x672C;&#x4F53;&#x306E;&#x5B9F;&#x88C5;&#x306E;&#x8A73;&#x7D30;&#x3092;&#x77E5;&#x3089;&#x306A;&#x304F;&#x3066;&#x3088;&#x3044;</li>
+<li>&#x30EB;&#x30FC;&#x30EB;&#x304C;read-only&#x3060;&#x3068;&#x7C21;&#x5358;&#x3067;&#x52B9;&#x7387;&#x7684;</li>
+<li>read-write&#x3068;&#x3059;&#x308B;&#x5834;&#x5408;&#x306F;&#x6C17;&#x3092;&#x4ED8;&#x3051;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308B;</li>
+<li>&#x8A2D;&#x5B9A;&#x3092;JavaScript&#x3067;&#x8868;&#x73FE;&#x3067;&#x304D;&#x308B;</li>
+<li>&#x8A2D;&#x5B9A;&#x3092;npm&#x3067;&#x5171;&#x6709;&#x3067;&#x304D;&#x308B;&#x4F5C;&#x308A;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../jQuery/" class="navigation navigation-prev " aria-label="Previous page: jQuery">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../connect/" class="navigation navigation-next " aria-label="Next page: Connect">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ESLint","level":"1.3","depth":1,"next":{"title":"Connect","level":"1.4","depth":1,"path":"ja/connect/README.md","ref":"ja/connect/README.md","articles":[]},"previous":{"title":"jQuery","level":"1.2","depth":1,"path":"ja/jQuery/README.md","ref":"ja/jQuery/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexMincho","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"ja/ESLint/README.md","mtime":"2020-09-05T15:19:59.032Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-05T15:20:36.689Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

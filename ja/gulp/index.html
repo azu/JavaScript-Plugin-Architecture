@@ -1,0 +1,598 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>gulp · JavaScript Plugin Architecture</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.6">
+        <meta name="author" content="azu">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-richquotes/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../Redux/" />
+    
+    
+    <link rel="prev" href="../connect/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    この書籍について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../jQuery/">
+            
+                <a href="../jQuery/">
+            
+                    
+                    jQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ESLint/">
+            
+                <a href="../ESLint/">
+            
+                    
+                    ESLint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../connect/">
+            
+                <a href="../connect/">
+            
+                    
+                    Connect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    gulp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Redux/">
+            
+                <a href="../Redux/">
+            
+                    
+                    Redux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../CONTRIBUTING.html">
+            
+                <a href="../../CONTRIBUTING.html">
+            
+                    
+                    CONTRIBUTING
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >gulp</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="gulp">gulp</h1>
+<blockquote>
+<p>&#x3053;&#x306E;&#x6587;&#x7AE0;&#x306F;<a href="http://gulpjs.com/" title="gulp" target="_blank">gulp</a> 3.9.0&#x3092;&#x5143;&#x306B;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+<p><a href="http://gulpjs.com/" title="gulp" target="_blank">gulp</a>&#x306F;Node.js&#x3092;&#x4F7F;&#x3063;&#x305F;&#x30BF;&#x30B9;&#x30AF;&#x81EA;&#x52D5;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x3059;&#x3002;&#x30D3;&#x30EB;&#x30C9;&#x3084;&#x30C6;&#x30B9;&#x30C8;&#x306A;&#x3069;&#x3068;&#x3044;&#x3063;&#x305F;&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30BF;&#x30B9;&#x30AF;&#x3092;JavaScript&#x3067;&#x66F8;&#x304F;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x3044;&#x3046;&#x30BF;&#x30B9;&#x30AF;&#x3068;&#x306F;&#x8907;&#x6570;&#x306E;&#x51E6;&#x7406;&#x304B;&#x3089;&#x306A;&#x308B;&#x51E6;&#x7406;&#x306E;&#x56FA;&#x307E;&#x308A;&#x306E;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x3053;&#x306E;&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;API&#x3068;&#x3057;&#x3066;<code>gulp.task</code>&#x304C;&#x7528;&#x610F;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x307E;&#x305F;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x51E6;&#x7406;&#x306F;Node.js&#x306E;<a href="https://nodejs.org/api/stream.html" title="Stream" target="_blank">Stream</a>&#x3092;&#x4F7F;&#x3044;&#x3064;&#x306A;&#x3052;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x8907;&#x6570;&#x306E;&#x51E6;&#x7406;&#x3092;&#x4E00;&#x6642;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306A;&#x3057;&#x3067;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x51E6;&#x7406;&#x306F;gulp&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x3044;&#x3046;&#x5F62;&#x3067;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x5316;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x5229;&#x7528;&#x8005;&#x306F;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x307F;&#x3001;<code>pipe()</code>&#x3067;&#x7E4B;&#x3050;&#x3060;&#x3051;&#x3067;&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x5B9A;&#x7FA9;&#x304C;&#x3067;&#x304D;&#x308B;&#x30C4;&#x30FC;&#x30EB;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;">&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?</h2>
+<p>&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;<a href="http://sass-lang.com/" title="Sass" target="_blank">Sass</a>&#x3067;&#x66F8;&#x3044;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x51E6;&#x7406;&#x3057;&#x305F;&#x3044;&#x3068;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<ol>
+<li><code>sass/*.scss</code>&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x3080;</li>
+<li>&#x8AAD;&#x307F;&#x8FBC;&#x3093;&#x3060;sass&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;<code>sass</code>&#x3067;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;</li>
+<li>CSS&#x3068;&#x306A;&#x3063;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;<code>autoprefixture</code>&#x3067;&#x63A5;&#x982D;&#x8F9E;&#x3092;&#x3064;&#x3051;&#x308B;</li>
+<li>CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x305D;&#x308C;&#x305E;&#x308C;<code>minify</code>&#x3067;&#x5727;&#x7E2E;&#x3059;&#x308B;</li>
+<li>&#x5727;&#x7E2E;&#x3057;&#x305F;CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x305D;&#x308C;&#x305E;&#x308C;<code>css</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x51FA;&#x529B;&#x3059;&#x308B;</li>
+</ol>
+<p>&#x3053;&#x306E;&#x4E00;&#x9023;&#x306E;&#x51E6;&#x7406;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30BF;&#x30B9;&#x30AF;&#x3068;&#x3057;&#x3066;&#x5B9A;&#x7FA9;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> gulp <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp&quot;</span>;
+<span class="hljs-keyword">import</span> sass <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp-sass&quot;</span>;
+<span class="hljs-keyword">import</span> autoprefixer <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp-autoprefixer&quot;</span>;
+<span class="hljs-keyword">import</span> minify <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp-minify-css&quot;</span>;
+
+gulp.task(<span class="hljs-string">&quot;sass&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">&quot;sass/*.scss&quot;</span>)
+        .pipe(sass())
+        .pipe(autoprefixer())
+        .pipe(minify())
+        .pipe(gulp.dest(<span class="hljs-string">&quot;css&quot;</span>));
+});
+</code></pre>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x306B;&#x3064;&#x3044;&#x3066;&#x6271;&#x3046;&#x306E;&#x3067;&#x3001;gulp&#x306E;&#x4F7F;&#x3044;&#x65B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x8A73;&#x3057;&#x304F;&#x306F;&#x4EE5;&#x4E0B;&#x3092;&#x53C2;&#x7167;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/gulpjs/gulp/tree/master/docs" target="_blank">gulp/docs at master &#xB7; gulpjs/gulp</a></li>
+<li><a href="https://app.codegrid.net/entry/gulp-1" target="_blank">&#x73FE;&#x5834;&#x3067;&#x4F7F;&#x3048;&#x308B;gulp&#x5165;&#x9580; - gulp&#x3068;&#x306F;&#x4F55;&#x304B; | CodeGrid</a></li>
+<li><a href="http://dotinstall.com/lessons/basic_gulp" target="_blank">gulp&#x5165;&#x9580; (&#x5168;12&#x56DE;) - &#x30D7;&#x30ED;&#x30B0;&#x30E9;&#x30DF;&#x30F3;&#x30B0;&#x306A;&#x3089;&#x30C9;&#x30C3;&#x30C8;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;</a></li>
+</ul>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;?</h2>
+<p>&#x5B9F;&#x969B;&#x306B;gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3092;&#x66F8;&#x304D;&#x306A;&#x304C;&#x3089;&#x3001;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;&#x3067;&#x51E6;&#x7406;&#x540C;&#x58EB;&#x304C;&#x9023;&#x643A;&#x3092;&#x53D6;&#x308A;&#x52D5;&#x4F5C;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x304B;&#x3092;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<p>&#x5148;&#x307B;&#x3069;&#x306E;gulp&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x4F8B;&#x3067;&#x306F;&#x3001;&#x3059;&#x3067;&#x306B;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x5316;&#x3055;&#x308C;&#x305F;&#x51E6;&#x7406;&#x3092;<code>pipe</code>&#x3067;&#x7E4B;&#x3052;&#x305F;&#x3060;&#x3051;&#x3067;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x51E6;&#x7406;&#x304C;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x306F;&#x3088;&#x304F;&#x5206;&#x304B;&#x308A;&#x307E;&#x305B;&#x3093;&#x3067;&#x3057;&#x305F;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;<code>gulp-prefixer</code>&#x3068;&#x3044;&#x3046;gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3092;&#x66F8;&#x3044;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;
+<code>gulp-prefixer</code>&#x306F;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x305F;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x5148;&#x982D;&#x306B;&#x7279;&#x5B9A;&#x306E;&#x6587;&#x5B57;&#x5217;&#x306E;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x540C;&#x69D8;&#x306E;&#x540D;&#x524D;&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x516C;&#x5F0F;&#x306E;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3067;&#x300C;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x66F8;&#x304D;&#x65B9;&#x300D;&#x306E;&#x4F8B;&#x3068;&#x3057;&#x3066;&#x7D39;&#x4ECB;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x5408;&#x308F;&#x305B;&#x3066;&#x898B;&#x308B;&#x3068;&#x3088;&#x3044;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/gulpjs/gulp/tree/master/docs/writing-a-plugin" title="gulp/docs/writing-a-plugin at master &#xB7; gulpjs/gulp" target="_blank">gulp/docs/writing-a-plugin</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/dealing-with-streams.md" title="gulp/dealing-with-streams.md at master &#xB7; gulpjs/gulp" target="_blank">gulp/dealing-with-streams.md</a></li>
+</ul>
+<p>&#x591A;&#x304F;&#x306E;gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306F;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x3001;Node&#x306E;Stream&#x3092;&#x8FD4;&#x3059;&#x95A2;&#x6570;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> {Transform} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;stream&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prefixBuffer</span>(<span class="hljs-params">buffer, prefix</span>) </span>{
+    <span class="hljs-keyword">return</span> Buffer.concat([Buffer(prefix), buffer]);
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prefixStream</span>(<span class="hljs-params">prefix</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
+        <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">chunk, encoding, next</span>) </span>{
+            <span class="hljs-keyword">let</span> buffer = prefixBuffer(chunk, prefix);
+            <span class="hljs-keyword">this</span>.push(buffer);
+            next();
+        }
+    });
+}
+
+<span class="hljs-keyword">let</span> gulpPrefixer = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">prefix</span>) </span>{
+    <span class="hljs-comment">// enable `objectMode` of the stream for vinyl File objects.</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
+        <span class="hljs-comment">// Takes in vinyl File objects</span>
+        writableObjectMode: <span class="hljs-literal">true</span>,
+        <span class="hljs-comment">// Outputs vinyl File objects</span>
+        readableObjectMode: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">file, encoding, next</span>) </span>{
+            <span class="hljs-keyword">if</span> (file.isBuffer()) {
+                file.contents = prefixBuffer(file.contents, prefix);
+            }
+
+            <span class="hljs-keyword">if</span> (file.isStream()) {
+                file.contents = file.contents.pipe(prefixStream(prefix));
+            }
+            <span class="hljs-keyword">this</span>.push(file);
+            next();
+        }
+    });
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> gulpPrefixer;
+</code></pre>
+<p>&#x3053;&#x3053;&#x3067;&#x5B9F;&#x88C5;&#x3057;&#x305F;<code>gulp-prefixer</code>&#x306F;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x30BF;&#x30B9;&#x30AF;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x3080;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> gulp <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp&quot;</span>;
+<span class="hljs-keyword">import</span> gulpPrefixer <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./gulp-prefixer&quot;</span>;
+gulp.task(<span class="hljs-string">&quot;default&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">&quot;./*.*&quot;</span>)
+        .pipe(gulpPrefixer(<span class="hljs-string">&quot;prefix text&quot;</span>))
+        .pipe(gulp.dest(<span class="hljs-string">&quot;build&quot;</span>))
+        .on(<span class="hljs-string">&quot;error&quot;</span>, (error) =&gt; {
+            <span class="hljs-built_in">console</span>.error(error);
+        });
+});
+</code></pre>
+<p>&#x3053;&#x306E;<code>default</code>&#x30BF;&#x30B9;&#x30AF;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x51E6;&#x7406;&#x304C;&#x884C;&#x308F;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<ol>
+<li><code>./*.*</code>&#x306B;&#x30DE;&#x30C3;&#x30C1;&#x3059;&#x308B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x53D6;&#x5F97;(&#x3059;&#x3079;&#x3066;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;)</li>
+<li>&#x53D6;&#x5F97;&#x3057;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x5148;&#x982D;&#x306B;&quot;prefix text&quot;&#x3068;&#x3044;&#x3046;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;</li>
+<li>&#x5909;&#x66F4;&#x3057;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;<code>build/</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x51FA;&#x529B;&#x3059;&#x308B;</li>
+</ol>
+<h3 id="stream">Stream</h3>
+<p><a href="#gulp-prefixer.js">gulp-prefixer.js</a>&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;<code>gulpPrefixer</code>&#x3068;&#x3044;&#x3046;<a href="https://nodejs.org/api/stream.html#stream_class_stream_transform" title="stream.Transform" target="_blank">Transform Stream</a>&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> gulpPrefixer = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">prefix</span>) </span>{
+    <span class="hljs-comment">// enable `objectMode` of the stream for vinyl File objects.</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
+        <span class="hljs-comment">// Takes in vinyl File objects</span>
+        writableObjectMode: <span class="hljs-literal">true</span>,
+        <span class="hljs-comment">// Outputs vinyl File objects</span>
+        readableObjectMode: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">file, encoding, next</span>) </span>{
+            <span class="hljs-keyword">if</span> (file.isBuffer()) {
+                file.contents = prefixBuffer(file.contents, prefix);
+            }
+
+            <span class="hljs-keyword">if</span> (file.isStream()) {
+                file.contents = file.contents.pipe(prefixStream(prefix));
+            }
+            <span class="hljs-keyword">this</span>.push(file);
+            next();
+        }
+    });
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> gulpPrefixer;
+</code></pre>
+<p>Transform Stream&#x3068;&#x3044;&#x3046;&#x3082;&#x306E;&#x304C;&#x51FA;&#x3066;&#x304D;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;Node.js&#x306E;Stream&#x306F;&#x6B21;&#x306E;4&#x7A2E;&#x985E;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li>Readable Stream</li>
+<li>Transform Stream</li>
+<li>Writable Stream</li>
+<li>Duplex Stream</li>
+</ul>
+<p>&#x4ECA;&#x56DE;&#x306E;<code>default</code>&#x30BF;&#x30B9;&#x30AF;&#x306E;&#x51E6;&#x7406;&#x3092;&#x305D;&#x308C;&#x305E;&#x308C;&#x5F53;&#x3066;&#x306F;&#x3081;&#x308B;&#x3068;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ol>
+<li><code>./*.*</code>&#x306B;&#x30DE;&#x30C3;&#x30C1;&#x3059;&#x308B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x53D6;&#x5F97; = Readable Stream</li>
+<li>&#x53D6;&#x5F97;&#x3057;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x5148;&#x982D;&#x306B;&quot;prefix text&quot;&#x3068;&#x3044;&#x3046;&#x6587;&#x5B57;&#x5217;&#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B; = Transform Stream</li>
+<li>&#x5909;&#x66F4;&#x3057;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092; <code>build/</code> &#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;&#x51FA;&#x529B;&#x3059;&#x308B; = Writable Stream</li>
+</ol>
+<p>&#x3042;&#x308B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092; <em>Read</em> &#x3057;&#x3066;&#x3001; <em>Transform</em> &#x3057;&#x305F;&#x3082;&#x306E;&#x3092;&#x3001;&#x5225;&#x306E;&#x3068;&#x3053;&#x308D;&#x306B; <em>Write</em> &#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x3044;&#x3046;&#x3088;&#x304F;&#x3042;&#x308B;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x6D41;&#x308C;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;</p>
+<p><a href="#gulp-prefixer.js">gulp-prefixer.js</a>&#x3067;&#x306F;&#x3001;gulp&#x304B;&#x3089;&#x6D41;&#x308C;&#x3066;&#x304D;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x3092;Stream&#x3067;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x3001;&#x305D;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x5909;&#x66F4;&#x3057;&#x305F;&#x3082;&#x306E;&#x6B21;&#x3078;&#x6E21;&#x3059;Transform Stream&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x300C;gulp&#x304B;&#x3089;&#x6D41;&#x308C;&#x3066;&#x304D;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x300D;&#x3092;&#x6271;&#x3046;&#x305F;&#x3081;&#x306B;<code>readableObjectMode</code>&#x3068;<code>writableObjectMode</code>&#x3092;&#x305D;&#x308C;&#x305E;&#x308C;<code>true</code>&#x306B;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E; <em>ObjectMode</em> &#x3068;&#x3044;&#x3046;&#x306E;&#x306F;&#x540D;&#x524D;&#x306E;&#x3068;&#x304A;&#x308A;&#x3001;Stream&#x3067;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x6D41;&#x3059;&#x305F;&#x3081;&#x306E;&#x8A2D;&#x5B9A;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#x306E;Node.js Stream&#x306F;<a href="https://nodejs.org/api/buffer.html" target="_blank">Buffer</a>&#x3068;&#x3044;&#x3046;&#x30D0;&#x30A4;&#x30CA;&#x30EA;&#x30FC;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x6271;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;<a href="https://nodejs.org/api/buffer.html" target="_blank">Buffer</a>&#x306F;String&#x3068;&#x76F8;&#x4E92;&#x5909;&#x63DB;&#x304C;&#x53EF;&#x80FD;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x4E00;&#x65B9;&#x3067;&#x8907;&#x6570;&#x306E;&#x5024;&#x3092;&#x6301;&#x3063;&#x305F;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x3088;&#x3046;&#x306A;&#x3082;&#x306E;&#x306F;&#x6271;&#x3048;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;Node.js Stream&#x306B;&#x306F;<a href="https://nodejs.org/api/stream.html#stream_object_mode" title="Object Mode" target="_blank">Object Mode</a>&#x304C;&#x3042;&#x308A;&#x3001;&#x6709;&#x52B9;&#x306E;&#x5834;&#x5408;&#x306F;Buffer&#x3084;String&#x4EE5;&#x5916;&#x306E;JavaScript&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;Stream&#x3067;&#x6D41;&#x305B;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>Node.js Stream&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x4EE5;&#x4E0B;&#x3092;&#x5408;&#x308F;&#x305B;&#x3066;&#x53C2;&#x7167;&#x3059;&#x308B;&#x3068;&#x3044;&#x3044;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html" title="Stream Node.js Manual &amp; Documentation" target="_blank">Stream Node.js Manual &amp; Documentation</a></li>
+<li><a href="https://github.com/substack/stream-handbook" title="substack/stream-handbook" target="_blank">substack/stream-handbook</a></li>
+</ul>
+<h3 id="vinyl">vinyl</h3>
+<p>gulp&#x3067;&#x306F;<a href="https://github.com/gulpjs/vinyl" title="vinyl" target="_blank">vinyl</a>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;Stream&#x3067;&#x6D41;&#x308C;&#x3066;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;vinyl&#x306F; <em>Virtual file format</em> &#x3068;&#x3044;&#x3046;&#x547C;&#x3070;&#x308C;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;&#x3067;&#x3001;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x60C5;&#x5831;&#x3068;&#x4E2D;&#x8EAB;&#x3092;&#x30E9;&#x30C3;&#x30D7;&#x3057;&#x305F;gulp&#x7528;&#x306B;&#x4F5C;&#x6210;&#x3055;&#x308C;&#x305F;&#x62BD;&#x8C61;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30C3;&#x30C8;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x306A;&#x305C;&#x3053;&#x3046;&#x3044;&#x3063;&#x305F;&#x62BD;&#x8C61;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30C3;&#x30C8;&#x304C;&#x5FC5;&#x8981;&#x306A;&#x306E;&#x304B;&#x306F;&#x6B21;&#x306E;&#x3053;&#x3068;&#x3092;&#x8003;&#x3048;&#x3066;&#x307F;&#x308B;&#x3068;&#x5206;&#x304B;&#x308A;&#x3084;&#x3059;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<ul>
+<li>Stream&#x3067;&#x6D41;&#x308C;&#x3066;&#x304D;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x62E1;&#x5F35;&#x5B50;&#x3092;&#x77E5;&#x308A;&#x305F;&#x3044;</li>
+<li>Stream&#x3067;&#x6D41;&#x308C;&#x3066;&#x304D;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x8AAD;&#x307F;&#x53D6;&#x308A;&#x5C5E;&#x6027;&#x3092;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x305F;&#x3044;</li>
+<li>Stream&#x3067;&#x6D41;&#x308C;&#x3066;&#x304D;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x3068;&#x540C;&#x3058;&#x5834;&#x6240;&#x306B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x66F8;&#x304D;&#x51FA;&#x3057;&#x305F;&#x3044;</li>
+</ul>
+<p>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x4E2D;&#x8EAB;&#x3060;&#x3051;&#x304C;Stream&#x3067;&#x6D41;&#x308C;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x30D1;&#x30B9;&#x3084;&#x8AAD;&#x307F;&#x53D6;&#x308A;&#x5C5E;&#x6027;&#x306A;&#x3069;&#x306E;&#x8A73;&#x7D30;&#x306A;&#x60C5;&#x5831;&#x3092;&#x77E5;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;<code>gulp.src</code>&#x3067;&#x8AAD;&#x307F;&#x8FBC;&#x3093;&#x3060;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;vinyl&#x3067;&#x30E9;&#x30C3;&#x30D7;&#x3055;&#x308C;&#x3001;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x4E2D;&#x8EAB;&#x306F;<code>contents</code>&#x3068;&#x3057;&#x3066;&#x53C2;&#x7167;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="vinyl&#x306E;&#x4E2D;&#x8EAB;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;">vinyl&#x306E;&#x4E2D;&#x8EAB;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;</h3>
+<p>&#x6B21;&#x306F;Transform Stream&#x306E;&#x5177;&#x4F53;&#x7684;&#x306A;&#x51E6;&#x7406;&#x3092;&#x898B;&#x3066;&#x307F;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-comment">// file &#x306F; `vinyl` &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;</span>
+<span class="hljs-keyword">if</span> (file.isBuffer()) {
+    file.contents = prefixBuffer(file.contents, prefix);
+}
+
+<span class="hljs-keyword">if</span> (file.isStream()) {
+    file.contents = file.contents.pipe(prefixStream(prefix));
+}
+</code></pre>
+<p><code>vinyl</code>&#x62BD;&#x8C61;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30C3;&#x30C8;&#x306E;<code>contents</code>&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306B;&#x306F;&#x3001;&#x8AAD;&#x307F;&#x8FBC;&#x3093;&#x3060;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;Buffer&#x307E;&#x305F;&#x306F;Stream&#x304C;&#x683C;&#x7D0D;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x4E21;&#x65B9;&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306B;&#x5BFE;&#x5FDC;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30C9;&#x3059;&#x308B;&#x5834;&#x5408;&#x306F;&#x3069;&#x3061;&#x3089;&#x304C;&#x6765;&#x3066;&#x3082;&#x554F;&#x984C;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B;&#x66F8;&#x304F;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<blockquote class="clearfix alert alert-info"><strong class="fa fa-2x fa-edit"></strong>
+<p>: gulp plugin&#x306F;&#x5FC5;&#x305A;&#x3057;&#x3082;&#x4E21;&#x65B9;&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306B;&#x5BFE;&#x5FDC;&#x3057;&#x306A;&#x3044;&#x3068;&#x3044;&#x3051;&#x306A;&#x3044;&#x306E;&#x3067;&#x306F;&#x306A;&#x304F;&#x3001;Buffer&#x3060;&#x3051;&#x306B;&#x5BFE;&#x5FDC;&#x3057;&#x305F;&#x3082;&#x306E;&#x3082;&#x591A;&#x3044;&#x3067;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x305D;&#x306E;&#x5834;&#x5408;&#x306B;Stream&#x304C;&#x6765;&#x305F;&#x6642;&#x306E;Error&#x30A4;&#x30D9;&#x30F3;&#x30C8;&#x3092;&#x901A;&#x77E5;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x30AC;&#x30A4;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x3067;&#x63A8;&#x5968;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002; - <a href="https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md" title="gulp/guidelines.md at master &#xB7; gulpjs/gulp" target="_blank">gulp/guidelines.md at master &#xB7; gulpjs/gulp</a></p>
+</blockquote>
+<p><code>contents</code>&#x306B;&#x3069;&#x3061;&#x3089;&#x306E;&#x30BF;&#x30A4;&#x30D7;&#x304C;&#x683C;&#x7D0D;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x306F;&#x3001;&#x3072;&#x3068;&#x3064;&#x524D;&#x306E;Stream&#x3067;&#x6C7A;&#x5B9A;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js">gulp.src(<span class="hljs-string">&quot;./*.*&quot;</span>)
+    .pipe(gulpPrefixer(<span class="hljs-string">&quot;prefix text&quot;</span>))
+    .pipe(gulp.dest(<span class="hljs-string">&quot;build&quot;</span>));
+</code></pre>
+<p>&#x3053;&#x306E;&#x5834;&#x5408;&#x306F;&#x3001;<code>gulp.src</code>&#x306B;&#x3088;&#x308A;&#x6C7A;&#x5B9A;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;
+<code>gulp.src</code>&#x306F;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x306F;&#x3001;<code>contents</code>&#x306B;Buffer&#x3092;&#x683C;&#x7D0D;&#x3059;&#x308B;&#x306E;&#x3067;&#x3001;&#x3053;&#x306E;&#x5834;&#x5408;&#x306F;Buffer&#x3067;&#x51E6;&#x7406;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p><code>gulp.src</code>&#x306F;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;<code>{ buffer: false }</code>&#x3092;&#x6E21;&#x3059;&#x3053;&#x3068;&#x3067;<code>contents</code>&#x306B;Stream&#x3092;&#x6D41;&#x3059;&#x3053;&#x3068;&#x3082;&#x53EF;&#x80FD;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-js">gulp.src(<span class="hljs-string">&quot;./*.*&quot;</span>, { <span class="hljs-attr">buffer</span>: <span class="hljs-literal">false</span> })
+        .pipe(gulpPrefixer(<span class="hljs-string">&quot;prefix text&quot;</span>))
+        .pipe(gulp.dest(<span class="hljs-string">&quot;build&quot;</span>));
+</code></pre>
+<h3 id="&#x5909;&#x63DB;&#x51E6;&#x7406;">&#x5909;&#x63DB;&#x51E6;&#x7406;</h3>
+<p>&#x6700;&#x5F8C;&#x306B;Buffer&#x3068;Stream&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x5909;&#x63DB;&#x51E6;&#x7406;&#x3092;&#x898B;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prefixBuffer</span>(<span class="hljs-params">buffer, prefix</span>) </span>{
+    <span class="hljs-keyword">return</span> Buffer.concat([Buffer(prefix), buffer]);
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prefixStream</span>(<span class="hljs-params">prefix</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
+        <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">chunk, encoding, next</span>) </span>{
+            <span class="hljs-comment">// ObjectMode:false&#x306E;Transform Stream</span>
+            <span class="hljs-comment">// Stream&#x306E;chunk&#x306B;&#x306F;Buffer&#x304C;&#x6D41;&#x308C;&#x3066;&#x304F;&#x308B;</span>
+            <span class="hljs-keyword">let</span> buffer = prefixBuffer(chunk, prefix);
+            <span class="hljs-keyword">this</span>.push(buffer);
+            next();
+        }
+    });
+}
+</code></pre>
+<p>&#x3084;&#x3063;&#x3066;&#x304D;&#x305F;Buffer&#x306E;&#x5148;&#x982D;&#x306B;<code>prefix</code>&#x306E;&#x6587;&#x5B57;&#x5217;&#x3092;Buffer&#x3068;&#x3057;&#x3066;&#x7D50;&#x5408;&#x3057;&#x3066;&#x8FD4;&#x3059;&#x3060;&#x3051;&#x306E;&#x51E6;&#x7406;&#x304C;&#x884C;&#x308F;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x5909;&#x63DB;&#x51E6;&#x7406;&#x306F;gulp&#x306B;&#x4F9D;&#x5B58;&#x3057;&#x305F;&#x3082;&#x306E;&#x3067;&#x306F;&#x306A;&#x3044;&#x305F;&#x3081;&#x3001;&#x901A;&#x5E38;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x306B;&#x6E21;&#x3057;&#x3066;&#x51E6;&#x7406;&#x3059;&#x308B;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x304C;&#x53EF;&#x80FD;&#x3067;&#x3059;&#x3002;
+Buffer&#x306F;String&#x3068;&#x76F8;&#x4E92;&#x5909;&#x63DB;&#x304C;&#x53EF;&#x80FD;&#x306A;&#x306E;&#x3067;&#x3001;&#x591A;&#x304F;&#x306E;gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x3082;&#x306E;&#x306F;&#x3001;<code>gulpPrefixer</code>&#x3068;<code>prefixBuffer</code>&#x306B;&#x3042;&#x305F;&#x308B;&#x90E8;&#x5206;&#x3060;&#x3051;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3064;&#x307E;&#x308A;&#x3001;prefix&#x3092;&#x4ED8;&#x3051;&#x308B;&#x3068;&#x3044;&#x3063;&#x305F;&#x5909;&#x63DB;&#x51E6;&#x7406;&#x306F;&#x3001;&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3067;&#x884C;&#x3046;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306F;<a href="https://github.com/gulpjs/vinyl" title="vinyl" target="_blank">vinyl</a>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x540C;&#x58EB;&#x3067;&#x3084;&#x308A;&#x53D6;&#x308A;&#x3057;&#x3001;&#x305D;&#x306E;&#x30A4;&#x30F3;&#x30BF;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x3068;&#x3057;&#x3066;&#x65E2;&#x5B58;&#x306E;Node.js Stream&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;">&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;</h2>
+<p>gulp&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x884C;&#x3046;&#x51E6;&#x7406;&#x306F;&#x300C;&#x5165;&#x529B;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x51FA;&#x529B;&#x3092;&#x8FD4;&#x3059;&#x300D;&#x304C;&#x4E3B;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x53D7;&#x3051;&#x6E21;&#x3059;&#x30C7;&#x30FC;&#x30BF;&#x3068;&#x3057;&#x3066;<a href="https://github.com/gulpjs/vinyl" title="vinyl" target="_blank">vinyl</a>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x4F7F;&#x3044;&#x3001;&#x53D7;&#x3051;&#x6E21;&#x3059;API&#x306E;&#x30A4;&#x30F3;&#x30BF;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x3068;&#x3057;&#x3066;Node.js Stream&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>gulp&#x3067;&#x306F;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x3082;&#x3064;&#x6A5F;&#x80FD;&#x306F;1&#x3064;(&#x5358;&#x6A5F;&#x80FD;)&#x3068;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x63A8;&#x5968;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<blockquote>
+<p>Your plugin should only do one thing, and do it well.
+-- <a href="https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md" title="gulp/guidelines.md at master &#xB7; gulpjs/gulp" target="_blank">gulp/guidelines.md</a></p>
+</blockquote>
+<p>gulp&#x306F;&#x65E2;&#x5B58;&#x306E;Node.js Stream&#x306B;&#x4E57;&#x308B;&#x3053;&#x3068;&#x3067;&#x72EC;&#x81EA;&#x306E;API&#x3092;&#x4F7F;&#x308F;&#x305A;&#x306B;&#x89E3;&#x6C7A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x5143;&#x3005;&#x3001;Transform Stream&#x306F;1&#x3064;&#x306E;&#x5909;&#x63DB;&#x51E6;&#x7406;&#x3092;&#x884C;&#x3046;&#x3053;&#x3068;&#x304C;&#x5F97;&#x610F;&#x306A;&#x306E;&#x3067;&#x3001;&#x305D;&#x306E;&#x5909;&#x63DB;&#x51E6;&#x7406;&#x3092;<code>pipe</code>&#x3092;&#x7E4B;&#x3052;&#x308B;&#x3053;&#x3068;&#x3067;&#x8907;&#x6570;&#x306E;&#x51E6;&#x7406;&#x3092;&#x884C;&#x3046;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305F;&#x3001;gulp&#x306F;&#x30BF;&#x30B9;&#x30AF;&#x81EA;&#x52D5;&#x5316;&#x30C4;&#x30FC;&#x30EB;&#x306A;&#x306E;&#x3067;&#x3001;&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x30BF;&#x30B9;&#x30AF;&#x3068;&#x3057;&#x3066;&#x4F7F;&#x3044;&#x3084;&#x3059;&#x304F;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x91CD;&#x8981;&#x3060;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;
+Node.js Stream&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x306F;&#x6D41;&#x308C;&#x308B;&#x30C7;&#x30FC;&#x30BF;&#x304C;<code>Buffer</code>&#x3068;&#x306A;&#x308A;&#x3001;&#x305D;&#x306E;&#x307E;&#x307E;&#x3067;&#x306F;&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3067;&#x306F;&#x6271;&#x3044;&#x306B;&#x304F;&#x3044;&#x554F;&#x984C;&#x3092;&#x30C7;&#x30FC;&#x30BF;&#x3068;&#x3057;&#x3066;<a href="https://github.com/gulpjs/vinyl" title="vinyl" target="_blank">vinyl</a>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x6D41;&#x3059;&#x3053;&#x3068;&#x3067;&#x7DE9;&#x548C;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x3001;gulp&#x306F;&#x30BF;&#x30B9;&#x30AF;&#x306B;&#x5FC5;&#x8981;&#x306A;&#x5358;&#x6A5F;&#x80FD;&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3092;&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3067;&#x4F5C;&#x308A;&#x3084;&#x3059;&#x304F;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x518D;&#x5229;&#x7528;&#x3067;&#x304D;&#x308B;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x591A;&#x304F;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x3067;&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3092;&#x69CB;&#x7BC9;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?</h2>
+<p>gulp&#x81EA;&#x4F53;&#x306F;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x6D41;&#x308C;&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x3060;&#x3051;&#x3067;&#x3001;&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x306F;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x91CD;&#x8981;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x30BF;&#x30B9;&#x30AF;&#x306B;&#x306F;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x51E6;&#x7406;&#x304C;&#x60F3;&#x5B9A;&#x3055;&#x308C;&#x308B;&#x305F;&#x3081;&#x3001;&#x5FC5;&#x8981;&#x306B;&#x306A;&#x308B;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3082;&#x7A2E;&#x985E;&#x304C;&#x3055;&#x307E;&#x3056;&#x307E;&#x306A;&#x3082;&#x306E;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>gulp&#x3067;&#x306F;<a href="https://github.com/gulpjs/vinyl" title="vinyl" target="_blank">vinyl</a>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x4E2D;&#x9593;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30C3;&#x30C8;&#x3068;&#x6C7A;&#x3081;&#x305F;&#x3053;&#x3068;&#x3067;&#x3001;&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3092;&#x30E9;&#x30C3;&#x30D7;&#x3057;&#x305F;&#x3060;&#x3051;&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x4F5C;&#x308A;&#x3084;&#x3059;&#x304F;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305F;gulp&#x306F;&#x3001;Grunt&#x3068;&#x306F;&#x7570;&#x306A;&#x308A;&#x3001;&#x30BF;&#x30B9;&#x30AF;&#x3092;JavaScript&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3057;&#x3066;&#x8868;&#x73FE;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x3060;&#x3051;&#x3060;&#x3068;&#x5B9F;&#x73FE;&#x3067;&#x304D;&#x306A;&#x3044;&#x5834;&#x5408;&#x306B;&#x3001;&#x76F4;&#x63A5;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F8;&#x304F;&#x3053;&#x3068;&#x3067;&#x5BFE;&#x5FDC;&#x3059;&#x308B;&#x3068;&#x3044;&#x3063;&#x305F;&#x5BFE;&#x51E6;&#x6CD5;&#x3092;&#x53D6;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x884C;&#x3046;&#x51E6;&#x7406;&#x304C;&#x4E88;&#x6E2C;&#x3067;&#x304D;&#x306A;&#x3044;&#x5834;&#x5408;&#x306B;&#x3001;&#x4E2D;&#x9593;&#x30D5;&#x30A9;&#x30FC;&#x30DE;&#x30C3;&#x30C8;&#x3068;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x6D41;&#x3057;&#x65B9;&#x3060;&#x3051;&#x3092;&#x6C7A;&#x3081;&#x308B;&#x3068;&#x3044;&#x3046;&#x3084;&#x308A;&#x65B9;&#x306F;&#x5411;&#x3044;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x3068;&#x3081;&#x308B;&#x3068;</p>
+<ul>
+<li>&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3092;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x5316;&#x3057;&#x3084;&#x3059;&#x3044;</li>
+<li>&#x5FC5;&#x8981;&#x306A;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x306A;&#x3044;&#x5834;&#x5408;&#x3082;&#x3001;&#x8A2D;&#x5B9A;&#x3068;&#x3057;&#x3066;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x66F8;&#x304F;&#x3053;&#x3068;&#x3067;&#x5BFE;&#x5FDC;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?</h2>
+<p>&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3092;&#x8907;&#x6570;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x6271;&#x3046;&#x3082;&#x306E;&#x306B;&#x5171;&#x901A;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3059;&#x304C;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x554F;&#x984C;&#x306F;gulp&#x3067;&#x3082;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;<a href="https://github.com/substack/node-browserify" target="_blank">Browserify</a>&#x306F;Node.js Stream&#x3092;&#x6271;&#x3048;&#x307E;&#x3059;&#x304C;&#x3001;&#x5909;&#x63DB;&#x306E;&#x958B;&#x59CB;&#x70B9;&#x3068;&#x3057;&#x3066;&#x3044;&#x306A;&#x3044;&#x5834;&#x5408;&#x306B;&#x554F;&#x984C;&#x304C;&#x767A;&#x751F;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-transforms.md" title="gulp/browserify-transforms.md at master &#xB7; gulpjs/gulp" target="_blank">gulp/browserify-transforms.md at master &#xB7; gulpjs/gulp</a></li>
+</ul>
+<p>&#x307E;&#x305F;&#x3001;gulp&#x306F;&#x5358;&#x6A5F;&#x80FD;&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3092;&#x63A8;&#x5968;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x3053;&#x308C;&#x306F;API&#x3068;&#x3057;&#x3066;&#x305D;&#x3046;&#x3044;&#x3046;&#x5236;&#x9650;&#x304C;&#x3042;&#x308B;&#x308F;&#x3051;&#x3067;&#x306F;&#x306A;&#x3044;&#x305F;&#x3081;&#x3042;&#x304F;&#x307E;&#x3067;&#x30EB;&#x30FC;&#x30EB;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x554F;&#x984C;&#x306B;&#x5BFE;&#x3057;&#x3066;gulp&#x306F;&#x30AC;&#x30A4;&#x30C9;&#x30E9;&#x30A4;&#x30F3;&#x3084;&#x30EC;&#x30B7;&#x30D4;&#x3068;&#x3044;&#x3063;&#x305F;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3092;&#x5145;&#x5B9F;&#x3055;&#x305B;&#x308B;&#x3053;&#x3068;&#x3067;&#x5BFE;&#x51E6;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/gulpjs/gulp/tree/master/docs" title="gulp/docs at master &#xB7; gulpjs/gulp" target="_blank">gulp/docs at master &#xB7; gulpjs/gulp</a></li>
+</ul>
+<p>&#x65E2;&#x5B58;&#x306E;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3092;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x5316;&#x3057;&#x3084;&#x3059;&#x3044;&#x4E00;&#x65B9;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x306E;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x304C;&#x7570;&#x306A;&#x3063;&#x305F;&#x308A;&#x3001;&#x5229;&#x7528;&#x8005;&#x306F;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x5316;&#x3057;&#x305F;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x306E;&#x6271;&#x3044;&#x65B9;&#x3092;&#x5B66;&#x3076;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3068;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x4F5C;&#x8005;&#x304C;&#x7570;&#x306A;&#x308B;&#x30B1;&#x30FC;&#x30B9;&#x3082;&#x591A;&#x3044;&#x305F;&#x3081;&#x3001;&#x540C;&#x69D8;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x3082;&#x3064;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x8907;&#x6570;&#x3067;&#x304D;&#x305F;&#x308A;&#x3001;&#x8CEA;&#x3082;&#x30D0;&#x30E9;&#x30D0;&#x30E9;&#x3068;&#x306A;&#x308A;&#x3084;&#x3059;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x3068;&#x3081;&#x308B;&#x3068;</p>
+<ul>
+<li>&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x554F;&#x984C;&#x306F;&#x5229;&#x7528;&#x8005;&#x304C;&#x89E3;&#x6C7A;&#x3057;&#x306A;&#x3044;&#x3068;&#x3044;&#x3051;&#x306A;&#x3044;</li>
+<li>&#x540C;&#x69D8;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x3082;&#x3064;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x304C;&#x751F;&#x307E;&#x308C;&#x3084;&#x3059;&#x3044;</li>
+</ul>
+<h2 id="&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;">&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;</h2>
+<ul>
+<li><a href="https://github.com/sighjs/sigh" title="sighjs/sigh" target="_blank">sighjs/sigh</a><ul>
+<li>gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x305D;&#x306E;&#x3082;&#x306E;&#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x307E;&#x3068;&#x3081;">&#x307E;&#x3068;&#x3081;</h2>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;gulp&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x3073;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<ul>
+<li><a href="#gulp">gulp</a><ul>
+<li><a href="#%E3%81%A9%E3%81%86%E6%9B%B8%E3%81%91%E3%82%8B">&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?</a></li>
+<li><a href="#%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E4%BB%95%E7%B5%84%E3%81%BF">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;?</a><ul>
+<li><a href="#stream">Stream</a></li>
+<li><a href="#vinyl">vinyl</a></li>
+<li><a href="#vinyl%E3%81%AE%E4%B8%AD%E8%BA%AB%E3%82%92%E5%87%A6%E7%90%86%E3%81%99%E3%82%8B">vinyl&#x306E;&#x4E2D;&#x8EAB;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;</a></li>
+<li><a href="#%E5%A4%89%E6%8F%9B%E5%87%A6%E7%90%86">&#x5909;&#x63DB;&#x51E6;&#x7406;</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A8%E3%82%B3%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;</a></li>
+<li><a href="#%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E7%94%A8%E9%80%94%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?</a></li>
+<li><a href="#%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E7%94%A8%E9%80%94%E3%81%AB%E5%90%91%E3%81%84%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?</a></li>
+<li><a href="#%E3%81%93%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%82%82%E3%81%AE">&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81">&#x307E;&#x3068;&#x3081;</a></li>
+</ul>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../connect/" class="navigation navigation-prev " aria-label="Previous page: Connect">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../Redux/" class="navigation navigation-next " aria-label="Next page: Redux">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"gulp","level":"1.5","depth":1,"next":{"title":"Redux","level":"1.6","depth":1,"path":"ja/Redux/README.md","ref":"ja/Redux/README.md","articles":[]},"previous":{"title":"Connect","level":"1.4","depth":1,"path":"ja/connect/README.md","ref":"ja/connect/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexMincho","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"ja/gulp/README.md","mtime":"2020-09-05T15:19:59.036Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-05T15:20:36.689Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

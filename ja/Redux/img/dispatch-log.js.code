@@ -1,0 +1,20 @@
+// dispatch action
+const action = {type: "ActionType"};
+dispatch(action);
+//        |
+//        |
+//        v
+// logger middleware
+//                | "action"
+//                v
+store => next => action => {
+    logger.log(action);
+    const value = next(action);
+    // next is store.dispatch
+    logger.log(store.getState());
+    return value;
+}
+//        |
+//        |
+//        v
+store.dispatch(action);

@@ -1,0 +1,49 @@
+version: 1
+imports:
+  - ./prh-open-closed.yml
+rules:
+# ルールの書き方については https://github.com/vvakame/prh を参照する
+# https://github.com/vvakame/prh/blob/master/misc/prh.yml
+# プロジェクト固有の単語
+  - expected: jQuery
+  - expected: ESLint
+
+  - expected: Connect
+    specs:
+      - from: connect
+        to:   Connect
+  - expected: gulp
+  - expected: タスク自動化ツール
+    patterns:
+      - タスクランナー
+      - タスク管理ツール
+      - Task Runner
+
+  - expected: プラグインアーキテクチャ
+    pattern:
+      - プラグイン機構
+      - プラグインのアーキテクチャ
+  - expected: middleware
+    pattern:
+      - ミドルウェア
+      - /\bMiddleware/
+    specs:
+      - from: Middleware
+        to:   middleware
+      - from: applyMiddleware
+        to:   applyMiddleware
+
+  - expected: 使っているもの
+    pattern: 使ってるもの
+  - expected: String
+    patterns:
+      - 文字列オブジェクト
+
+  - expected: わけでは
+    patterns: 訳では
+
+  - expected: 三原則
+    patterns: 3原則
+
+  - expected: しやすい
+    patterns: し易い

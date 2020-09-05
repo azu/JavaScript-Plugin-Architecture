@@ -1,0 +1,437 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>CONTRIBUTING · JavaScript Plugin Architecture</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.6">
+        <meta name="author" content="azu">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-richquotes/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="ja/Redux/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    この書籍について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="ja/jQuery/">
+            
+                <a href="ja/jQuery/">
+            
+                    
+                    jQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="ja/ESLint/">
+            
+                <a href="ja/ESLint/">
+            
+                    
+                    ESLint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="ja/connect/">
+            
+                <a href="ja/connect/">
+            
+                    
+                    Connect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="ja/gulp/">
+            
+                <a href="ja/gulp/">
+            
+                    
+                    gulp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="ja/Redux/">
+            
+                <a href="ja/Redux/">
+            
+                    
+                    Redux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="CONTRIBUTING.html">
+            
+                <a href="CONTRIBUTING.html">
+            
+                    
+                    CONTRIBUTING
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >CONTRIBUTING</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="contribute">Contribute</h1>
+<h2 id="installation">Installation</h2>
+<p>&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x306B;&#x306F;Node.js&#x304C;&#x5FC5;&#x8981;&#x3067;&#x3059;</p>
+<pre><code>git clone https://github.com/azu/JavaScript-Plugin-Architecture.git
+cd JavaScript-Plugin-Architecture
+npm install
+</code></pre><h2 id="usage">Usage</h2>
+<p>&#x3053;&#x306E;&#x66F8;&#x7C4D;&#x306F;<a href="https://github.com/honkit/honkit" target="_blank">HonKit</a>&#x3092;&#x4F7F;&#x3044;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x8868;&#x793A;&#x306E;&#x78BA;&#x8A8D;">&#x8868;&#x793A;&#x306E;&#x78BA;&#x8A8D;</h3>
+<p><code>npm start</code>&#x3067;<a href="https://github.com/honkit/honkit" target="_blank">HonKit</a>&#x306E;&#x30ED;&#x30FC;&#x30AB;&#x30EB;&#x30B5;&#x30FC;&#x30D0;&#x3092;&#x7ACB;&#x3061;&#x4E0A;&#x3052;&#x3066;&#x8868;&#x793A;&#x3092;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>npm start
+</code></pre><h3 id="&#x30C6;&#x30B9;&#x30C8;">&#x30C6;&#x30B9;&#x30C8;</h3>
+<p><code>npm test</code>&#x3067;&#x30B3;&#x30FC;&#x30C9;&#x3084;&#x6587;&#x7AE0;&#x306E;&#x5358;&#x8A9E;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3092;&#x884C;&#x3048;&#x307E;&#x3059;</p>
+<pre><code>npm test
+</code></pre><h3 id="&#x6587;&#x7AE0;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;">&#x6587;&#x7AE0;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;</h3>
+<p><a href="https://github.com/textlint/textlint" title="textlint" target="_blank">textlint</a>&#x3068;<a href="https://github.com/azu/textlint-formatter-codecov" title="textlint-formatter-codecov" target="_blank">textlint-formatter-codecov</a>&#x3092;&#x4F7F;&#x3063;&#x3066;&#x51FA;&#x3057;&#x3066;&#x308B;&#x6587;&#x7AE0;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;</p>
+<p>100&#xFF05;&#x3092;&#x7406;&#x60F3;&#x7684;&#x76EE;&#x6A19;&#x3068;&#x3057;&#x3066;&#x3001;&#x305D;&#x308C;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x73FE;&#x5B9F;&#x7684;&#x306A;&#x5024;&#x3092;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;&#x306E;&#xFF05;&#x3068;&#x3057;&#x3066;&#x8868;&#x73FE;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p><a href="https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master" target="_blank"><img src="https://codecov.io/github/azu/JavaScript-Plugin-Architecture/coverage.svg?branch=master" alt="codecov.io"></a></p>
+<p><img src="https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master" alt="coverage graph"></p>
+<p>&#x73FE;&#x5728;&#x306E;&#x6587;&#x7AE0;&#x30AB;&#x30D0;&#x30EC;&#x30C3;&#x30B8;&#x306F;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3067;&#x3082;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>npm run textlint:coverage
+</code></pre><h2 id="contribute&#x306E;&#x3084;&#x308A;&#x304B;&#x305F;">Contribute&#x306E;&#x3084;&#x308A;&#x304B;&#x305F;</h2>
+<p>&#x3053;&#x306E;&#x66F8;&#x7C4D;&#x3067;&#x306F;JavaScript&#x306B;&#x304A;&#x3051;&#x308B;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x3092;&#x8272;&#x3005;&#x306A;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3084;&#x30C4;&#x30FC;&#x30EB;&#x3092;&#x5143;&#x306B;&#x7D39;&#x4ECB;&#x3059;&#x308B;&#x5F62;&#x3092;&#x3068;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>Contribute&#x306F;&#x5927;&#x304D;&#x304F;&#x5206;&#x3051;&#x3066;&#x3001;&#x65E2;&#x5B58;&#x306E;&#x6587;&#x7AE0;&#x306E;&#x4FEE;&#x6B63;&#x3084;&#x57F7;&#x7B46;&#x3068;Proposal&#x306E;&#x63D0;&#x6848;&#x306A;&#x3069;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x6587;&#x7AE0;&#x306E;&#x4FEE;&#x6B63;">&#x6587;&#x7AE0;&#x306E;&#x4FEE;&#x6B63;</h2>
+<p>typo&#x306A;&#x3069;&#x3092;&#x898B;&#x3064;&#x3051;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;1&#x6587;&#x5B57;&#x306E;&#x4FEE;&#x6B63;&#x304B;&#x3089;&#x3067;&#x3082;&#x554F;&#x984C;&#x7121;&#x3044;&#x306E;&#x3067;&#x3001;Pull Request&#x3092;&#x9001;&#x3063;&#x3066;&#x3044;&#x305F;&#x3060;&#x3051;&#x308B;&#x3068;&#x52A9;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x8868;&#x8A18;&#x63FA;&#x308C;&#x3092;&#x767A;&#x898B;&#x3057;&#x305F;&#x5834;&#x5408;&#x306F;&#x5358;&#x7D14;&#x306B;Issue&#x3092;&#x7ACB;&#x3066;&#x3066;&#x3082;&#x3089;&#x3046;&#x304B;&#x3001;Pull Request&#x3067;&#x306E;&#x4FEE;&#x6B63;&#x3092;&#x3044;&#x305F;&#x3060;&#x3051;&#x308B;&#x3068;&#x5B09;&#x3057;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305F;&#x3001;&#x3053;&#x306E;&#x66F8;&#x7C4D;&#x3067;&#x306F;<a href="test/prh-rule.yaml">test/prh-rule.yaml</a>&#x3067;&#x5B9A;&#x7FA9;&#x3057;&#x305F;&#x8F9E;&#x66F8;&#x3092;&#x4F7F;&#x3044;&#x8868;&#x8A18;&#x63FA;&#x308C;&#x3092;&#x8F9E;&#x66F8;&#x3067;&#x30C6;&#x30B9;&#x30C8;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x8F9E;&#x66F8;&#x306B;&#x3088;&#x308B;&#x8868;&#x8A18;&#x63FA;&#x308C;&#x306E;&#x691C;&#x77E5;&#x304C;&#x53EF;&#x80FD;&#x306A;&#x3089;&#x3001;&#x305D;&#x3061;&#x3089;&#x3082;&#x5408;&#x308F;&#x305B;&#x3066;&#x3054;&#x6307;&#x6458;&#x3044;&#x305F;&#x3060;&#x3051;&#x308B;&#x3068;&#x3042;&#x308A;&#x304C;&#x305F;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="http://efcl.info/2015/09/14/textlint-rule-prh/" title="textlint + prh&#x3067;&#x8868;&#x8A18;&#x3086;&#x308C;&#x3092;&#x691C;&#x51FA;&#x3059;&#x308B; | Web Scratch" target="_blank">textlint + prh&#x3067;&#x8868;&#x8A18;&#x3086;&#x308C;&#x3092;&#x691C;&#x51FA;&#x3059;&#x308B; | Web Scratch</a></li>
+</ul>
+<pre><code>## Proposal&#x306E;&#x66F8;&#x304D;&#x65B9;
+
+Proposal&#x3068;&#x306F;&#x3001;&#x66F8;&#x7C4D;&#x306B;&#x8F09;&#x305B;&#x305F;&#x3044;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x3064;&#x3044;&#x3066;&#x306E;Issue&#x3092;&#x7ACB;&#x3066;&#x308B;&#x3053;&#x3068;&#x3092;&#x8A00;&#x3044;&#x307E;&#x3059;&#x3002;
+
+&#x305F;&#x3068;&#x3048;&#x3070;&#x3001;XXX&#x3068;&#x3044;&#x3046;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;/&#x30C4;&#x30FC;&#x30EB;&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x3064;&#x3044;&#x3066;&#x306E;Issue&#x3092;&#x7ACB;&#x3066;&#x308B;&#x5834;&#x5408;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x3053;&#x3068;&#x304C;1&#x884C;&#x3068;&#x304B;&#x3067;&#x3082;&#x3044;&#x3044;&#x306E;&#x3067;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x308C;&#x3070;&#x53C2;&#x8003;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;
+
+&#x4ED5;&#x7D44;&#x307F;&#x306B;&#x3064;&#x3044;&#x3066;&#x8ABF;&#x3079;&#x308B;&#x306E;&#x304C;&#x5927;&#x5909;&#x306A;&#x5834;&#x5408;&#x306F;&#x98DB;&#x3070;&#x3057;&#x3066;&#x3082;&#x554F;&#x984C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;
+JavaScript&#x306F;&#x3068;&#x306B;&#x304B;&#x304F;&#x67D4;&#x8EDF;&#x306A;&#x8A00;&#x8A9E;&#x306A;&#x306E;&#x3067;&#x3001;&#x3053;&#x3046;&#x3044;&#x3046;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x5F62;&#x5F0F;&#x3092;&#x53D6;&#x3063;&#x3066;&#x308B;&#x3068;&#x3044;&#x3046;&#x306E;&#x3092;&#x77E5;&#x3089;&#x305B;&#x308B;&#x3060;&#x3051;&#x3067;&#x3082;&#x6709;&#x7528;&#x3060;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;
+
+# XXX&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;
+
+## &#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?
+
+- &#x5B9F;&#x969B;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x4F8B;
+
+## &#x3069;&#x3046;&#x3044;&#x3046;&#x4ED5;&#x7D44;&#x307F;?
+
+- prototype&#x3092;&#x62E1;&#x5F35;&#x3057;&#x3066;&#x3044;&#x308B;&#x306A;&#x3069;&#x5177;&#x4F53;&#x7684;&#x306A;&#x4ED5;&#x7D44;&#x307F;
+- &#x305D;&#x306E;&#x6A5F;&#x69CB;&#x306E;&#x30B3;&#x30FC;&#x30C9;&#x3078;&#x306E;&#x30EA;&#x30F3;&#x30AF;
+- &#x305D;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3084;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x3064;&#x3044;&#x3066;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3078;&#x306E;&#x30EA;&#x30F3;&#x30AF;
+
+## &#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?
+
+- &#x3069;&#x3046;&#x3044;&#x3046;&#x7528;&#x9014;&#x3067;&#x4F7F;&#x308F;&#x308C;&#x3066;&#x308B;(&#x30E6;&#x30FC;&#x30B9;&#x30B1;&#x30FC;&#x30B9;)
+- &#x5909;&#x63DB;&#x3059;&#x308B;&#x6BCE;&#x306B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3068;&#x3057;&#x3066;&#x5410;&#x304D;&#x51FA;&#x3055;&#x306A;&#x3044;&#x306E;&#x3067;&#x3001;&#x9AD8;&#x901F;&#x306B;&#x8907;&#x6570;&#x306E;&#x5909;&#x63DB;&#x3092;&#x3059;&#x308B;&#x306E;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;&#x7B49;
+
+## &#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?
+
+- &#x5909;&#x63DB;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x4E0A;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x7B49;&#x3092;&#x884C;&#x3046;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3092;&#x6271;&#x3044;&#x306B;&#x304F;&#x3044;&#x7B49;
+
+## &#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;
+
+- XXX&#x4EE5;&#x5916;&#x306B;&#x3082;&#x540C;&#x69D8;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;&#x304C;&#x3042;&#x308B;&#x306A;&#x3089;
+
+----
+
+## &#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30EA;&#x30B9;&#x30C8;
+
+- [ ] &#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?
+- [ ] &#x3069;&#x3046;&#x3044;&#x3046;&#x4ED5;&#x7D44;&#x307F;?
+- [ ] &#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?
+- [ ] &#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?
+- [ ] &#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;
+- [ ] &#x5B9F;&#x88C5;&#x3057;&#x3066;&#x307F;&#x3088;&#x3046;
+- [ ] &#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;
+</code></pre><p>&#x4EE5;&#x4E0B;&#x304B;&#x3089;&#x3053;&#x306E;&#x30C6;&#x30F3;&#x30D7;&#x30EC;&#x30FC;&#x30C8;&#x3067;&#x4F7F;&#x3063;&#x305F;Issue&#x3092;&#x7ACB;&#x3066;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?title=Proposal:XXX&amp;body=%23+XXX&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;%0D%0AURL%3A" target="_blank">&#x65B0;&#x3057;&#x3044;Proposal&#x3092;&#x66F8;&#x304F;</a></li>
+</ul>
+<h3 id="proposal&#x306E;&#x5177;&#x4F53;&#x4F8B;">Proposal&#x306E;&#x5177;&#x4F53;&#x4F8B;</h3>
+<p>&#x73FE;&#x5728;&#x3042;&#x308B;<a href="https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal" target="_blank">Proposal&#x4E00;&#x89A7;</a>&#x3092;&#x53C2;&#x8003;&#x306B;&#x3057;&#x3066;&#x307F;&#x308B;&#x3068;&#x3088;&#x3044;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/azu/JavaScript-Plugin-Architecture/issues/8" title="jQuery Plugin &#xB7; Issue #8 &#xB7; azu/JavaScript-Plugin-Architecture" target="_blank">jQuery Plugin &#xB7; Issue #8 &#xB7; azu/JavaScript-Plugin-Architecture</a></li>
+</ul>
+<h2 id="&#x30C6;&#x30B9;&#x30C8;">&#x30C6;&#x30B9;&#x30C8;</h2>
+<p><code>$ npm test</code> &#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3068;&#x30B3;&#x30FC;&#x30C9;&#x3084;&#x6587;&#x7AE0;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x304C;&#x5B9F;&#x884C;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-sh">npm <span class="hljs-built_in">test</span>
+</code></pre>
+<p>&#x6587;&#x7AE0;&#x306F;<a href="https://github.com/azu/textlint" title="textlint" target="_blank">textlint</a>&#x306B;&#x3088;&#x308B;&#x5358;&#x8A9E;&#x306E;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x304C;&#x884C;&#x308F;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;">&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;</h2>
+<p>AngularJS&#x306E;Git Commit Guidelines&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x3068;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md" title="conventional-changelog/angular.md at master &#xB7; ajoslin/conventional-changelog" target="_blank">conventional-changelog/angular.md at master &#xB7; ajoslin/conventional-changelog</a></li>
+</ul>
+<p>&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x5F62;&#x3067;1&#x884C;&#x76EE;&#x306B;&#x6982;&#x8981;&#x3001;3&#x884C;&#x76EE;&#x304B;&#x3089;&#x672C;&#x6587;&#x3001;&#x6700;&#x5F8C;&#x306B;&#x95A2;&#x9023;&#x3059;&#x308B;Issue(&#x4EFB;&#x610F;)&#x3092;&#x66F8;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>feat(ngInclude): add template url parameter to events
+
+The `src` (i.e. the url of the template to load) is now provided to the
+`$includeContentRequested`, `$includeContentLoaded` and `$includeContentError`
+events.
+
+Closes #8453
+Closes #8454
+</code></pre><pre><code>                         scope        commit title
+
+        commit type       /                /      
+                \        |                |
+                 feat(ngInclude): add template url parameter to events
+
+        body -&gt;  The &apos;src` (i.e. the url of the template to load) is now provided to the
+                 `$includeContentRequested`, `$includeContentLoaded` and `$includeContentError`
+                 events.
+
+ referenced  -&gt;  Closes #8453
+ issues          Closes #8454
+</code></pre><p>1&#x884C;&#x306E;<code>feat</code>&#x3084;<code>fix</code>&#x3068;&#x3044;&#x3063;&#x305F;commit type&#x306F;&#x3001;&#x8FF7;&#x3063;&#x305F;&#x3089;&#x3068;&#x308A;&#x3042;&#x3048;&#x305A;<code>chore</code>&#x3068;&#x66F8;&#x3044;&#x3066;&#x3001;<code>scope</code>&#x3082;&#x7701;&#x7565;&#x3057;&#x3066;&#x554F;&#x984C;&#x306A;&#x3044;&#x306E;&#x3067;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x5F62;&#x3067;&#x3082;&#x554F;&#x984C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<pre><code>chore: &#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;
+</code></pre><p>&#x3053;&#x306E;&#x30B3;&#x30DF;&#x30C3;&#x30C8;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x306E;&#x898F;&#x7D04;&#x306F;<a href="https://github.com/ajoslin/conventional-changelog" title="conventional-changelog" target="_blank">conventional-changelog</a>&#x306B;&#x3088;&#x308B;&#x81EA;&#x52D5;&#x751F;&#x6210;&#x306E;&#x305F;&#x3081;&#x3067;&#x3082;&#x3042;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x53D6;&#x308A;&#x8FBC;&#x3080;&#x3068;&#x304D;&#x306B;&#x8ABF;&#x6574;&#x3067;&#x304D;&#x308B;&#x306E;&#x3067;&#x7121;&#x8996;&#x3057;&#x3066;&#x3082;&#x3089;&#x3063;&#x3066;&#x3082;&#x554F;&#x984C;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3088;&#x3044;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<ul>
+<li><a href="http://efcl.info/2015/06/18/good-changelog/" title="&#x826F;&#x3044;ChangeLog&#x3001;&#x826F;&#x304F;&#x306A;&#x3044;ChangeLog | Web Scratch" target="_blank">&#x826F;&#x3044;ChangeLog&#x3001;&#x826F;&#x304F;&#x306A;&#x3044;ChangeLog | Web Scratch</a></li>
+<li><a href="http://azu.github.io/slide/cto/changelog.html" title="&#x308F;&#x308C;&#x308F;&#x308C;&#x306F;&#x3001;&#x3044;&#x304B;&#x306B;&#x3057;&#x3066;&#x5909;&#x66F4;&#x70B9;&#x3092;&#x8FFD;&#x3046;&#x304B;" target="_blank">&#x308F;&#x308C;&#x308F;&#x308C;&#x306F;&#x3001;&#x3044;&#x304B;&#x306B;&#x3057;&#x3066;&#x5909;&#x66F4;&#x70B9;&#x3092;&#x8FFD;&#x3046;&#x304B;</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ja/Redux/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Redux">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"CONTRIBUTING","level":"1.7","depth":1,"previous":{"title":"Redux","level":"1.6","depth":1,"path":"ja/Redux/README.md","ref":"ja/Redux/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexMincho","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"CONTRIBUTING.md","mtime":"2020-09-05T15:19:58.976Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-05T15:20:36.689Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

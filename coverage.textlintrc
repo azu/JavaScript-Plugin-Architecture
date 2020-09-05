@@ -1,0 +1,48 @@
+{
+  "filters": {
+    "comments": true
+  },
+  "rules": {
+    // strictオプションの有効化
+    "max-ten": {
+      "max": 3,
+      "strict": true
+    },
+    "ja-no-abusage": true,
+    "unexpanded-acronym": true,
+    "no-nfd": true,
+    "max-kanji-continuous-len": true,
+    "no-doubled-conjunctive-particle-ga": true,
+    "no-doubled-conjunction": true,
+    "no-double-negative-ja": true,
+    "no-doubled-joshi": {
+      "min_interval": 1,
+      "strict": true
+    },
+    "sentence-length": {
+      "max": 100
+    },
+    "no-start-duplicated-conjunction": {
+      "interval": 3
+    },
+    "spellcheck-tech-word": true,
+    "no-mix-dearu-desumasu": {
+      "preferInHeader": "",
+      "preferInBody": "ですます",
+      "preferInList": "である"
+    },
+    "prh": {
+      "rulePaths": [
+        "test/prh.yml"
+      ]
+    },
+    "preset-jtf-style": {
+    // デフォルト無効のオプション
+      "2.1.2.漢字": true,
+      "2.1.5.カタカナ": true,
+      "2.2.1.ひらがなと漢字の使い分け": true,
+      "4.2.2.疑問符(？)": false,
+      "4.3.1.丸かっこ（）": false
+    }
+  }
+}

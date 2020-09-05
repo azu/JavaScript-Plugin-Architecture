@@ -1,0 +1,642 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Redux · JavaScript Plugin Architecture</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.6">
+        <meta name="author" content="azu">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-richquotes/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../CONTRIBUTING.html" />
+    
+    
+    <link rel="prev" href="../gulp/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    この書籍について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../jQuery/">
+            
+                <a href="../jQuery/">
+            
+                    
+                    jQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ESLint/">
+            
+                <a href="../ESLint/">
+            
+                    
+                    ESLint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../connect/">
+            
+                <a href="../connect/">
+            
+                    
+                    Connect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../gulp/">
+            
+                <a href="../gulp/">
+            
+                    
+                    gulp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Redux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../CONTRIBUTING.html">
+            
+                <a href="../../CONTRIBUTING.html">
+            
+                    
+                    CONTRIBUTING
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Redux</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="redux">Redux</h1>
+<blockquote>
+<p>&#x3053;&#x306E;&#x6587;&#x7AE0;&#x306F;<a href="https://github.com/reactjs/redux" title="reactjs/redux: Predictable state container for JavaScript apps" target="_blank">Redux</a> <a href="https://github.com/reactjs/redux/releases/tag/v3.5.2" title="3.5.2" target="_blank">3.5.2</a>&#x3092;&#x5143;&#x306B;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+<p><a href="https://github.com/reactjs/redux" title="reactjs/redux: Predictable state container for JavaScript apps" target="_blank">Redux</a>&#x306F;JavaScript&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;State&#x3092;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3067;&#x3001;
+<a href="https://github.com/facebook/react" title="React" target="_blank">React</a>&#x306A;&#x3069;&#x3068;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x5229;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>Redux&#x306F;<a href="https://facebook.github.io/flux/" title="Flux" target="_blank">Flux</a>&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x985E;&#x4F3C;&#x3059;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x3067;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x4E8B;&#x524D;&#x306B;Flux&#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x7FD2;&#x3057;&#x3066;&#x3044;&#x308B;&#x3068;&#x3088;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>Redux&#x306B;&#x306F;<a href="http://redux.js.org/docs/introduction/ThreePrinciples.html" title="Three Principles | Redux" target="_blank">Three Principles</a>(&#x4EE5;&#x4E0B;&#x3001;&#x4E09;&#x539F;&#x5247;)&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;3&#x3064;&#x306E;&#x5236;&#x7D04;&#x306E;&#x4E0A;&#x3067;&#x6210;&#x7ACB;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li>Single source of truth<ul>
+<li>&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x5168;&#x4F53;&#x306E;State&#x306F;1&#x3064;&#x306E;State&#x30C4;&#x30EA;&#x30FC;&#x3068;&#x3057;&#x3066;&#x4FDD;&#x5B58;&#x3055;&#x308C;&#x308B;</li>
+</ul>
+</li>
+<li>State is read-only<ul>
+<li>State&#x306F;Action&#x3092;&#x7D4C;&#x7531;&#x3057;&#x306A;&#x3044;&#x3068;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x306A;&#x3044;</li>
+</ul>
+</li>
+<li>Changes are made with pure functions<ul>
+<li>Action&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;State&#x3092;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;Reducer&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;pure function&#x3092;&#x4F5C;&#x308B;</li>
+</ul>
+</li>
+</ul>
+<p>&#x3053;&#x306E;&#x4E09;&#x539F;&#x5247;&#x306B;&#x3064;&#x3044;&#x3066;&#x306E;&#x8A73;&#x7D30;&#x306F;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x306A;&#x3069;&#x3092;&#x53C2;&#x7167;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+<ul>
+<li><a href="http://redux.js.org/" target="_blank">Read Me | Redux</a></li>
+<li><a href="https://egghead.io/series/getting-started-with-redux" target="_blank">Getting Started with Redux - Course by @dan_abramov @eggheadio</a></li>
+</ul>
+<p>Redux&#x306E;&#x4F7F;&#x3044;&#x65B9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3053;&#x3053;&#x3067;&#x306F;&#x89E3;&#x8AAC;&#x3057;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;Redux&#x306E;&#x62E1;&#x5F35;&#x6A5F;&#x80FD;&#x3068;&#x306A;&#x308B; <em>middleware</em> &#x3082;&#x3001;&#x3053;&#x306E;&#x4E09;&#x539F;&#x5247;&#x306B;&#x57FA;&#x3065;&#x3044;&#x305F;&#x4ED5;&#x7D44;&#x307F;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p><em>middleware</em> &#x3068;&#x3044;&#x3046;&#x540D;&#x524D;&#x304B;&#x3089;&#x3082;&#x5206;&#x304B;&#x308B;&#x3088;&#x3046;&#x306B;&#x3001;<a href="../connect/">Connect</a>&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3068;&#x985E;&#x4F3C;&#x70B9;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;
+<a href="../connect/">Connect</a>&#x306E;&#x9055;&#x3044;&#x3092;&#x610F;&#x8B58;&#x3057;&#x306A;&#x304C;&#x3089;&#x3001;Redux&#x306E; <em>middleware</em> &#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<h2 id="&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;">&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?</h2>
+<p>&#x7C21;&#x6F54;&#x306B;Redux&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x66F8;&#x304F;&#x3068;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li>&#x64CD;&#x4F5C;&#x3092;&#x8868;&#x73FE;&#x3059;&#x308B;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;Action&#x3068;&#x547C;&#x3076;<ul>
+<li>&#x4E00;&#x822C;&#x7684;&#x306A;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3068;&#x540C;&#x69D8;&#x306E;&#x3082;&#x306E;</li>
+</ul>
+</li>
+<li>Action&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;State&#x3092;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x95A2;&#x6570;&#x3092; <em>Reducer</em> &#x3068;&#x547C;&#x3076;<ul>
+<li>Reducer&#x306F;Store&#x3078;&#x4E8B;&#x524D;&#x306B;&#x767B;&#x9332;&#x3059;&#x308B;</li>
+</ul>
+</li>
+<li>Action&#x3092;Dispatch(<code>store.dispatch(action)</code>)&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;Action&#x3092;Reducer&#x3078;&#x901A;&#x77E5;&#x3059;&#x308B;</li>
+</ul>
+<p>Redux&#x306E;&#x4F8B;&#x3068;&#x3057;&#x3066;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x898B;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {createStore, applyMiddleware} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;redux&quot;</span>;
+<span class="hljs-keyword">import</span> createLogger <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./logger&quot;</span>;
+<span class="hljs-keyword">import</span> timestamp <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./timestamp&quot;</span>;
+<span class="hljs-comment">// 4. Action&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x65B0;&#x3057;&#x3044;State&#x3092;&#x8FD4;&#x3059;Reducer&#x95A2;&#x6570;</span>
+<span class="hljs-keyword">const</span> reducer = <span class="hljs-function">(<span class="hljs-params">state = {}, action</span>) =&gt;</span> {
+    <span class="hljs-keyword">switch</span> (action.type) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;AddTodo&quot;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, state, {<span class="hljs-attr">title</span>: action.title});
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">return</span> state;
+    }
+};
+<span class="hljs-comment">// 1. `logger`&#x3068;`crashReporter`&#x306E;middleware&#x3092;&#x9069;&#x7528;&#x3057;&#x305F;`createStore`&#x95A2;&#x6570;&#x3092;&#x4F5C;&#x308B;</span>
+<span class="hljs-keyword">const</span> createStoreWithMiddleware = applyMiddleware(createLogger(), timestamp)(createStore);
+
+<span class="hljs-comment">// 2. Reducer&#x3092;&#x767B;&#x9332;&#x3057;&#x305F;Store&#x3092;&#x4F5C;&#x6210;</span>
+<span class="hljs-keyword">const</span> store = createStoreWithMiddleware(reducer);
+
+store.subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-comment">// 5. State&#x304C;&#x5909;&#x66F4;&#x3055;&#x308C;&#x305F;&#x3089;&#x547C;&#x3070;&#x308C;&#x308B;</span>
+    <span class="hljs-keyword">const</span> state = store.getState();
+    <span class="hljs-comment">// &#x73FE;&#x5728;&#x306E;State&#x3092;&#x53D6;&#x5F97;</span>
+    <span class="hljs-built_in">console</span>.log(state);
+});
+<span class="hljs-comment">// 3. Store&#x306E;&#x5909;&#x66F4;&#x3092;&#x3059;&#x308B;Action&#x3092;dispatch</span>
+store.dispatch({
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;AddTodo&quot;</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Todo title&quot;</span>
+});
+</code></pre>
+<ol>
+<li><code>logger</code>&#x3068;<code>crashReporter</code>&#x306E;middleware&#x3092;&#x9069;&#x7528;&#x3057;&#x305F;<code>createStore</code>&#x95A2;&#x6570;&#x3092;&#x4F5C;&#x308B;</li>
+<li>Reducer&#x3092;&#x767B;&#x9332;&#x3057;&#x305F;Store&#x3092;&#x4F5C;&#x6210;</li>
+<li>(Store&#x306E;&#x5909;&#x66F4;&#x3092;&#x3059;&#x308B;)Action&#x3092;dispatch</li>
+<li>Action&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x65B0;&#x3057;&#x3044;State&#x3092;&#x8FD4;&#x3059;Reducer&#x95A2;&#x6570;</li>
+<li>State&#x304C;&#x5909;&#x66F4;&#x3055;&#x308C;&#x305F;&#x3089;&#x547C;&#x3070;&#x308C;&#x308B;</li>
+</ol>
+<p>&#x3068;&#x3044;&#x3046;&#x3088;&#x3046;&#x306A;&#x6D41;&#x308C;&#x3067;&#x52D5;&#x4F5C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4E0A;&#x8A18;&#x306E;&#x51E6;&#x7406;&#x306E;&#x3046;&#x3061;&#x3001; 3&#x304B;&#x3089;4&#x306E;&#x9593;&#x304C; <em>middleware</em> &#x304C;&#x51E6;&#x7406;&#x3059;&#x308B;&#x5834;&#x6240;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>dispatch(action) -&gt; (_middleware_ &#x306E;&#x51E6;&#x7406;) -&gt; reducer&#x306B;&#x3088;&#x308A;&#x65B0;&#x3057;&#x3044;State&#x306E;&#x4F5C;&#x6210; -&gt; (State&#x304C;&#x5909;&#x308F;&#x3063;&#x305F;&#x3089;) -&gt; subscribe&#x3067;&#x767B;&#x9332;&#x3057;&#x305F;&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x3092;&#x547C;&#x3076;
+</code></pre><p><img src="img/redux-unidir-ui-arch.jpg" alt="Redux flow"></p>
+<p>via <a href="http://staltz.com/unidirectional-user-interface-architectures.html" target="_blank">staltz.com/unidirectional-user-interface-architectures.html</a>o</p>
+<p>&#x6B21;&#x306F; <em>middleware</em> &#x306B;&#x3088;&#x308A;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x62E1;&#x5F35;&#x304C;&#x3067;&#x304D;&#x308B;&#x306E;&#x304B;&#x3092;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="middleware">middleware</h2>
+<p>Redux&#x3067;&#x306F;&#x7B2C;&#x4E09;&#x8005;&#x304C;&#x62E1;&#x5F35;&#x3067;&#x304D;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x3092; <em>middleware</em> &#x3068;&#x547C;&#x3093;&#x3067;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="http://redux.js.org/docs/advanced/Middleware.html" title="Middleware | Redux" target="_blank">Middleware | Redux</a></li>
+</ul>
+<p>&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x62E1;&#x5F35;&#x3092; <em>middleware</em> &#x3067;&#x66F8;&#x3051;&#x308B;&#x306E;&#x304B;&#x3001;&#x5B9F;&#x969B;&#x306E;&#x4F8B;&#x3092;&#x898B;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;&#x6B21;&#x306E; <em>middleware</em> &#x306F;Store&#x304C;dispatch&#x3057;&#x305F;Action&#x3068;&#x3001;&#x305D;&#x306E;&#x524D;&#x5F8C;&#x3067;State&#x306B;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x5909;&#x66F4;&#x304C;&#x3042;&#x3063;&#x305F;&#x306E;&#x304B;&#x3092;&#x51FA;&#x529B;&#x3059;&#x308B;&#x30ED;&#x30AC;&#x30FC;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// LICENSE : MIT</span>
+<span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">const</span> defaultOptions = {
+    <span class="hljs-comment">// default: logger use console API</span>
+    logger: <span class="hljs-built_in">console</span>
+};
+<span class="hljs-comment">/**
+ * create logger middleware
+ * @param {{logger: *}} options
+ * @returns {Function} middleware function
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createLogger</span>(<span class="hljs-params">options = defaultOptions</span>) </span>{
+    <span class="hljs-keyword">const</span> logger = options.logger || defaultOptions.logger;
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">store</span> =&gt;</span> next =&gt; <span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {
+        logger.log(action);
+        <span class="hljs-keyword">const</span> value = next(action);
+        logger.log(store.getState());
+        <span class="hljs-keyword">return</span> value;
+    };
+}
+</code></pre>
+<p>&#x3053;&#x306E; <em>middleware</em> &#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;Redux&#x306B;&#x5BFE;&#x3057;&#x3066;&#x9069;&#x7528;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> {createStore, applyMiddleware} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;redux&quot;</span>;
+<span class="hljs-keyword">const</span> createStoreWithMiddleware = applyMiddleware(createLogger())(createStore);
+</code></pre>
+<p>&#x3053;&#x306E;&#x3068;&#x304D;&#x3001;&#x898B;&#x305F;&#x76EE;&#x4E0A;&#x306F; <code>store</code> &#x306B;&#x5BFE;&#x3057;&#x3066; <em>middleware</em> &#x304C;&#x9069;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3088;&#x3046;&#x306B;&#x898B;&#x3048;&#x307E;&#x3059;&#x304C;&#x3001;&#x5B9F;&#x969B;&#x306B;&#x306F;<code>store.dispatch</code>&#x306B;&#x5BFE;&#x3057;&#x3066;&#x9069;&#x7528;&#x3055;&#x308C;&#x3001;&#x62E1;&#x5F35;&#x3055;&#x308C;&#x305F;<code>dispatch</code>&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x304C;&#x4F5C;&#x6210;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x3001;<code>dispatch</code>&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x969B;&#x306B; <em>middleware</em> &#x306E;&#x51E6;&#x7406;&#x3092;&#x631F;&#x3080;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x304C;Redux&#x306E; <em>middleware</em> &#x306B;&#x3088;&#x308B;&#x62E1;&#x5F35;&#x30DD;&#x30A4;&#x30F3;&#x30C8;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js">store.dispatch({
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;AddTodo&quot;</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Todo title&quot;</span>
+});
+</code></pre>
+<p>&#x5148;&#x307B;&#x3069;&#x306E;<code>logger.js</code>&#x3092;&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x898B;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createLogger</span>(<span class="hljs-params">options = defaultOptions</span>) </span>{
+    <span class="hljs-keyword">const</span> logger = options.logger || defaultOptions.logger;
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">store</span> =&gt;</span> next =&gt; <span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {
+        logger.log(action);
+        <span class="hljs-keyword">const</span> value = next(action);
+        logger.log(store.getState());
+        <span class="hljs-keyword">return</span> value;
+    };
+}
+</code></pre>
+<p><code>createLogger</code>&#x306F;&#x3001;logger&#x306B;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x6E21;&#x3059;&#x305F;&#x3081;&#x306E;&#x3082;&#x306E;&#x306A;&#x306E;&#x3067;&#x7F6E;&#x3044;&#x3066;&#x304A;&#x304D;&#x3001;
+<code>return</code>&#x3057;&#x3066;&#x3044;&#x308B;&#x9AD8;&#x968E;&#x95A2;&#x6570;&#x306E;&#x9023;&#x306A;&#x308A;&#x304C; <em>middleware</em> &#x306E;&#x672C;&#x4F53;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> middleware = <span class="hljs-function"><span class="hljs-params">store</span> =&gt;</span> next =&gt; <span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {};
+</code></pre>
+<p>&#x4E0A;&#x8A18;&#x306E;ArrowFunction&#x306E;&#x9023;&#x306A;&#x308A;&#x304C;&#x4E00;&#x898B;&#x3059;&#x308B;&#x3068;&#x4F55;&#x3092;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x304B;&#x304C;&#x5206;&#x304B;&#x308A;&#x306B;&#x304F;&#x3044;&#x3067;&#x3059;&#x304C;&#x3001;&#x3053;&#x308C;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x5C55;&#x958B;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> middleware = <span class="hljs-function">(<span class="hljs-params">store</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">next</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">action</span>) =&gt;</span> {
+            <span class="hljs-comment">// Middleware&#x306E;&#x51E6;&#x7406;</span>
+        };
+    };
+};
+</code></pre>
+<p>&#x305F;&#x3060;&#x5358;&#x306B;&#x95A2;&#x6570;&#x3092;&#x8FD4;&#x3059;&#x95A2;&#x6570;(&#x9AD8;&#x968E;&#x95A2;&#x6570;)&#x3092;&#x4F5C;&#x3063;&#x3066;&#x3044;&#x308B;&#x3060;&#x3051;&#x3060;&#x3068;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3092;&#x8E0F;&#x307E;&#x3048;&#x3066;<code>logger.js</code>&#x3092;&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;<code>next(action)</code> &#x306E;&#x524D;&#x5F8C;&#x306B;&#x30ED;&#x30B0;&#x8868;&#x793A;&#x3092;&#x631F;&#x3093;&#x3067;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// LICENSE : MIT</span>
+<span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">const</span> defaultOptions = {
+    <span class="hljs-comment">// default: logger use console API</span>
+    logger: <span class="hljs-built_in">console</span>
+};
+<span class="hljs-comment">/**
+ * create logger middleware
+ * @param {{logger: *}} options
+ * @returns {Function} middleware function
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createLogger</span>(<span class="hljs-params">options = defaultOptions</span>) </span>{
+    <span class="hljs-keyword">const</span> logger = options.logger || defaultOptions.logger;
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">store</span> =&gt;</span> next =&gt; <span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {
+        logger.log(action);
+        <span class="hljs-keyword">const</span> value = next(action);
+        logger.log(store.getState());
+        <span class="hljs-keyword">return</span> value;
+    };
+}
+</code></pre>
+<p>&#x3053;&#x306E; <em>middleware</em> &#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30A4;&#x30E1;&#x30FC;&#x30B8;&#x3067;&#x52D5;&#x4F5C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><img src="img/dispatch-log.js.png" alt="dispatch-log.js flow"></p>
+<p>&#x3053;&#x306E;&#x5834;&#x5408;&#x306E; <code>next</code> &#x306F; <code>dispatch</code> &#x3068;&#x8A00;&#x3044;&#x63DB;&#x3048;&#x3066;&#x3082;&#x554F;&#x984C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;&#x8907;&#x6570;&#x306E; <em>middleware</em> &#x3092;&#x9069;&#x7528;&#x3057;&#x305F;&#x5834;&#x5408;&#x306F;&#x3001;
+<strong>&#x6B21;&#x306E;</strong> <em>middleware</em> &#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x3092;&#x8868;&#x73FE;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>Redux&#x306E; <em>middleware</em> &#x306E;&#x4ED5;&#x7D44;&#x307F;&#x306F;&#x5358;&#x7D14;&#x3067;&#x3059;&#x304C;&#x3001;&#x898B;&#x6163;&#x308C;&#x306A;&#x3044;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x306A;&#x306E;&#x3067;&#x8907;&#x96D1;&#x306B;&#x898B;&#x3048;&#x307E;&#x3059;&#x3002;&#x5B9F;&#x969B;&#x306B;&#x540C;&#x3058;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x306A;&#x304C;&#x3089;&#x3001;Redux&#x306E; <em>middleware</em> &#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x3093;&#x3067;&#x3044;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;?</h2>
+<p><em>middleware</em> &#x306F;<code>dispatch</code>&#x3092;&#x30E9;&#x30C3;&#x30D7;&#x3059;&#x308B;&#x51E6;&#x7406;&#x3067;&#x3059;&#x304C;&#x3001;&#x305D;&#x3082;&#x305D;&#x3082;<code>dispatch</code>&#x3068;&#x306F;&#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x3092;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x3057;&#x3087;&#x3046;&#x304B;?</p>
+<p>&#x7C21;&#x6F54;&#x306B;&#x66F8;&#x304F;&#x3068;&#x3001;Redux&#x306E;<code>store.dispatch(action)</code>&#x306F;<code>store.subscribe(callback)</code>&#x3067;&#x767B;&#x9332;&#x3057;&#x305F;<code>callback</code>&#x306B;<code>action</code>&#x3092;&#x6E21;&#x3057;&#x547C;&#x3073;&#x51FA;&#x3059;&#x3060;&#x3051;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x306F;&#x3088;&#x304F;&#x307F;&#x308B;Pub/Sub&#x306E;&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x3067;&#x3059;&#x304C;&#x3001;&#x4ECA;&#x56DE;&#x306F;&#x3053;&#x306E;Pub/Sub&#x30D1;&#x30BF;&#x30FC;&#x30F3;&#x306E;&#x5B9F;&#x88C5;&#x304B;&#x3089;&#x307F;&#x3066;&#x3044;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<h3 id="dispatcher">Dispatcher</h3>
+<p><a href="../ESLint/">ESLint</a>&#x3068;&#x540C;&#x69D8;&#x3067;EventEmitter&#x3092;&#x4F7F;&#x3044;&#x3001;<code>dispatch</code>&#x3068;<code>subscribe</code>&#x3092;&#x3082;&#x3064;<code>Dispatcher</code>&#x3092;&#x5B9F;&#x88C5;&#x3059;&#x308B;&#x3068;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">const</span> EventEmitter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;events&quot;</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ON_DISPATCH = <span class="hljs-string">&quot;__ON_DISPATCH__&quot;</span>;
+<span class="hljs-comment">/**
+ * The action object that must have `type` property.
+ * @typedef {Object} Action
+ * @property {String} type The event type to dispatch.
+ * @public
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dispatcher</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+    <span class="hljs-comment">/**
+     * subscribe `dispatch` and call handler. it return release function
+     * @param {function(Action)} actionHandler
+     * @returns {Function} call the function and release handler
+     */</span>
+    subscribe(actionHandler) {
+        <span class="hljs-keyword">this</span>.on(ON_DISPATCH, actionHandler);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.removeListener.bind(<span class="hljs-keyword">this</span>, ON_DISPATCH, actionHandler);
+    }
+
+    <span class="hljs-comment">/**
+     * dispatch action object.
+     * @param {Action} action
+     */</span>
+    dispatch(action) {
+        <span class="hljs-keyword">this</span>.emit(ON_DISPATCH, action);
+    }
+}
+</code></pre>
+<p><code>Dispatcher</code>&#x306F;Action&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;<code>dispatch</code>&#x3059;&#x308B;&#x3068;&#x3001;<code>subscribe</code>&#x3067;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x305F;&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x95A2;&#x6570;&#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;&#x3068;&#x3044;&#x3046;&#x5358;&#x7D14;&#x306A;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305F;&#x3001;&#x3053;&#x306E;<code>Dispatcher</code>&#x306E;&#x5B9F;&#x88C5;&#x306F;Redux&#x306E;&#x3082;&#x306E;&#x3068;&#x306F;&#x7570;&#x306A;&#x308B;&#x306E;&#x3067;&#x3001;&#x3042;&#x304F;&#x307E;&#x3067;&#x7406;&#x89E3;&#x306E;&#x305F;&#x3081;&#x306E;&#x53C2;&#x8003;&#x5B9F;&#x88C5;&#x3067;&#x3059;&#x3002;</p>
+<blockquote>
+<p>Unlike Flux, Redux does not have the concept of a Dispatcher.
+This is because it relies on pure functions instead of event emitters
+-- <a href="http://redux.js.org/docs/introduction/PriorArt.html" title="Prior Art | Redux" target="_blank">Prior Art | Redux</a></p>
+</blockquote>
+<h3 id="applymiddleware">applyMiddleware</h3>
+<p>&#x6B21;&#x306B;&#x3001; <em>middleware</em> &#x3092;&#x9069;&#x7528;&#x3059;&#x308B;&#x51E6;&#x7406;&#x3068;&#x306A;&#x308B; <code>applyMiddleware</code>&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;&#x5148;&#x307B;&#x3069;&#x3082;&#x66F8;&#x3044;&#x305F;&#x3088;&#x3046;&#x306B;&#x3001; <em>middleware</em> &#x306F; <code>dispatch</code> &#x3092;&#x62E1;&#x5F35;&#x3059;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x3067;&#x3059;&#x3002;</p>
+<p><code>applyMiddleware</code>&#x306F;<code>dispatch</code>&#x3068; <em>middleware</em> &#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x3001; <em>middleware</em> &#x3067;&#x62E1;&#x5F35;&#x3057;&#x305F; <code>dispatch</code> &#x3092;&#x8FD4;&#x3059;&#x95A2;&#x6570;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-comment">/*
+   =&gt; api - middleware api
+       =&gt; next - next/dispatch function
+          =&gt; action - action object
+
+ */</span>
+<span class="hljs-keyword">const</span> applyMiddleware = <span class="hljs-function">(<span class="hljs-params">...middlewares</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">middlewareAPI</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> originalDispatch = <span class="hljs-function">(<span class="hljs-params">action</span>) =&gt;</span> {
+            middlewareAPI.dispatch(action);
+        };
+        <span class="hljs-comment">// `api` is middlewareAPI</span>
+        <span class="hljs-keyword">const</span> wrapMiddleware = middlewares.map(<span class="hljs-function"><span class="hljs-params">middleware</span> =&gt;</span> {
+            <span class="hljs-keyword">return</span> middleware(middlewareAPI);
+        });
+        <span class="hljs-comment">// apply middleware order by first</span>
+        <span class="hljs-keyword">const</span> last = wrapMiddleware[wrapMiddleware.length - <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">const</span> rest = wrapMiddleware.slice(<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>);
+        <span class="hljs-keyword">const</span> roundDispatch = rest.reduceRight(<span class="hljs-function">(<span class="hljs-params">oneMiddle, middleware</span>) =&gt;</span> {
+            <span class="hljs-keyword">return</span> middleware(oneMiddle);
+        }, last);
+        <span class="hljs-keyword">return</span> roundDispatch(originalDispatch);
+    };
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> applyMiddleware;
+</code></pre>
+<p>&#x3053;&#x306E;<code>applyMiddleware</code>&#x306F;Redux&#x306E;&#x3082;&#x306E;&#x3068;&#x540C;&#x3058;&#x306A;&#x306E;&#x3067;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B; <em>middleware</em> &#x3092;&#x9069;&#x7528;&#x3057;&#x305F; <code>dispatch</code> &#x95A2;&#x6570;&#x3092;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> Dispatcher <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./Dispatcher&quot;</span>;
+<span class="hljs-keyword">import</span> applyMiddleware <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./apply-middleware&quot;</span>;
+<span class="hljs-keyword">import</span> timestamp <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./timestamp&quot;</span>;
+<span class="hljs-keyword">import</span> createLogger <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./logger&quot;</span>;
+<span class="hljs-keyword">const</span> dispatcher = <span class="hljs-keyword">new</span> Dispatcher();
+dispatcher.subscribe(<span class="hljs-function"><span class="hljs-params">action</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(action);
+    <span class="hljs-comment">/*
+    { timeStamp: 1463742440479, type: &apos;FOO&apos; }
+     */</span>
+});
+<span class="hljs-comment">// Redux compatible middleware API</span>
+<span class="hljs-keyword">const</span> state = {};
+<span class="hljs-keyword">const</span> middlewareAPI = {
+    getState(){
+        <span class="hljs-comment">// shallow-copy state</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, state);
+    },
+    dispatch(action){
+        dispatcher.dispatch(action);
+    }
+};
+<span class="hljs-comment">// create `dispatch` function that wrapped with middleware</span>
+<span class="hljs-keyword">const</span> dispatchWithMiddleware = applyMiddleware(createLogger(), timestamp)(middlewareAPI);
+dispatchWithMiddleware({<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;FOO&quot;</span>});
+</code></pre>
+<p><code>applyMiddleware</code>&#x3067;<code>timestamp</code>&#x3092;Action&#x306B;&#x4ED8;&#x52A0;&#x3059;&#x308B; <em>middleware</em> &#x3092;&#x9069;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;<code>dispatchWithMiddleware(action)</code>&#x3057;&#x305F;<code>action</code>&#x306B;&#x306F;&#x81EA;&#x52D5;&#x7684;&#x306B;<code>timestamp</code>&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x304C;&#x8FFD;&#x52A0;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> dispatchWithMiddleware = applyMiddleware(createLogger(), timestamp)(middlewareAPI);
+dispatchWithMiddleware({<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;FOO&quot;</span>});
+</code></pre>
+<p>&#x3053;&#x3053;&#x3067; <em>middleware</em> &#x306B;&#x306F;<code>middlewareAPI</code>&#x3068;&#x3057;&#x3066;&#x5B9A;&#x7FA9;&#x3057;&#x305F;2&#x3064;&#x306E;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x3082;&#x3064;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x6E21;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;<code>getState</code>&#x306F;&#x8AAD;&#x307F;&#x8FBC;&#x307F;&#x306E;&#x307F;&#x3067;&#x3001;<em>middleware</em>&#x306B;&#x306F;State&#x3092;&#x76F4;&#x63A5;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x624B;&#x6BB5;&#x304C;&#x7528;&#x610F;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x305B;&#x3093;&#x3002;&#x307E;&#x305F;&#x3001;&#x3082;&#x3046;1&#x3064;&#x306E;<code>dispatch</code>&#x3082;Action&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x3089;&#x308C;&#x307E;&#x3059;&#x304C;&#x3001;&#x7D50;&#x5C40;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x306F;<code>dispatch</code>&#x3059;&#x308B;&#x3060;&#x3051;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x3053;&#x3068;&#x304B;&#x3089; <em>middleware</em> &#x306B;&#x3082;&#x4E09;&#x539F;&#x5247;&#x304C;&#x9069;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li>State is read-only<ul>
+<li>State&#x306F;Action&#x3092;&#x7D4C;&#x7531;&#x3057;&#x306A;&#x3044;&#x3068;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x306A;&#x3044;</li>
+</ul>
+</li>
+</ul>
+<p><em>middleware</em> &#x3068;&#x3044;&#x3046;&#x4ED5;&#x7D44;&#x307F;&#x81EA;&#x4F53;&#x306F;<a href="../connect/">Connect</a>&#x3068;&#x4F3C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001; <em>middleware</em> &#x304C;&#x76F4;&#x63A5;&#x7684;&#x306B;&#x7D50;&#x679C;(State)&#x3092;&#x76F4;&#x63A5;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x3053;&#x3068;&#x306F;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>Connect&#x306E; <em>middleware</em> &#x306F;&#x6700;&#x7D42;&#x7684;&#x306A;&#x7D50;&#x679C;(<code>response</code>)&#x3092;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x4E00;&#x65B9;&#x3001;Redux&#x306E; <em>middleware</em> &#x306F;&#x6271;&#x3048;&#x308B;&#x7BC4;&#x56F2;&#x304C;&#x300C;<code>dispatch</code>&#x304B;&#x3089;Reducer&#x307E;&#x3067;&#x300D;&#x3068;&#x7DDA;&#x5F15;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x9055;&#x3044;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;">&#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?</h2>
+<p>Redux&#x306E; <em>middleware</em> &#x305D;&#x306E;&#x3082;&#x306E;&#x3082;&#x4E09;&#x539F;&#x5247;&#x306B;&#x57FA;&#x3065;&#x3044;&#x305F;&#x4ED5;&#x7D44;&#x307F;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;
+<em>middleware</em> &#x306F;Action&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x81EA;&#x7531;&#x306B;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x305F;&#x308A;&#x3001;Action&#x3092;&#x7121;&#x8996;&#x3057;&#x305F;&#x308A;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x4E00;&#x65B9;&#x3001;State&#x3092;&#x76F4;&#x63A5;&#x306F;&#x66F8;&#x304D;&#x63DB;&#x3048;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x591A;&#x304F;&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3067;&#x306F;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x7279;&#x6A29;&#x7684;&#x306A;&#x6A5F;&#x80FD;&#x3092;&#x4E0E;&#x3048;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x591A;&#x3044;&#x3067;&#x3059;&#x304C;&#x3001;
+Redux&#x306E; <em>middleware</em> &#x306F;&#x66F8;&#x304D;&#x8FBC;&#x307F;&#x306E;&#x3088;&#x3046;&#x306A;&#x7279;&#x6A29;&#x7684;&#x306A;&#x8981;&#x7D20;&#x3082;&#x5236;&#x9650;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p><em>middleware</em> &#x306B;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x3066;&#x3044;&#x308B;&#x7279;&#x6A29;&#x7684;&#x306A;API&#x3068;&#x3057;&#x3066;&#x306F;&#x3001;<code>getState()</code> &#x3068; <code>dispatch()</code>&#x3067;&#x3059;&#x304C;&#x3001;&#x3069;&#x3061;&#x3089;&#x3082;&#x66F8;&#x304D;&#x8FBC;&#x307F;&#x3092;&#x3059;&#x308B;&#x3088;&#x3046;&#x306A;API&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x3088;&#x3046;&#x306B;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x4E00;&#x5B9A;&#x306E;&#x6A29;&#x9650;&#x3092;&#x3082;&#x3064;API&#x3092;&#x4E0E;&#x3048;&#x3064;&#x3064;&#x3001;&#x539F;&#x5247;&#x3092;&#x58CA;&#x3059;&#x3088;&#x3046;&#x306A;&#x7279;&#x6A29;&#x3092;&#x4E0E;&#x3048;&#x306A;&#x3044;&#x3053;&#x3068;&#x3092;&#x76EE;&#x7684;&#x3068;&#x3057;&#x3066;&#x3044;&#x308B;&#x5834;&#x5408;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;">&#x3069;&#x3046;&#x3044;&#x3046;&#x3053;&#x3068;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?</h2>
+<p>&#x4E00;&#x65B9;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x3082;&#x66F8;&#x304D;&#x8FBC;&#x307F;&#x6A29;&#x9650;&#x3092;&#x4E0E;&#x3048;&#x306A;&#x3044;&#x305F;&#x3081;&#x306B;&#x306F;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x9593;&#x3067;&#x3084;&#x308A;&#x53D6;&#x308A;&#x3059;&#x308B;&#x4E2D;&#x9593;&#x7684;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x304C;&#x5FC5;&#x8981;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>Redux&#x3067;&#x306F;Action&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3068;&#x3044;&#x3046;&#x3088;&#x3046;&#x306A;&#x547D;&#x4EE4;(&#x30B3;&#x30DE;&#x30F3;&#x30C9;)&#x3092;&#x8868;&#x73FE;&#x3057;&#x305F;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x3001;
+Reducer&#x3068;&#x3044;&#x3046;&#x547D;&#x4EE4;&#x3092;&#x5143;&#x306B;&#x65B0;&#x3057;&#x3044;State&#x3092;&#x4F5C;&#x308A;&#x51FA;&#x3059;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x8A2D;&#x3051;&#x3066;&#x3044;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<p>&#x3064;&#x307E;&#x308A;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x305D;&#x306E;&#x3082;&#x306E;&#x3060;&#x3051;&#x3067;&#x3059;&#x3079;&#x3066;&#x306E;&#x51E6;&#x7406;&#x304C;&#x5B8C;&#x7D50;&#x3059;&#x308B;&#x308F;&#x3051;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x51E6;&#x7406;&#x3057;&#x305F;&#x7D50;&#x679C;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x3001;&#x305D;&#x306E;&#x7D50;&#x679C;&#x3092;&#x51E6;&#x7406;&#x3059;&#x308B;&#x5B9F;&#x88C5;&#x3082;&#x540C;&#x6642;&#x306B;&#x5FC5;&#x8981;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;
+Redux&#x3067;&#x306F; <em>middleware</em> &#x3092;&#x524D;&#x63D0;&#x3068;&#x3057;&#x305F;&#x51E6;&#x7406;&#x3092;&#x5B9F;&#x88C5;&#x3068;&#x3057;&#x3066;&#x66F8;&#x304F;&#x3053;&#x3068;&#x3082;&#x591A;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x3046;&#x3044;&#x3046;&#x610F;&#x5473;&#x3067;&#x306F;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3068;&#x5B9F;&#x88C5;&#x304C;&#x5BC6;&#x63A5;&#x3068;&#x3044;&#x3048;&#x308B;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306E;&#x307F;&#x3067;&#x5168;&#x51E6;&#x7406;&#x304C;&#x5B8C;&#x7D50;&#x3059;&#x308B;&#x3088;&#x3046;&#x306A;&#x6A5F;&#x80FD;&#x3092;&#x4F5C;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x306F;&#x5411;&#x3044;&#x3066;&#x3044;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<h2 id="&#x307E;&#x3068;&#x3081;">&#x307E;&#x3068;&#x3081;</h2>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;<a href="https://github.com/reactjs/redux" title="reactjs/redux: Predictable state container for JavaScript apps" target="_blank">Redux</a>&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x3073;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<ul>
+<li>Redux&#x306E; <em>middleware</em> &#x306F;Action&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x51E6;&#x7406;&#x3092;&#x66F8;&#x3051;&#x308B;</li>
+<li><em>middleware</em> &#x306B;&#x5BFE;&#x3057;&#x3066;&#x3082;&#x4E09;&#x539F;&#x5247;&#x304C;&#x9069;&#x7528;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;</li>
+<li><em>middleware</em> &#x306B;&#x5BFE;&#x3057;&#x3066;&#x3082;&#x6271;&#x3048;&#x308B;&#x6A5F;&#x80FD;&#x306E;&#x5236;&#x9650;&#x3092;&#x9069;&#x7528;&#x3057;&#x3084;&#x3059;&#x3044;</li>
+<li><em>middleware</em> &#x306E;&#x307F;&#x3067;&#x3059;&#x3079;&#x3066;&#x306E;&#x51E6;&#x7406;&#x304C;&#x5B8C;&#x7D50;&#x3059;&#x308B;&#x308F;&#x3051;&#x3067;&#x306F;&#x306A;&#x3044;</li>
+</ul>
+<h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
+<ul>
+<li><a href="http://redux.js.org/docs/advanced/Middleware.html" target="_blank">Middleware | Redux</a></li>
+<li><a href="https://github.com/happypoulp/redux-tutorial/wiki/10.-Middleware" target="_blank">10. Middleware &#xB7; happypoulp/redux-tutorial Wiki</a></li>
+<li><a href="http://briantroncone.com/?p=529" target="_blank">Brian Troncone &#x2013; Redux Middleware: Behind the Scenes</a></li>
+<li><a href="https://hogehuga.com/post-1123/" target="_blank">Redux&#x306E;Middleware&#x306B;&#x3064;&#x3044;&#x3066;&#x7406;&#x89E3;&#x3057;&#x305F;&#x3044;&#x30DE;&#x30F3; | moxt</a></li>
+<li><a href="https://medium.com/@meagle/understanding-87566abcfb7a#.8fr4jmjwz" target="_blank">Understanding Redux Middleware &#x2014; Medium</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../gulp/" class="navigation navigation-prev " aria-label="Previous page: gulp">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../CONTRIBUTING.html" class="navigation navigation-next " aria-label="Next page: CONTRIBUTING">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Redux","level":"1.6","depth":1,"next":{"title":"CONTRIBUTING","level":"1.7","depth":1,"path":"CONTRIBUTING.md","ref":"./CONTRIBUTING.md","articles":[]},"previous":{"title":"gulp","level":"1.5","depth":1,"path":"ja/gulp/README.md","ref":"ja/gulp/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexMincho","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"ja/Redux/README.md","mtime":"2020-09-05T15:19:59.036Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-05T15:20:36.689Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

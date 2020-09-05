@@ -1,0 +1,1 @@
+{"index":{"version":"0.5.12","fields":[{"name":"title","boost":10},{"name":"keywords","boost":15},{"name":"body","boost":1}],"ref":"url","documentStore":{"store":{},"length":0},"tokenStore":{"root":{"docs":{}},"length":0},"corpusTokens":[],"pipeline":["stopWordFilter","stemmer"]},"store":{}}

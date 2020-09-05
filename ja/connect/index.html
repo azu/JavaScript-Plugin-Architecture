@@ -1,0 +1,663 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Connect · JavaScript Plugin Architecture</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.6">
+        <meta name="author" content="azu">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-richquotes/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../gulp/" />
+    
+    
+    <link rel="prev" href="../ESLint/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    この書籍について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../jQuery/">
+            
+                <a href="../jQuery/">
+            
+                    
+                    jQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ESLint/">
+            
+                <a href="../ESLint/">
+            
+                    
+                    ESLint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Connect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../gulp/">
+            
+                <a href="../gulp/">
+            
+                    
+                    gulp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Redux/">
+            
+                <a href="../Redux/">
+            
+                    
+                    Redux
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../CONTRIBUTING.html">
+            
+                <a href="../../CONTRIBUTING.html">
+            
+                    
+                    CONTRIBUTING
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Connect</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="connect">Connect</h1>
+<blockquote>
+<p>&#x3053;&#x306E;&#x6587;&#x7AE0;&#x306F;<a href="https://github.com/senchalabs/connect" title="Connect" target="_blank">Connect</a> 3.4.0&#x3092;&#x5143;&#x306B;&#x66F8;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+<p><a href="https://github.com/senchalabs/connect" title="Connect" target="_blank">Connect</a>&#x306F;Node.js&#x3067;&#x52D5;&#x304F;HTTP&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x3067;&#x3059;&#x3002;
+ <em>middleware</em> &#x3068;&#x3044;&#x3046;&#x62E1;&#x5F35;&#x3059;&#x308B;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x6301;&#x3061;&#x3001;Connect&#x304C;&#x3082;&#x3064;&#x6A5F;&#x80FD;&#x81EA;&#x4F53;&#x306F;&#x3068;&#x3066;&#x3082;&#x5C11;&#x306A;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x7AE0;&#x3067;&#x306F;Connect&#x306E; <em>middleware</em> &#x306E;&#x4ED5;&#x7D44;&#x307F;&#x306B;&#x3064;&#x3044;&#x3066;&#x898B;&#x3066;&#x884C;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<h2 id="&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;">&#x3069;&#x3046;&#x66F8;&#x3051;&#x308B;?</h2>
+<p>Connect&#x3092;&#x4F7F;&#x3044;&#x7C21;&#x5358;&#x306A;Echo&#x30B5;&#x30FC;&#x30D0;&#x3092;&#x66F8;&#x3044;&#x3066;&#x307F;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;
+Echo&#x30B5;&#x30FC;&#x30D0;&#x3068;&#x306F;&#x3001;&#x9001;&#x3089;&#x308C;&#x3066;&#x304D;&#x305F;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306E;&#x5185;&#x5BB9;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x8FD4;&#x3059;&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> connect <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;connect&quot;</span>;
+<span class="hljs-keyword">import</span> http <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;http&quot;</span>;
+<span class="hljs-keyword">import</span> fetch <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node-fetch&quot;</span>;
+<span class="hljs-keyword">import</span> assert <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;assert&quot;</span>;
+<span class="hljs-keyword">let</span> app = connect();
+<span class="hljs-comment">// add Error handling</span>
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, req, res, next</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(err.stack);
+    res.status(<span class="hljs-number">500</span>).send(err.message);
+    next();
+});
+<span class="hljs-comment">// request to response</span>
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+    req.pipe(res);
+});
+<span class="hljs-comment">//create node.js http server and listen on port</span>
+<span class="hljs-keyword">let</span> server = http.createServer(app).listen(<span class="hljs-number">3000</span>, request);
+
+<span class="hljs-comment">// request =&gt; response</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> closeServer = server.close.bind(server);
+    <span class="hljs-keyword">const</span> requestBody = {
+        <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;value&quot;</span>
+    };
+    fetch(<span class="hljs-string">&quot;http://localhost:3000&quot;</span>, {
+        <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(requestBody)
+    })
+        .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.text())
+        .then(<span class="hljs-function"><span class="hljs-params">text</span> =&gt;</span> {
+            assert.deepEqual(text, requestBody);
+        }).then(closeServer, closeServer);
+}
+</code></pre>
+<p>&#x3053;&#x306E;Echo&#x30B5;&#x30FC;&#x30D0;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;Body&#x3092;&#x9001;&#x4FE1;&#x3059;&#x308B;&#x3068;&#x3001;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x540C;&#x3058;&#x5024;&#x304C;&#x8FD4;&#x3063;&#x3066;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;value&quot;</span>
+}
+</code></pre>
+<p><code>app.use(middleware)</code> &#x3068;&#x3044;&#x3046;&#x5F62;&#x3067;&#x3001; <em>middleware</em> &#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x95A2;&#x6570;&#x306B;&#x306F;<code>request</code>&#x3084;<code>response</code>&#x3068;&#x3044;&#x3063;&#x305F;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304C;&#x6E21;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;<code>request</code>&#x3084;<code>response</code>&#x3092; <em>middleware</em> &#x3067;&#x51E6;&#x7406;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30ED;&#x30B0;&#x3092;&#x53D6;&#x3063;&#x305F;&#x308A;&#x3001;&#x4EFB;&#x610F;&#x306E;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3059;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>Echo&#x30B5;&#x30FC;&#x30D0;&#x3067;&#x306F; <code>req.pipe(res);</code> &#x3068;&#x3044;&#x3046;&#x5F62;&#x3067;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x6D41;&#x3059;&#x3053;&#x3068;&#x3067;&#x5B9F;&#x73FE;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="middleware&#x3092;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;">middleware&#x3092;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;</h3>
+<p>&#x3082;&#x3046;&#x5C11;&#x3057; <em>middleware</em> &#x3092;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3089;&#x3057;&#x304F;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3057;&#x305F;&#x3082;&#x306E;&#x3092;&#x898B;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6B21;&#x306E;<a href="#connect-example.js">connect-example.js</a>&#x306F;&#x3001;&#x3042;&#x3089;&#x3086;&#x308B;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x3001;
+<code>&quot;response text&quot;</code>&#x3068;&#x3044;&#x3046;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3092;<code>&quot;X-Content-Type-Options&quot;</code>&#x30D8;&#x30C3;&#x30C0;&#x3092;&#x4ED8;&#x3051;&#x3066;&#x8FD4;&#x3059;&#x3060;&#x3051;&#x306E;&#x30B5;&#x30FC;&#x30D0;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x51E6;&#x7406;&#x3092; <em>middleware</em> &#x3068;&#x3057;&#x3066;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x5206;&#x3051;&#x3066;&#x5B9F;&#x88C5;&#x3057;&#x3001;<code>app.use(middleware)</code>&#x3067;&#x51E6;&#x7406;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setHeaders</span>(<span class="hljs-params">res, headers</span>) </span>{
+    <span class="hljs-built_in">Object</span>.keys(headers).forEach(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> {
+        <span class="hljs-keyword">let</span> value = headers[key];
+        <span class="hljs-keyword">if</span> (value !== <span class="hljs-literal">null</span>) {
+            res.setHeader(key, value);
+        }
+    });
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nosniff</span>(<span class="hljs-params">req, res, next</span>) </span>{
+        setHeaders(res, {
+            <span class="hljs-string">&quot;X-Content-Type-Options&quot;</span>: <span class="hljs-string">&quot;nosniff&quot;</span>
+        });
+        next();
+    };
+}
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">text</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hello</span>(<span class="hljs-params">req, res</span>) </span>{
+        res.end(text);
+    };
+}
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">errorHandling</span>(<span class="hljs-params">err, req, res, next</span>) </span>{
+        res.writeHead(<span class="hljs-number">404</span>);
+        res.write(err.message);
+        res.end();
+        next();
+    };
+}
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> errorHandler <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./errorHandler&quot;</span>;
+<span class="hljs-keyword">import</span> hello <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./hello&quot;</span>;
+<span class="hljs-keyword">import</span> nosniff <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./nosniff&quot;</span>;
+<span class="hljs-keyword">import</span> assert <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;assert&quot;</span>;
+<span class="hljs-keyword">import</span> connect <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;connect&quot;</span>;
+<span class="hljs-keyword">import</span> http <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;http&quot;</span>;
+<span class="hljs-keyword">import</span> fetch <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node-fetch&quot;</span>;
+
+<span class="hljs-keyword">const</span> responseText = <span class="hljs-string">&quot;response text&quot;</span>;
+<span class="hljs-keyword">let</span> app = connect();
+<span class="hljs-comment">// add Error handling</span>
+app.use(errorHandler());
+<span class="hljs-comment">// add &quot;X-Content-Type-Options&quot; to response</span>
+app.use(nosniff());
+<span class="hljs-comment">// respond to all requests</span>
+app.use(hello(responseText));
+
+<span class="hljs-comment">//create node.js http server and listen on port</span>
+<span class="hljs-keyword">let</span> server = http.createServer(app).listen(<span class="hljs-number">3000</span>, request);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> closeServer = server.close.bind(server);
+    fetch(<span class="hljs-string">&quot;http://localhost:3000&quot;</span>)
+        .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.text())
+        .then(<span class="hljs-function"><span class="hljs-params">text</span> =&gt;</span> {
+            assert.equal(text, responseText);
+            server.close();
+        })
+        .catch(<span class="hljs-built_in">console</span>.error.bind(<span class="hljs-built_in">console</span>))
+        .then(closeServer, closeServer);
+}
+</code></pre>
+<p>&#x57FA;&#x672C;&#x7684;&#x306B;&#x3069;&#x306E; <em>middleware</em> &#x3082;<code>app.use(middleware)</code>&#x3068;&#x3044;&#x3046;&#x5F62;&#x3067;&#x62E1;&#x5F35;&#x3067;&#x304D;&#x3001;&#x30E2;&#x30B8;&#x30E5;&#x30FC;&#x30EB;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3059;&#x308C;&#x3070;&#x518D;&#x5229;&#x7528;&#x3082;&#x3057;&#x3084;&#x3059;&#x3044;&#x5F62;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<blockquote class="clearfix alert alert-info"><strong class="fa fa-2x fa-edit"></strong>
+<p> <em>middleware</em> &#x3068;&#x306A;&#x308B;&#x95A2;&#x6570;&#x306E;&#x5F15;&#x6570;&#x304C;4&#x3064;&#x3067;&#x3042;&#x308B;&#x3068;&#x3001;&#x305D;&#x308C;&#x306F;&#x30A8;&#x30E9;&#x30FC;&#x30CF;&#x30F3;&#x30C9;&#x30EA;&#x30F3;&#x30B0;&#x306E; <em>middleware</em> &#x3068;&#x3059;&#x308B;&#x3068;&#x3044;&#x3046;&#x3001;Connect&#x72EC;&#x81EA;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+</blockquote>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;?</h2>
+<p>Connect&#x306E; <em>middleware</em> &#x304C;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x4ED5;&#x7D44;&#x307F;&#x3067;&#x52D5;&#x3044;&#x3066;&#x3044;&#x308B;&#x306E;&#x304B;&#x3092;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p><code>app</code>&#x306B;&#x767B;&#x9332;&#x3057;&#x305F; <em>middleware</em> &#x306F;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x6642;&#x306B;&#x547C;&#x3073;&#x51FA;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;<code>app</code>&#x306E;&#x3069;&#x3053;&#x304B;&#x306B;&#x5229;&#x7528;&#x3059;&#x308B; <em>middleware</em> &#x3092;&#x4FDD;&#x6301;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x306F;&#x63A8;&#x6E2C;&#x3067;&#x304D;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>Connect&#x3067;&#x306F;<code>app.stack</code>&#x306B; <em>middleware</em> &#x3092;&#x914D;&#x5217;&#x3068;&#x3057;&#x3066;&#x4FDD;&#x6301;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;<code>app.stack</code>&#x306E;&#x4E2D;&#x8EAB;&#x3092;&#x8868;&#x793A;&#x3057;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001; <em>middleware</em> &#x304C;&#x767B;&#x9332;&#x9806;&#x3067;&#x4FDD;&#x6301;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> errorHandler <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./errorHandler&quot;</span>;
+<span class="hljs-keyword">import</span> hello <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./hello&quot;</span>;
+<span class="hljs-keyword">import</span> nosniff <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./nosniff&quot;</span>;
+<span class="hljs-keyword">import</span> connect <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;connect&quot;</span>;
+
+<span class="hljs-keyword">const</span> responseText = <span class="hljs-string">&quot;response text&quot;</span>;
+<span class="hljs-keyword">let</span> app = connect();
+<span class="hljs-comment">// add Error handling</span>
+app.use(errorHandler());
+<span class="hljs-comment">// add &quot;X-Content-Type-Options&quot; to response</span>
+app.use(nosniff());
+<span class="hljs-comment">// respond to all requests</span>
+app.use(hello(responseText));
+
+<span class="hljs-comment">// print middleware list</span>
+app.stack.map(<span class="hljs-function">(<span class="hljs-params">{handle}</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(handle));
+<span class="hljs-comment">/* =&gt;
+ [Function: errorHandling]
+ [Function: nosniff]
+ [Function: hello]
+*/</span>
+</code></pre>
+<p>Connect&#x306F;&#x767B;&#x9332;&#x3055;&#x308C;&#x305F; <em>middleware</em> &#x3092;&#x3001;&#x30B5;&#x30FC;&#x30D0;&#x304C;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x305D;&#x308C;&#x305E;&#x308C;&#x9806;&#x756A;&#x306B;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4E0A;&#x8A18;&#x306E;&#x4F8B;&#x3060;&#x3068;&#x6B21;&#x306E;&#x9806;&#x756A;&#x3067; <em>middleware</em> &#x304C;&#x547C;&#x3073;&#x51FA;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li>nosniff</li>
+<li>hello</li>
+<li>errorHandler</li>
+</ul>
+<p>&#x30A8;&#x30E9;&#x30FC;&#x30CF;&#x30F3;&#x30C9;&#x30EA;&#x30F3;&#x30B0;&#x306E; <em>middleware</em> &#x306F;&#x51E6;&#x7406;&#x4E2D;&#x306B;&#x30A8;&#x30E9;&#x30FC;&#x304C;&#x8D77;&#x304D;&#x305F;&#x6642;&#x306E;&#x307F;&#x547C;&#x3070;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x901A;&#x5E38;&#x306F; <a href="#nosniff.js">nosniff.js</a> &#x2192; <a href="#hello.js">hello.js</a> &#x306E;&#x9806;&#x3067;&#x547C;&#x3073;&#x51FA;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setHeaders</span>(<span class="hljs-params">res, headers</span>) </span>{
+    <span class="hljs-built_in">Object</span>.keys(headers).forEach(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> {
+        <span class="hljs-keyword">let</span> value = headers[key];
+        <span class="hljs-keyword">if</span> (value !== <span class="hljs-literal">null</span>) {
+            res.setHeader(key, value);
+        }
+    });
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nosniff</span>(<span class="hljs-params">req, res, next</span>) </span>{
+        setHeaders(res, {
+            <span class="hljs-string">&quot;X-Content-Type-Options&quot;</span>: <span class="hljs-string">&quot;nosniff&quot;</span>
+        });
+        next();
+    };
+}
+</code></pre>
+<p><code>nosniff.js</code>&#x306F;&#x3001;HTTP&#x30D8;&#x30C3;&#x30C0;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x7D42;&#x308F;&#x3063;&#x305F;&#x3089;<code>next()</code>&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3001;&#x3053;&#x306E;<code>next()</code>&#x304C;&#x6B21;&#x306E; <em>middleware</em> &#x3078;&#x884C;&#x304F;&#x3068;&#x3044;&#x3046;&#x610F;&#x5473;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6B21;&#x306B;&#x3001;<code>hello.js</code>&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;<code>next()</code>&#x304C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">text</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hello</span>(<span class="hljs-params">req, res</span>) </span>{
+        res.end(text);
+    };
+}
+</code></pre>
+<p><code>next()</code>&#x304C;&#x306A;&#x3044;&#x3068;&#x3044;&#x3046;&#x3053;&#x3068;&#x306F;<code>hello.js</code>&#x304C;&#x3053;&#x306E;&#x9023;&#x7D9A;&#x3059;&#x308B; <em>middleware</em> &#x306E;&#x6700;&#x5F8C;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x308F;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;&#x4EEE;&#x306B;&#x3001;&#x3053;&#x308C;&#x3088;&#x308A;&#x5148;&#x306B; <em>middleware</em> &#x304C;&#x767B;&#x9332;&#x3055;&#x308C;&#x3066;&#x3044;&#x305F;&#x3068;&#x3057;&#x3066;&#x3082;&#x7121;&#x8996;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3064;&#x307E;&#x308A;&#x3001;&#x51E6;&#x7406;&#x7684;&#x306B;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;stack&#x3092;&#x5148;&#x982D;&#x304B;&#x3089;&#x4E00;&#x500B;&#x3065;&#x3064;&#x53D6;&#x308A;&#x51FA;&#x3057;&#x3001;&#x51E6;&#x7406;&#x3057;&#x3066;&#x3044;&#x304F;&#x3068;&#x3044;&#x3046;&#x65B9;&#x6CD5;&#x304C;&#x53D6;&#x3089;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>Connect&#x306E;&#x884C;&#x3063;&#x3066;&#x3044;&#x308B;&#x51E6;&#x7406;&#x3092;&#x62BD;&#x8C61;&#x7684;&#x306A;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x66F8;&#x304F;&#x3068;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x5F62;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> req = <span class="hljs-string">&quot;...&quot;</span>,
+    res = <span class="hljs-string">&quot;...&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">next</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">let</span> middleware = app.stack.shift();
+    <span class="hljs-comment">// next&#x304C;&#x547C;&#x3070;&#x308C;&#x308C;&#x3070;&#x6B21;&#x306E;middleware</span>
+    middleware(req, res, next);
+}
+next();<span class="hljs-comment">// &#x521D;&#x56DE;</span>
+</code></pre>
+<p>&#x3053;&#x306E;&#x3088;&#x3046;&#x306A; <em>middleware</em> &#x3092;&#x7E4B;&#x3052;&#x305F;&#x3082;&#x306E;&#x3092;<em>middleware stack</em>&#x3068;&#x547C;&#x3076;&#x3053;&#x3068;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p><em>middleware stack</em> &#x3067;&#x69CB;&#x6210;&#x3055;&#x308C;&#x308B;HTTP&#x30B5;&#x30FC;&#x30D0;&#x3068;&#x3057;&#x3066;&#x3001;Python&#x306E;WSGI middleware&#x3084;Ruby&#x306E;Rack&#x306A;&#x3069;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;
+Connect&#x306F;Rack&#x3068;&#x540C;&#x3058;&#x304F;<code>use</code>&#x3067; <em>middleware</em> &#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x304B;&#x3089;&#x3082;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;
+Rack&#x3092;&#x53C2;&#x8003;&#x306B;&#x3057;&#x305F;&#x5B9F;&#x88C5;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5" title="Ruby - Rack&#x89E3;&#x8AAC; - Rack&#x306E;&#x69CB;&#x9020;&#x3068;Rack DSL - Qiita" target="_blank">Ruby - Rack&#x89E3;&#x8AAC; - Rack&#x306E;&#x69CB;&#x9020;&#x3068;Rack DSL - Qiita</a></li>
+</ul>
+<p>&#x6B21;&#x306F;&#x3001;&#x5148;&#x307B;&#x3069;&#x62BD;&#x8C61;&#x7684;&#x306A;&#x30B3;&#x30FC;&#x30C9;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x305F;&#x3082;&#x306E;&#x3092;&#x5177;&#x4F53;&#x7684;&#x306A;&#x5B9F;&#x88C5;&#x306B;&#x3057;&#x306A;&#x304C;&#x3089;&#x898B;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x307F;&#x3088;&#x3046;">&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x307F;&#x3088;&#x3046;</h2>
+<p>Connect&#x30E9;&#x30A4;&#x30AF;&#x306A; <em>middleware</em> &#x3092;&#x30B5;&#x30DD;&#x30FC;&#x30C8;&#x3057;&#x305F;Junction&#x3068;&#x3044;&#x3046;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<p>Junction&#x306F;&#x3001;<code>use(middleware)</code> &#x3068; <code>process(value, (error, result) =&gt; { });</code>&#x3092;&#x6301;&#x3063;&#x3066;&#x3044;&#x308B;&#x30B7;&#x30F3;&#x30D7;&#x30EB;&#x306A;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isErrorHandingMiddleware</span>(<span class="hljs-params">middleware</span>) </span>{
+    <span class="hljs-comment">// middleware(error, text, next)</span>
+    <span class="hljs-keyword">let</span> arity = middleware.length;
+    <span class="hljs-keyword">return</span> arity === <span class="hljs-number">3</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">applyMiddleware</span>(<span class="hljs-params">error, response, middleware, next</span>) </span>{
+    <span class="hljs-keyword">let</span> errorOnMiddleware = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">if</span> (error &amp;&amp; isErrorHandingMiddleware(middleware)) {
+            middleware(error, response, next);
+        } <span class="hljs-keyword">else</span> {
+            middleware(response, next);
+        }
+        <span class="hljs-keyword">return</span>;
+    } <span class="hljs-keyword">catch</span> (error) {
+        errorOnMiddleware = error;
+    }
+    <span class="hljs-comment">// skip the middleware or Error on the middleware</span>
+    next(errorOnMiddleware, response);
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Junction</span> </span>{
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">this</span>.stack = [];
+    }
+
+    use(middleware) {
+        <span class="hljs-keyword">this</span>.stack.push(middleware);
+    }
+
+    process(initialValue, callback) {
+        <span class="hljs-keyword">let</span> response = {<span class="hljs-attr">value</span>: initialValue};
+        <span class="hljs-keyword">let</span> next = <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+            <span class="hljs-keyword">let</span> middleware = <span class="hljs-keyword">this</span>.stack.shift();
+            <span class="hljs-keyword">if</span> (!middleware) {
+                <span class="hljs-keyword">return</span> callback(error, response);
+            }
+            applyMiddleware(error, response, middleware, next);
+        };
+        next();
+    }
+}
+</code></pre>
+<p>&#x5B9F;&#x88C5;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;<code>use</code>&#x3067; <em>middleware</em> &#x3092;&#x767B;&#x9332;&#x3057;&#x3066;&#x3001;<code>process</code>&#x3067;&#x767B;&#x9332;&#x3057;&#x305F; <em>middleware</em> &#x3092;&#x9806;&#x756A;&#x306B;&#x5B9F;&#x884C;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;<code>Junction</code>&#x81EA;&#x4F53;&#x306F;&#x6E21;&#x3055;&#x308C;&#x305F;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x51E6;&#x7406;&#x3092;&#x305B;&#x305A;&#x306B;&#x3001; <em>middleware</em> &#x306E;&#x4E2D;&#x7D99;&#x306E;&#x307F;&#x3092;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x767B;&#x9332;&#x3059;&#x308B; <em>middleware</em> &#x306F;Connect&#x3068;&#x540C;&#x3058;&#x3082;&#x306E;&#x3067;&#x3001;&#x51E6;&#x7406;&#x3092;&#x3057;&#x305F;&#x3089;<code>next</code>&#x3092;&#x547C;&#x3093;&#x3067;&#x3001;&#x6B21;&#x306E; <em>middleware</em> &#x304C;&#x51E6;&#x7406;&#x3059;&#x308B;&#x3068;&#x3044;&#x3046;&#x306E;&#x3092;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4F7F;&#x3044;&#x65B9;&#x306F;Connect&#x3068;&#x5F15;&#x6570;&#x306E;&#x9055;&#x3044;&#x306F;&#x3042;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x307B;&#x307C;&#x540C;&#x3058;&#x3088;&#x3046;&#x306A;&#x5F62;&#x3067;&#x5229;&#x7528;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
+<span class="hljs-keyword">import</span> Junction <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./junction&quot;</span>;
+<span class="hljs-keyword">import</span> assert <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;assert&quot;</span>;
+<span class="hljs-keyword">let</span> junction = <span class="hljs-keyword">new</span> Junction();
+junction.use(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toUpperCase</span>(<span class="hljs-params">res, next</span>) </span>{
+    res.value = res.value.toUpperCase();
+    next();
+});
+junction.use(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exclamationMark</span>(<span class="hljs-params">res, next</span>) </span>{
+    res.value = res.value + <span class="hljs-string">&quot;!&quot;</span>;
+    next();
+});
+junction.use(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">errorHandling</span>(<span class="hljs-params">error, res, next</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(error.stack);
+    next();
+});
+
+<span class="hljs-keyword">let</span> text = <span class="hljs-string">&quot;hello world&quot;</span>;
+junction.process(text, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, result</span>) </span>{
+    <span class="hljs-keyword">if</span> (error) {
+        <span class="hljs-built_in">console</span>.error(error);
+    }
+    <span class="hljs-keyword">let</span> value = result.value;
+    assert.equal(value, <span class="hljs-string">&quot;HELLO WORLD!&quot;</span>);
+});
+</code></pre>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x308B;?</h2>
+<p>Connect&#x3084;Junction&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x3053;&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x3067;&#x306F;&#x6A5F;&#x80FD;&#x306E;&#x8A73;&#x7D30;&#x3092; <em>middleware</em> &#x3067;&#x5B9F;&#x88C5;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x672C;&#x4F53;&#x306E;&#x5B9F;&#x88C5;&#x306F; <em>middleware</em> &#x306B;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x30A4;&#x30F3;&#x30BF;&#x30D5;&#x30A7;&#x30FC;&#x30B9;&#x306E;&#x6C7A;&#x5B9A;&#x3001;&#x30A8;&#x30E9;&#x30FC;&#x30CF;&#x30F3;&#x30C9;&#x30EA;&#x30F3;&#x30B0;&#x306E;&#x624B;&#x6BB5;&#x3092;&#x63D0;&#x4F9B;&#x3059;&#x308B;&#x3060;&#x3051;&#x3067;&#x3068;&#x3066;&#x3082;&#x5C0F;&#x3055;&#x3044;&#x3082;&#x306E;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4ECA;&#x56DE;&#x306F;&#x7D39;&#x4ECB;&#x3057;&#x3066;&#x3044;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;Connect&#x306B;&#x306F;&#x30EB;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x306B;&#x95A2;&#x3059;&#x308B;&#x6A5F;&#x80FD;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x3053;&#x306E;&#x6A5F;&#x80FD;&#x3082;&#x300C;&#x4E0E;&#x3048;&#x3089;&#x308C;&#x305F;&#x30D1;&#x30B9;&#x306B;&#x30DE;&#x30C3;&#x30C1;&#x3057;&#x305F;&#x5834;&#x5408;&#x306E;&#x307F;&#x306B;&#x53CD;&#x5FDC;&#x3059;&#x308B; <em>middleware</em> &#x3092;&#x767B;&#x9332;&#x3059;&#x308B;&#x300D;&#x3068;&#x3044;&#x3046;&#x5358;&#x7D14;&#x306A;&#x3082;&#x306E;&#x3067;&#x3059;&#x3002;</p>
+<pre><code class="lang-js">app.use(<span class="hljs-string">&quot;/foo&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fooMiddleware</span>(<span class="hljs-params">req, res, next</span>) </span>{
+    <span class="hljs-comment">// req.url starts with &quot;/foo&quot;</span>
+    next();
+});
+</code></pre>
+<p>&#x3053;&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306F;&#x3001;&#x5165;&#x529B;&#x3068;&#x51FA;&#x529B;&#x304C;&#x3042;&#x308B;&#x5834;&#x5408;&#x306B;&#x30B3;&#x30A2;&#x3068;&#x306A;&#x308B;&#x90E8;&#x5206;&#x306F;&#x5C0F;&#x3055;&#x304F;&#x5B9F;&#x88C5;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;Connect&#x3084;Rack&#x306A;&#x3069;&#x306E;HTTP&#x30B5;&#x30FC;&#x30D0;&#x3067;&#x306F;&#x300C;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x306B;&#x5BFE;&#x3057;&#x3066;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3059;&#x300D;&#x3068;&#x3044;&#x3046;&#x306E;&#x304C;&#x6C7A;&#x307E;&#x3063;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x3001;&#x3053;&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306F;&#x9069;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;">&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x7528;&#x9014;&#x306B;&#x5411;&#x3044;&#x3066;&#x3044;&#x306A;&#x3044;?</h2>
+<p>&#x3053;&#x306E;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x3067;&#x306F;&#x6A5F;&#x80FD;&#x306E;&#x8A73;&#x7D30;&#x304C; <em>middleware</em> &#x3067;&#x5B9F;&#x88C5;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3057;&#x304B;&#x3057;&#x3001;&#x591A;&#x304F;&#x306E;&#x6A5F;&#x80FD;&#x3092; <em>middleware</em> &#x3067;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x304F;&#x3068;&#x3001; <em>middleware</em> &#x9593;&#x306B;&#x4F9D;&#x5B58;&#x95A2;&#x4FC2;&#x3092;&#x4F5C;&#x3063;&#x3066;&#x3057;&#x307E;&#x3046;&#x3053;&#x3068;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x5834;&#x5408;&#x3001;<code>use(middleware)</code> &#x3067;&#x767B;&#x9332;&#x3059;&#x308B;&#x9806;&#x756A;&#x306B;&#x3088;&#x308A;&#x6319;&#x52D5;&#x304C;&#x5909;&#x308F;&#x308B;&#x305F;&#x3081;&#x3001;&#x5229;&#x7528;&#x8005;&#x304C; <em>middleware</em> &#x9593;&#x306E;&#x4F9D;&#x5B58;&#x95A2;&#x4FC2;&#x3092;&#x89E3;&#x6C7A;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x540C;&#x58EB;&#x306E;&#x5F37;&#x3044;&#x72EC;&#x7ACB;&#x6027;&#x3084;&#x660E;&#x78BA;&#x306A;&#x4F9D;&#x5B58;&#x95A2;&#x4FC2;&#x3092;&#x6271;&#x3044;&#x305F;&#x3044;&#x5834;&#x5408;&#x306B;&#x306F;&#x4E0D;&#x5411;&#x304D;&#x3068;&#x3044;&#x3048;&#x308B;&#x3067;&#x3057;&#x3087;&#x3046;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3089;&#x3092;&#x89E3;&#x6D88;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x30B3;&#x30A2;&#x306F;&#x305D;&#x306E;&#x307E;&#x307E;&#x306B;&#x3057;&#x3066;&#x3001;&#x6700;&#x521D;&#x304B;&#x3089;&#x5E7E;&#x3064;&#x304B;&#x306E;<em>middleware stack</em>&#x3092;&#x4F5C;&#x3063;&#x305F;&#x3082;&#x306E;&#x304C;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x308B;&#x30B1;&#x30FC;&#x30B9;&#x3082;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;">&#x30A8;&#x30B3;&#x30B7;&#x30B9;&#x30C6;&#x30E0;</h2>
+<p>Connect&#x81EA;&#x4F53;&#x306E;&#x6A5F;&#x80FD;&#x306F;&#x5C11;&#x306A;&#x3044;&#x3067;&#x3059;&#x304C;&#x3001;&#x305D;&#x306E;&#x5206; <em>middleware</em> &#x306E;&#x7A2E;&#x985E;&#x304C;&#x591A;&#x304F;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/senchalabs/connect#middleware" target="_blank">github.com/senchalabs/connect#middleware</a></li>
+<li><a href="http://expressjs.com/resources/middleware.html" title="Express middleware" target="_blank">Express middleware</a></li>
+</ul>
+<p>&#x307E;&#x305F;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E; <em>middleware</em> &#x304C;&#x5C0F;&#x3055;&#x306A;&#x5358;&#x6A5F;&#x80FD;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x3066;&#x3001;&#x305D;&#x308C;&#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x3066;&#x4F7F;&#x3046;&#x3088;&#x3046;&#x306B;&#x4F5C;&#x3089;&#x308C;&#x3066;&#x3044;&#x308B;&#x30B1;&#x30FC;&#x30B9;&#x304C;&#x591A;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x306F;&#x3001; <em>middleware</em> &#x304C;&#x5C64;&#x3068;&#x3057;&#x3066;&#x91CD;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x4F5C;&#x308A;&#x3001;&#x3064;&#x307E;&#x308A; <em>middleware stack</em> &#x306E;&#x5F62;&#x3092;&#x53D6;&#x308B;&#x3053;&#x3068;&#x304C;&#x591A;&#x3044;&#x305F;&#x3081;&#x3060;&#x3068;&#x3044;&#x3048;&#x307E;&#x3059;&#x3002;</p>
+<p><img src="img/pylons_as_onion.png" alt="pylons_as_onion"></p>
+<blockquote>
+<p>&#x30DF;&#x30C9;&#x30EB;&#x30A6;&#x30A7;&#x30A2;&#x3067;&#x30E9;&#x30C3;&#x30D7;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30BB;&#x30B9;&#x306F;&#x3001;&#x6982;&#x5FF5;&#x7684;&#x306B;&#x305F;&#x307E;&#x306D;&#x304E;&#x306E;&#x4E2D;&#x306E;&#x5C64;&#x3068;&#x540C;&#x69D8;&#x306E;&#x69CB;&#x9020;&#x3092;&#x3082;&#x305F;&#x3089;&#x3057;&#x307E;&#x3059;&#x3002;
+<a href="http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html#wsgi-middleware" title="WSGI &#x30DF;&#x30C9;&#x30EB;&#x30A6;&#x30A7;&#x30A2;" target="_blank">WSGI &#x30DF;&#x30C9;&#x30EB;&#x30A6;&#x30A7;&#x30A2;</a>&#x3088;&#x308A;&#x5F15;&#x7528;</p>
+</blockquote>
+<h2 id="&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;">&#x3053;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x308B;&#x3082;&#x306E;</h2>
+<ul>
+<li><a href="http://expressjs.com/" title="Express" target="_blank">Express</a><ul>
+<li>Connect&#x3068; <em>middleware</em> &#x306E;&#x4E92;&#x63DB;&#x6027;&#x304C;&#x3042;&#x308B;</li>
+<li>&#x5143;&#x3005;&#x306F;Connect&#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x3044;&#x305F;&#x304C;<a href="https://github.com/strongloop/express/blob/4.0.0/History.md" title="4.0.0" target="_blank">4.0.0</a>&#x3067;&#x81EA;&#x524D;&#x306E;&#x5B9F;&#x88C5;&#x306B;&#x5909;&#x66F4;</li>
+</ul>
+</li>
+<li><a href="https://github.com/wooorm/retext" title="wooorm/retext" target="_blank">wooorm/retext</a><ul>
+<li><code>use</code>&#x3067;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x767B;&#x9332;&#x3057;&#x3066;&#x3044;&#x304F;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x51E6;&#x7406;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;</li>
+</ul>
+</li>
+<li><a href="https://github.com/r7kamura/stackable-fetcher" title="r7kamura/stackable-fetcher" target="_blank">r7kamura/stackable-fetcher</a><ul>
+<li><code>use</code>&#x3067;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x767B;&#x9332;&#x3057;&#x3066;&#x51E6;&#x7406;&#x3092;&#x8FFD;&#x52A0;&#x3067;&#x304D;&#x308B;HTTP&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x307E;&#x3068;&#x3081;">&#x307E;&#x3068;&#x3081;</h2>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;Connect&#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x30A2;&#x30FC;&#x30AD;&#x30C6;&#x30AF;&#x30C1;&#x30E3;&#x306B;&#x3064;&#x3044;&#x3066;&#x5B66;&#x3073;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<ul>
+<li>Connect&#x306F; <em>middleware</em> &#x3092;&#x4F7F;&#x3063;&#x305F;HTTP&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x30E9;&#x30A4;&#x30D6;&#x30E9;&#x30EA;&#x3067;&#x3042;&#x308B;</li>
+<li>Connect&#x81EA;&#x4F53;&#x306E;&#x6A5F;&#x80FD;&#x306F;&#x5C11;&#x306A;&#x3044;</li>
+<li>&#x8907;&#x6570;&#x306E; <em>middleware</em> &#x3092;&#x7D44;&#x307F;&#x5408;&#x308F;&#x305B;&#x308B;&#x3053;&#x3068;&#x3067;HTTP&#x30B5;&#x30FC;&#x30D0;&#x3092;&#x4F5C;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x308B;</li>
+</ul>
+<h2 id="&#x53C2;&#x8003;&#x8CC7;&#x6599;">&#x53C2;&#x8003;&#x8CC7;&#x6599;</h2>
+<ul>
+<li><a href="http://qiita.com/higuma/items/838f4f58bc4a0645950a#2-5" target="_blank">Ruby - Rack&#x89E3;&#x8AAC; - Rack&#x306E;&#x69CB;&#x9020;&#x3068;Rack DSL - Qiita</a></li>
+<li><a href="http://docs.pylonsproject.org/projects/pylons-webframework/en/v1.0.1rc1/concepts.html" target="_blank">Pylons &#x306E;&#x30B3;&#x30F3;&#x30BB;&#x30D7;&#x30C8; &#x2014; Pylons 0.9.7 documentation</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../ESLint/" class="navigation navigation-prev " aria-label="Previous page: ESLint">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../gulp/" class="navigation navigation-next " aria-label="Next page: gulp">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Connect","level":"1.4","depth":1,"next":{"title":"gulp","level":"1.5","depth":1,"path":"ja/gulp/README.md","ref":"ja/gulp/README.md","articles":[]},"previous":{"title":"ESLint","level":"1.3","depth":1,"path":"ja/ESLint/README.md","ref":"ja/ESLint/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexMincho","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"ja/connect/README.md","mtime":"2020-09-05T15:19:59.036Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-05T15:20:36.689Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
