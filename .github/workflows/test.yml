@@ -21,6 +21,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Build ebook
-        run: docker run -v `pwd`:`pwd` -w `pwd` honkit/honkit honkit pdf
+        run: docker run -v `pwd`:`pwd` -w `pwd` honkit/honkit npx honkit pdf
       - name: Test
         run: npm test
