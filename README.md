@@ -4,13 +4,13 @@
 
 次の形式で読むことができます。
 
-- [Web版](https://azu.gitbooks.io/javascript-plugin-architecture/content/)
-- [PDF形式](https://www.gitbook.com/download/pdf/book/azu/javascript-plugin-architecture)
-- [ePub形式](https://www.gitbook.com/download/epub/book/azu/javascript-plugin-architecture)
-- [Mobi形式](https://www.gitbook.com/download/mobi/book/azu/javascript-plugin-architecture)
+- [Web版](https://azu.github.io/JavaScript-Plugin-Architecture/)
+- [PDF形式](https://azu.github.io/JavaScript-Plugin-Architecture/JavaScript-Plugin-Architecture.pdf)
+- [ePub形式](https://azu.github.io/JavaScript-Plugin-Architecture/JavaScript-Plugin-Architecture.epub)
+- [Mobi形式](https://azu.github.io/JavaScript-Plugin-Architecture/JavaScript-Plugin-Architecture.mobi)
 
 [GitHub](https://github.com/azu/JavaScript-Plugin-Architecture)上で直接Markdownファイルを読むこともできますが、
-その場合は[Web版](https://azu.gitbooks.io/javascript-plugin-architecture/content/)で読むことをオススメします。
+その場合は[Web版](https://azu.github.io/JavaScript-Plugin-Architecture/)で読むことをオススメします。
 
 Twitterのハッシュタグは[#js_plugin_book](https://twitter.com/search?f=tweets&q=%23js_plugin_book&src=typd "Twitter #js_plugin_book")
 
