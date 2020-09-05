@@ -10,11 +10,11 @@
 
 ## Usage
 
-この書籍は[GitBook](https://github.com/GitbookIO/gitbook "GitBook")を使い書かれています。
+この書籍は[HonKit](https://github.com/honkit/honkit)を使い書かれています。
 
 ### 表示の確認
 
-`npm start`でGitBookのローカルサーバを立ち上げて表示を確認できます。
+`npm start`で[HonKit](https://github.com/honkit/honkit)のローカルサーバを立ち上げて表示を確認できます。
 
     npm start
 
