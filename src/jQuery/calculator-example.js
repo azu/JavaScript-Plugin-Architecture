@@ -1,4 +1,3 @@
-"use strict";
 import assert from "assert";
 import calculator from "./calculator";
 import "./calculator-plugin"; // Extend

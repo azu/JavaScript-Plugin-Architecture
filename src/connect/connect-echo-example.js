@@ -1,4 +1,3 @@
-"use strict";
 import connect from "connect";
 import http from "http";
 import fetch from "node-fetch";

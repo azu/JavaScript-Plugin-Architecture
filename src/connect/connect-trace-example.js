@@ -1,4 +1,3 @@
-"use strict";
 import errorHandler from "./errorHandler";
 import hello from "./hello";
 import nosniff from "./nosniff";

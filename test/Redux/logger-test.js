@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 const assert = require("power-assert");
 import {createStore, applyMiddleware} from "redux";
 import createLogger from "../../src/Redux/logger";

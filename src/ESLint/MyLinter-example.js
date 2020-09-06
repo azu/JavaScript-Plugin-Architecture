@@ -1,4 +1,3 @@
-"use strict";
 import assert from "assert";
 import MyLinter from "./MyLinter";
 import noConsole from "./no-console";

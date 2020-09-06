@@ -1,4 +1,3 @@
-"use strict";
 const EventEmitter = require("events");
 export const ON_DISPATCH = "__ON_DISPATCH__";
 /**

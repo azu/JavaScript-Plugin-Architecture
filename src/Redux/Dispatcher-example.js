@@ -1,4 +1,3 @@
-"use strict";
 import Dispatcher from "./Dispatcher";
 const dispatcher = new Dispatcher();
 dispatcher.subscribe(action => {

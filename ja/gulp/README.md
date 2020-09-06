@@ -185,8 +185,8 @@ gulp.src("./*.*")
 
 ```js
 gulp.src("./*.*", { buffer: false })
-        .pipe(gulpPrefixer("prefix text"))
-        .pipe(gulp.dest("build"));
+    .pipe(gulpPrefixer("prefix text"))
+    .pipe(gulp.dest("build"));
 ```
 
 ### 変換処理

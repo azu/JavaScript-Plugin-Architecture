@@ -1,4 +1,3 @@
-"use strict";
 function setHeaders(res, headers) {
     Object.keys(headers).forEach(key => {
         let value = headers[key];

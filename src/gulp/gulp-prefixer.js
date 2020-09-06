@@ -1,4 +1,3 @@
-"use strict";
 import {Transform} from "stream";
 export function prefixBuffer(buffer, prefix) {
     return Buffer.concat([Buffer(prefix), buffer]);

@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import assert from "power-assert";
 import Junction from "../../src/connect/junction";
 describe("junction", function () {

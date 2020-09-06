@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 const assert = require("power-assert");
 import applyMiddleware from "../../src/Redux/apply-middleware";
 import Dispatcher from "../../src/Redux/Dispatcher";

@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import assert from "power-assert";
 import calculator from "../../src/jQuery/calculator";
 import "../../src/jQuery/calculator-plugin";

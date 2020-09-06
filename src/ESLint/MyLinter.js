@@ -1,4 +1,3 @@
-"use strict";
 import {parse} from "esprima";
 import {traverse} from "estraverse";
 import {EventEmitter} from "events";

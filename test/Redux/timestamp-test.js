@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 const assert = require("power-assert");
 import {createStore, applyMiddleware} from "redux";
 import timestamp from "../../src/Redux/timestamp";

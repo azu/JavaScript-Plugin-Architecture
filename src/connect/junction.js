@@ -1,4 +1,3 @@
-"use strict";
 function isErrorHandingMiddleware(middleware) {
     // middleware(error, text, next)
     let arity = middleware.length;

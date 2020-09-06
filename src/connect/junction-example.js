@@ -1,4 +1,3 @@
-"use strict";
 import Junction from "./junction";
 import assert from "assert";
 let junction = new Junction();
