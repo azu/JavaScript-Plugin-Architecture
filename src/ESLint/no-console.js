@@ -4,7 +4,10 @@ module.exports = {
         return {
             "MemberExpression": function (node) {
                 if (node.object.name === "console") {
-                    context.report(node, "Unexpected console statement.");
+                    context.report({
+                        node,
+                        message: "Unexpected console statement."
+                    });
                 }
             }
         };
