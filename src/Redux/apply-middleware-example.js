@@ -1,4 +1,3 @@
-"use strict";
 import Dispatcher from "./Dispatcher";
 import applyMiddleware from "./apply-middleware";
 import timestamp from "./timestamp";

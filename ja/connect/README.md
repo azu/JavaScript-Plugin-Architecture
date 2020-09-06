@@ -91,10 +91,10 @@ Connectは登録された _middleware_ を、サーバがリクエストを受�
 Connectの行っている処理を抽象的なコードで書くと次のような形になっています。
 
 ```js
-let req = "...",
+const req = "...",
     res = "...";
 function next(){
-    let middleware = app.stack.shift();
+    const middleware = app.stack.shift();
     // nextが呼ばれれば次のmiddleware
     middleware(req, res, next);
 }

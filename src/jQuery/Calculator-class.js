@@ -1,4 +1,3 @@
-"use strict";
 function Calculator(value) {
     this.value = value;
 }

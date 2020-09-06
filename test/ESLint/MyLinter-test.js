@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import assert from "power-assert";
 import MyLinter from "../../src/ESLint/MyLinter";
 import noConsole from "../../src/ESLint/no-console";

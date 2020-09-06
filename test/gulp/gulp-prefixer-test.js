@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import assert from "power-assert";
 import {createReadStream} from "fs";
 import {prefixBuffer, prefixStream} from "../../src/gulp/gulp-prefixer";

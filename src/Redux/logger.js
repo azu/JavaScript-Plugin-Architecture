@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 const defaultOptions = {
     // default: logger use console API
     logger: console

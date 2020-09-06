@@ -1,12 +1,13 @@
-"use strict";
-import {parse} from "esprima";
-import {traverse} from "estraverse";
-import {EventEmitter} from "events";
+import { parse } from "esprima";
+import { traverse } from "estraverse";
+import { EventEmitter } from "events";
+
 class RuleContext extends EventEmitter {
-    report(node, message) {
+    report({ message }) {
         this.emit("report", message);
     }
 }
+
 export default class MyLinter {
     constructor() {
         this._emitter = new EventEmitter();
@@ -14,7 +15,7 @@ export default class MyLinter {
     }
 
     loadRule(rule) {
-        let ruleExports = rule(this._ruleContext);
+        const ruleExports = rule.create(this._ruleContext);
         // on(nodeType, nodeTypeCallback);
         Object.keys(ruleExports).forEach(nodeType => {
             this._emitter.on(nodeType, ruleExports[nodeType]);
@@ -23,12 +24,12 @@ export default class MyLinter {
 
 
     lint(code) {
-        let messages = [];
-        let addMessage = (message)=> {
+        const messages = [];
+        const addMessage = (message) => {
             messages.push(message);
         };
         this._ruleContext.on("report", addMessage);
-        let ast = parse(code);
+        const ast = parse(code);
         traverse(ast, {
             enter: (node) => {
                 this._emitter.emit(node.type, node);
