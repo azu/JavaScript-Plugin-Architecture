@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import assert from "power-assert";
 import connect from "connect";
 import errorHandler from "../../src/connect/errorHandler";

@@ -276,8 +276,7 @@ gulp.task(<span class="hljs-string">&quot;sass&quot;</span>, <span class="hljs-f
 <li><a href="https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/dealing-with-streams.md" title="gulp/dealing-with-streams.md at master &#xB7; gulpjs/gulp" target="_blank">gulp/dealing-with-streams.md</a></li>
 </ul>
 <p>&#x591A;&#x304F;&#x306E;gulp&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x306F;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308A;&#x3001;Node&#x306E;Stream&#x3092;&#x8FD4;&#x3059;&#x95A2;&#x6570;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
-<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
-<span class="hljs-keyword">import</span> {Transform} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;stream&quot;</span>;
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {Transform} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;stream&quot;</span>;
 <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prefixBuffer</span>(<span class="hljs-params">buffer, prefix</span>) </span>{
     <span class="hljs-keyword">return</span> Buffer.concat([Buffer(prefix), buffer]);
 }
@@ -285,14 +284,14 @@ gulp.task(<span class="hljs-string">&quot;sass&quot;</span>, <span class="hljs-f
 <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prefixStream</span>(<span class="hljs-params">prefix</span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
         <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">chunk, encoding, next</span>) </span>{
-            <span class="hljs-keyword">let</span> buffer = prefixBuffer(chunk, prefix);
+            <span class="hljs-keyword">const</span> buffer = prefixBuffer(chunk, prefix);
             <span class="hljs-keyword">this</span>.push(buffer);
             next();
         }
     });
 }
 
-<span class="hljs-keyword">let</span> gulpPrefixer = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">prefix</span>) </span>{
+<span class="hljs-keyword">const</span> gulpPrefixer = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">prefix</span>) </span>{
     <span class="hljs-comment">// enable `objectMode` of the stream for vinyl File objects.</span>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
         <span class="hljs-comment">// Takes in vinyl File objects</span>
@@ -316,8 +315,7 @@ gulp.task(<span class="hljs-string">&quot;sass&quot;</span>, <span class="hljs-f
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> gulpPrefixer;
 </code></pre>
 <p>&#x3053;&#x3053;&#x3067;&#x5B9F;&#x88C5;&#x3057;&#x305F;<code>gulp-prefixer</code>&#x306F;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x30BF;&#x30B9;&#x30AF;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x3080;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
-<pre><code class="lang-javascript"><span class="hljs-meta">&quot;use strict&quot;</span>;
-<span class="hljs-keyword">import</span> gulp <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp&quot;</span>;
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> gulp <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gulp&quot;</span>;
 <span class="hljs-keyword">import</span> gulpPrefixer <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./gulp-prefixer&quot;</span>;
 gulp.task(<span class="hljs-string">&quot;default&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">return</span> gulp.src(<span class="hljs-string">&quot;./*.*&quot;</span>)
@@ -336,7 +334,7 @@ gulp.task(<span class="hljs-string">&quot;default&quot;</span>, <span class="hlj
 </ol>
 <h3 id="stream">Stream</h3>
 <p><a href="#gulp-prefixer.js">gulp-prefixer.js</a>&#x3092;&#x898B;&#x3066;&#x307F;&#x308B;&#x3068;&#x3001;<code>gulpPrefixer</code>&#x3068;&#x3044;&#x3046;<a href="https://nodejs.org/api/stream.html#stream_class_stream_transform" title="stream.Transform" target="_blank">Transform Stream</a>&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30BF;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> gulpPrefixer = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">prefix</span>) </span>{
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> gulpPrefixer = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">prefix</span>) </span>{
     <span class="hljs-comment">// enable `objectMode` of the stream for vinyl File objects.</span>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Transform({
         <span class="hljs-comment">// Takes in vinyl File objects</span>
@@ -415,8 +413,8 @@ gulp.task(<span class="hljs-string">&quot;default&quot;</span>, <span class="hlj
 <code>gulp.src</code>&#x306F;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x306F;&#x3001;<code>contents</code>&#x306B;Buffer&#x3092;&#x683C;&#x7D0D;&#x3059;&#x308B;&#x306E;&#x3067;&#x3001;&#x3053;&#x306E;&#x5834;&#x5408;&#x306F;Buffer&#x3067;&#x51E6;&#x7406;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
 <p><code>gulp.src</code>&#x306F;&#x30AA;&#x30D7;&#x30B7;&#x30E7;&#x30F3;&#x306B;<code>{ buffer: false }</code>&#x3092;&#x6E21;&#x3059;&#x3053;&#x3068;&#x3067;<code>contents</code>&#x306B;Stream&#x3092;&#x6D41;&#x3059;&#x3053;&#x3068;&#x3082;&#x53EF;&#x80FD;&#x3067;&#x3059;&#x3002;</p>
 <pre><code class="lang-js">gulp.src(<span class="hljs-string">&quot;./*.*&quot;</span>, { <span class="hljs-attr">buffer</span>: <span class="hljs-literal">false</span> })
-        .pipe(gulpPrefixer(<span class="hljs-string">&quot;prefix text&quot;</span>))
-        .pipe(gulp.dest(<span class="hljs-string">&quot;build&quot;</span>));
+    .pipe(gulpPrefixer(<span class="hljs-string">&quot;prefix text&quot;</span>))
+    .pipe(gulp.dest(<span class="hljs-string">&quot;build&quot;</span>));
 </code></pre>
 <h3 id="&#x5909;&#x63DB;&#x51E6;&#x7406;">&#x5909;&#x63DB;&#x51E6;&#x7406;</h3>
 <p>&#x6700;&#x5F8C;&#x306B;Buffer&#x3068;Stream&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x5909;&#x63DB;&#x51E6;&#x7406;&#x3092;&#x898B;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
@@ -429,7 +427,7 @@ gulp.task(<span class="hljs-string">&quot;default&quot;</span>, <span class="hlj
         <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">chunk, encoding, next</span>) </span>{
             <span class="hljs-comment">// ObjectMode:false&#x306E;Transform Stream</span>
             <span class="hljs-comment">// Stream&#x306E;chunk&#x306B;&#x306F;Buffer&#x304C;&#x6D41;&#x308C;&#x3066;&#x304F;&#x308B;</span>
-            <span class="hljs-keyword">let</span> buffer = prefixBuffer(chunk, prefix);
+            <span class="hljs-keyword">const</span> buffer = prefixBuffer(chunk, prefix);
             <span class="hljs-keyword">this</span>.push(buffer);
             next();
         }
@@ -551,7 +549,7 @@ Node.js Stream&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x3067;&#x306F;&#
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"gulp","level":"1.5","depth":1,"next":{"title":"Redux","level":"1.6","depth":1,"path":"ja/Redux/README.md","ref":"ja/Redux/README.md","articles":[]},"previous":{"title":"Connect","level":"1.4","depth":1,"path":"ja/connect/README.md","ref":"ja/connect/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexGothic","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"ja/gulp/README.md","mtime":"2020-09-05T15:35:07.024Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-05T15:35:46.850Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"gulp","level":"1.5","depth":1,"next":{"title":"Redux","level":"1.6","depth":1,"path":"ja/Redux/README.md","ref":"ja/Redux/README.md","articles":[]},"previous":{"title":"Connect","level":"1.4","depth":1,"path":"ja/connect/README.md","ref":"ja/connect/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","richquotes","edit-link","japanese-support","ga","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/azu/JavaScript-Plugin-Architecture"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"richquotes":{},"japanese-support":{},"highlight":{},"ga":{"configuration":"auto","token":"UA-2184335-16"},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"Edit This Page","base":"https://github.com/azu/JavaScript-Plugin-Architecture/edit/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"azu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"IPAexGothic","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"JavaScript Plugin Architecture","gitbook":"3.x.x","description":"JavaScriptライブラリやツールのプラグインの仕組み","githubId":"azu/JavaScript-Plugin-Architecture"},"file":{"path":"ja/gulp/README.md","mtime":"2020-09-06T03:12:42.018Z","type":"markdown"},"gitbook":{"version":"3.6.6","time":"2020-09-06T03:13:21.801Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

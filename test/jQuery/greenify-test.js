@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import jsdom from "jsdom";
 import assert from "power-assert";
 import fs from "fs";

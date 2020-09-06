@@ -1,4 +1,3 @@
-"use strict";
 /*
    => api - middleware api
        => next - next/dispatch function

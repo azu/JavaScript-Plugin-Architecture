@@ -1,7 +1,6 @@
-"use strict";
 function isErrorHandingMiddleware(middleware) {
     // middleware(error, text, next)
-    let arity = middleware.length;
+    const arity = middleware.length;
     return arity === 3;
 }
 function applyMiddleware(error, response, middleware, next) {
@@ -30,9 +29,9 @@ export default class Junction {
     }
 
     process(initialValue, callback) {
-        let response = {value: initialValue};
-        let next = (error) => {
-            let middleware = this.stack.shift();
+        const response = {value: initialValue};
+        const next = (error) => {
+            const middleware = this.stack.shift();
             if (!middleware) {
                 return callback(error, response);
             }

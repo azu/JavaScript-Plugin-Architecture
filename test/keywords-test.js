@@ -1,5 +1,4 @@
 // LICENSE : MIT
-"use strict";
 import {getKeywords}  from "stemming-x-keywords";
 const fs = require("fs");
 const path = require("path");

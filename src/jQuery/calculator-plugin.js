@@ -1,4 +1,3 @@
-"use strict";
 import calculator from "./calculator";
 calculator.fn.add = function (x) {
     this.value += x;

@@ -1,0 +1,7 @@
+{
+  "timeout": "100000",
+  "recursive": true,
+  "require": [
+    "@babel/register"
+  ]
+}

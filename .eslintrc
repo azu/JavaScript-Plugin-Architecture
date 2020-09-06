@@ -17,7 +17,8 @@
       "always"
     ],
     "no-console": 0,
-    "no-var": 2
+    "no-var": 2,
+    "prefer-const": "error"
   },
   "env": {
     "es6": true,
