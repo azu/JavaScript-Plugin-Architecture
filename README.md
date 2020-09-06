@@ -82,6 +82,11 @@ Pull Request、コミットのやりかたなどが書かれています。
 
 - [azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture)
 
+## Author
+
+- [github/azu](https://github.com/azu)
+- [twitter/azu_re](https://twitter.com/azu_re)
+
 ## License
 
 MIT/CC BY-NC © azu
