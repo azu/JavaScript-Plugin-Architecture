@@ -35,6 +35,10 @@ JavaScriptの世界では1つの大きなライブラリよりも小さいなも
 
 この書籍では、JavaScriptにおけるプラグインアーキテクチャやそのエコシステムを形成してるライブラリやツールなどの実装を学ぶことが目的となっています。
 
+JavaScriptの基本的な文法などについては解説していないため、次の書籍を参照してください。
+
+- [JavaScript Primer - 迷わないための入門書 #jsprimer](https://jsprimer.net/)
+
 ## この書籍の内容について
 
 ### [jQuery](ja/jQuery/README.md)
