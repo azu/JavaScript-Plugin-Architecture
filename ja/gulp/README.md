@@ -80,7 +80,7 @@ gulp.task("sass", function() {
 [gulp-prefixer.js](#gulp-prefixer.js)を見てみると、`gulpPrefixer`という[Transform Stream](https://nodejs.org/api/stream.html#stream_class_stream_transform "stream.Transform")のインスタンスを返していることが分かります。
 
 ```js
-let gulpPrefixer = function (prefix) {
+const gulpPrefixer = function (prefix) {
     // enable `objectMode` of the stream for vinyl File objects.
     return new Transform({
         // Takes in vinyl File objects
@@ -203,7 +203,7 @@ export function prefixStream(prefix) {
         transform: function (chunk, encoding, next) {
             // ObjectMode:falseのTransform Stream
             // StreamのchunkにはBufferが流れてくる
-            let buffer = prefixBuffer(chunk, prefix);
+            const buffer = prefixBuffer(chunk, prefix);
             this.push(buffer);
             next();
         }

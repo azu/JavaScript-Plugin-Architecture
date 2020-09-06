@@ -1,6 +1,6 @@
 function setHeaders(res, headers) {
     Object.keys(headers).forEach(key => {
-        let value = headers[key];
+        const value = headers[key];
         if (value !== null) {
             res.setHeader(key, value);
         }

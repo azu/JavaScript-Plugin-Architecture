@@ -4,7 +4,7 @@ import nosniff from "./nosniff";
 import connect from "connect";
 
 const responseText = "response text";
-let app = connect();
+const app = connect();
 // add Error handling
 app.use(errorHandler());
 // add "X-Content-Type-Options" to response

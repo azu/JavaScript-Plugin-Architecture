@@ -163,7 +163,7 @@ function lint(code){
         // それぞれのルールに定義されているメソッド一覧を取得
         // e.g) MemberExpression(node){}
         // => {"MemberExpression" : function(node){}, ... } というオブジェクト
-        let methodObject = getDefinedMethod(rule);
+        const methodObject = getDefinedMethod(rule);
         Object.keys(methodObject).forEach(nodeType => {
             emitter.on(nodeType, methodList[nodeType]);
         });

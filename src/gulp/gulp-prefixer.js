@@ -6,14 +6,14 @@ export function prefixBuffer(buffer, prefix) {
 export function prefixStream(prefix) {
     return new Transform({
         transform: function (chunk, encoding, next) {
-            let buffer = prefixBuffer(chunk, prefix);
+            const buffer = prefixBuffer(chunk, prefix);
             this.push(buffer);
             next();
         }
     });
 }
 
-let gulpPrefixer = function (prefix) {
+const gulpPrefixer = function (prefix) {
     // enable `objectMode` of the stream for vinyl File objects.
     return new Transform({
         // Takes in vinyl File objects

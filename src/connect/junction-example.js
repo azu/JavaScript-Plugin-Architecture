@@ -1,6 +1,6 @@
 import Junction from "./junction";
 import assert from "assert";
-let junction = new Junction();
+const junction = new Junction();
 junction.use(function toUpperCase(res, next) {
     res.value = res.value.toUpperCase();
     next();
@@ -14,11 +14,11 @@ junction.use(function errorHandling(error, res, next) {
     next();
 });
 
-let text = "hello world";
+const text = "hello world";
 junction.process(text, function (error, result) {
     if (error) {
         console.error(error);
     }
-    let value = result.value;
+    const value = result.value;
     assert.equal(value, "HELLO WORLD!");
 });
