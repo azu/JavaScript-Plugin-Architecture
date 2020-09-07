@@ -109,7 +109,7 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 
 以下からこのテンプレートで使ったIssueを立てることができます。
 
-- [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?title=Proposal:XXX&body=%23+XXXのアーキテクチャ%0D%0AURL%3A)
+- [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?assignees=&labels=Status%3A+Proposal&template=proposal.md&title=)
 
 ### Proposalの具体例
 
