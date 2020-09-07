@@ -30,9 +30,7 @@
 
 100％を理想的目標として、それに対する現実的な値をカバレッジの％として表現しています。
 
-[![codecov.io](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/coverage.svg?branch=master)](https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master)
-
-![coverage graph](https://codecov.io/github/azu/JavaScript-Plugin-Architecture/branch.svg?branch=master)
+- https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master
 
 現在の文章カバレッジは次のコマンドでも確認できます。
 
