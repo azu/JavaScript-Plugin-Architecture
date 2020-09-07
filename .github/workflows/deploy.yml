@@ -30,6 +30,7 @@ jobs:
           docker run -v `pwd`:`pwd` -w `pwd` honkit node_modules/.bin/honkit pdf . _book/JavaScript-Plugin-Architecture.pdf
           docker run -v `pwd`:`pwd` -w `pwd` honkit node_modules/.bin/honkit epub . _book/JavaScript-Plugin-Architecture.epub
           docker run -v `pwd`:`pwd` -w `pwd` honkit node_modules/.bin/honkit mobi . _book/JavaScript-Plugin-Architecture.mobi
+          ls _book
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
