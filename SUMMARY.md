@@ -1,9 +1,10 @@
-# Summary
+# Table of contents
 
-* [この書籍について](./README.md)
-* [jQuery](ja/jQuery/README.md)
-* [ESLint](ja/ESLint/README.md)
-* [Connect](ja/connect/README.md)
-* [gulp](ja/gulp/README.md)
-* [Redux](ja/Redux/README.md)
-* [CONTRIBUTING](./CONTRIBUTING.md)
+* [この書籍について](README.md)
+* [jQuery](jquery.md)
+* [ESLint](eslint.md)
+* [Connect](connect.md)
+* [gulp](gulp.md)
+* [Redux](redux.md)
+* [CONTRIBUTING](contributing.md)
+

@@ -1,12 +1,14 @@
-# Contribute
+# CONTRIBUTING
 
 ## Installation
 
 インストールにはNode.jsが必要です
 
-    git clone https://github.com/azu/JavaScript-Plugin-Architecture.git
-    cd JavaScript-Plugin-Architecture
-    npm install
+```text
+git clone https://github.com/azu/JavaScript-Plugin-Architecture.git
+cd JavaScript-Plugin-Architecture
+npm install
+```
 
 ## Usage
 
@@ -16,25 +18,29 @@
 
 `npm start`で[HonKit](https://github.com/honkit/honkit)のローカルサーバを立ち上げて表示を確認できます。
 
-    npm start
+```text
+npm start
+```
 
 ### テスト
 
 `npm test`でコードや文章の単語チェックを行えます
 
-    npm test
+```text
+npm test
+```
 
 ### 文章カバレッジ
 
-[textlint](https://github.com/textlint/textlint "textlint")と[textlint-formatter-codecov](https://github.com/azu/textlint-formatter-codecov "textlint-formatter-codecov")を使って出してる文章に対するカバレッジ
+[textlint](https://github.com/textlint/textlint)と[textlint-formatter-codecov](https://github.com/azu/textlint-formatter-codecov)を使って出してる文章に対するカバレッジ
 
 100％を理想的目標として、それに対する現実的な値をカバレッジの％として表現しています。
 
-- https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master
+* [https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master](https://codecov.io/github/azu/JavaScript-Plugin-Architecture?branch=master)
 
 現在の文章カバレッジは次のコマンドでも確認できます。
 
-```
+```text
 npm run textlint:coverage
 ```
 
@@ -44,31 +50,27 @@ npm run textlint:coverage
 
 Contributeは大きく分けて、既存の文章の修正や執筆とProposalの提案などがあります。
 
-
 ## 文章の修正
 
 typoなどを見つけた場合は、1文字の修正からでも問題無いので、Pull Requestを送っていただけると助かります。
 
 表記揺れを発見した場合は単純にIssueを立ててもらうか、Pull Requestでの修正をいただけると嬉しいです。
 
-また、この書籍では[test/prh-rule.yaml](test/prh-rule.yaml)で定義した辞書を使い表記揺れを辞書でテストできるようにしています。
-辞書による表記揺れの検知が可能なら、そちらも合わせてご指摘いただけるとありがたいです。
+また、この書籍では[test/prh-rule.yaml](https://github.com/azu/javaScript-plugin-architecture/tree/ba76aad2d15c478071fdb7e0a9702d120f1da575/test/prh-rule.yaml)で定義した辞書を使い表記揺れを辞書でテストできるようにしています。 辞書による表記揺れの検知が可能なら、そちらも合わせてご指摘いただけるとありがたいです。
 
-- [textlint + prhで表記ゆれを検出する | Web Scratch](http://efcl.info/2015/09/14/textlint-rule-prh/ "textlint + prhで表記ゆれを検出する | Web Scratch")
+* [textlint + prhで表記ゆれを検出する \| Web Scratch](http://efcl.info/2015/09/14/textlint-rule-prh/)
 
 ## 新しいプラグインの仕組みを書く
 
 この書籍に載せたいプラグインアーキテクチャがある場合は、Issueを立ててください。
 
-たとえば、XXXというライブラリ/ツールのアーキテクチャについてのIssueを立てる場合、
-次のようなことが1行とかでもいいので書かれているとよさそうです。
+たとえば、XXXというライブラリ/ツールのアーキテクチャについてのIssueを立てる場合、 次のようなことが1行とかでもいいので書かれているとよさそうです。
 
-仕組みについて調べるのが大変な場合は、あとで調べれば問題ないため空欄で問題ありません。
-JavaScriptはとにかく柔軟な言語なので、こういうプラグインの形式を取ってるというのを知らせるだけでも有用だと思います。
+仕組みについて調べるのが大変な場合は、あとで調べれば問題ないため空欄で問題ありません。 JavaScriptはとにかく柔軟な言語なので、こういうプラグインの形式を取ってるというのを知らせるだけでも有用だと思います。
 
 新しいプラグインの仕組みについて書く場合は、次のテンプレートを参照してください。
 
-```
+```text
 # XXXのアーキテクチャ
 
 ## どう書ける?
@@ -109,33 +111,33 @@ JavaScriptはとにかく柔軟な言語なので、こういうプラグイン�
 
 以下からこのテンプレートで使ったIssueを立てることができます。
 
-- [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?assignees=&labels=Status%3A+Proposal&template=proposal.md&title=)
+* [新しいProposalを書く](https://github.com/azu/JavaScript-Plugin-Architecture/issues/new?assignees=&labels=Status%3A+Proposal&template=proposal.md&title=)
 
 ### Proposalの具体例
 
 現在ある[Proposal一覧](https://github.com/azu/JavaScript-Plugin-Architecture/labels/proposal)を参考にしてみるとよいかもしれません。
 
-- [jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture/issues/8 "jQuery Plugin · Issue #8 · azu/JavaScript-Plugin-Architecture")
+* [jQuery Plugin · Issue \#8 · azu/JavaScript-Plugin-Architecture](https://github.com/azu/JavaScript-Plugin-Architecture/issues/8)
 
 ## テスト
 
 `$ npm test` を実行するとコードや文章に対するテストが実行されます。
 
-```sh
+```bash
 npm test
 ```
 
-文章は[textlint](https://github.com/azu/textlint "textlint")による単語のチェックが行われます。
+文章は[textlint](https://github.com/azu/textlint)による単語のチェックが行われます。
 
 ## コミットメッセージ
 
 AngularJSのGit Commit Guidelinesをベースとしています。
 
-- [conventional-changelog/angular.md at master · ajoslin/conventional-changelog](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md "conventional-changelog/angular.md at master · ajoslin/conventional-changelog")
+* [conventional-changelog/angular.md at master · ajoslin/conventional-changelog](https://github.com/ajoslin/conventional-changelog/blob/master/conventions/angular.md)
 
-次のような形で1行目に概要、3行目から本文、最後に関連するIssue(任意)を書きます。
+次のような形で1行目に概要、3行目から本文、最後に関連するIssue\(任意\)を書きます。
 
-```
+```text
 feat(ngInclude): add template url parameter to events
 
 The `src` (i.e. the url of the template to load) is now provided to the
@@ -146,8 +148,7 @@ Closes #8453
 Closes #8454
 ```
 
-
-```
+```text
                          scope        commit title
 
         commit type       /                /      
@@ -164,14 +165,14 @@ Closes #8454
 
 1行の`feat`や`fix`といったcommit typeは、迷ったらとりあえず`chore`と書いて、`scope`も省略して問題ないので次のような形でも問題ありません。
 
-```
+```text
 chore: コミットメッセージ
 ```
 
-このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog "conventional-changelog")による自動生成のためでもありますが、
-取り込むときに調整できるので無視してもらっても問題はありません。
+このコミットメッセージの規約は[conventional-changelog](https://github.com/ajoslin/conventional-changelog)による自動生成のためでもありますが、 取り込むときに調整できるので無視してもらっても問題はありません。
 
 以下を見てみるとよいかもしれません。
 
-- [良いChangeLog、良くないChangeLog | Web Scratch](http://efcl.info/2015/06/18/good-changelog/ "良いChangeLog、良くないChangeLog | Web Scratch")
-- [われわれは、いかにして変更点を追うか](http://azu.github.io/slide/cto/changelog.html "われわれは、いかにして変更点を追うか")
+* [良いChangeLog、良くないChangeLog \| Web Scratch](http://efcl.info/2015/06/18/good-changelog/)
+* [われわれは、いかにして変更点を追うか](http://azu.github.io/slide/cto/changelog.html)
+
