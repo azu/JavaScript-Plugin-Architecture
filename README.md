@@ -20,11 +20,7 @@ Twitterのハッシュタグは[#js_plugin_book](https://twitter.com/search?f=tw
 
 <!-- textlint-disable -->
 
-{% if output.name != "ebook" %}
-
 <a aria-label="Star azu/JavaScript-Plugin-Architecture on GitHub" href="https://github.com/azu/JavaScript-Plugin-Architecture" class="github-button"><img src="https://monosnap.com/file/MZsfLjZNkSNwTJ33apkwpBjlBZLbSh.png" alt="GitHub"></a> <a href="http://b.hatena.ne.jp/entry/https://github.com/azu/JavaScript-Plugin-Architecture" class="hatena-bookmark-button" data-hatena-bookmark-title="JavaScript Plugin Architecture" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="はてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="はてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-
-{% endif %}
 
 <!-- textlint-enable -->
 
