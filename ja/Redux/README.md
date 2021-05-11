@@ -20,7 +20,7 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 この三原則についての詳細はドキュメントなどを参照してください。
 
 - [Read Me | Redux](http://redux.js.org/)
-- [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://egghead.io/series/getting-started-with-redux)
+- [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://app.egghead.io/series/getting-started-with-redux)
 
 Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _middleware_ も、この三原則に基づいた仕組みとなっています。
 
