@@ -20,7 +20,7 @@ Reduxには[Three Principles](http://redux.js.org/docs/introduction/ThreePrincip
 この三原則についての詳細はドキュメントなどを参照してください。
 
 - [Read Me | Redux](http://redux.js.org/)
-- [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://egghead.io/series/getting-started-with-redux)
+- [Getting Started with Redux - Course by @dan_abramov @eggheadio](https://app.egghead.io/series/getting-started-with-redux)
 
 Reduxの使い方についてはここでは解説しませんが、Reduxの拡張機能となる _middleware_ も、この三原則に基づいた仕組みとなっています。
 
@@ -57,7 +57,7 @@ dispatch(action) -> (_middleware_ の処理) -> reducerにより新しいState�
 
 ![Redux flow](./img/redux-unidir-ui-arch.jpg)
 
-via [staltz.com/unidirectional-user-interface-architectures.html](http://staltz.com/unidirectional-user-interface-architectures.html)o
+via [staltz.com/unidirectional-user-interface-architectures.html](http://staltz.com/unidirectional-user-interface-architectures.html)
 
 次は _middleware_ によりどのような拡張ができるのかを見ていきます。
 
@@ -197,7 +197,7 @@ dispatchWithMiddleware({type: "FOO"});
     - StateはActionを経由しないと書き換えることができない
 
 _middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
-しかし、 _middleware_ が直接的に結果(State)を直接書き換えることはできません。
+しかし、 _middleware_ が結果(State)を直接書き換えることはできません。
 
 Connectの _middleware_ は最終的な結果(`response`)を書き換えできます。
 一方、Reduxの _middleware_ は扱える範囲が「`dispatch`からReducerまで」と線引されている違いといえます。
