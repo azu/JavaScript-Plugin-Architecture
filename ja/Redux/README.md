@@ -57,7 +57,7 @@ dispatch(action) -> (_middleware_ の処理) -> reducerにより新しいState�
 
 ![Redux flow](./img/redux-unidir-ui-arch.jpg)
 
-via [staltz.com/unidirectional-user-interface-architectures.html](http://staltz.com/unidirectional-user-interface-architectures.html)o
+via [staltz.com/unidirectional-user-interface-architectures.html](http://staltz.com/unidirectional-user-interface-architectures.html)
 
 次は _middleware_ によりどのような拡張ができるのかを見ていきます。
 
@@ -197,7 +197,7 @@ dispatchWithMiddleware({type: "FOO"});
     - StateはActionを経由しないと書き換えることができない
 
 _middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
-しかし、 _middleware_ が直接的に結果(State)を直接書き換えることはできません。
+しかし、 _middleware_ が結果(State)を直接書き換えることはできません。
 
 Connectの _middleware_ は最終的な結果(`response`)を書き換えできます。
 一方、Reduxの _middleware_ は扱える範囲が「`dispatch`からReducerまで」と線引されている違いといえます。

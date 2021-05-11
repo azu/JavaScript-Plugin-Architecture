@@ -8,7 +8,7 @@ jQueryでは`$.fn`を拡張することで、`$()`の返り値となるjQueryオ
 
 [import, greenify.js](../../src/jQuery/greenify.js)
 
-実際に利用するため際は、`jquery.js`を読み込んだ後に`greenify.js`を読み込ませる必要があります。
+実際に利用する際は、`jquery.js`を読み込んだ後に`greenify.js`を読み込ませる必要があります。
 
 ```html
 <script src="jquery.js"></script>
@@ -113,7 +113,7 @@ Node.jsで使われているCommonJSやES6 Modulesなどがなかった時代に
 - jQueryプラグインは `jQuery.fn` を拡張する
 - `jQuery.fn` は `jQuery.prototype` と同じである
 - jQueryプラグインとは`jQuery.prototype`を拡張したものといえる
-- 何でもできるためプラグインが行うことを制御することのは難しい
+- 何でもできるためプラグインが行うことを制御することは難しい
 
 ## 参考資料
 
